@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Richii-Mahjong";
+    src: url('/assets/RichiiMahjong-Color.otf');
+}
+
+
+.font-mj {
+	font-family: 'Richii-Mahjong', sans-serif;
+}
+
+
+.zen-antique-regular {
+	font-family:  "Zen Antique", serif;
+	font-weight: 900;
+	font-style: normal;
+  }
+
+
+.courier-prime-regular {
+	font-family: "Courier Prime", monospace;
+	font-weight: 400;
+	font-style: normal;
+  }
+
+.baseline-btm {
+	height:      120px;  
+	line-height: 120px;
+}
