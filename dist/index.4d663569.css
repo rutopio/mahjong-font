@@ -2224,6 +2224,10 @@ html {
   margin-bottom: 2rem;
 }
 
+.mb-2 {
+  margin-bottom: .5rem;
+}
+
 .flex {
   display: flex;
 }
@@ -2300,6 +2304,10 @@ html {
   width: 100%;
 }
 
+.w-5\/6 {
+  width: 83.3333%;
+}
+
 .max-w-none {
   max-width: none;
 }
@@ -2310,6 +2318,14 @@ html {
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
 }
 
 .place-items-center {
@@ -2348,6 +2364,10 @@ html {
 
 .overflow-y-auto {
   overflow-y: auto;
+}
+
+.text-wrap {
+  text-wrap: wrap;
 }
 
 .rounded-box {
@@ -2457,6 +2477,26 @@ html {
   line-height: 1.25rem;
 }
 
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -2549,6 +2589,22 @@ html {
 }
 
 @media (width >= 768px) {
+  .md\:mb-0 {
+    margin-bottom: 0;
+  }
+
+  .md\:mr-2 {
+    margin-right: .5rem;
+  }
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
   .md\:w-full {
     width: 100%;
   }
@@ -2556,11 +2612,37 @@ html {
   .md\:w-2\/3 {
     width: 66.6667%;
   }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:gap-y-3 {
+    row-gap: .75rem;
+  }
+
+  .md\:pt-3 {
+    padding-top: .75rem;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .md\:text-8xl {
+    font-size: 6rem;
+    line-height: 1;
+  }
 }
 
 @media (width >= 1024px) {
   .lg\:w-1\/2 {
     width: 50%;
+  }
+
+  .lg\:w-3\/5 {
+    width: 60%;
   }
 }
 

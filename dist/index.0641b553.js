@@ -618,25 +618,33 @@ document.getElementById("selectOptions").addEventListener("change", function() {
     textInput.value = optionValues[selectedOptionId] || "";
     inputToURL(textInput.value);
 });
-document.getElementById("copy-link-btn").addEventListener("click", function() {
-    var dummy = document.createElement("input");
-    document.body.appendChild(dummy);
-    dummy.value = window.location.href;
-    dummy.select();
-    document.execCommand("copy");
-    document.body.removeChild(dummy);
+Array.from(document.getElementsByClassName("copy-link-btn")).forEach(function(element) {
+    element.addEventListener("click", function() {
+        var dummy = document.createElement("input");
+        document.body.appendChild(dummy);
+        dummy.value = window.location.href;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+    });
 });
-document.getElementById("share-on-facebook").addEventListener("click", function() {
-    const facebookShareURL = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(window.location.href)}`;
-    window.open(facebookShareURL, "_blank");
+Array.from(document.getElementsByClassName("share-on-facebook")).forEach(function(element) {
+    element.addEventListener("click", function() {
+        const facebookShareURL = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+        window.open(facebookShareURL, "_blank");
+    });
 });
-document.getElementById("share-on-x").addEventListener("click", function() {
-    const message = `${window.location.href}`;
-    const twitterShareURL = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
-    window.open(twitterShareURL, "_blank");
+Array.from(document.getElementsByClassName("share-on-x")).forEach(function(element) {
+    element.addEventListener("click", function() {
+        const message = `${window.location.href}`;
+        const twitterShareURL = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
+        window.open(twitterShareURL, "_blank");
+    });
 });
-document.getElementById("save-png-btn").addEventListener("click", function() {
-    textToImage(renderedText.innerText, `${textInput.value}.png`);
+Array.from(document.getElementsByClassName("save-png-btn")).forEach(function(element) {
+    element.addEventListener("click", function() {
+        textToImage(renderedText.innerText, `${textInput.value}.png`);
+    });
 });
 function encodeURL(url) {
     return url.replaceAll(" ", ".");
