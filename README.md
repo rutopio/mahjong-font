@@ -1,11 +1,20 @@
-# Japanese Mahjong (Riichi Mahjong) Font with OpenType
+<div align="center">
 
-# OpenType 機能付き麻雀牌図フォント
+<h1>Japanese Mahjong Font with OpenType</h1>
+<h3>OpenType 機能付き麻雀牌図フォント</h3>
+
+🔗&nbsp;&nbsp; https://mahjongfont.pages.dev/ &nbsp;&nbsp;🔗
+
+![](assets/banner.png)
+
+[[Notation (en)]](#Notation) ・ [[表記法 (ja)]](#表記法)  ・ [[表記方式 (zh)]](#表記方式)
+
+</div>
 
 
-![](assets/banner.png) 
 
-## Notations (En)
+
+## Notation
 
 1. Man（**M**anzu）：`1m`~`9m`
 2. Pin（**P**inzu）：`1p`~`9p`
@@ -26,7 +35,7 @@
 7. Ka-Kan：Follow by an equal mark (`=`). E.g., `3m3m3m-3m=`, `6m`.
 8. An-Kan：Use `0p`, `0s`, `0m`, `0z` to show the reversed one.
 
-## 表記法 (Ja)
+## 表記法
 
 1. 萬子（マンズ）：`1m`~`9m`
 2. 筒子（ピンズ）：`1p`~`9p`
@@ -47,7 +56,7 @@
 7. 加槓（カカン）：後ろに等号（`=`）を付ける。例：`3m3m3m-3m=`.
 8. 暗槓（アンカン）：`0p`, `0s`, `0m`, `0z` 牌を裏返し表記。
 
-## 表記方式 (Zh)
+## 表記方式
 
 1. 萬子：`1m`~`9m`
 2. 筒子：`1p`~`9p`
@@ -77,6 +86,7 @@
 - Develop
 
 ```
+npm install
 npx parcel src/index.html
 ```
 

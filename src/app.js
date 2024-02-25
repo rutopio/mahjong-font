@@ -1,15 +1,9 @@
 const textInput = document.getElementById('user-input');
 const renderedText = document.getElementById('rendered-text');
 
-
-function encodeURL(url) {
-    return url.replaceAll(" ", ".")
-}
-
-function decodeURL(url) {
-    return url.replaceAll(".", " ")
-}
-
+textInput.addEventListener('input', () => {
+    inputToURL(textInput.value)
+});
 
 const optionValues = {
     'danyao': '777m234888p4568s_8s',
@@ -41,23 +35,11 @@ const optionValues = {
     'chinroo': '1119m111999p999s_9m'
 };
 
-
-function inputToURL(input) {
-	renderedText.innerHTML = decodeURL(transformString(input));
-	window.location.hash = encodeURL(transformString(input));
-}
-
 document.getElementById('selectOptions').addEventListener('change', function() {
-	const selectedOptionId = this.selectedOptions[0].id; 
-	textInput.value = optionValues[selectedOptionId] || '';
-	inputToURL(textInput.value)
+    const selectedOptionId = this.selectedOptions[0].id;
+    textInput.value = optionValues[selectedOptionId] || '';
+    inputToURL(textInput.value)
 });
-
-
-textInput.addEventListener('input', () => {
-	inputToURL(textInput.value)
-});
-
 
 document.getElementById("copy-link-btn").addEventListener("click", function() {
     var dummy = document.createElement("input");
@@ -69,150 +51,101 @@ document.getElementById("copy-link-btn").addEventListener("click", function() {
 });
 
 document.getElementById("share-on-facebook").addEventListener("click", function() {
-            const facebookShareURL = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(window.location.href)}`;
-            window.open(facebookShareURL, "_blank");
-        });
-
-
-	document.getElementById("share-on-x").addEventListener("click", function() {
-            const message = `${window.location.href}`
-            const twitterShareURL = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
-            window.open(twitterShareURL, "_blank");
-        });
-
-
-
-
-document.getElementById('save-png-btn').addEventListener('click', function() {
-	textToImage(renderedText.innerText, `${textInput.value}.png`);
+    const facebookShareURL = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+    window.open(facebookShareURL, "_blank");
 });
 
+document.getElementById("share-on-x").addEventListener("click", function() {
+    const message = `${window.location.href}`
+    const twitterShareURL = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
+    window.open(twitterShareURL, "_blank");
+});
 
-// document.getElementById('save-svg-btn').addEventListener('click', function() {
-// 	textToSVG(renderedText.innerText, `${textInput.value}.svg`);
-// });
+document.getElementById('save-png-btn').addEventListener('click', function() {
+    textToImage(renderedText.innerText, `${textInput.value}.png`);
+});
 
-function textToImage(text, filename) {
-	const canvas = document.createElement('canvas');
-	const context = canvas.getContext('2d');
-	
-	const textMetrics = context.measureText(text);
-	console.log(textMetrics, renderedText.offsetWidth)
-
-	const imagePadding = 100
-    const scaleProp = 5
-
-	const fontFamily = window.getComputedStyle(renderedText).fontFamily;
-	const fontSize = parseFloat(window.getComputedStyle(renderedText).fontSize) * scaleProp;
-
-	context.font = `${fontSize}px ${fontFamily}`
-	canvas.width = context.measureText(text).width + imagePadding*2
-	canvas.height = parseInt(window.getComputedStyle(renderedText).fontSize)  * scaleProp + imagePadding*2;
-
-	context.font = `${fontSize}px ${fontFamily}`
-	context.fillText(text, imagePadding, parseInt(window.getComputedStyle(renderedText).fontSize)*scaleProp+imagePadding*1.7 )
-	
-	const imageData = canvas.toDataURL('image/png');
-
-	const link = document.createElement('a');
-	link.href = imageData;
-	link.download = filename;
-	link.click(); 
+function encodeURL(url) {
+    return url.replaceAll(" ", ".")
 }
 
+function decodeURL(url) {
+    return url.replaceAll(".", " ")
+}
 
-// Function to convert text to SVG image
-function textToSVG(text, filename) {
-	const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-	const textElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+function inputToURL(input) {
+    renderedText.innerHTML = decodeURL(transformString(input));
+    window.location.hash = encodeURL(transformString(input));
+}
 
-	// Set text attributes
-	textElement.textContent = text;
-	textElement.setAttribute('x', '0');
-	textElement.setAttribute('y', '20'); // Adjust as needed
-	textElement.setAttribute('font-family', "I.Mahjong-JP");
-	textElement.setAttribute('font-size', window.getComputedStyle(renderedText).fontSize);
+function textToImage(text, filename) {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
 
-	// Append text element to SVG
-	svg.appendChild(textElement);
+    const textMetrics = context.measureText(text);
+    console.log(textMetrics, renderedText.offsetWidth)
 
-	// Serialize SVG to XML string
-	const serializer = new XMLSerializer();
-	const svgString = serializer.serializeToString(svg);
+    const imagePadding = 100
+    const scaleProp = 5
 
-	// Create blob from SVG XML string
-	const blob = new Blob([svgString], { type: 'image/svg+xml' });
+    const fontFamily = window.getComputedStyle(renderedText).fontFamily;
+    const fontSize = parseFloat(window.getComputedStyle(renderedText).fontSize) * scaleProp;
 
-	// Create object URL from blob
-	const objectURL = URL.createObjectURL(blob);
+    context.font = `${fontSize}px ${fontFamily}`
+    canvas.width = context.measureText(text).width + imagePadding * 2
+    canvas.height = parseInt(window.getComputedStyle(renderedText).fontSize) * scaleProp + imagePadding * 2;
 
-	// Create a link element and trigger download
-	const link = document.createElement('a');
-	link.href = objectURL;
-	link.download = filename;
-	link.click();
+    context.font = `${fontSize}px ${fontFamily}`
+    context.fillText(text, imagePadding, parseInt(window.getComputedStyle(renderedText).fontSize) * scaleProp + imagePadding * 1.7)
 
-	// Release object URL
-	URL.revokeObjectURL(objectURL);
+    const imageData = canvas.toDataURL('image/png');
+
+    const link = document.createElement('a');
+    link.href = imageData;
+    link.download = filename;
+    link.click();
 }
 
 function transformString(str) {
-	let charArr = str.trim().split("");
+    let charArr = str.trim().split("");
     const result = []
     var stack = []
     var indicator
     for (let i = 0; i < charArr.length; i++) {
-        if ( /([A-Za-z])/.test(charArr[i]) ){ // indicators (m, p, s, z)
+        if (/([A-Za-z])/.test(charArr[i])) { // indicators (m, p, s, z)
             indicator = charArr[i]
-            
-            for(let j = 0; j < stack.length; j++){
-                 result.push(`${stack[j]}${indicator}`)
-             }
-             
+
+            for (let j = 0; j < stack.length; j++) {
+                result.push(`${stack[j]}${indicator}`)
+            }
+
             stack = []
-        } else if (/\d/.test(charArr[i])){ // numbers
-             stack.push(charArr[i])
-         } else { //symbols (*, -, =)
+        } else if (/\d/.test(charArr[i])) { // numbers
+            stack.push(charArr[i])
+        } else { //symbols (*, -, =)
             result.push(`${charArr[i]}`)
-         }
-    }   
-	console.log(result.concat(stack).join(""))
+        }
+    }
+    console.log(result.concat(stack).join(""))
     return result.concat(stack).join("")
 }
-
 
 function main() {
     if (window.location.hash) {
         try {
             textInput.value = (decodeURL(window.location.hash.substring(1)))
-			renderedText.innerText = transformString(decodeURL(window.location.hash.substring(1)))
+            renderedText.innerText = transformString(decodeURL(window.location.hash.substring(1)))
             console.log(`→ Url Get: ${window.location.hash}`)
         } catch (e) {
             console.log("→ Get Invalid Url, Random Select an Emoji 🎰", e)
         }
     } else {
-        console.log("→ Get Basic URL, Random Input 🎰")
-		const demoString = "45p*345m*88m_0220m_33s3s-3s=_6p"
-		window.location.hash = encodeURL(demoString)
-		textInput.value = (decodeURL(window.location.hash.substring(1)))
-		renderedText.innerText = transformString(decodeURL(window.location.hash.substring(1)))
+        console.log("→ Get Basic URL")
+        const demoString = "45p*345m*88m_0220m_33s3s-3s=_6p"
+        window.location.hash = encodeURL(demoString)
+        textInput.value = (decodeURL(window.location.hash.substring(1)))
+        renderedText.innerText = transformString(decodeURL(window.location.hash.substring(1)))
     }
 }
-
-
-// function setLanguage(lang) {
-//     // Hide all language versions
-//     var languageElements = document.querySelectorAll('.language');
-//     languageElements.forEach(function(element) {
-//       element.style.display = 'none';
-//     });
-
-//     // Show the selected language version
-//     var selectedLanguage = document.querySelector('.language.' + lang);
-//     if (selectedLanguage) {
-//       selectedLanguage.style.display = 'block';
-//     }
-//   }
-
 
 main()
