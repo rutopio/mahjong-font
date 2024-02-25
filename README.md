@@ -5,7 +5,7 @@
 
 🔗&nbsp;&nbsp; https://mahjongfont.pages.dev/ &nbsp;&nbsp;🔗
 
-![](assets/banner.png)
+![](src/assets/banner.png)
 
 [[Notation (en)]](#Notation) ・ [[表記法 (ja)]](#表記法)  ・ [[表記方式 (zh)]](#表記方式)
 
@@ -78,6 +78,14 @@
 8.  暗槓：使用 `0p`, `0s`, `0m`, `0z` 表示翻過來的牌。
 
 
+## OpenType Features
+
+### Ligature (*liga*)
+
+| Software | Support? | Note |
+|:---|:---:|:---|
+| Adobe Series | ✅ | |
+| iWork (Pages, Numbers, Keynote)|✅|| 
 
 ## Web Tool
 
@@ -90,7 +98,7 @@ npm install
 npx parcel src/index.html
 ```
 
-- Product
+- Build
 
 ```
 npx parcel build src/index.html

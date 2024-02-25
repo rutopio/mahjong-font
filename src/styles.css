@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "Richii-Mahjong";
-    src: url('./assets/RichiiMahjong-Color.otf');
+    font-family: "RiichiMahjong";
+    src: url('./assets/RiichiMahjong-Color.otf');
 }
 
 
 .font-mj {
-    font-family: 'Richii-Mahjong', sans-serif;
+    font-family: 'RiichiMahjong', sans-serif;
 }
 
 

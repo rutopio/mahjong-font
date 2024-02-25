@@ -35,7 +35,7 @@
 </head>
 
 <body>
-    <dialog id="my_modal_2" class="modal ">
+    <dialog id="tutorial_modal" class="modal ">
         <div class="modal-box relative max-w-none w-3/5 ">
 
             <form method="dialog">
@@ -229,14 +229,14 @@
                </div> -->
                 </div>
             </div>
-            <div class="w-full flex flex-col justify-center items-center">
-                <div class="w-2/3 lg:w-1/2 p-8 rounded-lg">
+			
+            <div class="w-full flex flex-col justify-center items-center mb-8">
+                <div class="w-full lg:w-1/2 md:w-2/3 sm:w-full p-8">
                     <div class="flex flex-col items-center justify-center space-y-2 pb-5">
                         <h1 class="font-bold text-4xl zen-antique-regular">麻雀牌図フォント作成ツール</h1>
-                        <!-- <div class=" text ">Mahjong Font Tool</div> -->
                     </div>
-                    <div class="join w-full">
-                        <input id="user-input" class="join-item text-center input input-bordered w-full" placeholder="表記入力..." value="123p"></input>
+                    <div class="join w-full ">
+                        <input id="user-input" class="join-item text-center input input-bordered w-full " placeholder="表記入力..." value="123p"></input>
                         <select class="select select-bordered join-item" id="selectOptions">
                             <option disabled selected>使用例</option>
                             <option disabled>一飜</option>
@@ -286,7 +286,7 @@
                     </div>
                     <div class="flex pt-5 pb-8">
                         <div class="flex">
-                            <button class="btn btn-sm  btn-neutral" onclick="my_modal_2.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                            <button class="btn btn-sm  btn-neutral" onclick="tutorial_modal.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                     <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
                                 </svg>How to Use?</button>
@@ -326,7 +326,7 @@
                     <div id="rendered-text" class="text-8xl font-mj h-100 pb-5 text-center"></div>
                 </div>
             </div>
-            <div class=" w-full fixed bottom-0 flex flex-row items-center justify-center gap-x-5 mt-6 mb-6 courier-prime-regular">
+            <div class=" w-full fixed bottom-0 flex flex-row items-center justify-center gap-x-5 mt-6 mb-6 courier-prime-regular text-sm">
                 <div class="flex items-center justify-center underline ">
                     <a rel="noopener noreferrer" href="https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType/releases" target="_blank" style="color:#000">
                         Font Download
@@ -336,7 +336,7 @@
                     ・
                 </div>
 
-                <div class="flex items-center justify-center underline ">
+                <div class="flex items-center justify-center underline">
                     <a rel="noopener noreferrer" href="https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType" target="_blank" style="color:#000">
                         View on Github
                     </a>
