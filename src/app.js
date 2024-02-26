@@ -41,6 +41,21 @@ document.getElementById('selectOptions').addEventListener('change', function() {
     inputToURL(textInput.value)
 });
 
+document.getElementById('colorOptions').addEventListener('change', function() {
+    const selectedOptionId = this.selectedOptions[0].id;
+    console.log(selectedOptionId)
+    if (selectedOptionId === 'mono') {
+        renderedText.classList.remove('font-mj-color')
+        renderedText.classList.add('font-mj-mono');
+    } else if (selectedOptionId === 'color') {
+        renderedText.classList.add('font-mj-color')
+        renderedText.classList.remove('font-mj-mono');
+    }
+
+    // textInput.value = optionValues[selectedOptionId] || '';
+    // inputToURL(textInput.value)
+});
+
 Array.from(document.getElementsByClassName("copy-link-btn"))
     .forEach(function(element) {
         element.addEventListener("click", function() {

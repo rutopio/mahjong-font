@@ -82,10 +82,12 @@
 
 ### Ligature (*liga*)
 
-| Software | Support? | Note |
+| Software | Support | Note |
 |:---|:---:|:---|
+| Mainstream Browser|✅ |   |
 | Adobe Series | ✅ | |
 | iWork (Pages, Numbers, Keynote)|✅|| 
+| Office Series|✅| Need to enable manually| 
 
 ## Web Tool
 
@@ -108,7 +110,7 @@ npx parcel build src/index.html
 
 - [I.Mahjong - @SyaoranHinata](https://github.com/SyaoranHinata/I.Mahjong/tree/main)
 - [Gutenberg Labo](http://gutenberg.osdn.jp)
-- [Chivo Mono - Google Fonts](https://fonts.google.com/specimen/Chivo+Mono)
+- [PT Sans Narrow - Google Fonts](https://fonts.google.com/specimen/PT+Sans+Narrow)
 
 ## License
 

@@ -3,15 +3,24 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "RiichiMahjong";
-    src: url('./assets/RiichiMahjong-Color.otf');
+    font-family: "RiichiMahjong-Color";
+    src: url('./assets/Riichi-Mahjong-Color.otf');
+
 }
 
+@font-face {
+    font-family: "RiichiMahjong-Mono";
+    src: url('./assets/Riichi-Mahjong-Mono.otf');
 
-.font-mj {
-    font-family: 'RiichiMahjong', sans-serif;
 }
 
+.font-mj-color {
+    font-family: 'RiichiMahjong-Color', sans-serif;
+}
+
+.font-mj-mono {
+    font-family: 'RiichiMahjong-Mono', sans-serif;
+}
 
 .zen-antique-regular {
     font-family: "Zen Antique", serif;
@@ -19,10 +28,15 @@
     font-style: normal;
 }
 
-
 .courier-prime-regular {
     font-family: "Courier Prime", monospace;
     font-weight: 400;
+    font-style: normal;
+}
+
+.courier-prime-bold {
+    font-family: "Courier Prime", monospace;
+    font-weight: 700;
     font-style: normal;
 }
 
