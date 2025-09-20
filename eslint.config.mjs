@@ -37,8 +37,8 @@ export default defineConfig([
         "plugin:import/errors",
         "plugin:import/warnings",
         "plugin:prettier/recommended",
-        "prettier",
-      ),
+        "prettier"
+      )
     ),
 
     plugins: {

@@ -83,15 +83,6 @@ export default function Home() {
   const [showNotations, setShowNotations] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // 如果 i18n 尚未準備好，顯示載入狀態
-  if (!ready) {
-    return (
-      <div className="flex h-screen w-full items-center justify-center">
-        <Loader2Icon className="size-12 animate-spin" />
-      </div>
-    );
-  }
-
   const handleShowNotations = () => {
     setShowNotations(!showNotations);
   };
@@ -147,6 +138,15 @@ export default function Home() {
     // 設置選項後立即清除，讓下次可以顯示 placeholder
     setTimeout(() => setSelectedOption(""), 100);
   };
+
+  // 如果 i18n 尚未準備好，顯示載入狀態
+  if (!ready) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <Loader2Icon className="size-12 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div
