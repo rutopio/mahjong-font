@@ -10,6 +10,7 @@ import { I18nProvider } from "@/components/i18n-provider";
 
 import { Footer } from "./components/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Navbar } from "./components/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,8 +23,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "麻雀牌図作成ツール | Mahjong Tile Generator",
-  description: "麻雀牌図作成ツール | Mahjong Tile Generator",
+  title: "麻雀牌図作成ツール | Mahjong Tile Image Generator",
+  description: "麻雀牌図作成ツール | Mahjong Tile Image Generator",
   manifest: "/site.webmanifest",
   icons: {
     icon: [
@@ -42,18 +43,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" className="">
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body
-        className={`font-notosans antialiased ${geistSans.variable} ${geistMono.variable}`}
+        className={`h-full font-notosans antialiased ${geistSans.variable} ${geistMono.variable}`}
       >
         <I18nProvider>
-          {children}
-          <Footer />
+          <div className="flex flex-col min-h-dvh">
+            <Navbar />
+            <main className="flex-1 flex bg-background">{children}</main>
+            <Footer />
+          </div>
           <Toaster
             expand={false}
             richColors

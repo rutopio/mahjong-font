@@ -1,5 +1,8 @@
+"use client";
+
 import { useTranslation } from "react-i18next";
 import { FileDownIcon, FileType2Icon, LanguagesIcon } from "lucide-react";
+import { useState } from "react";
 
 import { GithubIcon } from "@/components/icon/github";
 import { Button } from "@/components/ui/button";
@@ -7,11 +10,14 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 export function Navbar() {
   const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState(i18n.language);
 
   const downloadFont = (filePath: string) => {
     const link = document.createElement("a");
@@ -21,34 +27,59 @@ export function Navbar() {
   };
 
   return (
-    <div className="fixed top-0 left-0 z-50 h-12 w-full bg-gray-50 p-8">
+    <div className="h-12 w-full bg-background p-8">
       <div className="flex h-full w-full items-center justify-end gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" type="button">
+            <Button
+              variant="ghost"
+              type="button"
+              className="rounded-full sm:rounded-md"
+            >
               <LanguagesIcon />
               <span className="hidden md:block">{t("language")}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => i18n.changeLanguage("ja")}>
-              日本語
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => i18n.changeLanguage("en")}>
-              English
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => i18n.changeLanguage("zh-TW")}>
-              繁體中文
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => i18n.changeLanguage("zh-CN")}>
-              简体中文
-            </DropdownMenuItem>
+            <DropdownMenuRadioGroup
+              value={language}
+              onValueChange={setLanguage}
+            >
+              <DropdownMenuRadioItem
+                value="ja"
+                onClick={() => i18n.changeLanguage("ja")}
+              >
+                日本語
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem
+                value="en"
+                onClick={() => i18n.changeLanguage("en")}
+              >
+                English
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem
+                value="zh-TW"
+                onClick={() => i18n.changeLanguage("zh-TW")}
+              >
+                繁體中文
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem
+                value="zh-CN"
+                onClick={() => i18n.changeLanguage("zh-CN")}
+              >
+                简体中文
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" type="button">
+            <Button
+              variant="ghost"
+              type="button"
+              className="rounded-full sm:rounded-md"
+            >
               <FileType2Icon />
               <span className="hidden md:block">{t("downloadFont")}</span>
             </Button>
@@ -82,7 +113,11 @@ export function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Button variant="ghost" type="button">
+          <Button
+            variant="ghost"
+            type="button"
+            className="rounded-full sm:rounded-md"
+          >
             <GithubIcon />
             <span className="hidden md:block">Github</span>
           </Button>

@@ -169,21 +169,11 @@ export default function Notations({ theme }: { theme: string }) {
               </TableRow>
               <TableRow>
                 <TableCell className="font-bold">{t("space")}</TableCell>
-                <TableCell>
-                  {t("explainOfSpace")}
-                  <Badge variant="outline" className="rounded-full">
-                    _
-                  </Badge>
-                </TableCell>
+                <TableCell>{t("explainOfSpace")}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell className="font-bold">{t("big-gap")}</TableCell>
-                <TableCell>
-                  {t("explainOfBigGap")}
-                  <Badge variant="outline" className="rounded-full">
-                    _
-                  </Badge>
-                </TableCell>
+                <TableCell>{t("explainOfBigGap")}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -363,29 +353,28 @@ export default function Notations({ theme }: { theme: string }) {
         {examples.map((example, index) => (
           <div
             key={index}
-            className="flex flex-col space-y-2 border-b p-2 sm:flex-row sm:justify-between sm:space-y-0"
+            className={`flex flex-col border-b p-2 ${index === 3 ? "gap-8" : "gap-4"}`}
           >
-            {/* 第一行：組合名稱和記號 */}
-            <div className="flex flex-col p-2 sm:flex-1">
+            <div className="flex gap-4 p-2 items-center">
               <div className="text-sm font-bold break-words">
                 {t(example.combination)}
               </div>
-              <div className="font-mono text-sm break-all">
+              <Badge
+                variant="outline"
+                className=" text-sm break-all rounded-full"
+              >
                 {example.notation}
-              </div>
+              </Badge>
             </div>
 
-            {/* 第二行：置中的麻將字型顯示 */}
-            <div className="flex items-center justify-center p-2 sm:justify-end sm:pt-10 sm:pr-2">
-              <div
-                className={`text-4xl sm:text-7xl ${
-                  theme === "monochrome"
-                    ? "font-riichi-mahjong-mono"
-                    : "font-riichi-mahjong-color"
-                }`}
-              >
-                {transformString(example.notation)}
-              </div>
+            <div
+              className={`text-4xl sm:text-7xl ${
+                theme === "monochrome"
+                  ? "font-riichi-mahjong-mono"
+                  : "font-riichi-mahjong-color"
+              }`}
+            >
+              {transformString(example.notation)}
             </div>
           </div>
         ))}

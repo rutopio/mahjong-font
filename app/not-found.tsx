@@ -7,7 +7,6 @@ export default function NotFound() {
   const router = useRouter();
 
   useEffect(() => {
-    // 立即重定向到首頁
     router.replace("/");
   }, [router]);
 

@@ -5,7 +5,7 @@
 
 ![Npm](https://img.shields.io/badge/npm-v10.9.2-CB3837?style=flat-square&logo=npm&logoColor=white)
 ![Node](https://img.shields.io/badge/Node.js-v22.17.0-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-[![License: SIL](https://img.shields.io/badge/License-SIL-yellow.svg)](https://openfontlicense.org/)
+[![License: SIL](https://img.shields.io/badge/License-SIL_1.1-yellow.svg)](https://openfontlicense.org/)
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue?style=flat-square&logo=typescript)
 ![React](https://img.shields.io/badge/React-19.1.0-blue?style=flat-square&logo=react)
@@ -15,8 +15,9 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?style=flat-square&logo=tailwind-css)
 ![ShadCN](https://img.shields.io/badge/shadcn%2Fui-2.4.0-000000?style=flat-square&logo=shadcnui&logoColor=white)
 
+Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflarepages&logoColor=fff&style=flat-square)
 
-🔗&nbsp;&nbsp; https://mahjongfont.pages.dev/ &nbsp;&nbsp;🔗
+🔗&nbsp;&nbsp;Playground: https://mahjongfont.pages.dev/ &nbsp;&nbsp;🔗
 
 ![](/assets/banner.png)
 
@@ -37,8 +38,8 @@
    - `5z`：Haku, Shiro
    - `6z`：Hatsu
    - `7z`：Chun, Naka
-5. Aka-Dora：Follow by a star mark (`*`). E.g., `5p*`, `5s*`, `5m*` .
-6. Fuuro：Follow by a minus mark (`-`). E.g., `3m3m3m-`, `4s5s-6s`.
+5. Aka-Dora：Follow by a asterisk (`*`). E.g., `5p*`, `5s*`, `5m*` .
+6. Fuuro：Follow by a minus sign (`-`). E.g., `3m3m3m-`, `4s5s-6s`.
    - Chi：`4s4s-4s`
    - Pon：`3m3m3m-`
    - Dai-Minkan：`6m6m6m-6m`
@@ -58,12 +59,12 @@
    - `5z`：白
    - `6z`：発
    - `7z`：中
-5. 赤ドラ：後ろに星印（`*`）を付ける。例：`5p*`, `5s*`, `5m*` .
-6. 副露（フーロ）：後ろにマイナス記号（`-`）を付ける。例：
+5. 赤ドラ：後ろに星マーク（`*`）を付ける。例：`5p*`, `5s*`, `5m*` .
+6. 副露（フーロ）：後ろにマイナスマーク（`-`）を付ける。例：
    - 吃（チー）：`4s4s-4s`
    - 碰（ポン）：`3m3m3m-`
    - 大明槓（ダイミンカン）：`6m6m6m-6m`
-7. 加槓（カカン）：後ろに等号（`=`）を付ける。例：`3m3m3m-3m=`.
+7. 加槓（カカン）：後ろにイコールマーク（`=`）を付ける。例：`3m3m3m-3m=`.
 8. 暗槓（アンカン）：`0p`, `0s`, `0m`, `0z` 牌を裏返し表記。
 
 ## 表記方式

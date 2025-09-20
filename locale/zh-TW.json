@@ -1,7 +1,7 @@
 {
-  "downloadFont": "   下載字型",
-  "monochromeFont": "麻將字型 - 黑白版",
-  "colorfulFont": "麻將字型 - 彩色版",
+  "downloadFont": "下載字型",
+  "monochromeFont": "黑白麻雀牌",
+  "colorfulFont": "彩色麻雀牌",
   "language": "語言",
   "toolTitle": "麻雀牌圖製作工具",
   "placeholder": "輸入表記...",
@@ -17,6 +17,7 @@
   "shareOnX": "分享到 X (Twitter)",
   "shareOnThreads": "分享到 Threads",
   "linkCopied": "連結已複製到剪貼簿",
+  "close": "關閉",
 
   "tanyao": "断么九",
   "ipeiko": "一盃口",
@@ -55,7 +56,7 @@
   "six_han": "六飜",
   "yakuman": "役満",
 
-  "tileName": "牌名",
+  "tileName": "種類",
   "notation": "表記法",
   "manzu": "萬子",
   "pinzu": "筒子",
@@ -65,15 +66,15 @@
   "fuuro": "副露",
   "ka-kan": "加槓",
   "an-kan": "暗槓",
-  "space": "空格",
+  "space": "小間隔",
   "big-gap": "大間隔",
-  "explainOfAkaDora": "在後面加上星號 * 表記。例如：",
-  "explainOfFuuro": "在後面加上減號 - 表記。例如：",
-  "explainOfKaKan": "在後面加上等號 = 表記。例如：",
+  "explainOfAkaDora": "在後面加上星號「*」表記。例如：",
+  "explainOfFuuro": "在後面加上減號「-」表記。例如：",
+  "explainOfKaKan": "在後面加上等號「=」表記。例如：",
   "explainOfAnKan1": "使用",
   "explainOfAnKan2": "表記裏牌",
-  "explainOfSpace": "使用空格表記空格",
-  "explainOfBigGap": "使用底線表記大間隔",
+  "explainOfSpace": "使用空格 (space) 表記小間隔，適合用在分類面子的情況。",
+  "explainOfBigGap": "使用底線 (_) 表記大間隔，適合用在有副露的情況。",
 
   "combination": "組合",
   "display": "表示",
@@ -82,5 +83,5 @@
   "souzu-fuuro-examples": "索子 & 副露",
   "zipai-ka-kan-examples": "字牌 & 加槓",
   "zipai-an-kan-examples": "字牌 & 暗槓",
-  "big-gap-examples": "空間"
+  "big-gap-examples": "使用大間隔"
 }
