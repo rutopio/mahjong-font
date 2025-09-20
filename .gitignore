@@ -130,4 +130,4 @@ out
 .pnp.*
 
 
-**/*.py
+**/*.DS_Store
