@@ -9,6 +9,7 @@ import { Toaster } from "sonner";
 import { I18nProvider } from "@/components/i18n-provider";
 
 import { Footer } from "./components/footer";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -60,6 +61,7 @@ export default function RootLayout({
             position="top-center"
           />
         </I18nProvider>
+        <GoogleAnalytics gaId="G-8GTTB3S2GB" />
       </body>
     </html>
   );

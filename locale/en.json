@@ -1,7 +1,7 @@
 {
   "downloadFont": "Download Font",
-  "monochromeFont": "Monochrome Font",
-  "colorfulFont": "Colorful Font",
+  "monochromeFont": "Monochrome Version",
+  "colorfulFont": "Colorful Version",
   "language": "Language",
   "toolTitle": "Mahjong Tile Generator",
   "placeholder": "Input Notation...",

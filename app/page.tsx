@@ -150,11 +150,11 @@ export default function Home() {
 
   return (
     <div
-      className={`mx-auto flex h-screen w-full items-center justify-center gap-6 bg-gray-50 md:h-dvh ${monochromeFont.variable} ${colorfulFont.variable}`}
+      className={`mx-auto flex h-full w-full items-center justify-center gap-6 bg-gray-50 md:h-dvh ${monochromeFont.variable} ${colorfulFont.variable}`}
     >
       <Navbar />
 
-      <div className="flex w-full flex-col items-center justify-center gap-8 p-4 lg:max-w-4xl">
+      <div className="flex w-full flex-col items-center justify-center gap-8 lg:max-w-4xl">
         <div className="text-center text-2xl font-bold">{t("toolTitle")}</div>
         <div className="flex w-full flex-col items-center gap-4">
           <Input
