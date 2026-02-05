@@ -3,7 +3,7 @@
 <h1>Japanese Mahjong Font with OpenType</h1>
 <h3>OpenType 機能付き麻雀牌図フォント</h3>
 
-![Npm](https://img.shields.io/badge/npm-v10.9.2-CB3837?style=flat-square&logo=npm&logoColor=white)
+![pnpm](https://img.shields.io/badge/pnpm-v10-F69220?style=flat-square&logo=pnpm&logoColor=white)
 ![Node](https://img.shields.io/badge/Node.js-v22.17.0-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 [![License: SIL](https://img.shields.io/badge/License-SIL_1.1-yellow.svg)](https://openfontlicense.org/)
 
@@ -95,15 +95,15 @@ Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F380
 - Develop
 
 ```
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 - Build
 
 ```
-npm run format
-npm run build
+pnpm format
+pnpm build
 ```
 
 ## Font Download
