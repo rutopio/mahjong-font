@@ -48,12 +48,16 @@ export default function Home() {
     tileColorValue: string
   ) => {
     const urlTheme = THEME_INTERNAL_MAP[themeValue] || "mono";
-    const urlTileColor = tileColorValue.replace("#", "");
     const params = new URLSearchParams({
       input: inputValue,
       theme: urlTheme,
-      tile: urlTileColor,
     });
+
+    // Only include tile color when theme is colorful
+    if (urlTheme === "color") {
+      params.set("tile", tileColorValue.replace("#", ""));
+    }
+
     return params.toString();
   };
 
