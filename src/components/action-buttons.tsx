@@ -62,12 +62,28 @@ export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
     }
   };
 
-  const handleNativeShare = () => {
-    navigator.share({
-      title: t("toolTitle"),
-      text: t("toolTitle"),
-      url: window.location.href,
-    });
+  const handleNativeShare = async () => {
+    if (!navigator.share) {
+      // Fallback to copy link if Web Share API not supported
+      copyLink();
+      toast.success(t("linkCopied"), {
+        description: window.location.href,
+      });
+      return;
+    }
+
+    try {
+      await navigator.share({
+        title: t("toolTitle"),
+        text: t("toolTitle"),
+        url: window.location.href,
+      });
+    } catch (err) {
+      // Ignore if user cancelled the share
+      if (err instanceof Error && err.name !== "AbortError") {
+        console.error("Share failed:", err);
+      }
+    }
   };
 
   return (

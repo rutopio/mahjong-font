@@ -72,9 +72,9 @@ export default function RootLayout({
     <html lang="ja">
       <body className={`h-full font-sans antialiased ${geistMono.variable}`}>
         <I18nProvider>
-          <div className="flex min-h-dvh flex-col">
+          <div className="flex h-dvh flex-col">
             <Navbar />
-            <main className="container flex flex-1 bg-background">
+            <main className="container flex min-h-0 flex-1 bg-background">
               {children}
             </main>
             <Footer />

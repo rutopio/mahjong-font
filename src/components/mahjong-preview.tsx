@@ -72,7 +72,7 @@ export const MahjongPreview = forwardRef<HTMLDivElement, MahjongPreviewProps>(
     return (
       <div
         ref={containerRef}
-        className="mx-auto mt-8 flex w-full items-center justify-center"
+        className="relative mx-auto mt-8 flex w-full items-center justify-center overflow-hidden"
         style={{ height: `${fixedHeight}px` }}
       >
         {/* Hidden element for measuring text width */}

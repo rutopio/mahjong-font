@@ -18,10 +18,7 @@ export function Footer() {
           rel="noopener noreferrer"
           className="underline-offset-4 hover:underline"
         >
-          <div>
-            Noted that Color Font is not compatible with some devices or
-            browsers.{" "}
-          </div>
+          <div>Color Font is not compatible with some browsers. </div>
         </a>
         <div>Use Desktop Chrome for best experience.</div>
       </div>

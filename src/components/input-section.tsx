@@ -52,7 +52,7 @@ export function InputSection({
         type="text"
         placeholder={t("placeholder")}
         aria-label={t("placeholder")}
-        className="h-12 w-full bg-white text-center text-lg"
+        className="h-12 w-full bg-white text-center text-sm lg:text-lg"
         value={input}
         onChange={(e) => onInputChange(e.target.value)}
       />
