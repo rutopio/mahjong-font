@@ -211,9 +211,7 @@ export default function Home() {
   }
 
   return (
-    <div
-      className={`m-auto flex h-full w-full flex-col items-center justify-center gap-8 p-6 lg:max-w-4xl`}
-    >
+    <div className="m-auto flex h-full w-full flex-col items-center justify-center gap-8 p-6 lg:max-w-5xl">
       <h1 className="text-center text-2xl font-bold text-balance">
         {t("toolTitle")}
       </h1>
