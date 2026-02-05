@@ -104,6 +104,18 @@ export default function Notations({ theme }: { theme: string }) {
                 </TableCell>
               </TableRow>
               <TableRow>
+                <TableCell className="font-bold">{t("dice")}</TableCell>
+                <TableCell>
+                  <Badge variant="outline" className="rounded-full">
+                    1.
+                  </Badge>{" "}
+                  ~{" "}
+                  <Badge variant="outline" className="rounded-full">
+                    6.
+                  </Badge>
+                </TableCell>
+              </TableRow>
+              <TableRow>
                 <TableCell className="font-bold">{t("aka-dora")}</TableCell>
                 <TableCell className="break-words">
                   {t("explainOfAkaDora")}{" "}

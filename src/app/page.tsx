@@ -59,17 +59,17 @@ import {
 import { textToImage } from "@/lib/text-to-image";
 import { transformString } from "@/lib/transform-string";
 
-import Notations from "./components/notations";
+import Notations from "./sections/notations";
 import { optionValues } from "./constants";
 
 const monochromeFont = localFont({
-  src: "../public/fonts/Riichi-Mahjong-Mono.otf",
+  src: "../../public/fonts/Riichi-Mahjong-Mono.otf",
   display: "swap",
   variable: "--font-riichi-mahjong-mono",
 });
 
 const colorfulFont = localFont({
-  src: "../public/fonts/Riichi-Mahjong-Color.otf",
+  src: "../../public/fonts/Riichi-Mahjong-Color.otf",
   display: "swap",
   variable: "--font-riichi-mahjong-color",
 });
@@ -129,7 +129,7 @@ export default function Home() {
 
   const handleOptionChange = (value: string) => {
     const transformedValue = transformString(
-      optionValues[value as keyof typeof optionValues]
+      optionValues[value as keyof typeof optionValues],
     );
     setInput(transformedValue);
     setTimeout(() => setSelectedOption(""), 100);
@@ -268,7 +268,7 @@ export default function Home() {
               textToImage(
                 input,
                 renderedTextRef.current?.textContent || "",
-                renderedTextRef.current as HTMLDivElement
+                renderedTextRef.current as HTMLDivElement,
               )
             }
           >

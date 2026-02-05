@@ -8,9 +8,9 @@ import { Toaster } from "sonner";
 
 import { I18nProvider } from "@/components/i18n-provider";
 
-import { Footer } from "./components/footer";
+import { Footer } from "./sections/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Navbar } from "./components/navbar";
+import { Navbar } from "./sections/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

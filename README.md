@@ -11,7 +11,6 @@
 ![React](https://img.shields.io/badge/React-19.1.0-blue?style=flat-square&logo=react)
 ![Next.js](https://img.shields.io/badge/Next.js-15.4.5-black?style=flat-square&logo=next.js)
 
-
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?style=flat-square&logo=tailwind-css)
 ![ShadCN](https://img.shields.io/badge/shadcn%2Fui-2.4.0-000000?style=flat-square&logo=shadcnui&logoColor=white)
 
@@ -88,7 +87,6 @@ Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F380
 7. 加槓：在表記牌的後面加上等號（`=`）。例：`3m3m3m-3m=`.
 8. 暗槓：使用 `0p`, `0s`, `0m`, `0z` 表示翻過來的牌。
 
-
 ## Develop & Build
 
 - Develop
@@ -102,7 +100,7 @@ npm run dev
 
 ```
 npm run format
-npx run build 
+npx run build
 ```
 
 ## Special Thanks

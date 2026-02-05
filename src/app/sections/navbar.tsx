@@ -88,7 +88,7 @@ export function Navbar() {
             <DropdownMenuItem
               onClick={() =>
                 downloadFont(
-                  "https://raw.githubusercontent.com/rutopio/Japanese-Mahjong-Font-with-OpenType/main/public/fonts/Riichi-Mahjong-Mono.otf"
+                  "https://raw.githubusercontent.com/rutopio/Japanese-Mahjong-Font-with-OpenType/main/public/fonts/Riichi-Mahjong-Mono.otf",
                 )
               }
             >
@@ -98,7 +98,7 @@ export function Navbar() {
             <DropdownMenuItem
               onClick={() =>
                 downloadFont(
-                  "https://raw.githubusercontent.com/rutopio/Japanese-Mahjong-Font-with-OpenType/main/public/fonts/Riichi-Mahjong-Color.otf"
+                  "https://raw.githubusercontent.com/rutopio/Japanese-Mahjong-Font-with-OpenType/main/public/fonts/Riichi-Mahjong-Color.otf",
                 )
               }
             >
