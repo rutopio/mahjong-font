@@ -18,7 +18,7 @@ export const MahjongPreview = forwardRef<HTMLDivElement, MahjongPreviewProps>(
       <div
         role="img"
         aria-label={t("mahjongPreview")}
-        className={`mx-auto mt-8 flex items-center text-center text-3xl leading-loose md:text-7xl ${theme === "monochrome" ? "font-riichi-mahjong-monochrome" : "font-riichi-mahjong-colorful"}`}
+        className={`no-wrap mx-auto mt-8 flex items-center text-center text-3xl leading-loose md:text-6xl ${theme === "monochrome" ? "font-riichi-mahjong-monochrome" : "font-riichi-mahjong-colorful"}`}
         style={isColorful ? { fontPalette: "--custom-palette" } : undefined}
         ref={ref}
       >

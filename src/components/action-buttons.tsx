@@ -32,19 +32,18 @@ const shareOptions = [
 ] as const;
 
 interface ActionButtonsProps {
-  input: string;
   renderedTextRef: RefObject<HTMLDivElement | null>;
 }
 
-export function ActionButtons({ input, renderedTextRef }: ActionButtonsProps) {
+export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
   const { t } = useTranslation();
   const isMobile = useIsMobile();
 
   const handleDownload = () => {
+    if (!renderedTextRef.current) return;
     textToImage(
-      input,
-      renderedTextRef.current?.textContent || "",
-      renderedTextRef.current as HTMLDivElement
+      renderedTextRef.current.textContent || "mahjong",
+      renderedTextRef.current
     );
   };
 

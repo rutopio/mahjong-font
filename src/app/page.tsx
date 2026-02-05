@@ -236,9 +236,7 @@ export default function Home() {
         ref={renderedTextRef}
       />
 
-      {input && (
-        <ActionButtons input={input} renderedTextRef={renderedTextRef} />
-      )}
+      {input && <ActionButtons renderedTextRef={renderedTextRef} />}
 
       <NotationsModal
         open={showNotations}

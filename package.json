@@ -20,6 +20,7 @@
     "clsx": "^2.1.1",
     "i18next": "^25.5.2",
     "lucide-react": "^0.536.0",
+    "modern-screenshot": "^4.6.8",
     "next": "^15.5.3",
     "react": "19.1.0",
     "react-aria-components": "^1.15.0",

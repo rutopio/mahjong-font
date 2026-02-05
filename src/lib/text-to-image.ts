@@ -1,50 +1,48 @@
-import { transformString } from "@/lib/transform-string";
+import { domToPng } from "modern-screenshot";
+
+const PADDING = 24;
 
 /**
  * Renders mahjong notation as a PNG image and triggers download.
- * @param text - The raw mahjong notation string
+ * Uses modern-screenshot to capture DOM element with CSS styles (including font-palette).
  * @param filename - The filename for the downloaded image
- * @param renderedText - The DOM element used to extract font styles
+ * @param renderedText - The DOM element to capture
  */
-export function textToImage(
-  text: string,
+export async function textToImage(
   filename: string,
   renderedText: HTMLDivElement
 ) {
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
+  // Get the dynamic font-palette-values style
+  const paletteStyle = document.getElementById("mahjong-palette-style");
+  const paletteCSS = paletteStyle?.textContent || "";
 
-  if (!context) {
-    return;
-  }
+  // Calculate actual content size and add padding to output dimensions
+  const rect = renderedText.getBoundingClientRect();
 
-  const realText = transformString(text);
-
-  const imagePadding = 100;
-  const scaleProp = 5;
-
-  const fontFamily = window.getComputedStyle(renderedText).fontFamily;
-  const fontSize =
-    parseFloat(window.getComputedStyle(renderedText).fontSize) * scaleProp;
-
-  context.font = `${fontSize}px ${fontFamily}`;
-  canvas.width = context.measureText(realText).width + imagePadding * 2;
-  canvas.height =
-    parseInt(window.getComputedStyle(renderedText).fontSize) * scaleProp +
-    imagePadding * 2;
-
-  context.font = `${fontSize}px ${fontFamily}`;
-  context.fillText(
-    realText,
-    imagePadding,
-    parseInt(window.getComputedStyle(renderedText).fontSize) * scaleProp +
-      imagePadding * 1.7
-  );
-
-  const imageData = canvas.toDataURL("image/png");
+  const dataUrl = await domToPng(renderedText, {
+    scale: 4,
+    width: rect.width + PADDING * 2,
+    height: rect.height + PADDING * 2,
+    style: {
+      padding: `${PADDING}px`,
+      width: "fit-content",
+      maxWidth: "none",
+      margin: "0",
+      whiteSpace: "nowrap",
+      flexWrap: "nowrap",
+    },
+    onCloneNode: (clonedNode) => {
+      // Inject font-palette-values into cloned DOM
+      if (clonedNode instanceof HTMLElement && paletteCSS) {
+        const style = document.createElement("style");
+        style.textContent = paletteCSS;
+        clonedNode.prepend(style);
+      }
+    },
+  });
 
   const link = document.createElement("a");
-  link.href = imageData;
-  link.download = filename;
+  link.href = dataUrl;
+  link.download = `${filename}.png`;
   link.click();
 }
