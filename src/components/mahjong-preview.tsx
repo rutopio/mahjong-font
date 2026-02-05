@@ -1,6 +1,7 @@
 "use client";
 
 import { forwardRef } from "react";
+import { useTranslation } from "react-i18next";
 
 interface MahjongPreviewProps {
   text: string;
@@ -9,19 +10,20 @@ interface MahjongPreviewProps {
 
 export const MahjongPreview = forwardRef<HTMLDivElement, MahjongPreviewProps>(
   function MahjongPreview({ text, theme }, ref) {
+    const { t } = useTranslation();
+
+    const isColorful = theme === "colorful";
+
     return (
       <div
-        className="mx-auto mt-8 flex items-center text-center text-3xl leading-loose md:text-7xl"
-        style={{
-          fontFamily:
-            theme === "monochrome"
-              ? "var(--font-riichi-mahjong-mono)"
-              : "var(--font-riichi-mahjong-color)",
-        }}
+        role="img"
+        aria-label={t("mahjongPreview")}
+        className={`mx-auto mt-8 flex items-center text-center text-3xl leading-loose md:text-7xl ${theme === "monochrome" ? "font-riichi-mahjong-monochrome" : "font-riichi-mahjong-colorful"}`}
+        style={isColorful ? { fontPalette: "--custom-palette" } : undefined}
         ref={ref}
       >
         {text}
       </div>
     );
-  },
+  }
 );

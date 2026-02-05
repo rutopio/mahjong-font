@@ -1,22 +1,29 @@
-import { GITHUB_PROFILE_URL } from "@/app/constants";
+import { GITHUB_PROFILE_URL } from "@/lib/constants";
 
 export function Footer() {
   return (
-    <footer className="w-full bg-background font-light">
-      <div className="p-4 text-primary/80 text-center font-mono text-xs leading-loose">
+    <footer className="container w-full bg-background font-light">
+      <div className="p-4 text-center font-mono text-xs leading-loose text-primary/80">
         <a
           href={GITHUB_PROFILE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:underline underline-offset-4"
+          className="underline-offset-4 hover:underline"
         >
           <div>Made by ChingRu (rutopio@Github)</div>
         </a>
-        <div>
-          Noted that Color Font format is not supported on some devices and
-          browsers. <br />
-          Use Desktop Chrome for best experience.
-        </div>
+        <a
+          href="https://caniuse.com/colr"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline-offset-4 hover:underline"
+        >
+          <div>
+            Noted that Color Font is not compatible with some devices or
+            browsers.{" "}
+          </div>
+        </a>
+        <div>Use Desktop Chrome for best experience.</div>
       </div>
     </footer>
   );

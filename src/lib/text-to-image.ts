@@ -9,7 +9,7 @@ import { transformString } from "@/lib/transform-string";
 export function textToImage(
   text: string,
   filename: string,
-  renderedText: HTMLDivElement,
+  renderedText: HTMLDivElement
 ) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
@@ -38,7 +38,7 @@ export function textToImage(
     realText,
     imagePadding,
     parseInt(window.getComputedStyle(renderedText).fontSize) * scaleProp +
-      imagePadding * 1.7,
+      imagePadding * 1.7
   );
 
   const imageData = canvas.toDataURL("image/png");

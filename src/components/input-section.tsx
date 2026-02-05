@@ -1,8 +1,9 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { DicesIcon, InfoIcon, PaletteIcon } from "lucide-react";
+import { InfoIcon, LibraryBigIcon, PaletteIcon } from "lucide-react";
 
+import { ColorPickerPopover } from "@/components/color-palette-pickers";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { yakuGroups, themeOptions } from "@/app/constants";
+import { themeOptions, yakuGroups } from "@/lib/constants";
 
 interface InputSectionProps {
   input: string;
@@ -26,6 +27,8 @@ interface InputSectionProps {
   theme: string;
   onThemeChange: (value: string) => void;
   onShowNotations: () => void;
+  tileColor: string;
+  onColorChange: (value: string) => void;
 }
 
 export function InputSection({
@@ -36,15 +39,19 @@ export function InputSection({
   theme,
   onThemeChange,
   onShowNotations,
+  tileColor,
+  onColorChange,
 }: InputSectionProps) {
   const { t } = useTranslation();
   const isMobile = useIsMobile();
+  const isColorful = theme === "colorful";
 
   return (
     <div className="flex w-full flex-col items-center gap-4">
       <Input
         type="text"
         placeholder={t("placeholder")}
+        aria-label={t("placeholder")}
         className="h-12 w-full bg-white text-center text-lg"
         value={input}
         onChange={(e) => onInputChange(e.target.value)}
@@ -53,12 +60,9 @@ export function InputSection({
       <div className="flex w-full flex-col gap-4 md:flex-row md:justify-between">
         <div className="flex flex-col items-center gap-4 md:flex-row">
           <div className="flex items-center gap-2">
-            <DicesIcon className="size-6" />
-            <Select
-              value={selectedOption || undefined}
-              onValueChange={onOptionChange}
-            >
-              <SelectTrigger className="h-12 w-fit min-w-[180px] sm:min-w-[180px] bg-white">
+            <LibraryBigIcon className="size-6" aria-hidden="true" />
+            <Select value={selectedOption} onValueChange={onOptionChange}>
+              <SelectTrigger className="h-12 w-fit min-w-[180px] bg-white sm:min-w-[180px]">
                 <SelectValue placeholder={t("examples")} />
               </SelectTrigger>
               <SelectContent side="top" align={isMobile ? "center" : "start"}>
@@ -79,9 +83,9 @@ export function InputSection({
             </Select>
           </div>
           <div className="flex items-center gap-2">
-            <PaletteIcon className="size-6" />
+            <PaletteIcon className="size-6" aria-hidden="true" />
             <Select value={theme} onValueChange={onThemeChange}>
-              <SelectTrigger className="h-12 w-fit min-w-[180px] sm:min-w-[100px] bg-white">
+              <SelectTrigger className="h-12 w-fit min-w-[180px] bg-white sm:min-w-[100px]">
                 <SelectValue placeholder={t("theme")} />
               </SelectTrigger>
               <SelectContent>
@@ -92,6 +96,12 @@ export function InputSection({
                 ))}
               </SelectContent>
             </Select>
+            {isColorful && (
+              <ColorPickerPopover
+                color={tileColor}
+                onColorChange={onColorChange}
+              />
+            )}
           </div>
         </div>
         <div className="mx-auto flex items-center gap-2 md:mx-0">

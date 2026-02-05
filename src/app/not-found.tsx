@@ -11,10 +11,10 @@ export default function NotFound() {
   }, [router]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <h2 className="text-2xl font-bold mb-4">Redirecting</h2>
-        <p>Wait a moment...</p>
+    <div className="container flex min-h-screen items-center justify-center p-4">
+      <div className="flex flex-col items-center justify-center gap-4">
+        <p>Page not found.</p>
+        <h2 className="mb-4 text-2xl font-bold">Redirecting...</h2>
       </div>
     </div>
   );

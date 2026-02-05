@@ -9,12 +9,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { notationExamples, notationItems } from "@/lib/constants";
 import { transformString } from "@/lib/transform-string";
-import {
-  notationExamples,
-  notationItems,
-  type NotationItem,
-} from "@/app/constants";
+
+import type { NotationItem } from "@/lib/constants";
 
 function NotationBadge({ children }: { children: React.ReactNode }) {
   return (
@@ -24,12 +22,19 @@ function NotationBadge({ children }: { children: React.ReactNode }) {
   );
 }
 
-function NotationContent({ item, t }: { item: NotationItem; t: (key: string) => string }) {
+function NotationContent({
+  item,
+  t,
+}: {
+  item: NotationItem;
+  t: (key: string) => string;
+}) {
   switch (item.type) {
     case "range":
       return (
         <>
-          <NotationBadge>{item.start}</NotationBadge> ~ <NotationBadge>{item.end}</NotationBadge>
+          <NotationBadge>{item.start}</NotationBadge> ~{" "}
+          <NotationBadge>{item.end}</NotationBadge>
           {item.suffix}
         </>
       );
@@ -78,8 +83,14 @@ export default function Notations({ theme }: { theme: string }) {
             <TableBody>
               {notationItems.map((item) => (
                 <TableRow key={item.titleKey}>
-                  <TableCell className="font-bold">{t(item.titleKey)}</TableCell>
-                  <TableCell className={item.titleKey === "aka-dora" ? "break-words" : ""}>
+                  <TableCell className="font-bold">
+                    {t(item.titleKey)}
+                  </TableCell>
+                  <TableCell
+                    className={
+                      item.titleKey === "aka-dora" ? "break-words" : ""
+                    }
+                  >
                     <NotationContent item={item} t={t} />
                   </TableCell>
                 </TableRow>
@@ -92,10 +103,14 @@ export default function Notations({ theme }: { theme: string }) {
         <div className="block space-y-3 p-4 sm:hidden">
           {notationItems.map((item, index) => (
             <div key={item.titleKey}>
-              {index > 0 && <hr className="border-border mb-3" />}
+              {index > 0 && <hr className="mb-3 border-border" />}
               <div className="space-y-2">
-                <div className="text-sm font-bold">{t(item.titleKey)}</div>
-                <div className={`text-sm ${item.titleKey === "aka-dora" ? "break-words" : ""}`}>
+                <div className="text-sm font-bold text-pretty">
+                  {t(item.titleKey)}
+                </div>
+                <div
+                  className={`text-sm text-pretty ${item.titleKey === "aka-dora" ? "break-words" : ""}`}
+                >
                   <NotationContent item={item} t={t} />
                 </div>
               </div>
@@ -107,15 +122,15 @@ export default function Notations({ theme }: { theme: string }) {
         {notationExamples.map((example, index) => (
           <div
             key={index}
-            className={`flex flex-col border-b p-2 ${index === 3 ? "gap-8" : "gap-4"}`}
+            className={`flex flex-col p-2 ${index < notationExamples.length - 1 ? "border-b" : ""} ${index === 3 ? "gap-8" : "gap-4"}`}
           >
-            <div className="flex gap-4 p-2 items-center">
+            <div className="flex items-center gap-4 p-2">
               <div className="text-sm font-bold break-words">
                 {t(example.combination)}
               </div>
               <Badge
                 variant="outline"
-                className=" text-sm break-all rounded-full"
+                className="rounded-full text-sm break-all"
               >
                 {example.notation}
               </Badge>
@@ -124,8 +139,8 @@ export default function Notations({ theme }: { theme: string }) {
             <div
               className={`text-4xl sm:text-7xl ${
                 theme === "monochrome"
-                  ? "font-riichi-mahjong-mono"
-                  : "font-riichi-mahjong-color"
+                  ? "font-riichi-mahjong-monochrome"
+                  : "font-riichi-mahjong-colorful"
               }`}
             >
               {transformString(example.notation)}

@@ -5,19 +5,22 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerFooter,
-  DrawerClose,
 } from "@/components/ui/drawer";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
+
 import Notations from "@/app/sections/notations";
 
 interface NotationsModalProps {
@@ -34,8 +37,6 @@ export function NotationsModal({
   const { t } = useTranslation();
   const isMobile = useIsMobile();
 
-  if (!open) return null;
-
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
@@ -44,6 +45,9 @@ export function NotationsModal({
             <DrawerTitle className="text-center text-xl font-bold">
               {t("howToUse")}
             </DrawerTitle>
+            <DrawerDescription className="sr-only">
+              {t("howToUse")}
+            </DrawerDescription>
           </DrawerHeader>
           <div className="overflow-auto p-4">
             <Notations theme={theme} />
@@ -60,11 +64,14 @@ export function NotationsModal({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="min-w-1/2">
+      <SheetContent className="w-full gap-0 sm:max-w-[50%] sm:min-w-[600px]">
         <SheetHeader>
           <SheetTitle className="text-center text-2xl font-bold">
             {t("howToUse")}
           </SheetTitle>
+          <SheetDescription className="sr-only">
+            {t("howToUse")}
+          </SheetDescription>
         </SheetHeader>
         <div className="overflow-auto p-4">
           <Notations theme={theme} />

@@ -1,4 +1,5 @@
 {
+  "mahjongPreview": "Mahjong Tiles Preview",
   "downloadFont": "Download Font",
   "monochromeFont": "Monochrome Version",
   "colorfulFont": "Colorful Version",
@@ -21,6 +22,7 @@
   "close": "Close",
   "errorOccurred": "An error occurred",
   "tryAgain": "Try again",
+  "loading": "Loading",
 
   "tanyao": "All Simples",
   "ipeiko": "Twin Sequences",
@@ -87,5 +89,6 @@
   "souzu-fuuro-examples": "Souzu & Fuuro",
   "zipai-ka-kan-examples": "Zipai & Ka-Kan",
   "zipai-an-kan-examples": "Zipai & An-Kan",
-  "big-gap-examples": "Big Gap"
+  "big-gap-examples": "Big Gap",
+  "dice-examples": "Dice"
 }

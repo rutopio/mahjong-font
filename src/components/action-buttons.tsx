@@ -44,7 +44,7 @@ export function ActionButtons({ input, renderedTextRef }: ActionButtonsProps) {
     textToImage(
       input,
       renderedTextRef.current?.textContent || "",
-      renderedTextRef.current as HTMLDivElement,
+      renderedTextRef.current as HTMLDivElement
     );
   };
 
@@ -86,7 +86,7 @@ export function ActionButtons({ input, renderedTextRef }: ActionButtonsProps) {
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline">
+            <Button variant="outline" className="bg-white">
               <Share2Icon />
               {t("share")}
             </Button>

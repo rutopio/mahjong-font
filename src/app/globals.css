@@ -1,26 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+SC:wght@100..900&family=Noto+Sans+TC:wght@100..900&display=swap");
 
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @font-face {
-  font-family: "Riichi-Mahjong-Mono";
-  src: url("/fonts/Riichi-Mahjong-Mono.otf") format("opentype");
+  font-family: "Riichi-Mahjong-Monochrome";
+  src: url("/fonts/Riichi-Mahjong-Monochrome.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
-  font-family: "Riichi-Mahjong-Color";
-  src: url("/fonts/Riichi-Mahjong-Color.otf") format("opentype");
+  font-family: "Riichi-Mahjong-Colorful";
+  src: url("/fonts/Riichi-Mahjong-Colorful.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
-@theme {
-  --font-notosans:
+@theme inline {
+  --font-sans:
     "Lato", "Noto Sans JP", "Noto Sans TC", "Noto Sans SC", sans-serif;
+  --font-riichi-mahjong-monochrome: "Riichi-Mahjong-Monochrome", monospace;
+  --font-riichi-mahjong-colorful: "Riichi-Mahjong-Colorful", monospace;
 }
 
 @theme inline {
@@ -106,16 +109,28 @@
   }
 }
 
-@layer utilities {
-  .font-notosans {
-    font-family: var(--font-notosans);
+@utility container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 640px) {
+    max-width: 640px;
   }
 
-  .font-riichi-mahjong-mono {
-    font-family: "Riichi-Mahjong-Mono", monospace !important;
+  @media (min-width: 768px) {
+    max-width: 768px;
   }
 
-  .font-riichi-mahjong-color {
-    font-family: "Riichi-Mahjong-Color", monospace !important;
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+  }
+
+  @media (min-width: 1280px) {
+    max-width: 1280px;
+  }
+
+  @media (min-width: 1536px) {
+    max-width: 1536px;
   }
 }

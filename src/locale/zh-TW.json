@@ -1,4 +1,5 @@
 {
+  "mahjongPreview": "麻雀牌預覽",
   "downloadFont": "下載字型",
   "monochromeFont": "黑白麻雀牌",
   "colorfulFont": "彩色麻雀牌",
@@ -10,6 +11,7 @@
   "monochrome": "黑白",
   "colorful": "彩色",
   "howToUse": "表記方法",
+  "dice": "骰子",
   "saveAsImage": "儲存為圖片",
   "share": "分享",
   "copyLink": "複製連結",
@@ -20,6 +22,7 @@
   "close": "關閉",
   "errorOccurred": "發生錯誤",
   "tryAgain": "重試",
+  "loading": "載入中",
 
   "tanyao": "断么九",
   "ipeiko": "一盃口",
@@ -85,5 +88,6 @@
   "souzu-fuuro-examples": "索子 & 副露",
   "zipai-ka-kan-examples": "字牌 & 加槓",
   "zipai-an-kan-examples": "字牌 & 暗槓",
-  "big-gap-examples": "使用大間隔"
+  "big-gap-examples": "使用大間隔",
+  "dice-examples": "骰子"
 }
