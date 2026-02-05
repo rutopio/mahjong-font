@@ -1,5 +1,11 @@
 import { transformString } from "@/lib/transform-string";
 
+/**
+ * Renders mahjong notation as a PNG image and triggers download.
+ * @param text - The raw mahjong notation string
+ * @param filename - The filename for the downloaded image
+ * @param renderedText - The DOM element used to extract font styles
+ */
 export function textToImage(
   text: string,
   filename: string,

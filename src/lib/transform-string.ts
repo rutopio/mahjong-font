@@ -1,3 +1,7 @@
+/**
+ * Transforms mahjong notation string into displayable characters.
+ * Example: "123m" -> "1m2m3m"
+ */
 export function transformString(text: string) {
   let charArr = text.trim().split("");
   const result = [];
@@ -5,7 +9,7 @@ export function transformString(text: string) {
   var indicator;
   for (let i = 0; i < charArr.length; i++) {
     if (/([A-Za-z])/.test(charArr[i])) {
-      // indicators (m, p, s, z)
+      // Suit indicators (m, p, s, z)
       indicator = charArr[i];
 
       for (let j = 0; j < stack.length; j++) {
@@ -14,13 +18,12 @@ export function transformString(text: string) {
 
       stack = [];
     } else if (/\d/.test(charArr[i])) {
-      // numbers
+      // Tile numbers
       stack.push(charArr[i]);
     } else {
-      //symbols (*, -, =)
+      // Symbols (*, -, =, etc.)
       result.push(`${charArr[i]}`);
     }
   }
-  console.log(result.concat(stack).join(""));
   return result.concat(stack).join("");
 }

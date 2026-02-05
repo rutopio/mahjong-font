@@ -1,0 +1,109 @@
+"use client";
+
+import { RefObject } from "react";
+import { useTranslation } from "react-i18next";
+import { DownloadIcon, LinkIcon, Share2Icon } from "lucide-react";
+import { toast } from "sonner";
+
+import { FacebookIcon } from "@/components/icon/facebook";
+import { ThreadsIcon } from "@/components/icon/threads";
+import { XIcon } from "@/components/icon/x";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useIsMobile } from "@/hooks/use-mobile";
+import {
+  copyLink,
+  shareToFacebook,
+  shareToThreads,
+  shareToX,
+} from "@/lib/share-link";
+import { textToImage } from "@/lib/text-to-image";
+
+const shareOptions = [
+  { labelKey: "copyLink", icon: LinkIcon, action: "copy" },
+  { labelKey: "shareOnFacebook", icon: FacebookIcon, action: "facebook" },
+  { labelKey: "shareOnX", icon: XIcon, action: "x" },
+  { labelKey: "shareOnThreads", icon: ThreadsIcon, action: "threads" },
+] as const;
+
+interface ActionButtonsProps {
+  input: string;
+  renderedTextRef: RefObject<HTMLDivElement | null>;
+}
+
+export function ActionButtons({ input, renderedTextRef }: ActionButtonsProps) {
+  const { t } = useTranslation();
+  const isMobile = useIsMobile();
+
+  const handleDownload = () => {
+    textToImage(
+      input,
+      renderedTextRef.current?.textContent || "",
+      renderedTextRef.current as HTMLDivElement,
+    );
+  };
+
+  const handleShare = (action: string) => {
+    if (action === "copy") {
+      copyLink();
+      toast.success(t("linkCopied"), {
+        description: window.location.href,
+      });
+    } else if (action === "facebook") {
+      shareToFacebook();
+    } else if (action === "x") {
+      shareToX();
+    } else if (action === "threads") {
+      shareToThreads();
+    }
+  };
+
+  const handleNativeShare = () => {
+    navigator.share({
+      title: t("toolTitle"),
+      text: t("toolTitle"),
+      url: window.location.href,
+    });
+  };
+
+  return (
+    <div className="flex gap-2">
+      <Button onClick={handleDownload}>
+        <DownloadIcon />
+        {t("saveAsImage")}
+      </Button>
+
+      {isMobile ? (
+        <Button variant="outline" onClick={handleNativeShare}>
+          <Share2Icon />
+          {t("share")}
+        </Button>
+      ) : (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline">
+              <Share2Icon />
+              {t("share")}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start">
+            {shareOptions.map((option) => (
+              <DropdownMenuItem
+                key={option.action}
+                onClick={() => handleShare(option.action)}
+              >
+                <option.icon />
+                {t(option.labelKey)}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
+    </div>
+  );
+}

@@ -34,8 +34,6 @@ export default defineConfig([
         "plugin:import/recommended",
         "plugin:import/typescript",
         "plugin:tailwindcss/recommended",
-        "plugin:import/errors",
-        "plugin:import/warnings",
         "plugin:prettier/recommended",
         "prettier",
       ),

@@ -1,9 +1,11 @@
+import { GITHUB_PROFILE_URL } from "@/app/constants";
+
 export function Footer() {
   return (
     <footer className="w-full bg-background font-light">
       <div className="p-4 text-primary/80 text-center font-mono text-xs leading-loose">
         <a
-          href="https://github.com/rutopio"
+          href={GITHUB_PROFILE_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="hover:underline underline-offset-4"

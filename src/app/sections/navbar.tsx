@@ -1,8 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FileDownIcon, FileType2Icon, LanguagesIcon } from "lucide-react";
-import { useState } from "react";
 
 import { GithubIcon } from "@/components/icon/github";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { languages, fontDownloads, GITHUB_REPO_URL } from "@/app/constants";
 
 export function Navbar() {
   const { t, i18n } = useTranslation();
@@ -35,6 +36,7 @@ export function Navbar() {
               variant="ghost"
               type="button"
               className="rounded-full sm:rounded-md"
+              aria-label={t("language")}
             >
               <LanguagesIcon />
               <span className="hidden md:block">{t("language")}</span>
@@ -45,30 +47,15 @@ export function Navbar() {
               value={language}
               onValueChange={setLanguage}
             >
-              <DropdownMenuRadioItem
-                value="ja"
-                onClick={() => i18n.changeLanguage("ja")}
-              >
-                日本語
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem
-                value="en"
-                onClick={() => i18n.changeLanguage("en")}
-              >
-                English
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem
-                value="zh-TW"
-                onClick={() => i18n.changeLanguage("zh-TW")}
-              >
-                繁體中文
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem
-                value="zh-CN"
-                onClick={() => i18n.changeLanguage("zh-CN")}
-              >
-                简体中文
-              </DropdownMenuRadioItem>
+              {languages.map((lang) => (
+                <DropdownMenuRadioItem
+                  key={lang.value}
+                  value={lang.value}
+                  onClick={() => i18n.changeLanguage(lang.value)}
+                >
+                  {lang.label}
+                </DropdownMenuRadioItem>
+              ))}
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -79,47 +66,39 @@ export function Navbar() {
               variant="ghost"
               type="button"
               className="rounded-full sm:rounded-md"
+              aria-label={t("downloadFont")}
             >
               <FileType2Icon />
               <span className="hidden md:block">{t("downloadFont")}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              onClick={() =>
-                downloadFont(
-                  "https://raw.githubusercontent.com/rutopio/Japanese-Mahjong-Font-with-OpenType/main/public/fonts/Riichi-Mahjong-Mono.otf",
-                )
-              }
-            >
-              <FileDownIcon />
-              {t("monochromeFont")}
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() =>
-                downloadFont(
-                  "https://raw.githubusercontent.com/rutopio/Japanese-Mahjong-Font-with-OpenType/main/public/fonts/Riichi-Mahjong-Color.otf",
-                )
-              }
-            >
-              <FileDownIcon />
-              {t("colorfulFont")}
-            </DropdownMenuItem>
+            {fontDownloads.map((font) => (
+              <DropdownMenuItem
+                key={font.labelKey}
+                onClick={() => downloadFont(font.url)}
+              >
+                <FileDownIcon />
+                {t(font.labelKey)}
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
 
         <a
-          href="https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType"
+          href={GITHUB_REPO_URL}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="GitHub repository"
         >
           <Button
             variant="ghost"
             type="button"
             className="rounded-full sm:rounded-md"
+            aria-label="GitHub"
           >
             <GithubIcon />
-            <span className="hidden md:block">Github</span>
+            <span className="hidden md:block">GitHub</span>
           </Button>
         </a>
       </div>
