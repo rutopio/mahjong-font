@@ -50,7 +50,13 @@ export const MahjongPreview = forwardRef<HTMLDivElement, MahjongPreviewProps>(
     }, [text]);
 
     useEffect(() => {
-      calculateFontSize();
+      // Wait for fonts to load before calculating font size.
+      // On initial load, the Riichi-Mahjong font may not be ready yet,
+      // causing measurements to use fallback font widths (monospace),
+      // which are much wider due to missing OpenType ligatures.
+      document.fonts.ready.then(() => {
+        calculateFontSize();
+      });
 
       const container = containerRef.current;
       if (!container) return;
@@ -61,8 +67,13 @@ export const MahjongPreview = forwardRef<HTMLDivElement, MahjongPreviewProps>(
 
       resizeObserver.observe(container);
 
+      // Recalculate when any font finishes loading (handles late-loading fonts)
+      const onFontLoad = () => calculateFontSize();
+      document.fonts.addEventListener("loadingdone", onFontLoad);
+
       return () => {
         resizeObserver.disconnect();
+        document.fonts.removeEventListener("loadingdone", onFontLoad);
       };
     }, [calculateFontSize]);
 
@@ -72,7 +83,7 @@ export const MahjongPreview = forwardRef<HTMLDivElement, MahjongPreviewProps>(
     return (
       <div
         ref={containerRef}
-        className="relative mx-auto mt-8 flex w-full items-center justify-center overflow-hidden"
+        className="relative mx-auto flex w-full items-center justify-center overflow-hidden pt-16"
         style={{ height: `${fixedHeight}px` }}
       >
         {/* Hidden element for measuring text width */}
