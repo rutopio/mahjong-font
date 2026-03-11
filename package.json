@@ -2,6 +2,7 @@
   "name": "japanese-mahjong-font-with-openType",
   "version": "2.1.0",
   "private": true,
+  "packageManager": "pnpm@10.0.0",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
