@@ -89,20 +89,20 @@ export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
   return (
     <div className="flex gap-2">
       <Button onClick={handleDownload}>
-        <DownloadIcon />
+        <DownloadIcon aria-hidden="true" />
         {t("saveAsImage")}
       </Button>
 
       {isMobile ? (
         <Button variant="outline" onClick={handleNativeShare}>
-          <Share2Icon />
+          <Share2Icon aria-hidden="true" />
           {t("share")}
         </Button>
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="bg-white">
-              <Share2Icon />
+              <Share2Icon aria-hidden="true" />
               {t("share")}
             </Button>
           </DropdownMenuTrigger>
@@ -112,7 +112,7 @@ export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
                 key={option.action}
                 onClick={() => handleShare(option.action)}
               >
-                <option.icon />
+                <option.icon aria-hidden="true" />
                 {t(option.labelKey)}
               </DropdownMenuItem>
             ))}

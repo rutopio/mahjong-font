@@ -42,7 +42,7 @@ export function NotationsModal({
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle className="text-center text-xl font-bold">
+            <DrawerTitle className="text-center text-xl font-bold text-balance">
               {t("howToUse")}
             </DrawerTitle>
             <DrawerDescription className="sr-only">
@@ -66,7 +66,7 @@ export function NotationsModal({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full gap-0 sm:max-w-[50%] sm:min-w-[600px]">
         <SheetHeader>
-          <SheetTitle className="text-center text-2xl font-bold">
+          <SheetTitle className="text-center text-2xl font-bold text-balance">
             {t("howToUse")}
           </SheetTitle>
           <SheetDescription className="sr-only">

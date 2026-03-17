@@ -21,13 +21,29 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
+const SITE_URL =
+  "https://rutopio.github.io/Japanese-Mahjong-Font-with-OpenType";
+const SITE_TITLE = "麻雀牌図作成ツール | Mahjong Tile Image Generator";
+const SITE_DESCRIPTION =
+  "Create beautiful mahjong tile images with customizable notation. Supports monochrome and colorful themes.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    "https://rutopio.github.io/Japanese-Mahjong-Font-with-OpenType"
-  ),
-  title: "麻雀牌図作成ツール | Mahjong Tile Image Generator",
-  description:
-    "Create beautiful mahjong tile images with customizable notation. Supports monochrome and colorful themes.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "mahjong",
+    "麻雀",
+    "麻將",
+    "tile",
+    "font",
+    "OpenType",
+    "image generator",
+    "riichi",
+  ],
+  alternates: {
+    canonical: "/",
+  },
   manifest: "/site.webmanifest",
   icons: {
     icon: [
@@ -39,9 +55,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "麻雀牌図作成ツール | Mahjong Tile Image Generator",
-    description:
-      "Create beautiful mahjong tile images with customizable notation. Supports monochrome and colorful themes.",
+    url: "/",
     type: "website",
     locale: "ja_JP",
     siteName: "Mahjong Tile Image Generator",
@@ -56,9 +70,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "麻雀牌図作成ツール | Mahjong Tile Image Generator",
-    description:
-      "Create beautiful mahjong tile images with customizable notation.",
     images: ["/og-image.png"],
   },
 };

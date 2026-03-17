@@ -46,7 +46,7 @@ export function Navbar() {
               className="rounded-full sm:rounded-md"
               aria-label={t("language")}
             >
-              <LanguagesIcon />
+              <LanguagesIcon aria-hidden="true" />
               <span className="hidden md:block">{t("language")}</span>
             </Button>
           </DropdownMenuTrigger>
@@ -86,7 +86,7 @@ export function Navbar() {
               className="rounded-full sm:rounded-md"
               aria-label={t("downloadFont")}
             >
-              <FileType2Icon />
+              <FileType2Icon aria-hidden="true" />
               <span className="hidden md:block">{t("downloadFont")}</span>
             </Button>
           </DropdownMenuTrigger>
@@ -105,7 +105,7 @@ export function Navbar() {
                   key={font.labelKey}
                   onClick={() => downloadFont(font.url)}
                 >
-                  <FileDownIcon />
+                  <FileDownIcon aria-hidden="true" />
                   {t(font.labelKey)}
                 </DropdownMenuItem>
               ))}
@@ -113,27 +113,23 @@ export function Navbar() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <a
-          href={GITHUB_REPO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub repository"
-        >
-          <Button
-            variant="ghost"
-            type="button"
-            className="rounded-full sm:rounded-md"
+        <Button variant="ghost" asChild className="rounded-full sm:rounded-md">
+          <a
+            href={GITHUB_REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub repository"
           >
             <GithubIcon />
-            <div className="flex items-center gap-0">
+            <span className="flex items-center gap-0">
               <span>rutopio</span>
               <span className="hidden md:block">{" / "}</span>
               <span className="hidden md:block">
                 Japanese-Mahjong-Font-with-OpenType
               </span>
-            </div>
-          </Button>
-        </a>
+            </span>
+          </a>
+        </Button>
       </div>
     </nav>
   );

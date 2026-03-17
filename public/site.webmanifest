@@ -1,6 +1,7 @@
 {
-  "name": "麻雀牌図作成ツール",
-  "short_name": "Mahjong Tile Image Generator",
+  "name": "麻雀牌図作成ツール | Mahjong Tile Image Generator",
+  "short_name": "麻雀牌図作成ツール",
+  "start_url": ".",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

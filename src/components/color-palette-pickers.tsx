@@ -63,7 +63,7 @@ function EyeDropperButton() {
           );
       }}
     >
-      <PipetteIcon className="size-4" />
+      <PipetteIcon className="size-4" aria-hidden="true" />
     </AriaButton>
   );
 }
@@ -106,6 +106,7 @@ export function ColorPickerPopover({
   return (
     <DialogTrigger>
       <AriaButton
+        aria-label="Pick tile color"
         className="size-8 cursor-pointer rounded-md p-0 outline-none focus:ring focus:ring-offset-2"
         style={{ backgroundColor: color }}
       >
@@ -166,6 +167,7 @@ export function ColorPickerPopover({
               <Button
                 className="size-9"
                 variant="ghost"
+                aria-label="Copy hex color"
                 onClick={() => {
                   navigator.clipboard.writeText(colorValue.toString("hex"));
                   toast.success("Color copied to clipboard.", {
@@ -173,7 +175,7 @@ export function ColorPickerPopover({
                   });
                 }}
               >
-                <CopyIcon size={30} />
+                <CopyIcon size={30} aria-hidden="true" />
               </Button>
             </ColorField>
 

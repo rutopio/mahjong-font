@@ -62,7 +62,10 @@ export function InputSection({
           <div className="flex items-center gap-2">
             <LibraryBigIcon className="size-6" aria-hidden="true" />
             <Select value={selectedOption} onValueChange={onOptionChange}>
-              <SelectTrigger className="h-12 w-fit min-w-[180px] bg-white sm:min-w-[180px]">
+              <SelectTrigger
+                className="h-12 w-fit min-w-[180px] bg-white sm:min-w-[180px]"
+                aria-label={t("examples")}
+              >
                 <SelectValue placeholder={t("examples")} />
               </SelectTrigger>
               <SelectContent side="top" align={isMobile ? "center" : "start"}>
@@ -85,7 +88,10 @@ export function InputSection({
           <div className="flex items-center gap-2">
             <PaletteIcon className="size-6" aria-hidden="true" />
             <Select value={theme} onValueChange={onThemeChange}>
-              <SelectTrigger className="h-12 w-fit min-w-[180px] bg-white sm:min-w-[100px]">
+              <SelectTrigger
+                className="h-12 w-fit min-w-[180px] bg-white sm:min-w-[100px]"
+                aria-label={t("theme")}
+              >
                 <SelectValue placeholder={t("theme")} />
               </SelectTrigger>
               <SelectContent>
@@ -106,7 +112,7 @@ export function InputSection({
         </div>
         <div className="mx-auto flex items-center gap-2 md:mx-0">
           <Button onClick={onShowNotations}>
-            <InfoIcon />
+            <InfoIcon aria-hidden="true" />
             {t("howToUse")}
           </Button>
         </div>

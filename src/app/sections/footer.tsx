@@ -8,19 +8,21 @@ export function Footer() {
           href={GITHUB_PROFILE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="underline-offset-4 hover:underline"
+          className="underline-offset-4 hover:underline focus-visible:underline focus-visible:outline-none"
         >
-          <div>Made by ChingRu (rutopio@Github)</div>
+          <span className="block">Made by ChingRu (rutopio@Github)</span>
         </a>
         <a
           href="https://caniuse.com/colr"
           target="_blank"
           rel="noopener noreferrer"
-          className="underline-offset-4 hover:underline"
+          className="underline-offset-4 hover:underline focus-visible:underline focus-visible:outline-none"
         >
-          <div>Color Font is not compatible with some browsers. </div>
+          <span className="block">
+            Color Font is not compatible with some browsers.
+          </span>
         </a>
-        <div>Use Desktop Chrome for best experience.</div>
+        <p>Use Desktop Chrome for best experience.</p>
       </div>
     </footer>
   );

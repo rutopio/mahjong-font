@@ -20,7 +20,7 @@ export default function Error({
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-6">
-      <h2 className="text-xl font-bold">{t("errorOccurred")}</h2>
+      <h1 className="text-xl font-bold text-balance">{t("errorOccurred")}</h1>
       <Button onClick={() => reset()}>{t("tryAgain")}</Button>
     </div>
   );

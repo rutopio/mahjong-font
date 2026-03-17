@@ -37,7 +37,10 @@ i18next.use(initReactI18next).init({
 if (typeof window !== "undefined") {
   i18next.on("languageChanged", (lng: string) => {
     localStorage.setItem("japanese-mahjong-font:preferred-language", lng);
+    document.documentElement.lang = lng;
   });
+
+  document.documentElement.lang = i18next.language;
 }
 
 export default i18next;

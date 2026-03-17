@@ -137,6 +137,7 @@ export default function Notations({ theme }: { theme: string }) {
             </div>
 
             <div
+              aria-hidden="true"
               className={`text-4xl sm:text-7xl ${
                 theme === "monochrome"
                   ? "font-riichi-mahjong-monochrome"
