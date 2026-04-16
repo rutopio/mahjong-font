@@ -14,12 +14,13 @@ const resources = {
 };
 
 const getDefaultLanguage = () => {
-  if (typeof window !== "undefined") {
+  try {
     return (
       localStorage.getItem("japanese-mahjong-font:preferred-language") || "ja"
     );
+  } catch {
+    return "ja";
   }
-  return "ja";
 };
 
 i18next.use(initReactI18next).init({
@@ -34,13 +35,15 @@ i18next.use(initReactI18next).init({
   },
 });
 
-if (typeof window !== "undefined") {
-  i18next.on("languageChanged", (lng: string) => {
+i18next.on("languageChanged", (lng: string) => {
+  try {
     localStorage.setItem("japanese-mahjong-font:preferred-language", lng);
-    document.documentElement.lang = lng;
-  });
+  } catch {
+    // ignore storage failures
+  }
+  document.documentElement.lang = lng;
+});
 
-  document.documentElement.lang = i18next.language;
-}
+document.documentElement.lang = i18next.language;
 
 export default i18next;

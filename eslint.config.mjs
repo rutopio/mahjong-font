@@ -3,7 +3,6 @@ import { fileURLToPath } from "node:url";
 import { fixupConfigRules, fixupPluginRules } from "@eslint/compat";
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
-import tailwind from "@hyoban/eslint-plugin-tailwindcss";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import _import from "eslint-plugin-import";
@@ -18,21 +17,20 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
-// Helper function for Tailwind CSS config
-function findTailwindImportCss(cwd) {
-  return path.join(cwd, "app/globals.css");
-}
-
 export default defineConfig([
-  ...tailwind.configs["flat/recommended"],
-  globalIgnores(["**/components/ui/**/*"]),
+  globalIgnores([
+    "**/components/ui/**/*",
+    ".next/**",
+    "out/**",
+    "dist/**",
+    "src/routeTree.gen.ts",
+  ]),
   {
+    files: ["**/*.ts", "**/*.tsx"],
     extends: fixupConfigRules(
       compat.extends(
-        "next/core-web-vitals",
         "plugin:import/recommended",
         "plugin:import/typescript",
-        "plugin:tailwindcss/recommended",
         "plugin:prettier/recommended",
         "prettier"
       )
@@ -40,7 +38,6 @@ export default defineConfig([
 
     plugins: {
       prettier: fixupPluginRules(prettier),
-      tailwindcss: fixupPluginRules(tailwind),
       import: fixupPluginRules(_import),
       "@typescript-eslint": typescriptEslint,
     },
@@ -52,7 +49,7 @@ export default defineConfig([
 
       parserOptions: {
         project: "./tsconfig.json",
-        tsconfigRootDir: ".",
+        tsconfigRootDir: __dirname,
       },
     },
 
@@ -67,10 +64,6 @@ export default defineConfig([
           extensions: [".js", ".jsx", ".ts", ".tsx"],
           moduleDirectory: ["node_modules", "."],
         },
-
-        tailwindcss: {
-          config: findTailwindImportCss(process.cwd()),
-        },
       },
 
       "import/parsers": {
@@ -80,13 +73,9 @@ export default defineConfig([
 
     rules: {
       "prettier/prettier": "warn",
-      "tailwindcss/no-custom-classname": "off",
-      "tailwindcss/classnames-order": "off",
-      "tailwindcss/enforces-shorthand": "off",
       "react-hooks/exhaustive-deps": "off",
       "import/no-named-as-default-member": "off",
       "import/no-named-as-default": "off",
-      "@next/next/no-img-element": "off",
       "@typescript-eslint/no-explicit-any": "off",
 
       "@typescript-eslint/no-unused-vars": [

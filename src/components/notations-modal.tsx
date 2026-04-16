@@ -1,7 +1,6 @@
-"use client";
-
 import { useTranslation } from "react-i18next";
 
+import Notations from "@/components/sections/notations";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -20,8 +19,6 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
-
-import Notations from "@/app/sections/notations";
 
 interface NotationsModalProps {
   open: boolean;

@@ -41,6 +41,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+.pnpm-store/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -83,10 +84,14 @@ web_modules/
 .cache
 .parcel-cache
 
-# Next.js build output
-.next
+# Build output
+dist
 out
 cache
+.next/
+
+# TanStack Router generated files
+src/routeTree.gen.ts
 
 # Nuxt.js build / generate output
 .nuxt

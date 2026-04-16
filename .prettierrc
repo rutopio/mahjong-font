@@ -11,11 +11,10 @@
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss"
   ],
-  "tailwindStylesheet": "./src/app/globals.css",
+  "tailwindStylesheet": "./src/globals.css",
   "tailwindFunctions": ["cn", "clsx"],
   "importOrder": [
     "^react",
-    "^next",
     "lucide-react",
     "sonner",
     "<THIRD_PARTY_MODULES>",
@@ -25,8 +24,6 @@
     "^@/lib/(.*)",
     "^@/provider/(.*)",
     "^@/locale/(.*)",
-    "",
-    "^@/app/(.*)",
     "",
     "^\\.\\./(.*)",
     "^\\./(.*)",

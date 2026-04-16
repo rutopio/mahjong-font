@@ -1,7 +1,5 @@
 // https://www.jollyui.dev/docs/components/color
 
-"use client";
-
 import {
   ColorArea as AriaColorArea,
   ColorAreaProps as AriaColorAreaProps,

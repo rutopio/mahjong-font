@@ -71,7 +71,6 @@ export default function Notations({ theme }: { theme: string }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="rounded-md border">
-        {/* Desktop table */}
         <div className="hidden sm:block">
           <Table>
             <TableHeader>
@@ -99,7 +98,6 @@ export default function Notations({ theme }: { theme: string }) {
           </Table>
         </div>
 
-        {/* Mobile card layout */}
         <div className="block space-y-3 p-4 sm:hidden">
           {notationItems.map((item, index) => (
             <div key={item.titleKey}>

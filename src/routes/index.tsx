@@ -1,8 +1,7 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Loader2Icon } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { ActionButtons } from "@/components/action-buttons";
 import { InputSection } from "@/components/input-section";
@@ -10,6 +9,10 @@ import { MahjongPreview } from "@/components/mahjong-preview";
 import { NotationsModal } from "@/components/notations-modal";
 import { DEFAULT_TILE_COLOR, optionValues } from "@/lib/constants";
 import { transformString } from "@/lib/transform-string";
+
+export const Route = createFileRoute("/")({
+  component: Home,
+});
 
 // localStorage keys
 const STORAGE_KEY_INPUT = "japanese-mahjong-font:input";
@@ -31,7 +34,7 @@ const DEFAULT_INPUT = "19m19p19s1234567z_1m";
 const DEFAULT_THEME = "monochrome";
 const PALETTE_STYLE_ID = "mahjong-palette-style";
 
-export default function Home() {
+function Home() {
   const { t, ready } = useTranslation();
   const [input, setInput] = useState("");
   const [selectedOption, setSelectedOption] = useState("");

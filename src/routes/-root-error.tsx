@@ -1,17 +1,9 @@
-"use client";
-
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export function RootError({ error }: { error: unknown }) {
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -21,7 +13,7 @@ export default function Error({
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-6">
       <h1 className="text-xl font-bold text-balance">{t("errorOccurred")}</h1>
-      <Button onClick={() => reset()}>{t("tryAgain")}</Button>
+      <Button onClick={() => window.location.reload()}>{t("tryAgain")}</Button>
     </div>
   );
 }

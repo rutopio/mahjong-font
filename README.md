@@ -7,11 +7,11 @@
 ![Node](https://img.shields.io/badge/Node.js-v22.17.0-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 [![License: SIL](https://img.shields.io/badge/License-SIL_1.1-yellow.svg)](https://openfontlicense.org/)
 
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue?style=flat-square&logo=typescript)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue?style=flat-square&logo=typescript)
 ![React](https://img.shields.io/badge/React-19.1.0-blue?style=flat-square&logo=react)
-![Next.js](https://img.shields.io/badge/Next.js-15.4.5-black?style=flat-square&logo=next.js)
+![Tanstack](https://img.shields.io/badge/Tanstack-1.168.22-black?style=flat-square&logo=tanstack)
 
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?style=flat-square&logo=tailwind-css)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.18-38bdf8?style=flat-square&logo=tailwind-css)
 ![ShadCN](https://img.shields.io/badge/shadcn%2Fui-2.4.0-000000?style=flat-square&logo=shadcnui&logoColor=white)
 
 Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflarepages&logoColor=fff&style=flat-square)
@@ -102,7 +102,8 @@ pnpm dev
 - Build
 
 ```
-pnpm format
+pnpm run format
+pnpm run lint
 pnpm build
 ```
 

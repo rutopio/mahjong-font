@@ -1,5 +1,3 @@
-"use client";
-
 import { RefObject } from "react";
 import { useTranslation } from "react-i18next";
 import { DownloadIcon, LinkIcon, Share2Icon } from "lucide-react";
