@@ -119,7 +119,7 @@ export default function Notations({ theme }: { theme: string }) {
       <div className="rounded-md border">
         {notationExamples.map((example, index) => (
           <div
-            key={index}
+            key={example.notation}
             className={`flex flex-col p-2 ${index < notationExamples.length - 1 ? "border-b" : ""} ${index === 3 ? "gap-8" : "gap-4"}`}
           >
             <div className="flex items-center gap-4 p-2">

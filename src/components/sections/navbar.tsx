@@ -116,7 +116,7 @@ export function Navbar() {
             href={GITHUB_REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub repository"
+            aria-label="GitHub repository, opens in new tab"
           >
             <GithubIcon />
             <span className="flex items-center gap-0">

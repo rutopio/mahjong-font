@@ -1,14 +1,22 @@
-import { Toaster } from "sonner";
+import { lazy, Suspense } from "react";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { Toaster } from "sonner";
 
 import "@/globals.css";
 
 import { RootError } from "@/routes/-root-error";
 import { RootNotFound } from "@/routes/-root-not-found";
-
 import { Footer } from "@/components/sections/footer";
 import { Navbar } from "@/components/sections/navbar";
 import { I18nProvider } from "@/provider/i18n-provider";
+
+const TanStackRouterDevtools = import.meta.env.DEV
+  ? lazy(() =>
+      import("@tanstack/react-router-devtools").then((m) => ({
+        default: m.TanStackRouterDevtools,
+      }))
+    )
+  : () => null;
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -27,6 +35,9 @@ function RootComponent() {
         <Footer />
       </div>
       <Toaster expand={false} closeButton position="top-center" />
+      <Suspense>
+        <TanStackRouterDevtools />
+      </Suspense>
     </I18nProvider>
   );
 }

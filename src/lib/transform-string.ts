@@ -3,10 +3,10 @@
  * Example: "123m" -> "1m2m3m", "123." -> "1.2.3."
  */
 export function transformString(text: string) {
-  let charArr = text.trim().split("");
-  const result = [];
-  var stack = [];
-  var indicator;
+  const charArr = text.trim().split("");
+  const result: string[] = [];
+  let stack: string[] = [];
+  let indicator: string;
   for (let i = 0; i < charArr.length; i++) {
     if (/([A-Za-z]|\.)/.test(charArr[i])) {
       // Suit indicators (m, p, s, z) and tile modifiers (.)

@@ -1,83 +1,44 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { fixupConfigRules, fixupPluginRules } from "@eslint/compat";
-import { FlatCompat } from "@eslint/eslintrc";
+import pluginRouter from "@tanstack/eslint-plugin-router";
+import react from "@eslint-react/eslint-plugin";
 import js from "@eslint/js";
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
-import _import from "eslint-plugin-import";
-import prettier from "eslint-plugin-prettier";
-import { defineConfig, globalIgnores } from "eslint/config";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
+import eslintConfigPrettier from "eslint-config-prettier";
+import reactHooks from "eslint-plugin-react-hooks";
+import { defineConfig } from "eslint/config";
+import tseslint from "typescript-eslint";
 
 export default defineConfig([
-  globalIgnores([
-    "**/components/ui/**/*",
-    ".next/**",
-    "out/**",
-    "dist/**",
-    "src/routeTree.gen.ts",
-  ]),
   {
-    files: ["**/*.ts", "**/*.tsx"],
-    extends: fixupConfigRules(
-      compat.extends(
-        "plugin:import/recommended",
-        "plugin:import/typescript",
-        "plugin:prettier/recommended",
-        "prettier"
-      )
-    ),
-
-    plugins: {
-      prettier: fixupPluginRules(prettier),
-      import: fixupPluginRules(_import),
-      "@typescript-eslint": typescriptEslint,
-    },
-
+    ignores: [
+      "src/components/ui",
+      ".next",
+      "dist",
+      "out",
+      "src/routeTree.gen.ts",
+    ],
+  },
+  {
+    files: ["**/*.{ts,tsx}"],
     languageOptions: {
-      parser: tsParser,
-      ecmaVersion: 5,
-      sourceType: "module",
-
+      parser: tseslint.parser,
       parserOptions: {
-        project: "./tsconfig.json",
-        tsconfigRootDir: __dirname,
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
     },
-
-    settings: {
-      "import/resolver": {
-        typescript: {
-          alwaysTryTypes: true,
-          project: "./tsconfig.json",
-        },
-
-        node: {
-          extensions: [".js", ".jsx", ".ts", ".tsx"],
-          moduleDirectory: ["node_modules", "."],
-        },
-      },
-
-      "import/parsers": {
-        "@typescript-eslint/parser": [".ts", ".tsx"],
-      },
-    },
-
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      eslintConfigPrettier,
+      ...pluginRouter.configs["flat/recommended"],
+      reactHooks.configs.flat.recommended,
+      react.configs["recommended-type-checked"],
+    ],
     rules: {
-      "prettier/prettier": "warn",
-      "react-hooks/exhaustive-deps": "off",
-      "import/no-named-as-default-member": "off",
-      "import/no-named-as-default": "off",
       "@typescript-eslint/no-explicit-any": "off",
-
+      "@typescript-eslint/no-deprecated": "warn",
+      "@eslint-react/no-array-index-key": "error",
+      "react-hooks/exhaustive-deps": "off",
+      "react-hooks/set-state-in-effect": "warn",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {

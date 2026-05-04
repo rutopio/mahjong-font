@@ -7,6 +7,7 @@
   "bracketSpacing": true,
   "arrowParens": "always",
   "bracketSameLine": false,
+  "endOfLine": "lf",
   "plugins": [
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss"
@@ -15,10 +16,11 @@
   "tailwindFunctions": ["cn", "clsx"],
   "importOrder": [
     "^react",
-    "lucide-react",
-    "sonner",
+    "^@tanstack/(.*)",
     "<THIRD_PARTY_MODULES>",
     "",
+    "^@/app/(.*)",
+    "^@/routes/(.*)",
     "^@/components/(.*)",
     "^@/hooks/(.*)",
     "^@/lib/(.*)",
@@ -30,8 +32,7 @@
     "",
     "\\.(s?css|less)$",
     "",
-    "<TYPES>"
-  ],
-  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
-  "importOrderTypeScriptVersion": "5.0.0"
+    "<TYPES>",
+    ""
+  ]
 }

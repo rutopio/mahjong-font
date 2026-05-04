@@ -1,113 +1,112 @@
-import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import type { Ref } from "react";
 
 interface MahjongPreviewProps {
   text: string;
   theme: string;
+  ref?: Ref<HTMLDivElement>;
 }
 
 const MIN_FONT_SIZE = 16;
 const MAX_FONT_SIZE = 120;
 const BASE_FONT_SIZE = 100;
 
-export const MahjongPreview = forwardRef<HTMLDivElement, MahjongPreviewProps>(
-  function MahjongPreview({ text, theme }, ref) {
-    const { t } = useTranslation();
-    const containerRef = useRef<HTMLDivElement>(null);
-    const measureRef = useRef<HTMLSpanElement>(null);
-    const [fontSize, setFontSize] = useState(BASE_FONT_SIZE);
+export function MahjongPreview({ text, theme, ref }: MahjongPreviewProps) {
+  const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const measureRef = useRef<HTMLSpanElement>(null);
+  const [fontSize, setFontSize] = useState(BASE_FONT_SIZE);
 
-    const isColorful = theme === "colorful";
-    const fontClass =
-      theme === "monochrome"
-        ? "font-riichi-mahjong-monochrome"
-        : "font-riichi-mahjong-colorful";
+  const isColorful = theme === "colorful";
+  const fontClass =
+    theme === "monochrome"
+      ? "font-riichi-mahjong-monochrome"
+      : "font-riichi-mahjong-colorful";
 
-    const calculateFontSize = useCallback(() => {
-      const container = containerRef.current;
-      const measure = measureRef.current;
-      if (!container || !measure || !text) return;
+  const calculateFontSize = useCallback(() => {
+    const container = containerRef.current;
+    const measure = measureRef.current;
+    if (!container || !measure || !text) return;
 
-      // Get container width (with some padding)
-      const containerWidth = container.clientWidth * 0.95;
+    // Get container width (with some padding)
+    const containerWidth = container.clientWidth * 0.95;
 
-      // Measure text width at base font size
-      measure.style.fontSize = `${BASE_FONT_SIZE}px`;
-      const textWidth = measure.scrollWidth;
+    // Measure text width at base font size
+    measure.style.fontSize = `${BASE_FONT_SIZE}px`;
+    const textWidth = measure.scrollWidth;
 
-      if (textWidth === 0) return;
+    if (textWidth === 0) return;
 
-      // Calculate the scale factor
-      const scale = containerWidth / textWidth;
-      const newFontSize = Math.floor(BASE_FONT_SIZE * scale);
+    // Calculate the scale factor
+    const scale = containerWidth / textWidth;
+    const newFontSize = Math.floor(BASE_FONT_SIZE * scale);
 
-      // Clamp between min and max
-      setFontSize(
-        Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, newFontSize))
-      );
-    }, [text]);
+    // Clamp between min and max
+    setFontSize(Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, newFontSize)));
+  }, [text]);
 
-    useEffect(() => {
-      // Wait for fonts to load before calculating font size.
-      // On initial load, the Riichi-Mahjong font may not be ready yet,
-      // causing measurements to use fallback font widths (monospace),
-      // which are much wider due to missing OpenType ligatures.
-      document.fonts.ready.then(() => {
-        calculateFontSize();
-      });
+  useEffect(() => {
+    // Wait for fonts to load before calculating font size.
+    // On initial load, the Riichi-Mahjong font may not be ready yet,
+    // causing measurements to use fallback font widths (monospace),
+    // which are much wider due to missing OpenType ligatures.
+    document.fonts.ready.then(() => {
+      calculateFontSize();
+    });
 
-      const container = containerRef.current;
-      if (!container) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-      const resizeObserver = new ResizeObserver(() => {
-        calculateFontSize();
-      });
+    const resizeObserver = new ResizeObserver(() => {
+      calculateFontSize();
+    });
 
-      resizeObserver.observe(container);
+    resizeObserver.observe(container);
 
-      // Recalculate when any font finishes loading (handles late-loading fonts)
-      const onFontLoad = () => calculateFontSize();
-      document.fonts.addEventListener("loadingdone", onFontLoad);
+    // Recalculate when any font finishes loading (handles late-loading fonts)
+    const onFontLoad = () => calculateFontSize();
+    document.fonts.addEventListener("loadingdone", onFontLoad);
 
-      return () => {
-        resizeObserver.disconnect();
-        document.fonts.removeEventListener("loadingdone", onFontLoad);
-      };
-    }, [calculateFontSize]);
+    return () => {
+      resizeObserver.disconnect();
+      document.fonts.removeEventListener("loadingdone", onFontLoad);
+    };
+  }, [calculateFontSize]);
 
-    // Fixed height based on max font size with line-height (1.625 for leading-loose)
-    const fixedHeight = Math.ceil(MAX_FONT_SIZE * 1.625);
+  // Fixed height based on max font size with line-height (1.625 for leading-loose)
+  const fixedHeight = Math.ceil(MAX_FONT_SIZE * 1.625);
 
-    return (
-      <div
-        ref={containerRef}
-        className="relative mx-auto flex w-full items-center justify-center overflow-hidden pt-16"
-        style={{ height: `${fixedHeight}px` }}
+  return (
+    <div
+      ref={containerRef}
+      className="relative mx-auto flex w-full items-center justify-center overflow-hidden pt-16"
+      style={{ height: `${fixedHeight}px` }}
+    >
+      {/* Hidden element for measuring text width */}
+      <span
+        ref={measureRef}
+        className={`invisible absolute whitespace-nowrap ${fontClass}`}
+        style={isColorful ? { fontPalette: "--custom-palette" } : undefined}
+        aria-hidden="true"
       >
-        {/* Hidden element for measuring text width */}
-        <span
-          ref={measureRef}
-          className={`invisible absolute whitespace-nowrap ${fontClass}`}
-          style={isColorful ? { fontPalette: "--custom-palette" } : undefined}
-          aria-hidden="true"
-        >
-          {text}
-        </span>
+        {text}
+      </span>
 
-        {/* Visible preview */}
-        <div
-          role="img"
-          aria-label={t("mahjongPreview")}
-          className={`text-center leading-loose whitespace-nowrap ${fontClass}`}
-          style={{
-            fontSize: `${fontSize}px`,
-            ...(isColorful ? { fontPalette: "--custom-palette" } : {}),
-          }}
-          ref={ref}
-        >
-          {text}
-        </div>
+      {/* Visible preview */}
+      <div
+        role="img"
+        aria-label={t("mahjongPreview")}
+        className={`text-center leading-loose whitespace-nowrap ${fontClass}`}
+        style={{
+          fontSize: `${fontSize}px`,
+          ...(isColorful ? { fontPalette: "--custom-palette" } : {}),
+        }}
+        ref={ref}
+      >
+        {text}
       </div>
-    );
-  }
-);
+    </div>
+  );
+}
