@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { Toaster } from "sonner";
 
-import "@/globals.css";
+import "@/styles.css";
 
 import { RootError } from "@/routes/-root-error";
 import { RootNotFound } from "@/routes/-root-not-found";

@@ -11,9 +11,7 @@ export function Footer() {
           aria-label="Made by ChingRu (rutopio@Github), opens in new tab"
           className="rounded-sm underline-offset-4 hover:underline focus-visible:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
-          <span className="block" aria-hidden="true">
-            Made by ChingRu (rutopio@Github)
-          </span>
+          <span className="block">Made by ChingRu (rutopio@Github)</span>
         </a>
         <a
           href="https://caniuse.com/colr"
@@ -22,7 +20,7 @@ export function Footer() {
           aria-label="Color Font is not compatible with some browsers, opens in new tab"
           className="rounded-sm underline-offset-4 hover:underline focus-visible:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
-          <span className="block" aria-hidden="true">
+          <span className="block">
             Color Font is not compatible with some browsers.
           </span>
         </a>

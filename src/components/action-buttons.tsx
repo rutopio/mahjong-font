@@ -1,4 +1,3 @@
-import { RefObject } from "react";
 import { useTranslation } from "react-i18next";
 import { DownloadIcon, LinkIcon, Share2Icon } from "lucide-react";
 import { toast } from "sonner";
@@ -21,6 +20,8 @@ import {
   shareToX,
 } from "@/lib/share-link";
 import { textToImage } from "@/lib/text-to-image";
+
+import type { RefObject } from "react";
 
 const shareOptions = [
   { labelKey: "copyLink", icon: LinkIcon, action: "copy" },
