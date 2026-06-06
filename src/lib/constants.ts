@@ -9,7 +9,7 @@ export const GITHUB_PROFILE_URL = "https://github.com/rutopio";
 export const GITHUB_REPO_URL = `${GITHUB_PROFILE_URL}/Japanese-Mahjong-Font-with-OpenType`;
 
 /** Base URL for downloading font files from the repository. */
-export const FONT_DOWNLOAD_BASE_URL =
+const FONT_DOWNLOAD_BASE_URL =
   "https://raw.githubusercontent.com/rutopio/Japanese-Mahjong-Font-with-OpenType/main/fonts/otf";
 
 // ============================================================================

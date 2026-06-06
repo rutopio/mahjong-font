@@ -16,9 +16,12 @@ from fontTools.pens.boundsPen import BoundsPen
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.ttLib import TTFont
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-COLORFUL = os.path.join(ROOT, "public/fonts/Riichi-Mahjong-Colorful.woff2")
-MONOCHROME = os.path.join(ROOT, "public/fonts/Riichi-Mahjong-Monochrome.woff2")
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+# Source fonts live alongside this script (not in public/), so they aren't
+# shipped to the web build; only the generated tiles-data.json is.
+COLORFUL = os.path.join(HERE, "fonts/Riichi-Mahjong-Colorful.woff2")
+MONOCHROME = os.path.join(HERE, "fonts/Riichi-Mahjong-Monochrome.woff2")
 OUT = os.path.join(ROOT, "src/lib/tiles-data.json")
 
 

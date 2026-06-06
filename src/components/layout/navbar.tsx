@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { GithubIcon } from "@/components/icon/github";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -29,6 +30,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
+
+const FONT_VERSION = "v2.1";
 
 export function Navbar() {
   const { t, i18n } = useTranslation();
@@ -59,7 +62,7 @@ export function Navbar() {
           <img
             src="/icon.svg"
             alt=""
-            className="h-8 w-8 transition-transform hover:scale-110"
+            className="size-8 transition-transform hover:scale-110"
           />
         </Link>
         <div className="flex items-center gap-0 sm:gap-4">
@@ -165,14 +168,14 @@ export function Navbar() {
                       <button
                         key={font.labelKey}
                         type="button"
-                        className="flex w-full items-center gap-3 rounded-md px-3 py-3 text-sm hover:bg-accent"
+                        className="flex w-full items-center justify-between gap-3 rounded-md px-3 py-3 text-sm hover:bg-accent"
                         onClick={() => {
                           downloadFont(font.url);
                           setFontDrawerOpen(false);
                         }}
                       >
-                        {/* <FileArrowDownIcon aria-hidden="true" /> */}
                         {t(font.labelKey)}
+                        <Badge variant="secondary">{FONT_VERSION}</Badge>
                       </button>
                     ))}
                   </div>
@@ -204,10 +207,11 @@ export function Navbar() {
                   {fontDownloads.map((font) => (
                     <DropdownMenuItem
                       key={font.labelKey}
+                      className="justify-between gap-6"
                       onClick={() => downloadFont(font.url)}
                     >
-                      {/* <FileArrowDownIcon aria-hidden="true" /> */}
                       {t(font.labelKey)}
+                      <Badge variant="secondary">{FONT_VERSION}</Badge>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuGroup>

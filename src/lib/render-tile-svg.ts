@@ -122,5 +122,3 @@ export function renderTilesSvg(options: RenderOptions): string {
     `width="${width}" height="${height}">${inner}</svg>`
   );
 }
-
-export { DEFAULT_ADVANCE, MARGIN };

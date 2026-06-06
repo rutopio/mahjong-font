@@ -25,7 +25,7 @@ import {
   shareToThreads,
   shareToX,
 } from "@/lib/share-link";
-import { downloadPng, downloadSvg } from "@/lib/tiles-export";
+import { downloadJpg, downloadPng, downloadSvg } from "@/lib/tiles-export";
 
 interface ActionButtonsProps {
   text: string;
@@ -42,16 +42,32 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
   const [shareOpen, setShareOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const handleDownload = async (format: "png" | "svg") => {
+  const handleDownload = async (format: "png" | "jpg" | "svg") => {
     const filename = text || "mahjong";
     const opts = { text, theme, tileColor, filename };
     try {
       if (format === "svg") await downloadSvg(opts);
+      else if (format === "jpg") await downloadJpg(opts);
       else await downloadPng(opts);
       setDownloadOpen(false);
     } catch {
       toast.error(t("ui.saveAsImage"));
     }
+  };
+
+  // On touch devices, save the PNG straight through the native share sheet so
+  // the user can pick "Save Image" (Photos), Files, or anywhere else. Desktop
+  // opens the format dialog (PNG/SVG) instead.
+  const handleDownloadClick = () => {
+    const isTouch =
+      typeof window !== "undefined" &&
+      window.matchMedia("(pointer: coarse)").matches;
+
+    if (isTouch) {
+      void handleDownload("png");
+      return;
+    }
+    setDownloadOpen(true);
   };
 
   const preview = (
@@ -95,7 +111,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
 
   return (
     <div className="flex gap-2">
-      <Button onClick={() => setDownloadOpen(true)}>
+      <Button onClick={handleDownloadClick}>
         <DownloadSimpleIcon aria-hidden="true" />
         {t("ui.saveAsImage")}
       </Button>
@@ -112,7 +128,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
             <DialogDescription>{t("ui.saveDescription")}</DialogDescription>
           </DialogHeader>
           {preview}
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             <Button
               variant="outline"
               className={gridButtonClass}
@@ -120,6 +136,14 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
             >
               <DownloadSimpleIcon aria-hidden="true" />
               <span className="text-xs">PNG</span>
+            </Button>
+            <Button
+              variant="outline"
+              className={gridButtonClass}
+              onClick={() => handleDownload("jpg")}
+            >
+              <DownloadSimpleIcon aria-hidden="true" />
+              <span className="text-xs">JPG</span>
             </Button>
             <Button
               variant="outline"

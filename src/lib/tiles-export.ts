@@ -58,10 +58,15 @@ export async function downloadSvg(opts: ExportOptions) {
 }
 
 /**
- * Rasterize the SVG into a PNG via an <img> + canvas. No foreignObject and no
- * webfont, so this is reliable on iOS Safari.
+ * Rasterize the SVG via an <img> + canvas. No foreignObject and no webfont, so
+ * this is reliable on iOS Safari. A background color is filled first (required
+ * for JPEG, which has no transparency).
  */
-async function svgToPngBlob(svg: string): Promise<Blob> {
+async function svgToRasterBlob(
+  svg: string,
+  mime: "image/png" | "image/jpeg",
+  background?: string
+): Promise<Blob> {
   const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
   try {
     const img = new Image();
@@ -79,26 +84,27 @@ async function svgToPngBlob(svg: string): Promise<Blob> {
     canvas.height = (h + PADDING * 2) * PNG_SCALE;
     const ctx = canvas.getContext("2d");
     if (!ctx) throw new Error("Canvas not supported");
+    if (background) {
+      ctx.fillStyle = background;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
     ctx.scale(PNG_SCALE, PNG_SCALE);
     ctx.drawImage(img, PADDING, PADDING, w, h);
 
     return await new Promise<Blob>((resolve, reject) => {
       canvas.toBlob((blob) => {
         if (blob) resolve(blob);
-        else reject(new Error("Failed to generate PNG"));
-      }, "image/png");
+        else reject(new Error("Failed to generate image"));
+      }, mime);
     });
   } finally {
     URL.revokeObjectURL(url);
   }
 }
 
-/** Download (or share on mobile) the tiles as a PNG image. */
-export async function downloadPng(opts: ExportOptions) {
-  const svg = await buildSvg(opts);
-  if (!svg) throw new Error("Nothing to export");
-  const blob = await svgToPngBlob(svg);
-  const file = new File([blob], `${opts.filename}.png`, { type: "image/png" });
+/** Download a raster blob, preferring the native share sheet on mobile. */
+async function deliverRaster(blob: Blob, filename: string, mime: string) {
+  const file = new File([blob], filename, { type: mime });
 
   if (
     isMobileDevice() &&
@@ -106,12 +112,30 @@ export async function downloadPng(opts: ExportOptions) {
     navigator.canShare({ files: [file] })
   ) {
     try {
-      await navigator.share({ files: [file] });
+      // Sharing a file lets iOS offer "Save Image" (Photos) alongside Files.
+      await navigator.share({ files: [file], title: file.name });
       return;
     } catch (err) {
+      // User cancelled: stop here, don't fall back to a Files download.
       if (err instanceof Error && err.name === "AbortError") return;
     }
   }
 
-  triggerDownload(blob, `${opts.filename}.png`);
+  triggerDownload(blob, filename);
+}
+
+/** Download (or share on mobile) the tiles as a PNG image. */
+export async function downloadPng(opts: ExportOptions) {
+  const svg = await buildSvg(opts);
+  if (!svg) throw new Error("Nothing to export");
+  const blob = await svgToRasterBlob(svg, "image/png");
+  await deliverRaster(blob, `${opts.filename}.png`, "image/png");
+}
+
+/** Download (or share on mobile) the tiles as a JPEG image (white background). */
+export async function downloadJpg(opts: ExportOptions) {
+  const svg = await buildSvg(opts);
+  if (!svg) throw new Error("Nothing to export");
+  const blob = await svgToRasterBlob(svg, "image/jpeg", "#ffffff");
+  await deliverRaster(blob, `${opts.filename}.jpg`, "image/jpeg");
 }

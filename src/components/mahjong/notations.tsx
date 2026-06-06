@@ -13,6 +13,7 @@ import {
 import type { NotationItem } from "@/lib/constants";
 import { notationExamples, notationItems } from "@/lib/constants";
 import { transformString } from "@/lib/transform-string";
+import { cn } from "@/lib/utils";
 
 function NotationBadge({ children }: { children: React.ReactNode }) {
   return <Badge variant="outline">{children}</Badge>;
@@ -96,19 +97,25 @@ export function Notations({ theme }: { theme: string }) {
           </Table>
         </div>
 
-        <div className="block space-y-3 p-4 sm:hidden">
+        <div className="block sm:hidden">
           {notationItems.map((item, index) => (
-            <div key={item.titleKey}>
-              {index > 0 && <hr className="mb-3 border-border" />}
-              <div className="space-y-2">
-                <div className="text-pretty font-medium text-sm">
-                  {t(item.titleKey)}
-                </div>
-                <div
-                  className={`text-pretty text-sm ${item.titleKey === "notation.aka-dora" ? "break-words" : ""}`}
-                >
-                  <NotationContent item={item} t={t} />
-                </div>
+            <div
+              key={item.titleKey}
+              className={cn(
+                "space-y-2 p-4",
+                index < notationItems.length - 1 && "border-b"
+              )}
+            >
+              <div className="text-pretty font-medium text-sm">
+                {t(item.titleKey)}
+              </div>
+              <div
+                className={cn(
+                  "text-pretty text-sm",
+                  item.titleKey === "notation.aka-dora" && "break-words"
+                )}
+              >
+                <NotationContent item={item} t={t} />
               </div>
             </div>
           ))}
@@ -118,7 +125,11 @@ export function Notations({ theme }: { theme: string }) {
         {notationExamples.map((example, index) => (
           <div
             key={example.notation}
-            className={`flex flex-col p-2 ${index < notationExamples.length - 1 ? "border-b" : ""} ${index === 3 ? "gap-8" : "gap-4"}`}
+            className={cn(
+              "flex flex-col p-2",
+              index < notationExamples.length - 1 && "border-b",
+              index === 3 ? "gap-8" : "gap-4"
+            )}
           >
             <div className="flex items-center gap-4 p-2">
               <div className="wrap-break-word font-medium text-sm">

@@ -15,16 +15,16 @@ const THEME_INTERNAL_MAP: Record<string, string> = {
   colorful: "color",
 };
 
-export const DEFAULT_INPUT = "7m7m7m2p3p4p8p8p8p4s5s6s8s_8s";
-export const DEFAULT_THEME = "colorful";
+const DEFAULT_INPUT = "7m7m7m2p3p4p8p8p8p4s5s6s8s_8s";
+const DEFAULT_THEME = "colorful";
 
-export interface MahjongUrlState {
+interface MahjongUrlState {
   input: string;
   theme: string;
   tileColor: string;
 }
 
-export const DEFAULT_STATE: MahjongUrlState = {
+const DEFAULT_STATE: MahjongUrlState = {
   input: DEFAULT_INPUT,
   theme: DEFAULT_THEME,
   tileColor: DEFAULT_TILE_COLOR,
