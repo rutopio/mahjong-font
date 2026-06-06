@@ -81,6 +81,15 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    @apply bg-background;
+  }
+  html,
+  body {
+    /* Prevent iOS Chrome's collapsing toolbar from exposing a strip of
+       body background below the footer when rubber-band scrolling. */
+    overscroll-behavior-y: contain;
+  }
 }
 
 @utility container {

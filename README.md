@@ -40,7 +40,7 @@ Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F380
 5. Dice: `1.`~`6.`
 6. Aka-Dora：Follow by a asterisk (`*`). E.g., `5p*`, `5s*`, `5m*` .
 7. Fuuro：Follow by a minus sign (`-`). E.g., `3m3m3m-`, `4s5s-6s`.
-   - Chi：`4s4s-4s`
+   - Chi：`4s5s-6s`
    - Pon：`3m3m3m-`
    - Dai-Minkan：`6m6m6m-6m`
 8. Ka-Kan：Follow by an equal mark (`=`). E.g., `3m3m3m-3m=`, `6m`.
@@ -62,7 +62,7 @@ Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F380
 5. サイコロ：`1.`~`6.`
 6. 赤ドラ：後ろに星マーク（`*`）を付ける。例：`5p*`, `5s*`, `5m*` .
 7. 副露（フーロ）：後ろにマイナスマーク（`-`）を付ける。例：
-   - 吃（チー）：`4s4s-4s`
+   - 吃（チー）：`4s5s-6s`
    - 碰（ポン）：`3m3m3m-`
    - 大明槓（ダイミンカン）：`6m6m6m-6m`
 8. 加槓（カカン）：後ろにイコールマーク（`=`）を付ける。例：`3m3m3m-3m=`.
@@ -84,7 +84,7 @@ Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F380
 5. 骰子：`1.`~`6.`
 6. 赤寶牌：在表記牌的後面加上星號（`*`）。例：`5p*`, `5s*`, `5m*` .
 7. 副露：在表記牌的後面加上減號（`-`）。例：
-   - 吃：`4s4s-4s`
+   - 吃：`4s5s-6s`
    - 碰：`3m3m3m-`
    - 大明槓：`6m6m6m-6m`
 8. 加槓：在表記牌的後面加上等號（`=`）。例：`3m3m3m-3m=`.
