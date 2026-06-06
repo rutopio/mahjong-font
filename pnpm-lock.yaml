@@ -8,21 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@fontsource-variable/inter':
-        specifier: ^5.2.8
-        version: 5.2.8
-      '@fontsource-variable/noto-sans-jp':
-        specifier: ^5.2.10
-        version: 5.2.10
-      '@fontsource-variable/noto-sans-sc':
-        specifier: ^5.2.10
-        version: 5.2.10
-      '@fontsource-variable/noto-sans-tc':
-        specifier: ^5.2.10
-        version: 5.2.10
-      '@fontsource/lato':
-        specifier: ^5.2.7
-        version: 5.2.7
       '@phosphor-icons/react':
         specifier: ^2.1.10
         version: 2.1.10(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -87,6 +72,18 @@ importers:
       '@biomejs/biome':
         specifier: 2.4.15
         version: 2.4.15
+      '@fontsource-variable/noto-sans-jp':
+        specifier: ^5.2.10
+        version: 5.2.10
+      '@fontsource-variable/noto-sans-sc':
+        specifier: ^5.2.10
+        version: 5.2.10
+      '@fontsource-variable/noto-sans-tc':
+        specifier: ^5.2.10
+        version: 5.2.10
+      '@fontsource/lato':
+        specifier: ^5.2.7
+        version: 5.2.7
       '@ianvs/prettier-plugin-sort-imports':
         specifier: 4.7.1
         version: 4.7.1(prettier@3.6.2)
@@ -578,9 +575,6 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
-
-  '@fontsource-variable/inter@5.2.8':
-    resolution: {integrity: sha512-kOfP2D+ykbcX/P3IFnokOhVRNoTozo5/JxhAIVYLpea/UBmCQ/YWPBfWIDuBImXX/15KH+eKh4xpEUyS2sQQGQ==}
 
   '@fontsource-variable/noto-sans-jp@5.2.10':
     resolution: {integrity: sha512-m0XfZ38rZtCaGAuAQL0cBPQ6fc/RguYEOqw66zvuLOV9vNRUBf9MFqyoazTu2JVCRIcnkrxbwF29UUaHHgTKdg==}
@@ -4790,8 +4784,6 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
 
   '@floating-ui/utils@0.2.10': {}
-
-  '@fontsource-variable/inter@5.2.8': {}
 
   '@fontsource-variable/noto-sans-jp@5.2.10': {}
 

@@ -1,13 +1,6 @@
-import "@fontsource/lato/300.css";
-import "@fontsource/lato/400.css";
-import "@fontsource/lato/700.css";
-import "@fontsource-variable/noto-sans-jp";
-import "@fontsource-variable/noto-sans-tc";
-import "@fontsource-variable/noto-sans-sc";
-
+import { createRouter, RouterProvider } from "@tanstack/react-router";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createRouter, RouterProvider } from "@tanstack/react-router";
 
 import { routeTree } from "./routeTree.gen";
 
