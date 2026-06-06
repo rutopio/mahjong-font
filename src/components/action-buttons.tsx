@@ -1,7 +1,11 @@
-import { DownloadSimpleIcon, LinkIcon, ShareNetworkIcon } from "@phosphor-icons/react";
-import type { RefObject } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  DownloadSimpleIcon,
+  LinkIcon,
+  ShareNetworkIcon,
+} from "@phosphor-icons/react";
 import { toast } from "sonner";
+
 import { FacebookIcon } from "@/components/icon/facebook";
 import { ThreadsIcon } from "@/components/icon/threads";
 import { XIcon } from "@/components/icon/x";
@@ -20,6 +24,8 @@ import {
   shareToX,
 } from "@/lib/share-link";
 import { textToImage } from "@/lib/text-to-image";
+
+import type { RefObject } from "react";
 
 const shareOptions = [
   { labelKey: "copyLink", icon: LinkIcon, action: "copy" },
@@ -47,7 +53,7 @@ export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
   const handleShare = (action: string) => {
     if (action === "copy") {
       copyLink();
-      toast.success(t("linkCopied"), {
+      toast.success(t("share.linkCopied"), {
         description: window.location.href,
       });
     } else if (action === "facebook") {
@@ -63,7 +69,7 @@ export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
     if (!navigator.share) {
       // Fallback to copy link if Web Share API not supported
       copyLink();
-      toast.success(t("linkCopied"), {
+      toast.success(t("share.linkCopied"), {
         description: window.location.href,
       });
       return;
@@ -71,8 +77,8 @@ export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
 
     try {
       await navigator.share({
-        title: t("toolTitle"),
-        text: t("toolTitle"),
+        title: t("ui.toolTitle"),
+        text: t("ui.toolTitle"),
         url: window.location.href,
       });
     } catch (err) {
@@ -87,20 +93,20 @@ export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
     <div className="flex gap-2">
       <Button onClick={handleDownload}>
         <DownloadSimpleIcon aria-hidden="true" />
-        {t("saveAsImage")}
+        {t("ui.saveAsImage")}
       </Button>
 
       {isMobile ? (
         <Button variant="outline" onClick={handleNativeShare}>
           <ShareNetworkIcon aria-hidden="true" />
-          {t("share")}
+          {t("share.share")}
         </Button>
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="bg-white">
               <ShareNetworkIcon aria-hidden="true" />
-              {t("share")}
+              {t("share.share")}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">

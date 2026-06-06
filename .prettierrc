@@ -12,7 +12,7 @@
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss"
   ],
-  "tailwindStylesheet": "./src/globals.css",
+  "tailwindStylesheet": "./src/styles/globals.css",
   "tailwindFunctions": ["cn", "clsx"],
   "importOrder": [
     "^react",

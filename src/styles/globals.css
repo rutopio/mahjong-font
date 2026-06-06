@@ -1,4 +1,4 @@
-@import "./styles/fonts.css";
+@import "./fonts.css";
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -31,8 +31,11 @@
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: "Lato", "Noto Sans JP", "Noto Sans TC", "Noto Sans SC", sans-serif;
-  --font-mono: "Paper Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans:
+    "Lato", "Noto Sans JP", "Noto Sans TC", "Noto Sans SC", sans-serif;
+  --font-mono:
+    "Paper Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
   --font-riichi-mahjong-monochrome: "Riichi-Mahjong-Monochrome", monospace;
   --font-riichi-mahjong-colorful: "Riichi-Mahjong-Colorful", monospace;
 
@@ -153,7 +156,8 @@
   body {
     @apply bg-background text-foreground;
   }
-  button:not(:disabled), [role="button"]:not(:disabled) {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
     cursor: pointer;
   }
   html {

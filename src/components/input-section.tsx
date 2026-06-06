@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-import { Input } from "@/components/ui/input";
 import { NotationsButton } from "@/components/notations-button";
 import { ThemeSelector } from "@/components/theme-selector";
+import { Input } from "@/components/ui/input";
 import { YakuSelector } from "@/components/yaku-selector";
 
 interface InputSectionProps {
@@ -34,8 +34,8 @@ export function InputSection({
     <div className="flex w-full flex-col items-center gap-4">
       <Input
         type="text"
-        placeholder={t("placeholder")}
-        aria-label={t("placeholder")}
+        placeholder={t("ui.placeholder")}
+        aria-label={t("ui.placeholder")}
         className="h-12 w-full bg-white text-center text-sm lg:text-lg"
         value={input}
         onChange={(e) => onInputChange(e.target.value)}

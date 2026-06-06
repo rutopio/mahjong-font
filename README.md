@@ -122,3 +122,4 @@ See [License](https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType?tab
 - [I.Mahjong - @SyaoranHinata](https://github.com/SyaoranHinata/I.Mahjong/tree/main)
 - [Gutenberg Labo](http://gutenberg.osdn.jp)
 - [Inconsolata - Google Fonts](https://fonts.google.com/specimen/Inconsolata)
+- [Riichi.Wiki](https://riichi.wiki/)

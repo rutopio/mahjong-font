@@ -27,10 +27,26 @@ const outCss = join(root, "src", "styles", "fonts.css");
 // - scope: "@fontsource" (static) or "@fontsource-variable" (variable axis)
 // - cssFiles: explicit list; for static families this selects the weights.
 const packages = [
-  { scope: "@fontsource", name: "lato", cssFiles: ["300.css", "400.css", "700.css"] },
-  { scope: "@fontsource-variable", name: "noto-sans-jp", cssFiles: ["index.css"] },
-  { scope: "@fontsource-variable", name: "noto-sans-tc", cssFiles: ["index.css"] },
-  { scope: "@fontsource-variable", name: "noto-sans-sc", cssFiles: ["index.css"] },
+  {
+    scope: "@fontsource",
+    name: "lato",
+    cssFiles: ["300.css", "400.css", "700.css"],
+  },
+  {
+    scope: "@fontsource-variable",
+    name: "noto-sans-jp",
+    cssFiles: ["index.css"],
+  },
+  {
+    scope: "@fontsource-variable",
+    name: "noto-sans-tc",
+    cssFiles: ["index.css"],
+  },
+  {
+    scope: "@fontsource-variable",
+    name: "noto-sans-sc",
+    cssFiles: ["index.css"],
+  },
 ];
 
 mkdirSync(fontsDir, { recursive: true });

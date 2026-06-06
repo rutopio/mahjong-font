@@ -1,6 +1,7 @@
-import type { Ref } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import type { Ref } from "react";
 
 interface MahjongPreviewProps {
   text: string;
@@ -98,7 +99,7 @@ export function MahjongPreview({ text, theme, ref }: MahjongPreviewProps) {
       {/* Visible preview */}
       <div
         role="img"
-        aria-label={t("mahjongPreview")}
+        aria-label={t("ui.mahjongPreview")}
         className={`text-center leading-loose whitespace-nowrap ${fontClass}`}
         style={{
           fontSize: `${fontSize}px`,

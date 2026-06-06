@@ -23,7 +23,7 @@ export function ThemeSelector({
   return (
     <div className="flex items-center gap-2">
       <Tabs value={theme} onValueChange={onThemeChange}>
-        <TabsList aria-label={t("theme")}>
+        <TabsList aria-label={t("ui.theme")}>
           {themeOptions.map((option) => (
             <TabsTrigger key={option.value} value={option.value}>
               {t(option.labelKey)}
