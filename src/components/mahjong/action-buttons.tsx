@@ -1,4 +1,5 @@
 import {
+  ArrowSquareOutIcon,
   CheckIcon,
   DownloadSimpleIcon,
   LinkIcon,
@@ -27,6 +28,7 @@ import {
   shareToX,
 } from "@/lib/share-link";
 import { downloadJpg, downloadPng, downloadSvg } from "@/lib/tiles-export";
+import { encodeToQuery } from "@/lib/url-state";
 
 interface ActionButtonsProps {
   text: string;
@@ -79,6 +81,17 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
     </div>
   );
 
+  // Build the /img badge URL: tiles in the path, theme/color in the query.
+  const openImgPage = () => {
+    const params = new URLSearchParams(
+      encodeToQuery({ input: text, theme, tileColor })
+    );
+    params.delete("tile");
+    const query = params.toString();
+    const url = `/img/${encodeURIComponent(text)}${query ? `?${query}` : ""}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
   const handleCopy = () => {
     copyLink();
     setCopied(true);
@@ -121,7 +134,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
             <DialogDescription>{t("ui.saveDescription")}</DialogDescription>
           </DialogHeader>
           {preview}
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-4 gap-2">
             <Button
               variant="outline"
               className={gridButtonClass}
@@ -145,6 +158,15 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
             >
               <DownloadSimpleIcon aria-hidden="true" />
               <span className="text-xs">SVG</span>
+            </Button>
+            <Button
+              variant="outline"
+              className={gridButtonClass}
+              onClick={openImgPage}
+              aria-label={t("ui.openImageApiNewTab")}
+            >
+              <ArrowSquareOutIcon aria-hidden="true" />
+              <span className="text-xs">{t("ui.navImageApi")}</span>
             </Button>
           </div>
         </DialogContent>

@@ -17,6 +17,9 @@
     "savePng": "儲存為 PNG",
     "saveSvg": "儲存為 SVG",
     "saveDescription": "選擇下載格式。",
+    "navHome": "首頁",
+    "navImageApi": "Image API",
+    "openImageApiNewTab": "在新分頁開啟 Image API 圖片連結",
     "close": "關閉",
     "errorOccurred": "發生錯誤",
     "tryAgain": "重試",
@@ -85,6 +88,33 @@
     "others": {
       "dice": "骰子"
     }
+  },
+
+  "imgApi": {
+    "title": "Image API",
+    "intro": "把牌譜放進網址路徑就能得到一張可直接內嵌的 SVG 圖片。缺少的參數會自動套用預設值，方便快速產生牌譜圖。",
+    "urlFormatHeading": "網址格式",
+    "tilePlaceholder": "牌譜",
+    "convertHeading": "從分享網址轉換",
+    "convertIntro": "把首頁分享網址裡的 <from>?tile=</from> 換成 <to>/img/</to> 路徑，就能得到對應的 SVG 圖片，其餘參數原樣保留。",
+    "paramsHeading": "參數",
+    "colName": "參數",
+    "colLocation": "位置",
+    "colType": "型別",
+    "colDefault": "預設",
+    "colDescription": "說明",
+    "required": "必填",
+    "paramTileDesc": "牌譜字串，放在 `/img/` 之後的路徑上，例如 `/img/7m7m7m2p3p4p`。數字接花色：`m` 萬、`p` 筒、`s` 索、`z` 字牌（東南西北白發中為 `1z`~`7z`）。用 `_` 表示牌組間的空隙，例如 `123m456p_5z`。省略時回退為預設牌譜。",
+    "paramThemeDesc": "牌面配色主題。`color` 為彩色牌面，`mono` 為單色（黑白）牌面。其他值或省略時視為 `color`。",
+    "paramColorDesc": "牌面主色，六位十六進位色碼，**不含** `#`，例如 `2D7D46`。僅在 `theme=color` 時生效；`theme=mono` 時忽略。",
+    "examplesHeading": "範例",
+    "exampleDefault": "預設（彩色 / #AA7942）",
+    "exampleColor": "指定顏色",
+    "exampleMono": "單色主題",
+    "embedHeading": "嵌入方式",
+    "copyAria": "複製連結",
+    "copied": "已複製連結",
+    "copyFailed": "複製失敗"
   },
 
   "notation": {

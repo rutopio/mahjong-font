@@ -17,6 +17,9 @@
     "savePng": "Save as PNG",
     "saveSvg": "Save as SVG",
     "saveDescription": "Choose a format to download.",
+    "navHome": "Home",
+    "navImageApi": "Image API",
+    "openImageApiNewTab": "Open Image API link in a new tab",
     "close": "Close",
     "errorOccurred": "An error occurred",
     "tryAgain": "Try again",
@@ -85,6 +88,33 @@
     "others": {
       "dice": "Dice"
     }
+  },
+
+  "imgApi": {
+    "title": "Image API",
+    "intro": "Put a tile string in the URL path to get an SVG image you can embed directly. Missing parameters fall back to defaults, so you can generate a tile diagram fast.",
+    "urlFormatHeading": "URL format",
+    "tilePlaceholder": "tiles",
+    "convertHeading": "Convert from a share URL",
+    "convertIntro": "Replace the <from>?tile=</from> in a home-page share URL with the <to>/img/</to> path to get the matching SVG image; the other parameters stay the same.",
+    "paramsHeading": "Parameters",
+    "colName": "Parameter",
+    "colLocation": "Location",
+    "colType": "Type",
+    "colDefault": "Default",
+    "colDescription": "Description",
+    "required": "required",
+    "paramTileDesc": "The tile string, placed in the path after `/img/`, e.g. `/img/7m7m7m2p3p4p`. A number followed by a suit: `m` characters, `p` circles, `s` bamboo, `z` honors (East/South/West/North/White/Green/Red are `1z`~`7z`). Use `_` for a gap between tile groups, e.g. `123m456p_5z`. Falls back to the default tiles when omitted.",
+    "paramThemeDesc": "Tile color theme. `color` for colorful tiles, `mono` for monochrome (black & white). Any other value or omission is treated as `color`.",
+    "paramColorDesc": "Main tile color, a six-digit hex code **without** the `#`, e.g. `2D7D46`. Only applies when `theme=color`; ignored when `theme=mono`.",
+    "examplesHeading": "Examples",
+    "exampleDefault": "Default (colorful / #AA7942)",
+    "exampleColor": "Custom color",
+    "exampleMono": "Monochrome theme",
+    "embedHeading": "Embedding",
+    "copyAria": "Copy link",
+    "copied": "Link copied",
+    "copyFailed": "Copy failed"
   },
 
   "notation": {

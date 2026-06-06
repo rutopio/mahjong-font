@@ -17,6 +17,9 @@
     "savePng": "PNG として保存",
     "saveSvg": "SVG として保存",
     "saveDescription": "ダウンロード形式を選択します。",
+    "navHome": "ホーム",
+    "navImageApi": "Image API",
+    "openImageApiNewTab": "Image API のリンクを新しいタブで開く",
     "close": "閉じる",
     "errorOccurred": "エラーが発生しました",
     "tryAgain": "再試行",
@@ -85,6 +88,33 @@
     "others": {
       "dice": "サイコロ"
     }
+  },
+
+  "imgApi": {
+    "title": "Image API",
+    "intro": "牌譜を URL のパスに入れるだけで、そのまま埋め込める SVG 画像が得られます。不足しているパラメータは既定値が自動で適用されるので、牌姿の画像をすばやく生成できます。",
+    "urlFormatHeading": "URL の形式",
+    "tilePlaceholder": "牌譜",
+    "convertHeading": "共有 URL から変換",
+    "convertIntro": "トップページの共有 URL の <from>?tile=</from> を <to>/img/</to> パスに置き換えると、対応する SVG 画像が得られます。その他のパラメータはそのまま残せます。",
+    "paramsHeading": "パラメータ",
+    "colName": "パラメータ",
+    "colLocation": "位置",
+    "colType": "型",
+    "colDefault": "既定値",
+    "colDescription": "説明",
+    "required": "必須",
+    "paramTileDesc": "牌譜の文字列。`/img/` の後のパスに置きます。例：`/img/7m7m7m2p3p4p`。数字に花色を続けます：`m` 萬子、`p` 筒子、`s` 索子、`z` 字牌（東南西北白發中が `1z`~`7z`）。`_` で牌組の間隔を表します。例：`123m456p_5z`。省略時は既定の牌譜になります。",
+    "paramThemeDesc": "牌面の配色テーマ。`color` はカラー牌面、`mono` はモノクロ（白黒）牌面です。それ以外の値や省略時は `color` として扱われます。",
+    "paramColorDesc": "牌面のメインカラー。6 桁の 16 進カラーコードで、`#` は**含めません**。例：`2D7D46`。`theme=color` のときのみ有効で、`theme=mono` のときは無視されます。",
+    "examplesHeading": "例",
+    "exampleDefault": "既定（カラー / #AA7942）",
+    "exampleColor": "色を指定",
+    "exampleMono": "モノクロテーマ",
+    "embedHeading": "埋め込み方法",
+    "copyAria": "リンクをコピー",
+    "copied": "リンクをコピーしました",
+    "copyFailed": "コピーに失敗しました"
   },
 
   "notation": {

@@ -27,9 +27,9 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <I18nProvider>
-      <div className="flex h-dvh flex-col">
+      <div className="flex min-h-dvh flex-col">
         <Navbar />
-        <main className="container flex min-h-0 flex-1 bg-background">
+        <main className="container flex flex-1 bg-background">
           <Outlet />
         </main>
         <Footer />

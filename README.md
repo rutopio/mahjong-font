@@ -22,6 +22,7 @@ Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F380
 
 [[Notation (en)]](#Notation) ・ [[表記法 (ja)]](#表記法) ・ [[表記方式 (zh)]](#表記方式)
 
+
 </div>
 
 ## Notation
@@ -105,6 +106,55 @@ pnpm dev
 pnpm check
 pnpm build
 ```
+
+## Preprocess
+
+The app renders tiles as inline SVG (not as a webfont), which fixes iOS
+download blanks and gives consistent cross-browser COLR/CPAL color support.
+The glyph data is extracted ahead of time from the Riichi-Mahjong woff2 fonts
+into `src/lib/tiles-data.json`, which the web app and the Image API both read.
+
+- Tile glyph data — extract ligatures, SVG paths, bounds and the COLR/CPAL
+  palette from `preprocess/fonts/*.woff2` into `src/lib/tiles-data.json`.
+  Requires Python with [fontTools](https://github.com/fonttools/fonttools).
+  Re-run after changing the source fonts:
+
+  ```
+  pip install fonttools
+  python3 preprocess/extract-tiles.py
+  ```
+
+- Web fonts — copy the self-hosted UI font shards into `public/fonts/` and
+  generate `src/styles/fonts.css`. Re-run after changing the font package list:
+
+  ```
+  pnpm build:fonts
+  ```
+
+## Image API
+
+Put a tile string in the URL path to get an inline SVG image you can embed
+anywhere, shields.io-style. Missing parameters fall back to defaults.
+
+```
+https://mahjongfont.pages.dev/img/<tile>?theme=color&color=AA7942
+```
+
+| Parameter | Location | Type           | Default  | Description                                                          |
+| --------- | -------- | -------------- | -------- | ------------------------------------------------------------------- |
+| `tile`    | path     | `string`       | required | Tile string (same [notation](#Notation)). `_` for a gap, e.g. `123m456p_5z`. |
+| `theme`   | query    | `color \| mono`| `color`  | `color` for colorful tiles, `mono` for monochrome.                  |
+| `color`   | query    | `string` (hex) | `AA7942` | Main tile color, six-digit hex without `#`. Only when `theme=color`. |
+
+The SVG is rendered at a fixed height of 500px; width scales proportionally.
+It is a vector, so you can resize it freely when embedding.
+
+```md
+![](https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
+```
+
+Tip: take any share URL from the app and swap `?tile=` for the `/img/` path.
+Full docs and live examples: https://mahjongfont.pages.dev/img
 
 ## Font Download
 

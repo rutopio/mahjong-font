@@ -47,7 +47,7 @@ function Home() {
   }
 
   return (
-    <div className="m-auto flex h-full w-full flex-col items-center justify-center gap-8 p-6 lg:max-w-5xl">
+    <div className="mx-auto my-auto flex w-full flex-col items-center gap-8 p-6 lg:max-w-5xl">
       <h1 className="text-balance text-center font-semibold text-2xl">
         {t("ui.toolTitle")}
       </h1>

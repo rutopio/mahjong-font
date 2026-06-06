@@ -27,12 +27,16 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const contentType = response.headers.get("content-type") || "";
   if (!contentType.includes("text/html")) return response;
 
-  // Normalize the query so the image URL matches what the app would produce
-  // (defaults applied for missing/invalid params).
-  const state = decodeFromQuery(url.search);
+  // The /img docs page has no tile of its own: point og:url at the page itself
+  // and use the default tile diagram as a generic cover, instead of inheriting
+  // the home page's share URL. (The /img/<tile> SVG isn't HTML and never gets
+  // here.) Everything else is the home page: the image is the shared tile.
+  const isDocsPage = url.pathname === "/img" || url.pathname === "/img/";
+
+  const state = decodeFromQuery(isDocsPage ? "" : url.search);
   const query = encodeToQuery(state);
   const imageUrl = `${url.origin}/og?${query}`;
-  const pageUrl = `${url.origin}/?${query}`;
+  const pageUrl = isDocsPage ? `${url.origin}/img` : `${url.origin}/?${query}`;
 
   return new HTMLRewriter()
     .on('meta[property="og:image"]', new MetaContentRewriter(imageUrl))

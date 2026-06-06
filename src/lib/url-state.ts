@@ -44,18 +44,31 @@ export function encodeToQuery(state: MahjongUrlState): string {
  * Parse a query string into state. Returns the full default state when any
  * required field is missing or invalid, rather than partially merging — a
  * malformed URL falls back entirely to the default.
+ *
+ * `tileOverride` supplies the tile sequence from outside the query (e.g. the
+ * URL path for the /img endpoint); when given, missing theme/color params fall
+ * back to their individual defaults instead of discarding the tiles.
  */
-export function decodeFromQuery(search: string): MahjongUrlState {
+export function decodeFromQuery(
+  search: string,
+  tileOverride?: string
+): MahjongUrlState {
   const params = new URLSearchParams(search);
-  const input = params.get("tile");
+  const input = tileOverride || params.get("tile");
   const urlTheme = params.get("theme");
   const theme = urlTheme ? THEME_URL_MAP[urlTheme] : undefined;
 
-  if (!input || !theme) return DEFAULT_STATE;
+  // Without an explicit tile source, a missing tile/theme means a bare URL:
+  // fall back entirely to the default share.
+  if (!input) return DEFAULT_STATE;
+  if (!theme && !tileOverride) return DEFAULT_STATE;
 
+  const resolvedTheme = theme || DEFAULT_THEME;
   const urlColor = params.get("color");
   const tileColor =
-    theme === "colorful" && urlColor ? `#${urlColor}` : DEFAULT_TILE_COLOR;
+    resolvedTheme === "colorful" && urlColor
+      ? `#${urlColor}`
+      : DEFAULT_TILE_COLOR;
 
-  return { input, theme, tileColor };
+  return { input, theme: resolvedTheme, tileColor };
 }

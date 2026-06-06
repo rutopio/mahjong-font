@@ -28,8 +28,17 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
+
+const navLinkClass =
+  "inline-flex h-9 items-center rounded-md px-3 py-2 font-medium text-sm transition-colors hover:bg-accent hover:text-accent-foreground";
 
 const FONT_VERSION = "v2.1";
 
@@ -58,13 +67,47 @@ export function Navbar() {
       aria-label="Main navigation"
     >
       <div className="flex h-full w-full items-center justify-between gap-0 sm:gap-4">
-        <Link to="/" aria-label="Home" className="shrink-0">
-          <img
-            src="/icon.svg"
-            alt=""
-            className="size-8 transition-transform hover:scale-110"
-          />
-        </Link>
+        <div className="flex items-center gap-2 sm:gap-4">
+          <Link to="/" aria-label="Home" className="shrink-0">
+            <img
+              src="/icon.svg"
+              alt=""
+              className="size-8 transition-transform hover:scale-110"
+            />
+          </Link>
+          <NavigationMenu viewport={false}>
+            <NavigationMenuList>
+              {/* Home is desktop-only; the logo already links home on mobile. */}
+              <NavigationMenuItem className="hidden md:flex">
+                <NavigationMenuLink asChild className={navLinkClass}>
+                  <Link
+                    to="/"
+                    activeOptions={{ exact: true, includeSearch: false }}
+                    activeProps={{
+                      className: "bg-accent",
+                      "aria-current": "page" as const,
+                    }}
+                  >
+                    {t("ui.navHome")}
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild className={navLinkClass}>
+                  <Link
+                    to="/img"
+                    activeProps={{
+                      className: "bg-accent",
+                      "aria-current": "page" as const,
+                    }}
+                  >
+                    {t("ui.navImageApi")}
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
         <div className="flex items-center gap-0 sm:gap-4">
           {isMobile ? (
             <>
