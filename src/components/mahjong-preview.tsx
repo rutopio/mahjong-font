@@ -1,7 +1,6 @@
+import type { Ref } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import type { Ref } from "react";
 
 interface MahjongPreviewProps {
   text: string;
@@ -30,11 +29,10 @@ export function MahjongPreview({ text, theme, ref }: MahjongPreviewProps) {
     const measure = measureRef.current;
     if (!container || !measure || !text) return;
 
-    // Get container width (with some padding)
+    // Batch layout reads together. The measure span renders at BASE_FONT_SIZE
+    // (set declaratively in JSX), so no style write is needed here, avoiding a
+    // write -> read reflow during measurement.
     const containerWidth = container.clientWidth * 0.95;
-
-    // Measure text width at base font size
-    measure.style.fontSize = `${BASE_FONT_SIZE}px`;
     const textWidth = measure.scrollWidth;
 
     if (textWidth === 0) return;
@@ -88,7 +86,10 @@ export function MahjongPreview({ text, theme, ref }: MahjongPreviewProps) {
       <span
         ref={measureRef}
         className={`invisible absolute whitespace-nowrap ${fontClass}`}
-        style={isColorful ? { fontPalette: "--custom-palette" } : undefined}
+        style={{
+          fontSize: `${BASE_FONT_SIZE}px`,
+          ...(isColorful ? { fontPalette: "--custom-palette" } : {}),
+        }}
         aria-hidden="true"
       >
         {text}

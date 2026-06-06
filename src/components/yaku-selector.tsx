@@ -1,6 +1,6 @@
+import { BookmarkSimpleIcon, CaretDownIcon, CheckIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { CheckIcon, ChevronDownIcon, LibraryBigIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -55,7 +55,7 @@ function YakuCommandList({
                                 >
                                     {t(item)}
                                     {selectedOption === item && (
-                                        <CheckIcon size={16} className="ml-auto" />
+                                        <CheckIcon aria-hidden="true" className="ml-auto" />
                                     )}
                                 </CommandItem>
                             ))}
@@ -92,11 +92,11 @@ export function YakuSelector({ selectedOption, onOptionChange }: YakuSelectorPro
             className="w-fit min-w-[180px] justify-between border-input bg-white px-3 font-normal hover:bg-white"
             onClick={() => isMobile && setOpen(true)}
         >
-            <LibraryBigIcon aria-hidden="true" />
+            <BookmarkSimpleIcon aria-hidden="true" />
             <span className={cn("truncate", !selectedLabel && "text-muted-foreground")}>
                 {selectedLabel ?? t("examples")}
             </span>
-            <ChevronDownIcon size={16} aria-hidden="true" className="shrink-0 text-muted-foreground/80" />
+            <CaretDownIcon aria-hidden="true" className="shrink-0 text-muted-foreground/80" />
         </Button>
     );
 
@@ -110,7 +110,7 @@ export function YakuSelector({ selectedOption, onOptionChange }: YakuSelectorPro
                             <DrawerTitle>{t("examples")}</DrawerTitle>
                             <DrawerDescription className="sr-only">{t("examples")}</DrawerDescription>
                         </DrawerHeader>
-                        <div className="overflow-auto px-4">
+                        <div className="overflow-auto p-2">
                             <YakuCommandList
                                 selectedOption={selectedOption}
                                 commandClassName="bg-background"

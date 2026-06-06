@@ -1,7 +1,7 @@
+import { DownloadSimpleIcon, LinkIcon, ShareNetworkIcon } from "@phosphor-icons/react";
+import type { RefObject } from "react";
 import { useTranslation } from "react-i18next";
-import { DownloadIcon, LinkIcon, Share2Icon } from "lucide-react";
 import { toast } from "sonner";
-
 import { FacebookIcon } from "@/components/icon/facebook";
 import { ThreadsIcon } from "@/components/icon/threads";
 import { XIcon } from "@/components/icon/x";
@@ -20,8 +20,6 @@ import {
   shareToX,
 } from "@/lib/share-link";
 import { textToImage } from "@/lib/text-to-image";
-
-import type { RefObject } from "react";
 
 const shareOptions = [
   { labelKey: "copyLink", icon: LinkIcon, action: "copy" },
@@ -88,20 +86,20 @@ export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
   return (
     <div className="flex gap-2">
       <Button onClick={handleDownload}>
-        <DownloadIcon aria-hidden="true" />
+        <DownloadSimpleIcon aria-hidden="true" />
         {t("saveAsImage")}
       </Button>
 
       {isMobile ? (
         <Button variant="outline" onClick={handleNativeShare}>
-          <Share2Icon aria-hidden="true" />
+          <ShareNetworkIcon aria-hidden="true" />
           {t("share")}
         </Button>
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="bg-white">
-              <Share2Icon aria-hidden="true" />
+              <ShareNetworkIcon aria-hidden="true" />
               {t("share")}
             </Button>
           </DropdownMenuTrigger>

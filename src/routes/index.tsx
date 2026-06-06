@@ -1,7 +1,7 @@
+import { CircleNotchIcon } from "@phosphor-icons/react";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { createFileRoute } from "@tanstack/react-router";
-import { Loader2Icon } from "lucide-react";
 
 import { ActionButtons } from "@/components/action-buttons";
 import { InputSection } from "@/components/input-section";
@@ -172,7 +172,7 @@ function Home() {
         aria-busy="true"
         aria-label="Loading"
       >
-        <Loader2Icon
+        <CircleNotchIcon
           className="size-12 animate-spin motion-reduce:animate-none"
           aria-hidden="true"
         />

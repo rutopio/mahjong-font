@@ -4,7 +4,9 @@
  * to select colors using a color area, hue slider, hex input, and preset colors.
  */
 
+import { CopyIcon, EyedropperIcon } from "@phosphor-icons/react";
 import { use, useRef } from "react";
+import type { Color } from "react-aria-components";
 import {
     Button as AriaButton,
     Input as AriaInput,
@@ -12,12 +14,10 @@ import {
     ColorPickerStateContext,
     Dialog,
     DialogTrigger,
-    parseColor,
     Popover,
+    parseColor,
 } from "react-aria-components";
-import { CopyIcon, PipetteIcon } from "lucide-react";
 import { toast } from "sonner";
-
 import {
     ColorArea,
     ColorField,
@@ -31,8 +31,6 @@ import {
 } from "@/components/color";
 import { Button } from "@/components/ui/button";
 import { PRESET_COLORS } from "@/lib/constants";
-
-import type { Color } from "react-aria-components";
 
 /**
  * EyeDropper button component that uses the browser's EyeDropper API
@@ -62,7 +60,7 @@ function EyeDropperButton() {
                     );
             }}
         >
-            <PipetteIcon className="size-4" aria-hidden="true" />
+            <EyedropperIcon aria-hidden="true" />
         </AriaButton>
     );
 }
@@ -173,7 +171,7 @@ export function ColorPickerPopover({
                                     });
                                 }}
                             >
-                                <CopyIcon size={30} aria-hidden="true" />
+                                <CopyIcon aria-hidden="true" />
                             </Button>
                         </ColorField>
 
