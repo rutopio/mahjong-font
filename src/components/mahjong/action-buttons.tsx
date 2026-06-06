@@ -48,12 +48,16 @@ export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
     );
   };
 
+  const copyLinkWithToast = () => {
+    copyLink();
+    toast.success(t("share.linkCopied"), {
+      description: window.location.href,
+    });
+  };
+
   const handleShare = (action: string) => {
     if (action === "copy") {
-      copyLink();
-      toast.success(t("share.linkCopied"), {
-        description: window.location.href,
-      });
+      copyLinkWithToast();
     } else if (action === "facebook") {
       shareToFacebook();
     } else if (action === "x") {
@@ -66,10 +70,7 @@ export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
   const handleNativeShare = async () => {
     if (!navigator.share) {
       // Fallback to copy link if Web Share API not supported
-      copyLink();
-      toast.success(t("share.linkCopied"), {
-        description: window.location.href,
-      });
+      copyLinkWithToast();
       return;
     }
 

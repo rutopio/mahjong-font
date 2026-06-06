@@ -1,7 +1,7 @@
 /**
- * @fileoverview Color palette picker components for emoji customization.
- * Provides color picker popovers using react-aria-components that allow users
- * to select colors using a color area, hue slider, hex input, and preset colors.
+ * @fileoverview Tile color picker popover for the colorful mahjong theme.
+ * Provides a color picker popover using react-aria-components that lets users
+ * select a tile color via a color area, hue slider, hex input, and preset colors.
  */
 
 import { CopyIcon, EyedropperIcon } from "@phosphor-icons/react";
@@ -18,6 +18,7 @@ import {
   parseColor,
 } from "react-aria-components";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   ColorArea,
   ColorField,
@@ -28,8 +29,7 @@ import {
   ColorSwatchPickerItem,
   ColorThumb,
   SliderTrack,
-} from "@/components/color";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/color";
 import { PRESET_COLORS } from "@/lib/constants";
 
 /**
@@ -70,8 +70,6 @@ interface ColorPickerPopoverProps {
   color: string;
   /** Callback invoked when the color changes. */
   onColorChange: (color: string) => void;
-  /** Optional index for identification. */
-  index?: number;
 }
 
 /**

@@ -4,8 +4,8 @@ import { Toaster } from "sonner";
 
 import "@/styles/globals.css";
 
-import { Footer } from "@/components/sections/footer";
-import { Navbar } from "@/components/sections/navbar";
+import { Footer } from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/navbar";
 import { I18nProvider } from "@/provider/i18n-provider";
 import { RootError } from "@/routes/-root-error";
 import { RootNotFound } from "@/routes/-root-not-found";

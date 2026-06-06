@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import Notations from "@/components/sections/notations";
+import { Notations } from "@/components/mahjong/notations";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,

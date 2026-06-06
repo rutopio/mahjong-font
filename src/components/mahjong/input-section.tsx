@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 
-import { NotationsButton } from "@/components/notations-button";
-import { ThemeSelector } from "@/components/theme-selector";
+import { NotationsButton } from "@/components/mahjong/notations-button";
+import { ThemeSelector } from "@/components/mahjong/theme-selector";
+import { YakuSelector } from "@/components/mahjong/yaku-selector";
 import { Input } from "@/components/ui/input";
-import { YakuSelector } from "@/components/yaku-selector";
 
 interface InputSectionProps {
   input: string;

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { ColorPickerPopover } from "@/components/color-palette-pickers";
+import { ColorPickerPopover } from "@/components/mahjong/color-picker-popover";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { themeOptions } from "@/lib/constants";
 

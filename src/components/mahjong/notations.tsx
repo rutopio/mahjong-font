@@ -61,7 +61,7 @@ function NotationContent({
   }
 }
 
-export default function Notations({ theme }: { theme: string }) {
+export function Notations({ theme }: { theme: string }) {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-4">
