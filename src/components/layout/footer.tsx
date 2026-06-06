@@ -3,7 +3,7 @@ import { GITHUB_PROFILE_URL } from "@/lib/constants";
 export function Footer() {
   return (
     <footer className="container w-full bg-background font-light">
-      <div className="p-4 text-center font-mono text-primary/80 text-xs leading-loose">
+      <div className="p-4 text-center font-mono text-primary/80 text-xs leading-loose md:p-12">
         <a
           href={GITHUB_PROFILE_URL}
           target="_blank"

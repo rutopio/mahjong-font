@@ -31,6 +31,7 @@ import {
   SliderTrack,
 } from "@/components/ui/color";
 import { PRESET_COLORS } from "@/lib/constants";
+import { isTouchDevice } from "@/lib/is-touch-device";
 
 /**
  * EyeDropper button component that uses the browser's EyeDropper API
@@ -88,6 +89,26 @@ export function ColorPickerPopover({
   const colorValue = parseColor(color).toFormat("hsb");
   // Track if user is dragging to prevent popover from closing during drag
   const isDraggingRef = useRef(false);
+
+  // On touch devices (phones and tablets, incl. iPad), use the native OS color
+  // picker via <input type="color"> for the familiar system UI. The swatch
+  // keeps the same look.
+  if (isTouchDevice()) {
+    return (
+      <label
+        aria-label="Pick tile color"
+        className="relative inline-flex size-8 cursor-pointer overflow-hidden rounded-md outline-none focus-within:ring focus-within:ring-offset-2"
+        style={{ backgroundColor: color }}
+      >
+        <input
+          type="color"
+          value={color}
+          onChange={(e) => onColorChange(e.target.value)}
+          className="absolute inset-0 size-full cursor-pointer opacity-0"
+        />
+      </label>
+    );
+  }
 
   /**
    * Handles color change from the color picker.

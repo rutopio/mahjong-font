@@ -4,17 +4,13 @@
  * is no foreignObject/webfont involvement and iOS produces real images.
  */
 
+import { isTouchDevice } from "./is-touch-device";
 import { renderTilesSvg } from "./render-tile-svg";
 import { loadTilesData } from "./tiles-data";
 
 /** Output scale for PNG raster (multiplies the SVG's intrinsic pixel size). */
 const PNG_SCALE = 2;
 const PADDING = 48;
-
-function isMobileDevice(): boolean {
-  if (typeof navigator === "undefined") return false;
-  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-}
 
 function canShareFiles(): boolean {
   return (
@@ -107,7 +103,7 @@ async function deliverRaster(blob: Blob, filename: string, mime: string) {
   const file = new File([blob], filename, { type: mime });
 
   if (
-    isMobileDevice() &&
+    isTouchDevice() &&
     canShareFiles() &&
     navigator.canShare({ files: [file] })
   ) {

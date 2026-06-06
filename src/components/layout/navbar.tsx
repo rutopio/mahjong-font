@@ -54,7 +54,7 @@ export function Navbar() {
 
   return (
     <nav
-      className="container h-fit w-full bg-background p-4"
+      className="container h-fit w-full bg-background p-4 md:p-12"
       aria-label="Main navigation"
     >
       <div className="flex h-full w-full items-center justify-between gap-0 sm:gap-4">

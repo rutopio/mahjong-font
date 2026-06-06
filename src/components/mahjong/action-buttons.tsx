@@ -19,6 +19,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { isTouchDevice } from "@/lib/is-touch-device";
 import {
   copyLink,
   shareToFacebook,
@@ -59,11 +60,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
   // the user can pick "Save Image" (Photos), Files, or anywhere else. Desktop
   // opens the format dialog (PNG/SVG) instead.
   const handleDownloadClick = () => {
-    const isTouch =
-      typeof window !== "undefined" &&
-      window.matchMedia("(pointer: coarse)").matches;
-
-    if (isTouch) {
+    if (isTouchDevice()) {
       void handleDownload("png");
       return;
     }
@@ -91,11 +88,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
   // On touch devices, only use the native share sheet (no dialog fallback);
   // pointer-based devices (desktop) always open the dialog.
   const handleShareClick = async () => {
-    const isTouch =
-      typeof window !== "undefined" &&
-      window.matchMedia("(pointer: coarse)").matches;
-
-    if (isTouch && navigator.share) {
+    if (isTouchDevice() && navigator.share) {
       try {
         await navigator.share({
           title: t("ui.toolTitle"),
