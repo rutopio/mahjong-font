@@ -29,7 +29,9 @@ value = (
 name = glyphOrder;
 value = (
 .notdef,
-space
+space,
+enspace,
+nbspace
 );
 },
 {
@@ -37,7 +39,7 @@ name = "Disable Subroutines";
 value = 1;
 }
 );
-date = "2026-02-05 05:17:32 +0000";
+date = "2026-06-06 13:32:30 +0000";
 familyName = "Riichi-Mahjong";
 featurePrefixes = (
 {
@@ -323,7 +325,8 @@ tag = liga;
 },
 {
 automatic = 1;
-code = "sub space-han by space-han.half;
+code = "sub space by enspace;
+sub space-han by space-han.half;
 ";
 tag = hwid;
 }
@@ -517,6 +520,35 @@ width = 64;
 );
 note = space;
 unicode = 32;
+},
+{
+glyphname = enspace;
+layers = (
+{
+layerId = m01;
+width = 500;
+},
+{
+layerId = m002;
+width = 500;
+}
+);
+unicode = 8194;
+},
+{
+glyphname = nbspace;
+layers = (
+{
+layerId = m01;
+width = 64;
+},
+{
+layerId = m002;
+width = 64;
+}
+);
+metricWidth = space;
+unicode = 160;
 },
 {
 glyphname = A;
@@ -286964,7 +286996,7 @@ note = u1F01D.aka.hor;
 },
 {
 glyphname = dieFace1;
-lastChange = "2026-02-05 16:57:29 +0000";
+lastChange = "2026-06-06 12:50:11 +0000";
 layers = (
 {
 layerId = m01;
@@ -287052,6 +287084,89 @@ nodes = (
 (382,277,cs)
 );
 },
+{
+closed = 1;
+nodes = (
+(84,557,ls),
+(28,557,o),
+(0,529,o),
+(0,473,cs),
+(0,84,ls),
+(0,28,o),
+(28,0,o),
+(84,0,cs),
+(475,0,ls),
+(531,0,o),
+(559,28,o),
+(559,84,cs),
+(559,473,ls),
+(559,529,o),
+(531,557,o),
+(475,557,cs)
+);
+},
+{
+closed = 1;
+nodes = (
+(475,524,ls),
+(509,524,o),
+(526,507,o),
+(526,473,cs),
+(526,84,ls),
+(526,49,o),
+(509,32,o),
+(475,32,cs),
+(84,32,ls),
+(50,32,o),
+(33,49,o),
+(33,84,cs),
+(33,473,ls),
+(33,507,o),
+(50,524,o),
+(84,524,cs)
+);
+}
+);
+vertWidth = 1000;
+width = 559;
+},
+{
+associatedMasterId = m01;
+attr = {
+colorPalette = 2;
+};
+layerId = "24A1CF7F-DAAB-408C-88FB-C8D6FC1FCEB5";
+name = "26年6月6日 20:49";
+shapes = (
+{
+closed = 1;
+nodes = (
+(382,336,o),
+(336,380,o),
+(279,380,cs),
+(222,380,o),
+(176,336,o),
+(176,277,cs),
+(176,221,o),
+(223,174,o),
+(279,174,cs),
+(336,174,o),
+(382,220,o),
+(382,277,cs)
+);
+}
+);
+vertWidth = 1000;
+width = 559;
+},
+{
+associatedMasterId = m01;
+attr = {
+colorPalette = 0;
+};
+layerId = "BF95850F-0841-4F4C-AD4B-4863B45A01E7";
+name = "26年6月6日 20:50";
+shapes = (
 {
 closed = 1;
 nodes = (
@@ -287486,7 +287601,7 @@ unicode = 9858;
 },
 {
 glyphname = dieFace4;
-lastChange = "2026-02-05 16:57:29 +0000";
+lastChange = "2026-06-06 12:50:02 +0000";
 layers = (
 {
 layerId = m01;
@@ -287676,6 +287791,140 @@ nodes = (
 (238,400,cs)
 );
 },
+{
+closed = 1;
+nodes = (
+(84,557,ls),
+(28,557,o),
+(0,529,o),
+(0,473,cs),
+(0,84,ls),
+(0,28,o),
+(28,0,o),
+(84,0,cs),
+(475,0,ls),
+(531,0,o),
+(559,28,o),
+(559,84,cs),
+(559,473,ls),
+(559,529,o),
+(531,557,o),
+(475,557,cs)
+);
+},
+{
+closed = 1;
+nodes = (
+(475,524,ls),
+(509,524,o),
+(526,507,o),
+(526,473,cs),
+(526,84,ls),
+(526,49,o),
+(509,32,o),
+(475,32,cs),
+(84,32,ls),
+(50,32,o),
+(33,49,o),
+(33,84,cs),
+(33,473,ls),
+(33,507,o),
+(50,524,o),
+(84,524,cs)
+);
+}
+);
+vertWidth = 1000;
+width = 559;
+},
+{
+associatedMasterId = m01;
+attr = {
+colorPalette = 2;
+};
+layerId = "A7C743DD-73B7-4B1A-9C61-41567E0BEC1D";
+name = "26年6月6日 20:49";
+shapes = (
+{
+closed = 1;
+nodes = (
+(238,193,o),
+(208,223,o),
+(169,223,cs),
+(131,223,o),
+(101,193,o),
+(101,154,cs),
+(101,117,o),
+(131,85,o),
+(169,85,cs),
+(208,85,o),
+(238,117,o),
+(238,154,cs)
+);
+},
+{
+closed = 1;
+nodes = (
+(457,194,o),
+(426,223,o),
+(388,223,cs),
+(350,223,o),
+(320,193,o),
+(320,154,cs),
+(320,117,o),
+(350,85,o),
+(388,85,cs),
+(426,85,o),
+(457,116,o),
+(457,154,cs)
+);
+},
+{
+closed = 1;
+nodes = (
+(457,440,o),
+(426,469,o),
+(388,469,cs),
+(350,469,o),
+(320,439,o),
+(320,400,cs),
+(320,362,o),
+(350,332,o),
+(388,332,cs),
+(426,332,o),
+(457,361,o),
+(457,400,cs)
+);
+},
+{
+closed = 1;
+nodes = (
+(238,439,o),
+(208,469,o),
+(169,469,cs),
+(131,469,o),
+(101,439,o),
+(101,400,cs),
+(101,362,o),
+(131,332,o),
+(169,332,cs),
+(208,332,o),
+(238,362,o),
+(238,400,cs)
+);
+}
+);
+vertWidth = 1000;
+width = 559;
+},
+{
+associatedMasterId = m01;
+attr = {
+colorPalette = "*";
+};
+layerId = "110E4078-BD99-4702-8831-C1C4B5296459";
+name = "26年6月6日 20:49";
+shapes = (
 {
 closed = 1;
 nodes = (
@@ -288773,6 +289022,10 @@ properties = (
 {
 key = postscriptFontName;
 value = "Riichi-Mahjong-Colorful";
+},
+{
+key = uniqueID;
+value = "Riichi-Mahjong-Colorful-2.1";
 }
 );
 },
@@ -288794,6 +289047,10 @@ properties = (
 {
 key = postscriptFontName;
 value = "Riichi-Mahjong-Monochrome";
+},
+{
+key = uniqueID;
+value = "Riichi-Mahjong-Monochrome-2.1";
 }
 );
 }
@@ -288838,6 +289095,10 @@ value = "rutopio@Github";
 );
 },
 {
+key = designerURL;
+value = "https://github.com/rutopio";
+},
+{
 key = licenses;
 values = (
 {
@@ -288845,6 +289106,10 @@ language = dflt;
 value = "SIL Open Font License, Version 1.1.";
 }
 );
+},
+{
+key = licenseURL;
+value = "https://openfontlicense.org/";
 },
 {
 key = manufacturers;
@@ -288858,9 +289123,13 @@ value = "rutopio@Github";
 {
 key = manufacturerURL;
 value = "https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType";
+},
+{
+key = versionString;
+value = "2.1";
 }
 );
 unitsPerEm = 1000;
 versionMajor = 2;
-versionMinor = 0;
+versionMinor = 100;
 }
