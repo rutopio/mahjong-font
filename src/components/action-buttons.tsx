@@ -1,11 +1,11 @@
-import { useTranslation } from "react-i18next";
 import {
   DownloadSimpleIcon,
   LinkIcon,
   ShareNetworkIcon,
 } from "@phosphor-icons/react";
+import type { RefObject } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-
 import { FacebookIcon } from "@/components/icon/facebook";
 import { ThreadsIcon } from "@/components/icon/threads";
 import { XIcon } from "@/components/icon/x";
@@ -24,8 +24,6 @@ import {
   shareToX,
 } from "@/lib/share-link";
 import { textToImage } from "@/lib/text-to-image";
-
-import type { RefObject } from "react";
 
 const shareOptions = [
   { labelKey: "copyLink", icon: LinkIcon, action: "copy" },

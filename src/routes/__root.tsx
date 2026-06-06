@@ -1,14 +1,14 @@
-import { lazy, Suspense } from "react";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { lazy, Suspense } from "react";
 import { Toaster } from "sonner";
 
 import "@/styles/globals.css";
 
-import { RootError } from "@/routes/-root-error";
-import { RootNotFound } from "@/routes/-root-not-found";
 import { Footer } from "@/components/sections/footer";
 import { Navbar } from "@/components/sections/navbar";
 import { I18nProvider } from "@/provider/i18n-provider";
+import { RootError } from "@/routes/-root-error";
+import { RootNotFound } from "@/routes/-root-not-found";
 
 const TanStackRouterDevtools = import.meta.env.DEV
   ? lazy(() =>

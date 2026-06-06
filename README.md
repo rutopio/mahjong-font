@@ -102,8 +102,7 @@ pnpm dev
 - Build
 
 ```
-pnpm run format
-pnpm run lint
+pnpm check
 pnpm build
 ```
 

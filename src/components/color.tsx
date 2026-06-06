@@ -1,3 +1,12 @@
+import type {
+  ColorAreaProps as AriaColorAreaProps,
+  ColorSwatchPickerItemProps as AriaColorSwatchPickerItemProps,
+  ColorSwatchPickerProps as AriaColorSwatchPickerProps,
+  ColorSwatchProps as AriaColorSwatchProps,
+  ColorThumbProps as AriaColorThumbProps,
+  ColorWheelProps as AriaColorWheelProps,
+  SliderTrackProps as AriaSliderTrackProps,
+} from "react-aria-components";
 import {
   ColorArea as AriaColorArea,
   ColorField as AriaColorField,
@@ -13,18 +22,7 @@ import {
   SliderTrack as AriaSliderTrack,
   composeRenderProps,
 } from "react-aria-components";
-
 import { cn } from "@/lib/utils";
-
-import type {
-  ColorAreaProps as AriaColorAreaProps,
-  ColorSwatchPickerItemProps as AriaColorSwatchPickerItemProps,
-  ColorSwatchPickerProps as AriaColorSwatchPickerProps,
-  ColorSwatchProps as AriaColorSwatchProps,
-  ColorThumbProps as AriaColorThumbProps,
-  ColorWheelProps as AriaColorWheelProps,
-  SliderTrackProps as AriaSliderTrackProps,
-} from "react-aria-components";
 
 // https://www.jollyui.dev/docs/components/color
 
@@ -126,7 +124,7 @@ function ColorSwatchPickerItem({
           "size-8 cursor-pointer overflow-hidden rounded-md ring-offset-background transition-colors",
           "data-selected:border-white",
           "data-disabled:pointer-events-none data-disabled:opacity-50",
-          "data-focus-visible:ring-2 data-focus-visible:ring-ring data-focus-visible:outline-none",
+          "data-focus-visible:outline-none data-focus-visible:ring-2 data-focus-visible:ring-ring",
           className
         )
       )}
@@ -148,16 +146,16 @@ function ColorSwatch({ className, ...props }: AriaColorSwatchProps) {
 
 export type { ColorWheelProps };
 export {
-  ColorSlider,
-  ColorField,
-  ColorWheelTrack,
-  ColorWheel,
-  ColorPicker,
   ColorArea,
-  SliderTrack,
-  SliderOutput,
-  ColorThumb,
+  ColorField,
+  ColorPicker,
+  ColorSlider,
+  ColorSwatch,
   ColorSwatchPicker,
   ColorSwatchPickerItem,
-  ColorSwatch,
+  ColorThumb,
+  ColorWheel,
+  ColorWheelTrack,
+  SliderOutput,
+  SliderTrack,
 };

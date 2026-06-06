@@ -1,7 +1,6 @@
+import type { Ref } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import type { Ref } from "react";
 
 interface MahjongPreviewProps {
   text: string;
@@ -80,7 +79,7 @@ export function MahjongPreview({ text, theme, ref }: MahjongPreviewProps) {
   return (
     <div
       ref={containerRef}
-      className="relative mx-auto flex w-full items-center justify-center overflow-hidden pt-16"
+      className="relative mx-auto flex w-full items-center justify-center overflow-hidden"
       style={{ height: `${fixedHeight}px` }}
     >
       {/* Hidden element for measuring text width */}
@@ -100,7 +99,7 @@ export function MahjongPreview({ text, theme, ref }: MahjongPreviewProps) {
       <div
         role="img"
         aria-label={t("ui.mahjongPreview")}
-        className={`text-center leading-loose whitespace-nowrap ${fontClass}`}
+        className={`whitespace-nowrap text-center leading-loose ${fontClass}`}
         style={{
           fontSize: `${fontSize}px`,
           ...(isColorful ? { fontPalette: "--custom-palette" } : {}),

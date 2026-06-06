@@ -1,7 +1,7 @@
+import { CircleNotchIcon } from "@phosphor-icons/react";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { createFileRoute } from "@tanstack/react-router";
-import { CircleNotchIcon } from "@phosphor-icons/react";
 
 import { ActionButtons } from "@/components/action-buttons";
 import { InputSection } from "@/components/input-section";
@@ -182,7 +182,7 @@ function Home() {
 
   return (
     <div className="m-auto flex h-full w-full flex-col items-center justify-center gap-8 p-6 lg:max-w-5xl">
-      <h1 className="text-center text-2xl font-bold text-balance">
+      <h1 className="text-balance text-center font-bold text-2xl">
         {t("ui.toolTitle")}
       </h1>
 

@@ -1,6 +1,6 @@
+import { BookmarkSimpleIcon, CaretDownIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { BookmarkSimpleIcon, CaretDownIcon } from "@phosphor-icons/react";
 
 import { Button } from "@/components/ui/button";
 import {

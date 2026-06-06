@@ -9,10 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import type { NotationItem } from "@/lib/constants";
 import { notationExamples, notationItems } from "@/lib/constants";
 import { transformString } from "@/lib/transform-string";
-
-import type { NotationItem } from "@/lib/constants";
 
 function NotationBadge({ children }: { children: React.ReactNode }) {
   return <Badge variant="outline">{children}</Badge>;
@@ -101,11 +100,11 @@ export default function Notations({ theme }: { theme: string }) {
             <div key={item.titleKey}>
               {index > 0 && <hr className="mb-3 border-border" />}
               <div className="space-y-2">
-                <div className="text-sm font-medium text-pretty">
+                <div className="text-pretty font-medium text-sm">
                   {t(item.titleKey)}
                 </div>
                 <div
-                  className={`text-sm text-pretty ${item.titleKey === "notation.aka-dora" ? "break-words" : ""}`}
+                  className={`text-pretty text-sm ${item.titleKey === "notation.aka-dora" ? "break-words" : ""}`}
                 >
                   <NotationContent item={item} t={t} />
                 </div>
@@ -121,7 +120,7 @@ export default function Notations({ theme }: { theme: string }) {
             className={`flex flex-col p-2 ${index < notationExamples.length - 1 ? "border-b" : ""} ${index === 3 ? "gap-8" : "gap-4"}`}
           >
             <div className="flex items-center gap-4 p-2">
-              <div className="text-sm font-medium wrap-break-word">
+              <div className="wrap-break-word font-medium text-sm">
                 {t(example.combination)}
               </div>
               <Badge variant="outline">{example.notation}</Badge>

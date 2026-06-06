@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "@tanstack/react-router";
 import {
   CheckIcon,
   FileArrowDownIcon,
-  FileTextIcon,
   TranslateIcon,
 } from "@phosphor-icons/react";
+import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { GithubIcon } from "@/components/icon/github";
 import { Button } from "@/components/ui/button";
@@ -151,7 +150,7 @@ export function Navbar() {
                 aria-label={t("ui.downloadFont")}
                 onClick={() => setFontDrawerOpen(true)}
               >
-                <FileTextIcon aria-hidden="true" />
+                <FileArrowDownIcon aria-hidden="true" />
               </Button>
               <Drawer open={fontDrawerOpen} onOpenChange={setFontDrawerOpen}>
                 <DrawerContent>
@@ -172,7 +171,7 @@ export function Navbar() {
                           setFontDrawerOpen(false);
                         }}
                       >
-                        <FileArrowDownIcon aria-hidden="true" />
+                        {/* <FileArrowDownIcon aria-hidden="true" /> */}
                         {t(font.labelKey)}
                       </button>
                     ))}
@@ -194,7 +193,7 @@ export function Navbar() {
                   className="rounded-full sm:rounded-md"
                   aria-label={t("ui.downloadFont")}
                 >
-                  <FileTextIcon aria-hidden="true" />
+                  <FileArrowDownIcon aria-hidden="true" />
                   <span className="hidden md:block">
                     {t("ui.downloadFont")}
                   </span>
@@ -207,7 +206,7 @@ export function Navbar() {
                       key={font.labelKey}
                       onClick={() => downloadFont(font.url)}
                     >
-                      <FileArrowDownIcon aria-hidden="true" />
+                      {/* <FileArrowDownIcon aria-hidden="true" /> */}
                       {t(font.labelKey)}
                     </DropdownMenuItem>
                   ))}
