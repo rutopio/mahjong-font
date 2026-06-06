@@ -1,21 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { InfoIcon, LibraryBigIcon, PaletteIcon } from "lucide-react";
 
-import { ColorPickerPopover } from "@/components/color-palette-pickers";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { themeOptions, yakuGroups } from "@/lib/constants";
+import { NotationsButton } from "@/components/notations-button";
+import { ThemeSelector } from "@/components/theme-selector";
+import { YakuSelector } from "@/components/yaku-selector";
 
 interface InputSectionProps {
   input: string;
@@ -41,8 +29,6 @@ export function InputSection({
   onColorChange,
 }: InputSectionProps) {
   const { t } = useTranslation();
-  const isMobile = useIsMobile();
-  const isColorful = theme === "colorful";
 
   return (
     <div className="flex w-full flex-col items-center gap-4">
@@ -57,62 +43,20 @@ export function InputSection({
 
       <div className="flex w-full flex-col gap-4 md:flex-row md:justify-between">
         <div className="flex flex-col items-center gap-4 md:flex-row">
-          <div className="flex items-center gap-2">
-            <LibraryBigIcon className="size-6" aria-hidden="true" />
-            <Select value={selectedOption} onValueChange={onOptionChange}>
-              <SelectTrigger
-                className="h-12 w-fit min-w-[180px] bg-white sm:min-w-[180px]"
-                aria-label={t("examples")}
-              >
-                <SelectValue placeholder={t("examples")} />
-              </SelectTrigger>
-              <SelectContent side="top" align={isMobile ? "center" : "start"}>
-                {yakuGroups.map((group, index) => (
-                  <div key={group.labelKey}>
-                    {index > 0 && <SelectSeparator />}
-                    <SelectGroup>
-                      <SelectLabel>{t(group.labelKey)}</SelectLabel>
-                      {group.items.map((item) => (
-                        <SelectItem key={item} value={item}>
-                          {t(item)}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </div>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex items-center gap-2">
-            <PaletteIcon className="size-6" aria-hidden="true" />
-            <Select value={theme} onValueChange={onThemeChange}>
-              <SelectTrigger
-                className="h-12 w-fit min-w-[180px] bg-white sm:min-w-[100px]"
-                aria-label={t("theme")}
-              >
-                <SelectValue placeholder={t("theme")} />
-              </SelectTrigger>
-              <SelectContent>
-                {themeOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {t(option.labelKey)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            {isColorful && (
-              <ColorPickerPopover
-                color={tileColor}
-                onColorChange={onColorChange}
-              />
-            )}
-          </div>
+          <YakuSelector
+            selectedOption={selectedOption}
+            onOptionChange={onOptionChange}
+          />
+          <ThemeSelector
+            theme={theme}
+            onThemeChange={onThemeChange}
+            tileColor={tileColor}
+            onColorChange={onColorChange}
+          />
         </div>
+
         <div className="mx-auto flex items-center gap-2 md:mx-0">
-          <Button onClick={onShowNotations}>
-            <InfoIcon aria-hidden="true" />
-            {t("howToUse")}
-          </Button>
+          <NotationsButton onClick={onShowNotations} />
         </div>
       </div>
     </div>

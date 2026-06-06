@@ -1,18 +1,25 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FileDownIcon, FileType2Icon, LanguagesIcon } from "lucide-react";
+import { CheckIcon, FileDownIcon, FileType2Icon, LanguagesIcon } from "lucide-react";
 
 import { GithubIcon } from "@/components/icon/github";
 import { Button } from "@/components/ui/button";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -22,6 +29,8 @@ export function Navbar() {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
   const isMobile = useIsMobile();
+  const [langDrawerOpen, setLangDrawerOpen] = useState(false);
+  const [fontDrawerOpen, setFontDrawerOpen] = useState(false);
 
   const downloadFont = (filePath: string) => {
     const link = document.createElement("a");
@@ -30,86 +39,154 @@ export function Navbar() {
     link.click();
   };
 
+  const handleLanguageChange = (value: string) => {
+    setLanguage(value);
+    i18n.changeLanguage(value);
+  };
+
   return (
     <nav
       className="container h-fit w-full bg-background p-4"
       aria-label="Main navigation"
     >
       <div className="flex h-full w-full items-center justify-end gap-0 sm:gap-4">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+        {isMobile ? (
+          <>
             <Button
               variant="ghost"
               type="button"
               className="rounded-full sm:rounded-md"
               aria-label={t("language")}
+              onClick={() => setLangDrawerOpen(true)}
             >
               <LanguagesIcon aria-hidden="true" />
-              <span className="hidden md:block">{t("language")}</span>
             </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuGroup>
-              {isMobile && (
-                <>
-                  <DropdownMenuLabel className="px-2 py-1.5 text-xs text-muted-foreground">
-                    {t("language")}
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                </>
-              )}
-              <DropdownMenuRadioGroup
-                value={language}
-                onValueChange={setLanguage}
+            <Drawer open={langDrawerOpen} onOpenChange={setLangDrawerOpen}>
+              <DrawerContent>
+                <DrawerHeader>
+                  <DrawerTitle>{t("language")}</DrawerTitle>
+                  <DrawerDescription className="sr-only">{t("language")}</DrawerDescription>
+                </DrawerHeader>
+                <div className="px-4 pb-2">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.value}
+                      type="button"
+                      className="flex w-full items-center justify-between rounded-md px-3 py-3 text-sm hover:bg-accent"
+                      onClick={() => {
+                        handleLanguageChange(lang.value);
+                        setLangDrawerOpen(false);
+                      }}
+                    >
+                      {lang.label}
+                      {language === lang.value && <CheckIcon size={16} />}
+                    </button>
+                  ))}
+                </div>
+                <DrawerFooter>
+                  <DrawerClose asChild>
+                    <Button variant="outline">{t("close")}</Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          </>
+        ) : (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                type="button"
+                className="rounded-full sm:rounded-md"
+                aria-label={t("language")}
               >
-                {languages.map((lang) => (
-                  <DropdownMenuRadioItem
-                    key={lang.value}
-                    value={lang.value}
-                    onClick={() => i18n.changeLanguage(lang.value)}
-                  >
-                    {lang.label}
-                  </DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                <LanguagesIcon aria-hidden="true" />
+                <span className="hidden md:block">{t("language")}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuGroup>
+                <DropdownMenuRadioGroup value={language} onValueChange={handleLanguageChange}>
+                  {languages.map((lang) => (
+                    <DropdownMenuRadioItem key={lang.value} value={lang.value}>
+                      {lang.label}
+                    </DropdownMenuRadioItem>
+                  ))}
+                </DropdownMenuRadioGroup>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+        {isMobile ? (
+          <>
             <Button
               variant="ghost"
               type="button"
               className="rounded-full sm:rounded-md"
               aria-label={t("downloadFont")}
+              onClick={() => setFontDrawerOpen(true)}
             >
               <FileType2Icon aria-hidden="true" />
-              <span className="hidden md:block">{t("downloadFont")}</span>
             </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuGroup>
-              {isMobile && (
-                <>
-                  <DropdownMenuLabel className="px-2 py-1.5 text-xs text-muted-foreground">
-                    {t("downloadFont")}
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                </>
-              )}
-              {fontDownloads.map((font) => (
-                <DropdownMenuItem
-                  key={font.labelKey}
-                  onClick={() => downloadFont(font.url)}
-                >
-                  <FileDownIcon aria-hidden="true" />
-                  {t(font.labelKey)}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            <Drawer open={fontDrawerOpen} onOpenChange={setFontDrawerOpen}>
+              <DrawerContent>
+                <DrawerHeader>
+                  <DrawerTitle>{t("downloadFont")}</DrawerTitle>
+                  <DrawerDescription className="sr-only">{t("downloadFont")}</DrawerDescription>
+                </DrawerHeader>
+                <div className="px-4 pb-2">
+                  {fontDownloads.map((font) => (
+                    <button
+                      key={font.labelKey}
+                      type="button"
+                      className="flex w-full items-center gap-3 rounded-md px-3 py-3 text-sm hover:bg-accent"
+                      onClick={() => {
+                        downloadFont(font.url);
+                        setFontDrawerOpen(false);
+                      }}
+                    >
+                      <FileDownIcon size={16} aria-hidden="true" />
+                      {t(font.labelKey)}
+                    </button>
+                  ))}
+                </div>
+                <DrawerFooter>
+                  <DrawerClose asChild>
+                    <Button variant="outline">{t("close")}</Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          </>
+        ) : (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                type="button"
+                className="rounded-full sm:rounded-md"
+                aria-label={t("downloadFont")}
+              >
+                <FileType2Icon aria-hidden="true" />
+                <span className="hidden md:block">{t("downloadFont")}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuGroup>
+                {fontDownloads.map((font) => (
+                  <DropdownMenuItem
+                    key={font.labelKey}
+                    onClick={() => downloadFont(font.url)}
+                  >
+                    <FileDownIcon aria-hidden="true" />
+                    {t(font.labelKey)}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
 
         <Button variant="ghost" asChild className="rounded-full sm:rounded-md">
           <a
