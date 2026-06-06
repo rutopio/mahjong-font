@@ -16,6 +16,7 @@
     "saveAsImage": "儲存為圖片",
     "savePng": "儲存為 PNG",
     "saveSvg": "儲存為 SVG",
+    "saveDescription": "選擇下載格式。",
     "close": "關閉",
     "errorOccurred": "發生錯誤",
     "tryAgain": "重試",

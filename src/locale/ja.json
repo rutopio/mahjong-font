@@ -16,6 +16,7 @@
     "saveAsImage": "画像として保存",
     "savePng": "PNG として保存",
     "saveSvg": "SVG として保存",
+    "saveDescription": "ダウンロード形式を選択します。",
     "close": "閉じる",
     "errorOccurred": "エラーが発生しました",
     "tryAgain": "再試行",

@@ -16,8 +16,8 @@ const THEME_INTERNAL_MAP: Record<string, string> = {
   colorful: "color",
 };
 
-const DEFAULT_INPUT = "19m19p19s1234567z_1m";
-const DEFAULT_THEME = "monochrome";
+const DEFAULT_INPUT = "7m7m7m2p3p4p8p8p8p4s5s6s8s_8s";
+const DEFAULT_THEME = "colorful";
 
 const encodeToHash = (
   inputValue: string,
@@ -25,24 +25,22 @@ const encodeToHash = (
   tileColorValue: string
 ) => {
   const urlTheme = THEME_INTERNAL_MAP[themeValue] || "mono";
-  const params = new URLSearchParams({ input: inputValue, theme: urlTheme });
+  const params = new URLSearchParams({ tile: inputValue, theme: urlTheme });
   if (urlTheme === "color") {
-    params.set("tile", tileColorValue.replace("#", ""));
+    params.set("color", tileColorValue.replace("#", ""));
   }
   return params.toString();
 };
 
 const decodeFromHash = (hash: string) => {
   const params = new URLSearchParams(hash);
-  const inputValue = params.get("input");
+  const inputValue = params.get("tile");
   const urlTheme = params.get("theme");
-  const urlTileColor = params.get("tile");
+  const urlTileColor = params.get("color");
   const themeValue = urlTheme ? (THEME_URL_MAP[urlTheme] ?? null) : null;
   const tileColorValue = urlTileColor ? `#${urlTileColor}` : null;
-  const legacyInput =
-    !params.has("input") && hash ? hash.replaceAll(".", " ") : null;
   return {
-    input: inputValue || legacyInput,
+    input: inputValue,
     theme: themeValue,
     tileColor: tileColorValue,
   };

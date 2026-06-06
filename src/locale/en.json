@@ -16,6 +16,7 @@
     "saveAsImage": "Save as Image",
     "savePng": "Save as PNG",
     "saveSvg": "Save as SVG",
+    "saveDescription": "Choose a format to download.",
     "close": "Close",
     "errorOccurred": "An error occurred",
     "tryAgain": "Try again",
