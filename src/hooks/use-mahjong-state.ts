@@ -1,76 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { DEFAULT_TILE_COLOR, optionValues } from "@/lib/constants";
+import { optionValues } from "@/lib/constants";
 import { transformString } from "@/lib/transform-string";
-
-const STORAGE_KEY_INPUT = "japanese-mahjong-font:input";
-const STORAGE_KEY_THEME = "japanese-mahjong-font:theme";
-const STORAGE_KEY_TILE_COLOR = "japanese-mahjong-font:tile-color";
-
-const THEME_URL_MAP: Record<string, string> = {
-  mono: "monochrome",
-  color: "colorful",
-};
-const THEME_INTERNAL_MAP: Record<string, string> = {
-  monochrome: "mono",
-  colorful: "color",
-};
-
-const DEFAULT_INPUT = "7m7m7m2p3p4p8p8p8p4s5s6s8s_8s";
-const DEFAULT_THEME = "colorful";
-
-const encodeToHash = (
-  inputValue: string,
-  themeValue: string,
-  tileColorValue: string
-) => {
-  const urlTheme = THEME_INTERNAL_MAP[themeValue] || "mono";
-  const params = new URLSearchParams({ tile: inputValue, theme: urlTheme });
-  if (urlTheme === "color") {
-    params.set("color", tileColorValue.replace("#", ""));
-  }
-  return params.toString();
-};
-
-const decodeFromHash = (hash: string) => {
-  const params = new URLSearchParams(hash);
-  const inputValue = params.get("tile");
-  const urlTheme = params.get("theme");
-  const urlTileColor = params.get("color");
-  const themeValue = urlTheme ? (THEME_URL_MAP[urlTheme] ?? null) : null;
-  const tileColorValue = urlTileColor ? `#${urlTileColor}` : null;
-  return {
-    input: inputValue,
-    theme: themeValue,
-    tileColor: tileColorValue,
-  };
-};
-
-const saveToStorage = (
-  inputValue: string,
-  themeValue: string,
-  tileColorValue: string
-) => {
-  try {
-    localStorage.setItem(STORAGE_KEY_INPUT, inputValue);
-    localStorage.setItem(STORAGE_KEY_THEME, themeValue);
-    localStorage.setItem(STORAGE_KEY_TILE_COLOR, tileColorValue);
-  } catch {
-    // localStorage not available
-  }
-};
-
-const loadFromStorage = () => {
-  try {
-    return {
-      input: localStorage.getItem(STORAGE_KEY_INPUT),
-      theme: localStorage.getItem(STORAGE_KEY_THEME),
-      tileColor: localStorage.getItem(STORAGE_KEY_TILE_COLOR),
-    };
-  } catch {
-    return { input: null, theme: null, tileColor: null };
-  }
-};
+import { decodeFromQuery, encodeToQuery } from "@/lib/url-state";
 
 const findMatchingOption = (inputValue: string): string => {
   for (const [key, value] of Object.entries(optionValues)) {
@@ -81,39 +13,32 @@ const findMatchingOption = (inputValue: string): string => {
   return "";
 };
 
-const getInitialState = () => {
-  const hash = window.location.hash.slice(1);
-  const fromUrl = decodeFromHash(hash);
-  const fromStorage = loadFromStorage();
-  return {
-    input: fromUrl.input ?? fromStorage.input ?? DEFAULT_INPUT,
-    theme: fromUrl.theme ?? fromStorage.theme ?? DEFAULT_THEME,
-    tileColor: fromUrl.tileColor ?? fromStorage.tileColor ?? DEFAULT_TILE_COLOR,
-  };
-};
+const getInitialState = () => decodeFromQuery(window.location.search);
 
 /**
  * Owns the generator's core state (input, theme, tile color) and keeps it in
- * sync with the URL hash and localStorage. Also derives the matching yaku
- * option for the current input.
+ * sync with the URL query string. Also derives the matching yaku option for the
+ * current input. localStorage is intentionally not used; a URL without params
+ * (or a malformed one) always falls back to the default state.
  */
 export function useMahjongState() {
-  const [input, setInput] = useState(() => getInitialState().input);
+  const initial = getInitialState();
+  const [input, setInput] = useState(initial.input);
   const [selectedOption, setSelectedOption] = useState(() =>
-    findMatchingOption(getInitialState().input)
+    findMatchingOption(initial.input)
   );
-  const [theme, setTheme] = useState(() => getInitialState().theme);
-  const [tileColor, setTileColor] = useState(() => getInitialState().tileColor);
+  const [theme, setTheme] = useState(initial.theme);
+  const [tileColor, setTileColor] = useState(initial.tileColor);
 
-  // Sync URL hash and localStorage on every state change
+  // Keep the query string in sync with state, without adding history entries.
   useEffect(() => {
     if (!input) return;
-    const currentHash = window.location.hash.slice(1);
-    const encodedHash = encodeToHash(input, theme, tileColor);
-    if (currentHash !== encodedHash) {
-      window.location.hash = encodedHash;
+    const encoded = encodeToQuery({ input, theme, tileColor });
+    const current = window.location.search.slice(1);
+    if (current !== encoded) {
+      const url = `${window.location.pathname}?${encoded}${window.location.hash}`;
+      window.history.replaceState(null, "", url);
     }
-    saveToStorage(input, theme, tileColor);
   }, [input, theme, tileColor]);
 
   const handleOptionChange = (value: string) => {

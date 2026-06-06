@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "WebWorker"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": ["@cloudflare/workers-types"],
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "**/*.ts",
+    "../src/lib/render-og-image.ts",
+    "../src/lib/render-tile-svg.ts",
+    "../src/lib/shape-tiles.ts",
+    "../src/lib/tiles-data.ts",
+    "../src/lib/url-state.ts",
+    "../src/lib/constants.ts",
+    "../src/lib/tiles-data.json"
+  ],
+  "exclude": ["node_modules"]
+}

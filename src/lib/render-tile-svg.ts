@@ -37,21 +37,30 @@ interface RenderOptions {
   data: TilesData;
 }
 
+/** Tile content as a positioned <g>, plus its total box size in font units. */
+export interface TilesContent {
+  /** The `<g>` group with all tiles, already flipped to y-down svg space. */
+  inner: string;
+  width: number;
+  height: number;
+}
+
 /**
- * Returns an SVG string laying tiles left-to-right. Font coordinates are y-up,
- * so the whole content is flipped into the SVG y-down space via a transform.
+ * Lays tiles left-to-right and returns the inner `<g>` plus its box size. Font
+ * coordinates are y-up, so the content is flipped into svg y-down space. Shared
+ * by the inline preview and the OG image renderer.
  */
-export function renderTilesSvg({
+export function buildTilesContent({
   text,
   theme,
   tileColor,
   data,
-}: RenderOptions): string {
+}: RenderOptions): TilesContent | null {
   const { palette, ligatures, advances, bounds, colorful, monochrome } = data;
   const isColorful = theme !== "monochrome";
 
   const glyphs = shapeTiles(text, ligatures);
-  if (glyphs.length === 0) return "";
+  if (glyphs.length === 0) return null;
 
   let x = 0;
   const groups: string[] = [];
@@ -86,10 +95,8 @@ export function renderTilesSvg({
     x += advance;
   }
 
-  const contentWidth = maxX - minX;
-  const contentHeight = maxY - minY;
-  const totalWidth = contentWidth + MARGIN * 2;
-  const totalHeight = contentHeight + MARGIN * 2;
+  const width = maxX - minX + MARGIN * 2;
+  const height = maxY - minY + MARGIN * 2;
 
   // Place content at (MARGIN, MARGIN): shift left by minX, and flip y-up font
   // space to y-down svg space anchored at the content's top (maxY).
@@ -97,11 +104,23 @@ export function renderTilesSvg({
     `<g transform="translate(${MARGIN - minX} ${MARGIN + maxY}) scale(1 -1)">` +
     `${groups.join("")}</g>`;
 
+  return { inner, width, height };
+}
+
+/**
+ * Returns a standalone SVG string laying tiles left-to-right, sized to its own
+ * content box.
+ */
+export function renderTilesSvg(options: RenderOptions): string {
+  const content = buildTilesContent(options);
+  if (!content) return "";
+
+  const { inner, width, height } = content;
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" ` +
-    `viewBox="0 0 ${totalWidth} ${totalHeight}" ` +
-    `width="${totalWidth}" height="${totalHeight}">${inner}</svg>`
+    `viewBox="0 0 ${width} ${height}" ` +
+    `width="${width}" height="${height}">${inner}</svg>`
   );
 }
 
-export { DEFAULT_ADVANCE };
+export { DEFAULT_ADVANCE, MARGIN };

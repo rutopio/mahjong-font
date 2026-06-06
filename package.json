@@ -8,9 +8,10 @@
     "build:fonts": "node scripts/build-fonts.mjs",
     "build": "vite build && tsc -p tsconfig.json",
     "preview": "vite preview",
+    "preview:cf": "pnpm build && wrangler pages dev dist",
     "lint": "biome lint .",
     "format": "biome format --write .",
-    "check-types": "tsc --noEmit",
+    "check-types": "tsc --noEmit && tsc -p functions/tsconfig.json",
     "check": "biome check --write . && pnpm check-types",
     "deps": "pnpm dlx taze@latest -Ilw",
     "deps:major": "pnpm dlx taze@latest major -Ilw"
@@ -18,11 +19,13 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
-      "unrs-resolver"
+      "unrs-resolver",
+      "workerd"
     ]
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
+    "@resvg/resvg-wasm": "2.6.2",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "cmdk": "^1.1.1",
@@ -40,6 +43,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
+    "@cloudflare/workers-types": "4.20260606.1",
     "@fontsource-variable/noto-sans-jp": "^5.2.10",
     "@fontsource-variable/noto-sans-sc": "^5.2.10",
     "@fontsource-variable/noto-sans-tc": "^5.2.10",
@@ -54,6 +58,7 @@
     "@vitejs/plugin-react": "6.0.1",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3",
-    "vite": "8.0.8"
+    "vite": "8.0.8",
+    "wrangler": "4.98.0"
   }
 }
