@@ -22,7 +22,7 @@ export function MahjongPreview({
         theme={theme}
         tileColor={tileColor}
         ariaLabel={t("ui.mahjongPreview")}
-        className="[&>svg]:h-auto [&>svg]:max-h-48 [&>svg]:w-full"
+        className="[&>svg]:h-auto [&>svg]:max-h-14 [&>svg]:w-auto [&>svg]:max-w-full lg:[&>svg]:max-h-24"
       />
     </div>
   );

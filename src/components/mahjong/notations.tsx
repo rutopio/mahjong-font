@@ -130,7 +130,7 @@ export function Notations({ theme }: { theme: string }) {
             <TileSvg
               text={transformString(example.notation)}
               theme={theme}
-              className="[&>svg]:h-auto [&>svg]:max-h-16 [&>svg]:w-auto sm:[&>svg]:max-h-28"
+              className="[&>svg]:h-auto [&>svg]:max-h-16 [&>svg]:w-auto [&>svg]:max-w-full sm:[&>svg]:max-h-28"
             />
           </div>
         ))}

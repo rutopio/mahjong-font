@@ -125,11 +125,28 @@ def extract_palette(font):
     return [[c.red, c.green, c.blue] for c in cpal.palettes[0]]
 
 
+# Notation chars that produce horizontal gaps. They map to plain (pathless)
+# cmap glyphs whose advance widths create the spacing, but they are not GSUB
+# ligatures, so the shaper would otherwise skip them. " " is a small gap and
+# "_" a large gap; both must be registered so they advance the layout.
+GAP_CHARS = [" ", "_"]
+
+
+def add_gap_chars(font, ligatures):
+    """Register gap chars as single-char 'ligatures' so the shaper keeps them."""
+    cmap = font.getBestCmap()
+    for ch in GAP_CHARS:
+        glyph = cmap.get(ord(ch))
+        if glyph:
+            ligatures[ch] = glyph
+
+
 def main():
     colorful = TTFont(COLORFUL)
     monochrome = TTFont(MONOCHROME)
 
     ligatures = get_ligatures(colorful)
+    add_gap_chars(colorful, ligatures)
     target_glyphs = sorted(set(ligatures.values()))
 
     head = colorful["head"]
