@@ -1,9 +1,10 @@
 import {
+  CheckIcon,
   DownloadSimpleIcon,
   LinkIcon,
   ShareNetworkIcon,
 } from "@phosphor-icons/react";
-import type { RefObject } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { FacebookIcon } from "@/components/icon/facebook";
@@ -11,116 +12,158 @@ import { ThreadsIcon } from "@/components/icon/threads";
 import { XIcon } from "@/components/icon/x";
 import { Button } from "@/components/ui/button";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useIsMobile } from "@/hooks/use-mobile";
 import {
   copyLink,
   shareToFacebook,
   shareToThreads,
   shareToX,
 } from "@/lib/share-link";
-import { textToImage } from "@/lib/text-to-image";
-
-const shareOptions = [
-  { labelKey: "copyLink", icon: LinkIcon, action: "copy" },
-  { labelKey: "shareOnFacebook", icon: FacebookIcon, action: "facebook" },
-  { labelKey: "shareOnX", icon: XIcon, action: "x" },
-  { labelKey: "shareOnThreads", icon: ThreadsIcon, action: "threads" },
-] as const;
+import { downloadPng, downloadSvg } from "@/lib/tiles-export";
 
 interface ActionButtonsProps {
-  renderedTextRef: RefObject<HTMLDivElement | null>;
+  text: string;
+  theme: string;
+  tileColor: string;
 }
 
-export function ActionButtons({ renderedTextRef }: ActionButtonsProps) {
+const downloadOptions = [
+  { labelKey: "ui.savePng", format: "png" },
+  { labelKey: "ui.saveSvg", format: "svg" },
+] as const;
+
+const gridButtonClass =
+  "h-auto flex-col gap-1.5 py-3 [&_svg:not([class*='size-'])]:size-6";
+
+export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
   const { t } = useTranslation();
-  const isMobile = useIsMobile();
+  const [shareOpen, setShareOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const handleDownload = () => {
-    if (!renderedTextRef.current) return;
-    textToImage(
-      renderedTextRef.current.textContent || "mahjong",
-      renderedTextRef.current
-    );
-  };
-
-  const copyLinkWithToast = () => {
-    copyLink();
-    toast.success(t("share.linkCopied"), {
-      description: window.location.href,
-    });
-  };
-
-  const handleShare = (action: string) => {
-    if (action === "copy") {
-      copyLinkWithToast();
-    } else if (action === "facebook") {
-      shareToFacebook();
-    } else if (action === "x") {
-      shareToX();
-    } else if (action === "threads") {
-      shareToThreads();
-    }
-  };
-
-  const handleNativeShare = async () => {
-    if (!navigator.share) {
-      // Fallback to copy link if Web Share API not supported
-      copyLinkWithToast();
-      return;
-    }
-
+  const handleDownload = async (format: "png" | "svg") => {
+    const filename = text || "mahjong";
+    const opts = { text, theme, tileColor, filename };
     try {
-      await navigator.share({
-        title: t("ui.toolTitle"),
-        text: t("ui.toolTitle"),
-        url: window.location.href,
-      });
-    } catch (err) {
-      // Ignore if user cancelled the share
-      if (err instanceof Error && err.name !== "AbortError") {
-        console.error("Share failed:", err);
+      if (format === "svg") await downloadSvg(opts);
+      else await downloadPng(opts);
+    } catch {
+      toast.error(t("ui.saveAsImage"));
+    }
+  };
+
+  const handleCopy = () => {
+    copyLink();
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  // On touch devices, prefer the native share sheet; otherwise open the dialog.
+  // navigator.share only exists on secure origins, so dev over LAN falls back.
+  const handleShareClick = async () => {
+    const isTouch =
+      typeof window !== "undefined" &&
+      window.matchMedia("(pointer: coarse)").matches;
+
+    if (isTouch && navigator.share) {
+      try {
+        await navigator.share({
+          title: t("ui.toolTitle"),
+          url: window.location.href,
+        });
+        return;
+      } catch (err) {
+        if (err instanceof Error && err.name === "AbortError") return;
       }
     }
+    setShareOpen(true);
   };
 
   return (
     <div className="flex gap-2">
-      <Button onClick={handleDownload}>
-        <DownloadSimpleIcon aria-hidden="true" />
-        {t("ui.saveAsImage")}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button>
+            <DownloadSimpleIcon aria-hidden="true" />
+            {t("ui.saveAsImage")}
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start">
+          {downloadOptions.map((option) => (
+            <DropdownMenuItem
+              key={option.format}
+              onClick={() => handleDownload(option.format)}
+            >
+              <DownloadSimpleIcon aria-hidden="true" />
+              {t(option.labelKey)}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <Button variant="outline" className="bg-white" onClick={handleShareClick}>
+        <ShareNetworkIcon aria-hidden="true" />
+        {t("share.share")}
       </Button>
 
-      {isMobile ? (
-        <Button variant="outline" onClick={handleNativeShare}>
-          <ShareNetworkIcon aria-hidden="true" />
-          {t("share.share")}
-        </Button>
-      ) : (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="bg-white">
-              <ShareNetworkIcon aria-hidden="true" />
-              {t("share.share")}
+      <Dialog open={shareOpen} onOpenChange={setShareOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t("share.shareTitle")}</DialogTitle>
+            <DialogDescription>{t("share.shareDescription")}</DialogDescription>
+          </DialogHeader>
+          <div className="grid grid-cols-4 gap-2">
+            <Button
+              variant="outline"
+              className={gridButtonClass}
+              onClick={shareToFacebook}
+            >
+              <FacebookIcon aria-hidden="true" />
+              <span className="text-xs">Facebook</span>
             </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start">
-            {shareOptions.map((option) => (
-              <DropdownMenuItem
-                key={option.action}
-                onClick={() => handleShare(option.action)}
-              >
-                <option.icon aria-hidden="true" />
-                {t(option.labelKey)}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
+            <Button
+              variant="outline"
+              className={gridButtonClass}
+              onClick={shareToX}
+            >
+              <XIcon aria-hidden="true" />
+              <span className="text-xs">X</span>
+            </Button>
+            <Button
+              variant="outline"
+              className={gridButtonClass}
+              onClick={shareToThreads}
+            >
+              <ThreadsIcon aria-hidden="true" />
+              <span className="text-xs">Threads</span>
+            </Button>
+            <Button
+              variant="outline"
+              className={gridButtonClass}
+              onClick={handleCopy}
+            >
+              {copied ? (
+                <CheckIcon aria-hidden="true" />
+              ) : (
+                <LinkIcon aria-hidden="true" />
+              )}
+              <span className="text-xs">
+                {copied ? t("share.copied") : t("share.copyLink")}
+              </span>
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

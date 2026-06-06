@@ -14,6 +14,8 @@
     "howToUse": "表記法",
     "dice": "サイコロ",
     "saveAsImage": "画像として保存",
+    "savePng": "PNG として保存",
+    "saveSvg": "SVG として保存",
     "close": "閉じる",
     "errorOccurred": "エラーが発生しました",
     "tryAgain": "再試行",
@@ -26,7 +28,10 @@
     "shareOnFacebook": "Facebook でシェア",
     "shareOnX": "X (Twitter) でシェア",
     "shareOnThreads": "Threads でシェア",
-    "linkCopied": "リンクがクリップボードにコピーされました"
+    "linkCopied": "リンクがクリップボードにコピーされました",
+    "shareTitle": "このページをシェア",
+    "shareDescription": "シェア方法を選択するか、リンクをコピーします。",
+    "copied": "コピーしました"
   },
 
   "groups": {

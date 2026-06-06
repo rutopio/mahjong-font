@@ -6,7 +6,12 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!src/components/ui", "!src/routeTree.gen.ts"]
+    "includes": [
+      "**",
+      "!src/components/ui",
+      "!src/routeTree.gen.ts",
+      "!src/lib/tiles-data.json"
+    ]
   },
   "formatter": {
     "enabled": true,

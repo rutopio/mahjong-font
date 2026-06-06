@@ -11,22 +11,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Riichi-Mahjong-Monochrome";
-  src: url("/fonts/Riichi-Mahjong-Monochrome.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-
-@font-face {
-  font-family: "Riichi-Mahjong-Colorful";
-  src: url("/fonts/Riichi-Mahjong-Colorful.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -36,8 +20,6 @@
   --font-mono:
     "Paper Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  --font-riichi-mahjong-monochrome: "Riichi-Mahjong-Monochrome", monospace;
-  --font-riichi-mahjong-colorful: "Riichi-Mahjong-Colorful", monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

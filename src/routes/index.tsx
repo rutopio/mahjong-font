@@ -1,13 +1,12 @@
 import { CircleNotchIcon } from "@phosphor-icons/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ActionButtons } from "@/components/mahjong/action-buttons";
 import { InputSection } from "@/components/mahjong/input-section";
 import { MahjongPreview } from "@/components/mahjong/mahjong-preview";
 import { NotationsModal } from "@/components/mahjong/notations-modal";
-import { useColorPalette } from "@/hooks/use-color-palette";
 import { useMahjongState } from "@/hooks/use-mahjong-state";
 import { transformString } from "@/lib/transform-string";
 
@@ -27,10 +26,9 @@ function Home() {
     setTileColor,
     handleOptionChange,
   } = useMahjongState();
-  const renderedTextRef = useRef<HTMLDivElement>(null);
   const [showNotations, setShowNotations] = useState(false);
 
-  useColorPalette(tileColor);
+  const transformedText = transformString(input);
 
   if (!ready) {
     return (
@@ -67,12 +65,18 @@ function Home() {
       />
 
       <MahjongPreview
-        text={transformString(input)}
+        text={transformedText}
         theme={theme}
-        ref={renderedTextRef}
+        tileColor={tileColor}
       />
 
-      {input && <ActionButtons renderedTextRef={renderedTextRef} />}
+      {input && (
+        <ActionButtons
+          text={transformedText}
+          theme={theme}
+          tileColor={tileColor}
+        />
+      )}
 
       <NotationsModal
         open={showNotations}

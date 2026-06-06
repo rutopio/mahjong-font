@@ -1,4 +1,4 @@
-import { BookmarkSimpleIcon, CaretDownIcon } from "@phosphor-icons/react";
+import { BookmarkSimpleIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -97,7 +97,7 @@ export function YakuSelector({
       role="combobox"
       aria-expanded={open}
       aria-label={t("ui.examples")}
-      className="w-fit min-w-[180px] justify-between border-input bg-white px-3 font-normal hover:bg-white"
+      className="w-fit min-w-[180px] justify-start border-input bg-white px-3 font-normal hover:bg-white"
       onClick={() => isMobile && setOpen(true)}
     >
       <BookmarkSimpleIcon aria-hidden="true" />
@@ -106,10 +106,6 @@ export function YakuSelector({
       >
         {selectedLabel ?? t("ui.examples")}
       </span>
-      <CaretDownIcon
-        aria-hidden="true"
-        className="shrink-0 text-muted-foreground/80"
-      />
     </Button>
   );
 

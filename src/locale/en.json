@@ -14,6 +14,8 @@
     "howToUse": "How to Use",
     "dice": "Dice",
     "saveAsImage": "Save as Image",
+    "savePng": "Save as PNG",
+    "saveSvg": "Save as SVG",
     "close": "Close",
     "errorOccurred": "An error occurred",
     "tryAgain": "Try again",
@@ -26,7 +28,10 @@
     "shareOnFacebook": "Share on Facebook",
     "shareOnX": "Share on X (Twitter)",
     "shareOnThreads": "Share on Threads",
-    "linkCopied": "Link copied to clipboard"
+    "linkCopied": "Link copied to clipboard",
+    "shareTitle": "Share this page",
+    "shareDescription": "Choose how to share, or copy the link.",
+    "copied": "Copied"
   },
 
   "groups": {

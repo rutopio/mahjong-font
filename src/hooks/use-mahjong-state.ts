@@ -35,7 +35,7 @@ const encodeToHash = (
 const decodeFromHash = (hash: string) => {
   const params = new URLSearchParams(hash);
   const inputValue = params.get("input");
-  const urlTheme = params.get("ui.theme");
+  const urlTheme = params.get("theme");
   const urlTileColor = params.get("tile");
   const themeValue = urlTheme ? (THEME_URL_MAP[urlTheme] ?? null) : null;
   const tileColorValue = urlTileColor ? `#${urlTileColor}` : null;

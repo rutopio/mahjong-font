@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 
+import { TileSvg } from "@/components/mahjong/tile-svg";
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -126,16 +127,11 @@ export function Notations({ theme }: { theme: string }) {
               <Badge variant="outline">{example.notation}</Badge>
             </div>
 
-            <div
-              aria-hidden="true"
-              className={`text-4xl sm:text-7xl ${
-                theme === "monochrome"
-                  ? "font-riichi-mahjong-monochrome"
-                  : "font-riichi-mahjong-colorful"
-              }`}
-            >
-              {transformString(example.notation)}
-            </div>
+            <TileSvg
+              text={transformString(example.notation)}
+              theme={theme}
+              className="[&>svg]:h-auto [&>svg]:max-h-16 [&>svg]:w-auto sm:[&>svg]:max-h-28"
+            />
           </div>
         ))}
       </div>

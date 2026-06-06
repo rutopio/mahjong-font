@@ -14,6 +14,8 @@
     "howToUse": "表記方法",
     "dice": "骰子",
     "saveAsImage": "儲存為圖片",
+    "savePng": "儲存為 PNG",
+    "saveSvg": "儲存為 SVG",
     "close": "關閉",
     "errorOccurred": "發生錯誤",
     "tryAgain": "重試",
@@ -26,7 +28,10 @@
     "shareOnFacebook": "分享到 Facebook",
     "shareOnX": "分享到 X (Twitter)",
     "shareOnThreads": "分享到 Threads",
-    "linkCopied": "連結已複製到剪貼簿"
+    "linkCopied": "連結已複製到剪貼簿",
+    "shareTitle": "分享這個頁面",
+    "shareDescription": "選擇分享方式，或複製連結。",
+    "copied": "已複製"
   },
 
   "groups": {

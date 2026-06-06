@@ -1,113 +1,29 @@
-import type { Ref } from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { TileSvg } from "@/components/mahjong/tile-svg";
 
 interface MahjongPreviewProps {
   text: string;
   theme: string;
-  ref?: Ref<HTMLDivElement>;
+  tileColor: string;
 }
 
-const MIN_FONT_SIZE = 16;
-const MAX_FONT_SIZE = 120;
-const BASE_FONT_SIZE = 100;
-
-export function MahjongPreview({ text, theme, ref }: MahjongPreviewProps) {
+export function MahjongPreview({
+  text,
+  theme,
+  tileColor,
+}: MahjongPreviewProps) {
   const { t } = useTranslation();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const measureRef = useRef<HTMLSpanElement>(null);
-  const [fontSize, setFontSize] = useState(BASE_FONT_SIZE);
-
-  const isColorful = theme === "colorful";
-  const fontClass =
-    theme === "monochrome"
-      ? "font-riichi-mahjong-monochrome"
-      : "font-riichi-mahjong-colorful";
-
-  const calculateFontSize = useCallback(() => {
-    const container = containerRef.current;
-    const measure = measureRef.current;
-    if (!container || !measure || !text) return;
-
-    // Batch layout reads together. The measure span renders at BASE_FONT_SIZE
-    // (set declaratively in JSX), so no style write is needed here, avoiding a
-    // write -> read reflow during measurement.
-    const containerWidth = container.clientWidth * 0.95;
-    const textWidth = measure.scrollWidth;
-
-    if (textWidth === 0) return;
-
-    // Calculate the scale factor
-    const scale = containerWidth / textWidth;
-    const newFontSize = Math.floor(BASE_FONT_SIZE * scale);
-
-    // Clamp between min and max
-    setFontSize(Math.max(MIN_FONT_SIZE, Math.min(MAX_FONT_SIZE, newFontSize)));
-  }, [text]);
-
-  useEffect(() => {
-    // Wait for fonts to load before calculating font size.
-    // On initial load, the Riichi-Mahjong font may not be ready yet,
-    // causing measurements to use fallback font widths (monospace),
-    // which are much wider due to missing OpenType ligatures.
-    document.fonts.ready.then(() => {
-      calculateFontSize();
-    });
-
-    const container = containerRef.current;
-    if (!container) return;
-
-    const resizeObserver = new ResizeObserver(() => {
-      calculateFontSize();
-    });
-
-    resizeObserver.observe(container);
-
-    // Recalculate when any font finishes loading (handles late-loading fonts)
-    const onFontLoad = () => calculateFontSize();
-    document.fonts.addEventListener("loadingdone", onFontLoad);
-
-    return () => {
-      resizeObserver.disconnect();
-      document.fonts.removeEventListener("loadingdone", onFontLoad);
-    };
-  }, [calculateFontSize]);
-
-  // Fixed height based on max font size with line-height (1.625 for leading-loose)
-  const fixedHeight = Math.ceil(MAX_FONT_SIZE * 1.625);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative mx-auto flex w-full items-center justify-center overflow-hidden"
-      style={{ height: `${fixedHeight}px` }}
-    >
-      {/* Hidden element for measuring text width */}
-      <span
-        ref={measureRef}
-        className={`invisible absolute whitespace-nowrap ${fontClass}`}
-        style={{
-          fontSize: `${BASE_FONT_SIZE}px`,
-          ...(isColorful ? { fontPalette: "--custom-palette" } : {}),
-        }}
-        aria-hidden="true"
-      >
-        {text}
-      </span>
-
-      {/* Visible preview */}
-      <div
-        role="img"
-        aria-label={t("ui.mahjongPreview")}
-        className={`whitespace-nowrap text-center leading-loose ${fontClass}`}
-        style={{
-          fontSize: `${fontSize}px`,
-          ...(isColorful ? { fontPalette: "--custom-palette" } : {}),
-        }}
-        ref={ref}
-      >
-        {text}
-      </div>
+    <div className="relative mx-auto flex w-full items-center justify-center overflow-hidden">
+      <TileSvg
+        text={text}
+        theme={theme}
+        tileColor={tileColor}
+        ariaLabel={t("ui.mahjongPreview")}
+        className="[&>svg]:h-auto [&>svg]:max-h-48 [&>svg]:w-full"
+      />
     </div>
   );
 }
