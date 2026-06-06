@@ -1,7 +1,6 @@
 import "@fontsource/lato/300.css";
 import "@fontsource/lato/400.css";
 import "@fontsource/lato/700.css";
-import "@fontsource-variable/geist-mono";
 import "@fontsource-variable/noto-sans-jp";
 import "@fontsource-variable/noto-sans-tc";
 import "@fontsource-variable/noto-sans-sc";

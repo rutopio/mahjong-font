@@ -3,77 +3,77 @@ import { useTranslation } from "react-i18next";
 import Notations from "@/components/sections/notations";
 import { Button } from "@/components/ui/button";
 import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
 } from "@/components/ui/drawer";
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
 } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface NotationsModalProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  theme: string;
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+    theme: string;
 }
 
 export function NotationsModal({
-  open,
-  onOpenChange,
-  theme,
+    open,
+    onOpenChange,
+    theme,
 }: NotationsModalProps) {
-  const { t } = useTranslation();
-  const isMobile = useIsMobile();
+    const { t } = useTranslation();
+    const isMobile = useIsMobile();
 
-  if (isMobile) {
+    if (isMobile) {
+        return (
+            <Drawer open={open} onOpenChange={onOpenChange}>
+                <DrawerContent>
+                    <DrawerHeader>
+                        <DrawerTitle>
+                            {t("howToUse")}
+                        </DrawerTitle>
+                        <DrawerDescription className="sr-only">
+                            {t("howToUse")}
+                        </DrawerDescription>
+                    </DrawerHeader>
+                    <div className="overflow-auto p-2">
+                        <Notations theme={theme} />
+                    </div>
+                    <DrawerFooter>
+                        <DrawerClose asChild>
+                            <Button variant="outline">{t("close")}</Button>
+                        </DrawerClose>
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer>
+        );
+    }
+
     return (
-      <Drawer open={open} onOpenChange={onOpenChange}>
-        <DrawerContent>
-          <DrawerHeader>
-            <DrawerTitle className="text-center text-xl font-bold text-balance">
-              {t("howToUse")}
-            </DrawerTitle>
-            <DrawerDescription className="sr-only">
-              {t("howToUse")}
-            </DrawerDescription>
-          </DrawerHeader>
-          <div className="overflow-auto p-4">
-            <Notations theme={theme} />
-          </div>
-          <DrawerFooter>
-            <DrawerClose asChild>
-              <Button variant="outline">{t("close")}</Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+        <Sheet open={open} onOpenChange={onOpenChange}>
+            <SheetContent className="w-full gap-0 sm:max-w-[50%] sm:min-w-[600px]">
+                <SheetHeader>
+                    <SheetTitle>
+                        {t("howToUse")}
+                    </SheetTitle>
+                    <SheetDescription className="sr-only">
+                        {t("howToUse")}
+                    </SheetDescription>
+                </SheetHeader>
+                <div className="overflow-auto p-4">
+                    <Notations theme={theme} />
+                </div>
+            </SheetContent>
+        </Sheet>
     );
-  }
-
-  return (
-    <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full gap-0 sm:max-w-[50%] sm:min-w-[600px]">
-        <SheetHeader>
-          <SheetTitle className="text-center text-2xl font-bold text-balance">
-            {t("howToUse")}
-          </SheetTitle>
-          <SheetDescription className="sr-only">
-            {t("howToUse")}
-          </SheetDescription>
-        </SheetHeader>
-        <div className="overflow-auto p-4">
-          <Notations theme={theme} />
-        </div>
-      </SheetContent>
-    </Sheet>
-  );
 }
