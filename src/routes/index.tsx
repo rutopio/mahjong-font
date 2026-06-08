@@ -70,13 +70,15 @@ function Home() {
         tileColor={tileColor}
       />
 
-      {input && (
+      {/* Always render to reserve layout space so the centered column does not
+          shift when the buttons appear; hide it until there is input. */}
+      <div className={input ? undefined : "invisible"} aria-hidden={!input}>
         <ActionButtons
           text={transformedText}
           theme={theme}
           tileColor={tileColor}
         />
-      )}
+      </div>
 
       <NotationsModal
         open={showNotations}

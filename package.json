@@ -12,7 +12,7 @@
     "lint": "biome lint .",
     "format": "biome format --write .",
     "check-types": "tsc --noEmit && tsc -p functions/tsconfig.json",
-    "check": "biome check --write . && pnpm check-types",
+    "check": "biome check --write . && pnpm lint && pnpm check-types",
     "deps": "pnpm dlx taze@latest -Ilw",
     "deps:major": "pnpm dlx taze@latest major -Ilw"
   },

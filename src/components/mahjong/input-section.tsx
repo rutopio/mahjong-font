@@ -41,8 +41,8 @@ export function InputSection({
         onChange={(e) => onInputChange(e.target.value)}
       />
 
-      <div className="flex w-full flex-col gap-4 md:flex-row md:justify-between">
-        <div className="flex flex-col items-center gap-4 md:flex-row">
+      <div className="flex w-full flex-col gap-4 lg:flex-row lg:justify-between">
+        <div className="flex flex-col items-center gap-4 lg:flex-row">
           <YakuSelector
             selectedOption={selectedOption}
             onOptionChange={onOptionChange}
@@ -55,7 +55,7 @@ export function InputSection({
           />
         </div>
 
-        <div className="mx-auto flex items-center gap-2 md:mx-0">
+        <div className="mx-auto flex items-center gap-2 lg:mx-0">
           <NotationsButton onClick={onShowNotations} />
         </div>
       </div>

@@ -63,7 +63,7 @@ export function Navbar() {
 
   return (
     <nav
-      className="container h-fit w-full bg-background p-4 md:p-12"
+      className="container h-fit w-full bg-background p-4 lg:p-12"
       aria-label="Main navigation"
     >
       <div className="flex h-full w-full items-center justify-between gap-0 sm:gap-4">
@@ -78,7 +78,7 @@ export function Navbar() {
           <NavigationMenu viewport={false}>
             <NavigationMenuList>
               {/* Home is desktop-only; the logo already links home on mobile. */}
-              <NavigationMenuItem className="hidden md:flex">
+              <NavigationMenuItem className="hidden lg:flex">
                 <NavigationMenuLink asChild className={navLinkClass}>
                   <Link
                     to="/"
@@ -164,7 +164,7 @@ export function Navbar() {
                   aria-label={t("ui.language")}
                 >
                   <TranslateIcon aria-hidden="true" />
-                  <span className="hidden md:block">{t("ui.language")}</span>
+                  <span className="hidden lg:block">{t("ui.language")}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -240,7 +240,7 @@ export function Navbar() {
                   aria-label={t("ui.downloadFont")}
                 >
                   <FileArrowDownIcon aria-hidden="true" />
-                  <span className="hidden md:block">
+                  <span className="hidden lg:block">
                     {t("ui.downloadFont")}
                   </span>
                 </Button>
@@ -276,8 +276,8 @@ export function Navbar() {
               <GithubIcon />
               <span className="flex items-center gap-0">
                 <span>rutopio</span>
-                <span className="hidden md:block">{" / "}</span>
-                <span className="hidden md:block">
+                <span className="hidden lg:block">{" / "}</span>
+                <span className="hidden lg:block">
                   Japanese-Mahjong-Font-with-OpenType
                 </span>
               </span>

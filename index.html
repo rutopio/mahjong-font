@@ -82,7 +82,8 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-      gtag("config", "G-8GTTB3S2GB");
+      // page_view is sent manually on each route resolve (see src/main.tsx).
+      gtag("config", "G-8GTTB3S2GB", { send_page_view: false });
     </script>
   </head>
   <body>

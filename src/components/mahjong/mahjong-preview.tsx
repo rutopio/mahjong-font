@@ -16,7 +16,7 @@ export function MahjongPreview({
   const { t } = useTranslation();
 
   return (
-    <div className="relative mx-auto flex w-full items-center justify-center overflow-hidden">
+    <div className="relative mx-auto flex min-h-14 w-full items-center justify-center overflow-hidden lg:min-h-24">
       <TileSvg
         text={text}
         theme={theme}
