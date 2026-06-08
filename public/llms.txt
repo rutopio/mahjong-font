@@ -1,0 +1,96 @@
+# Japanese Mahjong Font with OpenType
+
+> A web playground and font for rendering Japanese (Riichi) Mahjong tile
+> diagrams. Tiles are written as a short notation string (e.g. `123m456p11z`)
+> and rendered as scalable color or monochrome SVG. The site also exposes an
+> Image API that turns any notation string into an embeddable SVG image,
+> shields.io-style.
+
+Site: https://mahjongfont.pages.dev
+Source: https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType
+License: SIL Open Font License 1.1
+
+## Tile notation
+
+A tile string is a concatenation of tile tokens with no separators.
+
+- Man (manzu): `1m`–`9m`
+- Pin (pinzu): `1p`–`9p`
+- Sou (souzu): `1s`–`9s`
+- Zi (honor tiles): `1z`–`9z`. Order is winds then dragons:
+  `1z` East, `2z` South, `3z` West, `4z` North, `5z` White, `6z` Green, `7z` Red.
+- Dice: `1.`–`6.`
+- Red five (aka-dora): append `*`, e.g. `5m*`, `5p*`, `5s*`.
+- Called meld / open tile (fuuro): append `-`, e.g. `3m3m3m-` (pon),
+  `4s5s-6s` (chi), `6m6m6m-6m` (daiminkan).
+- Added kan (ka-kan): append `=`, e.g. `3m3m3m-3m=`.
+- Closed kan (an-kan): use `0m`, `0p`, `0s`, `0z` for the face-down tiles.
+- Gap / spacing: `_` inserts a gap, e.g. `123m456p_5z`.
+
+Example string: `7m7m7m2p3p4p8p8p8p4s5s6s8s_8s`
+
+## Image API
+
+Put a tile notation string in the URL path to get an inline SVG image you can
+embed anywhere (Markdown, HTML, GitHub READMEs, chat). The response is a vector
+SVG, so it can be resized freely. Output is a pure function of the URL and is
+cached aggressively at the edge.
+
+### Endpoint
+
+```
+GET https://mahjongfont.pages.dev/img/<tile>?theme=<color|mono>&color=<hex>
+```
+
+Returns: `Content-Type: image/svg+xml`. Rendered at a fixed height of 500px;
+width scales proportionally. Returns HTTP 400 with `No tiles to render` when
+the tile string produces no tiles.
+
+### Parameters
+
+| Parameter | Location | Type             | Default  | Notes                                                        |
+| --------- | -------- | ---------------- | -------- | ------------------------------------------------------------ |
+| `tile`    | path     | string           | required | Tile notation string (see above). Use `_` for a gap.         |
+| `theme`   | query    | `color` \| `mono`| `color`  | `color` for colorful tiles, `mono` for monochrome.           |
+| `color`   | query    | string (hex)     | `AA7942` | Main tile color, six-digit hex without `#`. Only when `theme=color`. |
+
+Omitted parameters fall back to their defaults.
+
+### Examples
+
+- Default colors:
+  `https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s`
+- Custom color (green):
+  `https://mahjongfont.pages.dev/img/1m2m3m4p5p6p7s8s9s?theme=color&color=2D7D46`
+- Monochrome:
+  `https://mahjongfont.pages.dev/img/1z2z3z4z5z6z7z?theme=mono`
+
+### Embedding
+
+Markdown:
+
+```md
+![](https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
+```
+
+HTML:
+
+```html
+<img src="https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s" />
+```
+
+### Tip
+
+Any share URL from the playground can be turned into an image by swapping the
+`?tile=` query for the `/img/` path:
+
+```
+https://mahjongfont.pages.dev/?tile=123m456p_5z&theme=color&color=AA7942
+https://mahjongfont.pages.dev/img/123m456p_5z?theme=color&color=AA7942
+```
+
+## Pages
+
+- [Playground](https://mahjongfont.pages.dev/): Interactive tile editor.
+- [Image API docs](https://mahjongfont.pages.dev/img): Live examples and the parameter reference.
+- [Font releases](https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType/releases): Download the OpenType/woff2 fonts.

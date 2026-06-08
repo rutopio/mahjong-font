@@ -156,6 +156,15 @@ It is a vector, so you can resize it freely when embedding.
 Tip: take any share URL from the app and swap `?tile=` for the `/img/` path.
 Full docs and live examples: https://mahjongfont.pages.dev/img
 
+## Site Files
+
+Static files served from `public/` for crawlers and agents:
+
+- [`robots.txt`](public/robots.txt) — allows all crawlers, points to the sitemap.
+- [`sitemap.xml`](public/sitemap.xml) — lists the indexable pages (`/` and `/img`).
+- [`llms.txt`](public/llms.txt) — project and Image API overview for LLMs,
+  following the [llms.txt](https://llmstxt.org/) convention.
+
 ## Font Download
 
 See [Releases](https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType/releases).

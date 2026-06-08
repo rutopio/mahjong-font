@@ -1,7 +1,8 @@
+import { useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ColorPickerPopover } from "@/components/mahjong/color-picker-popover";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { themeOptions } from "@/lib/constants";
 
 interface ThemeSelectorProps {
@@ -18,19 +19,36 @@ export function ThemeSelector({
   onColorChange,
 }: ThemeSelectorProps) {
   const { t } = useTranslation();
+  const id = useId();
   const isColorful = theme === "colorful";
 
   return (
     <div className="flex items-center gap-2">
-      <Tabs value={theme} onValueChange={onThemeChange}>
-        <TabsList aria-label={t("ui.theme")}>
+      <div className="inline-flex h-9 rounded-lg bg-muted p-[3px]">
+        <RadioGroup
+          aria-label={t("ui.theme")}
+          className="group relative inline-grid grid-cols-2 items-center gap-0 font-medium text-sm after:absolute after:inset-y-0 after:w-1/2 after:rounded-md after:bg-background after:shadow-sm after:transition-[translate] after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] has-focus-visible:after:ring-[3px] has-focus-visible:after:ring-ring/50 data-[state=colorful]:after:translate-x-full"
+          data-state={theme}
+          onValueChange={onThemeChange}
+          value={theme}
+        >
           {themeOptions.map((option) => (
-            <TabsTrigger key={option.value} value={option.value}>
+            <label
+              key={option.value}
+              htmlFor={`${id}-${option.value}`}
+              className="relative z-10 inline-flex h-full cursor-pointer select-none items-center justify-center whitespace-nowrap px-3 text-foreground/60 transition-colors data-active:text-foreground"
+              data-active={theme === option.value ? "" : undefined}
+            >
               {t(option.labelKey)}
-            </TabsTrigger>
+              <RadioGroupItem
+                className="sr-only"
+                id={`${id}-${option.value}`}
+                value={option.value}
+              />
+            </label>
           ))}
-        </TabsList>
-      </Tabs>
+        </RadioGroup>
+      </div>
       {isColorful && (
         <ColorPickerPopover color={tileColor} onColorChange={onColorChange} />
       )}

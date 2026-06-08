@@ -6,6 +6,7 @@ import "@/styles/globals.css";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { ScreenSize } from "@/components/layout/screen-size";
 import { I18nProvider } from "@/provider/i18n-provider";
 import { RootError } from "@/routes/-root-error";
 import { RootNotFound } from "@/routes/-root-not-found";
@@ -35,6 +36,7 @@ function RootComponent() {
         <Footer />
       </div>
       <Toaster expand={false} closeButton position="top-center" />
+      <ScreenSize />
       <Suspense>
         <TanStackRouterDevtools />
       </Suspense>
