@@ -2,7 +2,7 @@
   "name": "japanese-mahjong-font-with-openType",
   "version": "3.0.0",
   "private": true,
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.13.1",
   "scripts": {
     "dev": "vite --host",
     "build:fonts": "node scripts/build-fonts.mjs",
