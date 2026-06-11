@@ -1,13 +1,13 @@
 import {
   CheckIcon,
   FileArrowDownIcon,
+  GithubLogoIcon,
   TranslateIcon,
 } from "@phosphor-icons/react";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { GithubIcon } from "@/components/icon/github";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -153,9 +153,11 @@ export function Navbar() {
                     ))}
                   </div>
                   <DrawerFooter>
-                    <DrawerClose asChild>
-                      <Button variant="outline">{t("ui.close")}</Button>
-                    </DrawerClose>
+                    <DrawerClose
+                      render={
+                        <Button variant="outline">{t("ui.close")}</Button>
+                      }
+                    />
                   </DrawerFooter>
                 </DrawerContent>
               </Drawer>
@@ -231,9 +233,11 @@ export function Navbar() {
                     ))}
                   </div>
                   <DrawerFooter>
-                    <DrawerClose asChild>
-                      <Button variant="outline">{t("ui.close")}</Button>
-                    </DrawerClose>
+                    <DrawerClose
+                      render={
+                        <Button variant="outline">{t("ui.close")}</Button>
+                      }
+                    />
                   </DrawerFooter>
                 </DrawerContent>
               </Drawer>
@@ -283,7 +287,7 @@ export function Navbar() {
                 rel="noopener noreferrer"
                 aria-label="GitHub repository, opens in new tab"
               >
-                <GithubIcon />
+                <GithubLogoIcon />
                 <span className="flex items-center gap-0">
                   <span>rutopio</span>
                   <span className="hidden lg:block">{" / "}</span>

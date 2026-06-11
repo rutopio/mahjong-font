@@ -2,15 +2,15 @@ import {
   ArrowSquareOutIcon,
   CheckIcon,
   DownloadSimpleIcon,
+  FacebookLogoIcon,
   LinkIcon,
   ShareNetworkIcon,
+  ThreadsLogoIcon,
+  XLogoIcon,
 } from "@phosphor-icons/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import { FacebookIcon } from "@/components/icon/facebook";
-import { ThreadsIcon } from "@/components/icon/threads";
-import { XIcon } from "@/components/icon/x";
 import { TileSvg } from "@/components/mahjong/tile-svg";
 import { Button } from "@/components/ui/button";
 import {
@@ -185,7 +185,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               className={gridButtonClass}
               onClick={shareToFacebook}
             >
-              <FacebookIcon aria-hidden="true" />
+              <FacebookLogoIcon aria-hidden="true" />
               <span className="text-xs">Facebook</span>
             </Button>
             <Button
@@ -193,7 +193,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               className={gridButtonClass}
               onClick={shareToX}
             >
-              <XIcon aria-hidden="true" />
+              <XLogoIcon aria-hidden="true" />
               <span className="text-xs">X</span>
             </Button>
             <Button
@@ -201,7 +201,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               className={gridButtonClass}
               onClick={shareToThreads}
             >
-              <ThreadsIcon aria-hidden="true" />
+              <ThreadsLogoIcon aria-hidden="true" />
               <span className="text-xs">Threads</span>
             </Button>
             <Button

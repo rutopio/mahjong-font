@@ -28,9 +28,9 @@ const outCss = join(root, "src", "styles", "fonts.css");
 // - cssFiles: explicit list; for static families this selects the weights.
 const packages = [
   {
-    scope: "@fontsource",
-    name: "lato",
-    cssFiles: ["300.css", "400.css", "700.css"],
+    scope: "@fontsource-variable",
+    name: "albert-sans",
+    cssFiles: ["index.css"],
   },
   {
     scope: "@fontsource-variable",

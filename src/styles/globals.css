@@ -16,7 +16,7 @@
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans:
-    "Lato", "Noto Sans JP", "Noto Sans TC", "Noto Sans SC", sans-serif;
+    "Albert Sans", "Noto Sans JP", "Noto Sans TC", "Noto Sans SC", sans-serif;
   --font-mono:
     "Paper Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;

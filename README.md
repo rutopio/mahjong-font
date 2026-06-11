@@ -12,7 +12,7 @@
 ![Tanstack](https://img.shields.io/badge/Tanstack-1.168.22-black?style=flat-square&logo=tanstack)
 
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.18-38bdf8?style=flat-square&logo=tailwind-css)
-![ShadCN](https://img.shields.io/badge/shadcn%2Fui-2.4.0-000000?style=flat-square&logo=shadcnui&logoColor=white)
+![ShadCN](https://img.shields.io/badge/shadcn%2Fui-4.10.0-000000?style=flat-square&logo=shadcnui&logoColor=white)
 
 Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflarepages&logoColor=fff&style=flat-square)
 

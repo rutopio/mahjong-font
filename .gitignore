@@ -137,3 +137,4 @@ src/routeTree.gen.ts
 .tanstack
 
 **/*.DS_Store
+/tasks

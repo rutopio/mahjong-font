@@ -48,9 +48,9 @@ export function NotationsModal({
             <Notations theme={theme} />
           </div>
           <DrawerFooter>
-            <DrawerClose asChild>
-              <Button variant="outline">{t("ui.close")}</Button>
-            </DrawerClose>
+            <DrawerClose
+              render={<Button variant="outline">{t("ui.close")}</Button>}
+            />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
