@@ -145,7 +145,7 @@ export function YakuSelector({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{triggerButton}</DialogTrigger>
+      <DialogTrigger render={triggerButton} />
       <DialogContent className="gap-0 p-0">
         <DialogHeader className="px-4 pt-4">
           <DialogTitle>{t("ui.examples")}</DialogTitle>

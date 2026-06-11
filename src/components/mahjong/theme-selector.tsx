@@ -29,7 +29,7 @@ export function ThemeSelector({
           aria-label={t("ui.theme")}
           className="group relative inline-grid grid-cols-2 items-center gap-0 font-medium text-sm after:absolute after:inset-y-0 after:w-1/2 after:rounded-md after:bg-background after:shadow-sm after:transition-[translate] after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] has-focus-visible:after:ring-[3px] has-focus-visible:after:ring-ring/50 data-[state=colorful]:after:translate-x-full"
           data-state={theme}
-          onValueChange={onThemeChange}
+          onValueChange={(value) => onThemeChange(value as string)}
           value={theme}
         >
           {themeOptions.map((option) => (

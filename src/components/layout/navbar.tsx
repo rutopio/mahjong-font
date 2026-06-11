@@ -79,31 +79,37 @@ export function Navbar() {
             <NavigationMenuList>
               {/* Home is desktop-only; the logo already links home on mobile. */}
               <NavigationMenuItem className="hidden lg:flex">
-                <NavigationMenuLink asChild className={navLinkClass}>
-                  <Link
-                    to="/"
-                    activeOptions={{ exact: true, includeSearch: false }}
-                    activeProps={{
-                      className: "bg-accent",
-                      "aria-current": "page" as const,
-                    }}
-                  >
-                    {t("ui.navHome")}
-                  </Link>
-                </NavigationMenuLink>
+                <NavigationMenuLink
+                  className={navLinkClass}
+                  render={
+                    <Link
+                      to="/"
+                      activeOptions={{ exact: true, includeSearch: false }}
+                      activeProps={{
+                        className: "bg-accent",
+                        "aria-current": "page" as const,
+                      }}
+                    >
+                      {t("ui.navHome")}
+                    </Link>
+                  }
+                />
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink asChild className={navLinkClass}>
-                  <Link
-                    to="/img"
-                    activeProps={{
-                      className: "bg-accent",
-                      "aria-current": "page" as const,
-                    }}
-                  >
-                    {t("ui.navImageApi")}
-                  </Link>
-                </NavigationMenuLink>
+                <NavigationMenuLink
+                  className={navLinkClass}
+                  render={
+                    <Link
+                      to="/img"
+                      activeProps={{
+                        className: "bg-accent",
+                        "aria-current": "page" as const,
+                      }}
+                    >
+                      {t("ui.navImageApi")}
+                    </Link>
+                  }
+                />
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
@@ -156,17 +162,19 @@ export function Navbar() {
             </>
           ) : (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  type="button"
-                  className="rounded-full sm:rounded-md"
-                  aria-label={t("ui.language")}
-                >
-                  <TranslateIcon aria-hidden="true" />
-                  <span className="hidden lg:block">{t("ui.language")}</span>
-                </Button>
-              </DropdownMenuTrigger>
+              <DropdownMenuTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    className="rounded-full sm:rounded-md"
+                    aria-label={t("ui.language")}
+                  >
+                    <TranslateIcon aria-hidden="true" />
+                    <span className="hidden lg:block">{t("ui.language")}</span>
+                  </Button>
+                }
+              />
               <DropdownMenuContent align="end">
                 <DropdownMenuGroup>
                   <DropdownMenuRadioGroup
@@ -232,19 +240,21 @@ export function Navbar() {
             </>
           ) : (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  type="button"
-                  className="rounded-full sm:rounded-md"
-                  aria-label={t("ui.downloadFont")}
-                >
-                  <FileArrowDownIcon aria-hidden="true" />
-                  <span className="hidden lg:block">
-                    {t("ui.downloadFont")}
-                  </span>
-                </Button>
-              </DropdownMenuTrigger>
+              <DropdownMenuTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    className="rounded-full sm:rounded-md"
+                    aria-label={t("ui.downloadFont")}
+                  >
+                    <FileArrowDownIcon aria-hidden="true" />
+                    <span className="hidden lg:block">
+                      {t("ui.downloadFont")}
+                    </span>
+                  </Button>
+                }
+              />
               <DropdownMenuContent align="end">
                 <DropdownMenuGroup>
                   {fontDownloads.map((font) => (
@@ -264,25 +274,26 @@ export function Navbar() {
 
           <Button
             variant="ghost"
-            asChild
+            nativeButton={false}
             className="rounded-full sm:rounded-md"
-          >
-            <a
-              href={GITHUB_REPO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub repository, opens in new tab"
-            >
-              <GithubIcon />
-              <span className="flex items-center gap-0">
-                <span>rutopio</span>
-                <span className="hidden lg:block">{" / "}</span>
-                <span className="hidden lg:block">
-                  Japanese-Mahjong-Font-with-OpenType
+            render={
+              <a
+                href={GITHUB_REPO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub repository, opens in new tab"
+              >
+                <GithubIcon />
+                <span className="flex items-center gap-0">
+                  <span>rutopio</span>
+                  <span className="hidden lg:block">{" / "}</span>
+                  <span className="hidden lg:block">
+                    Japanese-Mahjong-Font-with-OpenType
+                  </span>
                 </span>
-              </span>
-            </a>
-          </Button>
+              </a>
+            }
+          />
         </div>
       </div>
     </nav>
