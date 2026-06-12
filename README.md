@@ -140,28 +140,33 @@ anywhere, shields.io-style. Missing parameters fall back to defaults.
 https://mahjongfont.pages.dev/img/<tile>?theme=color&color=AA7942
 ```
 
-| Parameter | Location | Type           | Default  | Description                                                          |
-| --------- | -------- | -------------- | -------- | ------------------------------------------------------------------- |
-| `tile`    | path     | `string`       | required | Tile string (same [notation](#Notation)). `_` for a gap, e.g. `123m456p_5z`. |
-| `theme`   | query    | `color \| mono`| `color`  | `color` for colorful tiles, `mono` for monochrome.                  |
-| `color`   | query    | `string` (hex) | `AA7942` | Main tile color, six-digit hex without `#`. Only when `theme=color`. |
+| Parameter | Location | Type            | Default  | Description                                                                  |
+| --------- | -------- | --------------- | -------- | ---------------------------------------------------------------------------- |
+| `tile`    | path     | `string`        | required | Tile string (same [notation](#Notation)). `_` for a gap, e.g. `123m456p_5z`. |
+| `theme`   | query    | `color \| mono` | `color`  | `color` for colorful tiles, `mono` for monochrome.                           |
+| `color`   | query    | `string` (hex)  | `AA7942` | Main tile color, six-digit hex without `#`. Only when `theme=color`.         |
 
 The SVG is rendered at a fixed height of 500px; width scales proportionally.
-It is a vector, so you can resize it freely when embedding.
+
+It is a vector, so you can resize it freely when embedding. For example:
 
 ```md
 ![](https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
 ```
 
+![](https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
+
+
+
 Tip: take any share URL from the app and swap `?tile=` for the `/img/` path.
-Full docs and live examples: https://mahjongfont.pages.dev/img
+Full docs and live examples: https://mahjongfont.pages.dev/api
 
 ## Site Files
 
 Static files served from `public/` for crawlers and agents:
 
 - [`robots.txt`](public/robots.txt) — allows all crawlers, points to the sitemap.
-- [`sitemap.xml`](public/sitemap.xml) — lists the indexable pages (`/` and `/img`).
+- [`sitemap.xml`](public/sitemap.xml) — lists the page routes across all locales, with hreflang alternates.
 - [`llms.txt`](public/llms.txt) — project and Image API overview for LLMs,
   following the [llms.txt](https://llmstxt.org/) convention.
 

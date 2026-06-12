@@ -92,5 +92,5 @@ https://mahjongfont.pages.dev/img/123m456p_5z?theme=color&color=AA7942
 ## Pages
 
 - [Playground](https://mahjongfont.pages.dev/): Interactive tile editor.
-- [Image API docs](https://mahjongfont.pages.dev/img): Live examples and the parameter reference.
+- [Image API docs](https://mahjongfont.pages.dev/api): Live examples and the parameter reference.
 - [Font releases](https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType/releases): Download the OpenType/woff2 fonts.

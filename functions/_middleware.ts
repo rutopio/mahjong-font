@@ -1,14 +1,19 @@
 /**
- * Cloudflare Pages middleware: rewrite the static OG/Twitter image meta tags to
- * point at the on-demand /og image for the current share URL. Crawlers don't
- * run JS, so the per-share preview must be injected into the served HTML here.
+ * Cloudflare Pages middleware: inject per-route SEO metadata into the served
+ * HTML. The app is a single index.html shell whose static head only describes
+ * the ja home page, and crawlers don't run JS, so the correct title /
+ * description / canonical / locale / OG tags and hreflang alternates for each
+ * route (and language) must be written here.
  *
- * Only HTML document responses for the app shell are rewritten; the /og
- * function and static assets pass through untouched.
+ * On top of that, the OG/Twitter image is swapped for the on-demand /og image
+ * of the current share URL (the home page shares the rendered tile).
+ *
+ * Only the HTML app shell is rewritten; /og and static assets pass through.
  */
 
 import { OG_HEIGHT, OG_WIDTH } from "../src/lib/render-og-image";
 import { decodeFromQuery, encodeToQuery } from "../src/lib/url-state";
+import { metaFor, OG_LOCALE, pathFor, resolveRoute } from "./seo-meta";
 
 class MetaContentRewriter {
   constructor(private readonly content: string) {}
@@ -24,6 +29,15 @@ class MetaHrefRewriter {
   }
 }
 
+class TextRewriter {
+  constructor(private readonly value: string) {}
+  element(el: Element) {
+    el.setInnerContent(this.value);
+  }
+}
+
+const setContent = (v: string) => new MetaContentRewriter(v);
+
 export const onRequest: PagesFunction = async ({ request, next }) => {
   const url = new URL(request.url);
 
@@ -34,12 +48,15 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const contentType = response.headers.get("content-type") || "";
   if (!contentType.includes("text/html")) return response;
 
-  // The /api docs page (and its localized variants /en/api, /zh_tw/api,
-  // /zh_cn/api) has no tile of its own: point og:url at the page itself and use
-  // the default tile diagram as a generic cover, instead of inheriting the home
-  // page's share URL. (The /img/<tile> image SVG isn't HTML and never gets here.)
-  // Everything else is the home page: the image is the shared tile.
-  const isDocsPage = /^(?:\/(?:en|zh_tw|zh_cn))?\/api\/?$/.test(url.pathname);
+  const route = resolveRoute(url.pathname);
+  const { title, description } = metaFor(route);
+  const locale = OG_LOCALE[route.lang];
+
+  // The /api docs page has no tile of its own: point og:url at the page itself
+  // and use the default tile diagram as a generic cover, instead of inheriting
+  // the home page's share URL. Everything else is the home page: the image is
+  // the shared tile.
+  const isDocsPage = route.page === "api";
 
   const state = decodeFromQuery(isDocsPage ? "" : url.search);
   const query = encodeToQuery(state);
@@ -51,21 +68,32 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   // Canonical points at the current localized page without the share query, so
   // each locale URL is self-canonical and agrees with the hreflang alternates
   // (otherwise every locale would canonicalize to the ja home and cancel them).
-  const canonicalPath = url.pathname.replace(/\/$/, "") || "/";
-  const canonicalUrl = `${url.origin}${canonicalPath}`;
+  const canonicalUrl = `${url.origin}${route.path}`;
+
+  // hreflang alternates: the same page in each language. x-default points to ja.
+  const jaAlt = `${url.origin}${pathFor("ja", route.page)}`;
+  const enAlt = `${url.origin}${pathFor("en", route.page)}`;
+  const zhTwAlt = `${url.origin}${pathFor("zh-TW", route.page)}`;
+  const zhCnAlt = `${url.origin}${pathFor("zh-CN", route.page)}`;
 
   return new HTMLRewriter()
-    .on('meta[property="og:image"]', new MetaContentRewriter(imageUrl))
-    .on('meta[name="twitter:image"]', new MetaContentRewriter(imageUrl))
-    .on(
-      'meta[property="og:image:width"]',
-      new MetaContentRewriter(String(OG_WIDTH))
-    )
-    .on(
-      'meta[property="og:image:height"]',
-      new MetaContentRewriter(String(OG_HEIGHT))
-    )
-    .on('meta[property="og:url"]', new MetaContentRewriter(pageUrl))
+    .on("title", new TextRewriter(title))
+    .on('meta[name="description"]', setContent(description))
     .on('link[rel="canonical"]', new MetaHrefRewriter(canonicalUrl))
+    .on('link[hreflang="ja"]', new MetaHrefRewriter(jaAlt))
+    .on('link[hreflang="en"]', new MetaHrefRewriter(enAlt))
+    .on('link[hreflang="zh-Hant"]', new MetaHrefRewriter(zhTwAlt))
+    .on('link[hreflang="zh-Hans"]', new MetaHrefRewriter(zhCnAlt))
+    .on('link[hreflang="x-default"]', new MetaHrefRewriter(jaAlt))
+    .on('meta[property="og:url"]', setContent(pageUrl))
+    .on('meta[property="og:locale"]', setContent(locale))
+    .on('meta[property="og:title"]', setContent(title))
+    .on('meta[property="og:description"]', setContent(description))
+    .on('meta[property="og:image"]', setContent(imageUrl))
+    .on('meta[property="og:image:width"]', setContent(String(OG_WIDTH)))
+    .on('meta[property="og:image:height"]', setContent(String(OG_HEIGHT)))
+    .on('meta[name="twitter:title"]', setContent(title))
+    .on('meta[name="twitter:description"]', setContent(description))
+    .on('meta[name="twitter:image"]', setContent(imageUrl))
     .transform(response);
 };
