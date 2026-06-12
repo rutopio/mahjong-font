@@ -13,19 +13,12 @@ const resources = {
   ja: { translation: translationJA },
 };
 
-const getDefaultLanguage = () => {
-  try {
-    return (
-      localStorage.getItem("japanese-mahjong-font:preferred-language") || "ja"
-    );
-  } catch {
-    return "ja";
-  }
-};
-
+// The URL is the source of truth for language (see lib/locale.ts and the
+// LangSync effect in __root). i18next initializes to the default (ja); LangSync
+// calls changeLanguage on every navigation to match the path. No localStorage.
 i18next.use(initReactI18next).init({
   resources,
-  lng: getDefaultLanguage(),
+  lng: "ja",
   fallbackLng: "ja",
   interpolation: {
     escapeValue: false,
@@ -34,16 +27,5 @@ i18next.use(initReactI18next).init({
     useSuspense: false,
   },
 });
-
-i18next.on("languageChanged", (lng: string) => {
-  try {
-    localStorage.setItem("japanese-mahjong-font:preferred-language", lng);
-  } catch {
-    // ignore storage failures
-  }
-  document.documentElement.lang = lng;
-});
-
-document.documentElement.lang = i18next.language;
 
 export default i18next;

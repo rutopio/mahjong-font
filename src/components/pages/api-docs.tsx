@@ -1,5 +1,4 @@
 import { CheckIcon, CircleNotchIcon, CopyIcon } from "@phosphor-icons/react";
-import { createFileRoute } from "@tanstack/react-router";
 import { type ReactNode, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -28,10 +27,6 @@ function parseDescription(text: string): ReactNode {
     return part;
   });
 }
-
-export const Route = createFileRoute("/img/")({
-  component: ImgDocs,
-});
 
 /** Example tile strings; labels are i18n keys resolved at render time. */
 const EXAMPLES: { labelKey: string; path: string }[] = [
@@ -110,7 +105,7 @@ function CopyButton({ text }: { text: string }) {
   );
 }
 
-function ImgDocs() {
+export function ApiDocs() {
   const { t, ready } = useTranslation();
   const origin = typeof window !== "undefined" ? window.location.origin : "";
 

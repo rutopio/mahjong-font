@@ -4,7 +4,7 @@ import {
   GithubLogoIcon,
   TranslateIcon,
 } from "@phosphor-icons/react";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -34,8 +34,10 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { useLang } from "@/hooks/use-lang";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
+import { type Locale, withLocale } from "@/lib/locale";
 
 const navLinkClass =
   "inline-flex h-9 items-center rounded-md px-3 py-2 font-medium text-sm transition-colors hover:bg-accent hover:text-accent-foreground";
@@ -43,8 +45,11 @@ const navLinkClass =
 const FONT_VERSION = "v2.1";
 
 export function Navbar() {
-  const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState(i18n.language);
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const pathname = useLocation({ select: (l) => l.pathname });
+  // Active locale comes from the URL (the source of truth), not i18next state.
+  const language = useLang();
   const isMobile = useIsMobile();
   const [langDrawerOpen, setLangDrawerOpen] = useState(false);
   const [fontDrawerOpen, setFontDrawerOpen] = useState(false);
@@ -56,9 +61,10 @@ export function Navbar() {
     link.click();
   };
 
+  // Switching language is a soft navigation to the same page under the target
+  // locale's prefix (no reload). LangSync in __root then syncs i18next.
   const handleLanguageChange = (value: string) => {
-    setLanguage(value);
-    i18n.changeLanguage(value);
+    navigate({ to: withLocale(pathname, value as Locale) });
   };
 
   return (
@@ -68,7 +74,11 @@ export function Navbar() {
     >
       <div className="flex h-full w-full items-center justify-between gap-0 sm:gap-4">
         <div className="flex items-center gap-2 sm:gap-4">
-          <Link to="/" aria-label="Home" className="shrink-0">
+          <Link
+            to={withLocale("/", language)}
+            aria-label="Home"
+            className="shrink-0"
+          >
             <img
               src="/icon.svg"
               alt=""
@@ -83,7 +93,7 @@ export function Navbar() {
                   className={navLinkClass}
                   render={
                     <Link
-                      to="/"
+                      to={withLocale("/", language)}
                       activeOptions={{ exact: true, includeSearch: false }}
                       activeProps={{
                         className: "bg-accent",
@@ -100,7 +110,7 @@ export function Navbar() {
                   className={navLinkClass}
                   render={
                     <Link
-                      to="/img"
+                      to={withLocale("/api", language)}
                       activeProps={{
                         className: "bg-accent",
                         "aria-current": "page" as const,
