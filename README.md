@@ -1,7 +1,9 @@
 <div align="center">
 
-<h1>Japanese Mahjong Font with OpenType</h1>
-<h3>OpenType 機能付き麻雀牌図フォント</h3>
+<h2>Mahjong Font / Mahjong Tile Image Generator</h2>
+<h3>OpenType 機能付き麻雀牌図フォント / 麻雀牌図作成ツール</h3>
+
+🔗&nbsp;&nbsp;Playground: https://mahjongfont.pages.dev/ &nbsp;&**nbsp**;🔗
 
 ![pnpm](https://img.shields.io/badge/pnpm-v10-F69220?style=flat-square&logo=pnpm&logoColor=white)
 ![Node](https://img.shields.io/badge/Node.js-v22.17.0-339933?style=flat-square&logo=nodedotjs&logoColor=white)
@@ -16,7 +18,6 @@
 
 Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflarepages&logoColor=fff&style=flat-square)
 
-🔗&nbsp;&nbsp;Playground: https://mahjongfont.pages.dev/ &nbsp;&nbsp;🔗
 
 ![](/assets/banner.png)
 
@@ -172,13 +173,13 @@ Static files served from `public/` for crawlers and agents:
 
 ## Font Download
 
-See [Releases](https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType/releases).
+See [Releases](https://github.com/rutopio/mahjong-font/releases).
 
 ## License
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 
-See [License](https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType?tab=License-1-ov-file#readme).
+See [License](https://github.com/rutopio/mahjong-font?tab=License-1-ov-file#readme).
 
 ## Special Thanks
 

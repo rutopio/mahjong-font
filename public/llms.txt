@@ -7,7 +7,7 @@
 > shields.io-style.
 
 Site: https://mahjongfont.pages.dev
-Source: https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType
+Source: https://github.com/rutopio/mahjong-font
 License: SIL Open Font License 1.1
 
 ## Tile notation
@@ -93,4 +93,4 @@ https://mahjongfont.pages.dev/img/123m456p_5z?theme=color&color=AA7942
 
 - [Playground](https://mahjongfont.pages.dev/): Interactive tile editor.
 - [Image API docs](https://mahjongfont.pages.dev/api): Live examples and the parameter reference.
-- [Font releases](https://github.com/rutopio/Japanese-Mahjong-Font-with-OpenType/releases): Download the OpenType/woff2 fonts.
+- [Font releases](https://github.com/rutopio/mahjong-font/releases): Download the OpenType/woff2 fonts.

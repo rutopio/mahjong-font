@@ -6,11 +6,11 @@
 export const GITHUB_PROFILE_URL = "https://github.com/rutopio";
 
 /** GitHub repository URL for this project. */
-export const GITHUB_REPO_URL = `${GITHUB_PROFILE_URL}/Japanese-Mahjong-Font-with-OpenType`;
+export const GITHUB_REPO_URL = `${GITHUB_PROFILE_URL}/mahjong-font`;
 
 /** Base URL for downloading font files from the repository. */
 const FONT_DOWNLOAD_BASE_URL =
-  "https://raw.githubusercontent.com/rutopio/Japanese-Mahjong-Font-with-OpenType/main/fonts/otf";
+  "https://raw.githubusercontent.com/rutopio/mahjong-font/main/fonts/otf";
 
 // ============================================================================
 // Internationalization

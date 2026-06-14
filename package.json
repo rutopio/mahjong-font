@@ -1,6 +1,6 @@
 {
-  "name": "japanese-mahjong-font-with-openType",
-  "version": "3.0.0",
+  "name": "mahjong-font",
+  "version": "4.0.0",
   "private": true,
   "packageManager": "pnpm@10.13.1",
   "scripts": {

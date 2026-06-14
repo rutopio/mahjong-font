@@ -301,9 +301,7 @@ export function Navbar() {
                 <span className="flex items-center gap-0">
                   <span>rutopio</span>
                   <span className="hidden lg:block">{" / "}</span>
-                  <span className="hidden lg:block">
-                    Japanese-Mahjong-Font-with-OpenType
-                  </span>
+                  <span className="hidden lg:block">mahjong-font</span>
                 </span>
               </a>
             }
