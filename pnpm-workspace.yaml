@@ -13,4 +13,5 @@ overrides:
   # Transitive-only advisories (via shadcn / @tailwindcss/vite); upstream unpatched.
   hono: ">=4.12.25"
   esbuild: ">=0.28.1"
-  "@babel/core": ">=7.29.1"
+  # Cap at 7.x: router-plugin uses Babel 7's Scope#references, removed in Babel 8.
+  "@babel/core": ">=7.29.1 <8"

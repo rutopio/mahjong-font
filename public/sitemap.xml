@@ -2,82 +2,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://mahjongfont.pages.dev/</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjongfont.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mahjongfont.pages.dev/en"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjongfont.pages.dev/zh_tw"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjongfont.pages.dev/zh_cn"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjongfont.pages.dev/"/>
+    <loc>https://mahjong.chingru.com/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mahjongfont.pages.dev/en</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjongfont.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mahjongfont.pages.dev/en"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjongfont.pages.dev/zh_tw"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjongfont.pages.dev/zh_cn"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjongfont.pages.dev/"/>
+    <loc>https://mahjong.chingru.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mahjongfont.pages.dev/zh_tw</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjongfont.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mahjongfont.pages.dev/en"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjongfont.pages.dev/zh_tw"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjongfont.pages.dev/zh_cn"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjongfont.pages.dev/"/>
+    <loc>https://mahjong.chingru.com/zh_tw</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mahjongfont.pages.dev/zh_cn</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjongfont.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mahjongfont.pages.dev/en"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjongfont.pages.dev/zh_tw"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjongfont.pages.dev/zh_cn"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjongfont.pages.dev/"/>
+    <loc>https://mahjong.chingru.com/zh_cn</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mahjongfont.pages.dev/api</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjongfont.pages.dev/api"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mahjongfont.pages.dev/en/api"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjongfont.pages.dev/zh_tw/api"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjongfont.pages.dev/zh_cn/api"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjongfont.pages.dev/api"/>
+    <loc>https://mahjong.chingru.com/api</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/api"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en/api"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw/api"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn/api"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/api"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mahjongfont.pages.dev/en/api</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjongfont.pages.dev/api"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mahjongfont.pages.dev/en/api"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjongfont.pages.dev/zh_tw/api"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjongfont.pages.dev/zh_cn/api"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjongfont.pages.dev/api"/>
+    <loc>https://mahjong.chingru.com/en/api</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/api"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en/api"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw/api"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn/api"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/api"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mahjongfont.pages.dev/zh_tw/api</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjongfont.pages.dev/api"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mahjongfont.pages.dev/en/api"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjongfont.pages.dev/zh_tw/api"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjongfont.pages.dev/zh_cn/api"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjongfont.pages.dev/api"/>
+    <loc>https://mahjong.chingru.com/zh_tw/api</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/api"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en/api"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw/api"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn/api"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/api"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mahjongfont.pages.dev/zh_cn/api</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjongfont.pages.dev/api"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mahjongfont.pages.dev/en/api"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjongfont.pages.dev/zh_tw/api"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjongfont.pages.dev/zh_cn/api"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjongfont.pages.dev/api"/>
+    <loc>https://mahjong.chingru.com/zh_cn/api</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/api"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en/api"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw/api"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn/api"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/api"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

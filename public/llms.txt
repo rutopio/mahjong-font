@@ -6,7 +6,7 @@
 > Image API that turns any notation string into an embeddable SVG image,
 > shields.io-style.
 
-Site: https://mahjongfont.pages.dev
+Site: https://mahjong.chingru.com
 Source: https://github.com/rutopio/mahjong-font
 License: SIL Open Font License 1.1
 
@@ -39,7 +39,7 @@ cached aggressively at the edge.
 ### Endpoint
 
 ```
-GET https://mahjongfont.pages.dev/img/<tile>?theme=<color|mono>&color=<hex>
+GET https://mahjong.chingru.com/img/<tile>?theme=<color|mono>&color=<hex>
 ```
 
 Returns: `Content-Type: image/svg+xml`. Rendered at a fixed height of 500px;
@@ -59,24 +59,24 @@ Omitted parameters fall back to their defaults.
 ### Examples
 
 - Default colors:
-  `https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s`
+  `https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s`
 - Custom color (green):
-  `https://mahjongfont.pages.dev/img/1m2m3m4p5p6p7s8s9s?theme=color&color=2D7D46`
+  `https://mahjong.chingru.com/img/1m2m3m4p5p6p7s8s9s?theme=color&color=2D7D46`
 - Monochrome:
-  `https://mahjongfont.pages.dev/img/1z2z3z4z5z6z7z?theme=mono`
+  `https://mahjong.chingru.com/img/1z2z3z4z5z6z7z?theme=mono`
 
 ### Embedding
 
 Markdown:
 
 ```md
-![](https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
+![](https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
 ```
 
 HTML:
 
 ```html
-<img src="https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s" />
+<img src="https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s" />
 ```
 
 ### Tip
@@ -85,12 +85,12 @@ Any share URL from the playground can be turned into an image by swapping the
 `?tile=` query for the `/img/` path:
 
 ```
-https://mahjongfont.pages.dev/?tile=123m456p_5z&theme=color&color=AA7942
-https://mahjongfont.pages.dev/img/123m456p_5z?theme=color&color=AA7942
+https://mahjong.chingru.com/?tile=123m456p_5z&theme=color&color=AA7942
+https://mahjong.chingru.com/img/123m456p_5z?theme=color&color=AA7942
 ```
 
 ## Pages
 
-- [Playground](https://mahjongfont.pages.dev/): Interactive tile editor.
-- [Image API docs](https://mahjongfont.pages.dev/api): Live examples and the parameter reference.
+- [Playground](https://mahjong.chingru.com/): Interactive tile editor.
+- [Image API docs](https://mahjong.chingru.com/api): Live examples and the parameter reference.
 - [Font releases](https://github.com/rutopio/mahjong-font/releases): Download the OpenType/woff2 fonts.

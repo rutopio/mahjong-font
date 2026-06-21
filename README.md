@@ -3,7 +3,7 @@
 <h2>Mahjong Font / Mahjong Tile Image Generator</h2>
 <h3>OpenType 機能付き麻雀牌図フォント / 麻雀牌図作成ツール</h3>
 
-🔗&nbsp;&nbsp;Playground: https://mahjongfont.pages.dev/ &nbsp;&**nbsp**;🔗
+🔗&nbsp;&nbsp;Playground: https://mahjong.chingru.com/ &nbsp;&**nbsp**;🔗
 
 ![pnpm](https://img.shields.io/badge/pnpm-v11-F69220?style=flat-square&logo=pnpm&logoColor=white)
 ![Node](https://img.shields.io/badge/Node.js-v24-339933?style=flat-square&logo=nodedotjs&logoColor=white)
@@ -135,7 +135,7 @@ Put a tile string in the URL path to get an inline SVG image you can embed
 anywhere, shields.io-style. Missing parameters fall back to defaults.
 
 ```
-https://mahjongfont.pages.dev/img/<tile>?theme=color&color=AA7942
+https://mahjong.chingru.com/img/<tile>?theme=color&color=AA7942
 ```
 
 | Parameter | Location | Type            | Default  | Description                                                                  |
@@ -149,15 +149,15 @@ The SVG is rendered at a fixed height of 500px; width scales proportionally.
 It is a vector, so you can resize it freely when embedding. For example:
 
 ```md
-![](https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
+![](https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
 ```
 
-![](https://mahjongfont.pages.dev/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
+![](https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
 
 
 
 Tip: take any share URL from the app and swap `?tile=` for the `/img/` path.
-Full docs and live examples: https://mahjongfont.pages.dev/api
+Full docs and live examples: https://mahjong.chingru.com/api
 
 ## Site Files
 

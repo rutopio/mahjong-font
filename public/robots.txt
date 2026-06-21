@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mahjongfont.pages.dev/sitemap.xml
+Sitemap: https://mahjong.chingru.com/sitemap.xml
