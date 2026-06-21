@@ -5,16 +5,16 @@
 
 🔗&nbsp;&nbsp;Playground: https://mahjongfont.pages.dev/ &nbsp;&**nbsp**;🔗
 
-![pnpm](https://img.shields.io/badge/pnpm-v10-F69220?style=flat-square&logo=pnpm&logoColor=white)
-![Node](https://img.shields.io/badge/Node.js-v22.17.0-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-[![License: SIL](https://img.shields.io/badge/License-SIL_1.1-yellow.svg)](https://openfontlicense.org/)
+![pnpm](https://img.shields.io/badge/pnpm-v11-F69220?style=flat-square&logo=pnpm&logoColor=white)
+![Node](https://img.shields.io/badge/Node.js-v24-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+[![License: OFL 1.1 (Font) / MIT (Code)](https://img.shields.io/badge/License-OFL_1.1_(Font)_/_MIT_(Code)-yellow.svg)](./LICENSE-FONT)
 
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue?style=flat-square&logo=typescript)
-![React](https://img.shields.io/badge/React-19.1.0-blue?style=flat-square&logo=react)
-![Tanstack](https://img.shields.io/badge/Tanstack-1.168.22-black?style=flat-square&logo=tanstack)
+![TypeScript](https://img.shields.io/badge/TypeScript-6-blue?style=flat-square&logo=typescript)
+![React](https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react)
+![Tanstack](https://img.shields.io/badge/Tanstack-1-black?style=flat-square&logo=tanstack)
 
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.18-38bdf8?style=flat-square&logo=tailwind-css)
-![ShadCN](https://img.shields.io/badge/shadcn%2Fui-4.10.0-000000?style=flat-square&logo=shadcnui&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?style=flat-square&logo=tailwind-css)
+![ShadCN](https://img.shields.io/badge/shadcn%2Fui-4-000000?style=flat-square&logo=shadcnui&logoColor=white)
 
 Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflarepages&logoColor=fff&style=flat-square)
 
@@ -125,12 +125,9 @@ into `src/lib/tiles-data.json`, which the web app and the Image API both read.
   python3 preprocess/extract-tiles.py
   ```
 
-- Web fonts — copy the self-hosted UI font shards into `public/fonts/` and
-  generate `src/styles/fonts.css`. Re-run after changing the font package list:
-
-  ```
-  pnpm build:fonts
-  ```
+- Web fonts — UI fonts are self-hosted via `@fontsource` packages, imported
+  directly in `src/styles/fonts.css` (Vite bundles and hashes the woff2). Paper
+  Mono (not on @fontsource) stays as a local `public/fonts/` woff2.
 
 ## Image API
 
@@ -177,9 +174,9 @@ See [Releases](https://github.com/rutopio/mahjong-font/releases).
 
 ## License
 
-This Font Software is licensed under the SIL Open Font License, Version 1.1.
+The source code is licensed under the [MIT License](./LICENSE).
 
-See [License](https://github.com/rutopio/mahjong-font?tab=License-1-ov-file#readme).
+The font files are licensed under the [SIL Open Font License, Version 1.1](./LICENSE-FONT).
 
 ## Special Thanks
 

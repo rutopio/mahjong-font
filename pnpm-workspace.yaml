@@ -1,0 +1,16 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  workerd: true
+
+minimumReleaseAgeExclude:
+  - '@cloudflare/workers-types@4.20260621.1'
+
+verifyDepsBeforeRun: false
+
+overrides:
+  # Transitive-only advisories (via shadcn / @tailwindcss/vite); upstream unpatched.
+  hono: ">=4.12.25"
+  esbuild: ">=0.28.1"
+  "@babel/core": ">=7.29.1"

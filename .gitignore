@@ -89,6 +89,7 @@ dist
 out
 cache
 .next/
+.wrangler/
 
 # TanStack Router generated files
 src/routeTree.gen.ts

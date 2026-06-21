@@ -3,20 +3,15 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@font-face {
-  font-family: "Paper Mono";
-  src: url("/fonts/PaperMono[wght].woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: var(--font-sans);
   --font-sans:
-    "Albert Sans", "Noto Sans JP", "Noto Sans TC", "Noto Sans SC", sans-serif;
+    "Albert Sans Variable", "Noto Sans JP Variable", "Noto Sans TC Variable",
+    "Noto Sans SC Variable", sans-serif;
+  --font-heading:
+    "Host Grotesk Variable", "Noto Sans JP Variable", "Noto Sans TC Variable",
+    "Noto Sans SC Variable", sans-serif;
   --font-mono:
     "Paper Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
@@ -150,6 +145,16 @@
     /* Prevent iOS Chrome's collapsing toolbar from exposing a strip of
        body background below the footer when rubber-band scrolling. */
     overscroll-behavior-y: contain;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 

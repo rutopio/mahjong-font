@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -10,7 +10,10 @@
       "**",
       "!src/components/ui",
       "!src/routeTree.gen.ts",
-      "!src/lib/tiles-data.json"
+      "!src/lib/tiles-data.json",
+      "!**/*.css",
+      "!public",
+      "!assets"
     ]
   },
   "formatter": {
@@ -56,7 +59,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "suspicious": {
         "noExplicitAny": "off",
         "noArrayIndexKey": "error"
