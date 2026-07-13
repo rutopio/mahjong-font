@@ -54,11 +54,25 @@ export function Navbar() {
   const [langDrawerOpen, setLangDrawerOpen] = useState(false);
   const [fontDrawerOpen, setFontDrawerOpen] = useState(false);
 
-  const downloadFont = (filePath: string) => {
-    const link = document.createElement("a");
-    link.href = filePath;
-    link.download = filePath;
-    link.click();
+  // The font files live on raw.githubusercontent.com (cross-origin), where the
+  // `download` attribute is ignored — the browser would navigate to the file
+  // instead of saving it. Fetch it as a blob and download via an object URL so
+  // it saves with a clean filename; fall back to opening the URL on failure.
+  const downloadFont = async (fileUrl: string) => {
+    const filename = fileUrl.split("/").pop() || "mahjong-font.otf";
+    try {
+      const res = await fetch(fileUrl);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const blob = await res.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = objectUrl;
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(objectUrl);
+    } catch {
+      window.open(fileUrl, "_blank", "noopener,noreferrer");
+    }
   };
 
   // Switching language is a soft navigation to the same page under the target
