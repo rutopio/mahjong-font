@@ -45,7 +45,7 @@ function RootComponent() {
   const lang = useLangSync();
   return (
     <I18nProvider>
-      <div key={lang} className="flex min-h-dvh flex-col">
+      <div key={lang} className="flex min-h-full flex-col">
         <Navbar />
         <main className="container flex flex-1 bg-background">
           <Outlet />

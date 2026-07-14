@@ -146,6 +146,18 @@
        body background below the footer when rubber-band scrolling. */
     overscroll-behavior-y: contain;
   }
+  /* iOS Chrome computes dvh/svh/lvh as outerHeight (including the collapsed
+     toolbar band), so a root element with min-height:100dvh over-extends past
+     the viewport and, on short pages, leaves an empty strip below the footer.
+     Safari and desktop compute it correctly, so the bug is iOS-Chrome-only.
+     Percentage heights are immune: html/body at 100% resolve to the real
+     innerHeight in every browser, so the root's min-h-full fills exactly one
+     viewport without the toolbar overshoot. */
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
