@@ -1,0 +1,38 @@
+# Hashed build assets are immutable: the name changes when the content does.
+# These come first, but note Pages *appends* matching rules rather than letting
+# a more specific one win, so the HTML rules below must not use a bare /*.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Bracket globbing in _headers would read `[wght]` as a placeholder, so this
+# font is matched by its URL-encoded path (that is how the CSS requests it).
+/fonts/PaperMono%5Bwght%5D.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# The middleware rewrites <head> per route, but the result depends only on the
+# URL, so the shell is safe to cache at the edge. Without this it was
+# `max-age=0, must-revalidate` (DYNAMIC) and every hit re-ran the middleware.
+# Listed per route instead of /* so asset rules above stay single-valued.
+/
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
+/api
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
+/en
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
+/en/api
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
+/zh_tw
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
+/zh_tw/api
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
+/zh_cn
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
+/zh_cn/api
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800

@@ -1,4 +1,9 @@
+User-agent: bingbot
+Crawl-delay: 10
+
 User-agent: *
 Allow: /
+Disallow: /og
+Disallow: /img/
 
 Sitemap: https://mahjong.chingru.com/sitemap.xml
