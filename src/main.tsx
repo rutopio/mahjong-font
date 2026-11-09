@@ -12,11 +12,14 @@ declare module "@tanstack/react-router" {
   }
 }
 
-// Track SPA navigations as GA page_view events (initial load is sent by gtag config).
-router.subscribe("onResolved", ({ toLocation }) => {
+// Track the initial load and SPA navigations; gtag config disables automatic page views.
+router.subscribe("onResolved", ({ fromLocation, toLocation }) => {
   window.gtag?.("event", "page_view", {
     page_path: toLocation.pathname,
     page_location: window.location.href,
+    page_referrer: fromLocation
+      ? new URL(fromLocation.href, window.location.origin).href
+      : document.referrer,
   });
 });
 
