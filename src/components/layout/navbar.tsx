@@ -5,12 +5,12 @@ import {
   ListIcon,
   TranslateIcon,
 } from "@phosphor-icons/react";
+import { ActionMenu } from "@rutopio/base-component/action-menu";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { FluidHoverControls } from "@/components/fluid-hover-controls";
-import { HeaderActionDropdown } from "@/components/header-action-dropdown";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -233,14 +233,14 @@ export function Navbar() {
               </DrawerContent>
             </Drawer>
           ) : (
-            <HeaderActionDropdown
+            <ActionMenu
               label={t("ui.downloadFont")}
-              icon={<FileArrowDownIcon aria-hidden="true" />}
-              className={actionClass}
+              trigger={<FileArrowDownIcon aria-hidden="true" />}
+              triggerClassName={actionClass}
               items={fontDownloads.map((font) => ({
                 id: font.labelKey,
                 label: t(font.labelKey),
-                suffix: <Badge variant="secondary">{FONT_VERSION}</Badge>,
+                trailing: <Badge variant="secondary">{FONT_VERSION}</Badge>,
                 onSelect: () => downloadFont(font.url),
               }))}
             />
@@ -302,14 +302,17 @@ export function Navbar() {
               </DrawerContent>
             </Drawer>
           ) : (
-            <HeaderActionDropdown
+            <ActionMenu
               label={t("ui.language")}
-              icon={<TranslateIcon aria-hidden="true" />}
-              className={actionClass}
-              selectedId={language}
+              trigger={<TranslateIcon aria-hidden="true" />}
+              triggerClassName={actionClass}
+              indicator={<CheckIcon className="size-4" />}
               items={languages.map((lang) => ({
                 id: lang.value,
                 label: lang.label,
+                active: language === lang.value,
+                ariaCurrent:
+                  language === lang.value ? ("true" as const) : undefined,
                 onSelect: () => handleLanguageChange(lang.value),
               }))}
             />

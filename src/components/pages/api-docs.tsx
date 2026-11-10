@@ -1,9 +1,9 @@
 import { CircleNotchIcon } from "@phosphor-icons/react";
+import type { OutlineListItem as OutlineItem } from "@rutopio/base-component/outline-list";
 import type { ReactNode } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { ApiPageActions } from "@/components/api-page-actions";
 import { ArticleHeading } from "@/components/article-heading";
-import type { OutlineItem } from "@/components/outline-dropdown";
 
 /** Render `code` and **bold** markers inside a param description. */
 function parseDescription(text: string): ReactNode {

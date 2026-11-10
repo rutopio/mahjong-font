@@ -1,9 +1,9 @@
+import type { OutlineListItem as OutlineItem } from "@rutopio/base-component/outline-list";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ApiPageActions } from "@/components/api-page-actions";
 import { ArticleHeading } from "@/components/article-heading";
 import { GithubMarkIcon } from "@/components/github-mark-icon";
-import type { OutlineItem } from "@/components/outline-dropdown";
 import { useLang } from "@/hooks/use-lang";
 import { fontDownloads, GITHUB_REPO_URL } from "@/lib/constants";
 import { withLocale } from "@/lib/locale";

@@ -1,13 +1,14 @@
 import { ArrowBendRightUpIcon, ArrowLeftIcon } from "@phosphor-icons/react";
+import { ActionMenu } from "@rutopio/base-component/action-menu";
+import {
+  OutlineList,
+  type OutlineListItem,
+} from "@rutopio/base-component/outline-list";
 import { motion, useReducedMotion } from "motion/react";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ApiShareButton } from "@/components/api-share-button";
 import { FluidHoverControls } from "@/components/fluid-hover-controls";
-import {
-  OutlineDropdown,
-  type OutlineItem,
-} from "@/components/outline-dropdown";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -63,7 +64,7 @@ export function ApiPageActions({
   pageTitle,
   actionsLabel,
 }: {
-  items: OutlineItem[];
+  items: OutlineListItem[];
   pageTitle?: string;
   actionsLabel?: string;
 }) {
@@ -195,33 +196,12 @@ export function ApiPageActions({
                 aria-label={t("apiActions.outline")}
                 className="min-h-0 flex-1 overflow-y-auto px-4 pt-4 pb-6"
               >
-                <ul className="flex flex-col gap-1">
-                  {items.map((item) => (
-                    <li
-                      key={item.id}
-                      className={item.depth === 3 ? "ml-6" : undefined}
-                    >
-                      <a
-                        href={`#${encodeURIComponent(item.id)}`}
-                        data-active={selectedId === item.id || undefined}
-                        aria-current={
-                          selectedId === item.id ? "location" : undefined
-                        }
-                        onClick={(event) => {
-                          event.preventDefault();
-                          navigateToHeading(item.id);
-                        }}
-                        className="flex min-h-10 w-full items-center justify-between gap-3 rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=location]:bg-muted"
-                      >
-                        <span className="min-w-0">{item.label}</span>
-                        <ArrowLeftIcon
-                          className={`size-4 shrink-0 ${selectedId === item.id ? "" : "invisible"}`}
-                          aria-hidden="true"
-                        />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <OutlineList
+                  items={items}
+                  activeId={selectedId}
+                  onNavigate={navigateToHeading}
+                  indicator={<ArrowLeftIcon className="size-4" />}
+                />
               </nav>
             </DrawerContent>
           </Drawer>
@@ -236,15 +216,24 @@ export function ApiPageActions({
         className="fixed top-1/2 left-[var(--gutter-offset)] z-10 hidden h-fit -translate-y-1/2 min-[50rem]:flex"
       >
         {items.length > 0 && (
-          <OutlineDropdown
-            items={items}
-            activeId={selectedId}
-            progress={progress}
+          <ActionMenu
             label={t("apiActions.outline")}
-            onNavigate={navigateToHeading}
-          >
-            <ReadingProgressRing progress={progress} />
-          </OutlineDropdown>
+            triggerLabel={`${Math.round(progress * 100)}% · ${t("apiActions.outline")}`}
+            trigger={<ReadingProgressRing progress={progress} />}
+            side="left"
+            indicator={<ArrowLeftIcon className="size-4" />}
+            items={items.map((item) => ({
+              ...item,
+              active: item.id === selectedId,
+              ariaCurrent:
+                item.id === selectedId ? ("location" as const) : undefined,
+              href: `#${encodeURIComponent(item.id)}`,
+              onSelect: (event) => {
+                event.preventDefault();
+                navigateToHeading(item.id);
+              },
+            }))}
+          />
         )}
         {utilities}
       </FluidHoverControls>
