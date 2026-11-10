@@ -106,12 +106,12 @@ export function Notations({ theme }: { theme: string }) {
                 index < notationItems.length - 1 && "border-b"
               )}
             >
-              <div className="text-pretty font-medium text-sm">
+              <div className="text-pretty font-medium text-base">
                 {t(item.titleKey)}
               </div>
               <div
                 className={cn(
-                  "text-pretty text-sm",
+                  "text-pretty text-base",
                   item.titleKey === "notation.aka-dora" && "break-words"
                 )}
               >
@@ -132,7 +132,7 @@ export function Notations({ theme }: { theme: string }) {
             )}
           >
             <div className="flex items-center gap-4 p-2">
-              <div className="wrap-break-word font-medium text-sm">
+              <div className="wrap-break-word font-medium text-base">
                 {t(example.combination)}
               </div>
               <Badge variant="outline">{example.notation}</Badge>
