@@ -1,6 +1,6 @@
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 import { Toaster } from "sonner";
 
 import "@/styles/globals.css";
@@ -10,7 +10,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { ScreenSize } from "@/components/layout/screen-size";
 import { useLang } from "@/hooks/use-lang";
 import i18n from "@/lib/i18n";
-import { localeByCode, stripLocale } from "@/lib/locale";
+import { stripLocale } from "@/lib/locale";
 import { I18nProvider } from "@/provider/i18n-provider";
 import { RootError } from "@/routes/-root-error";
 import { RootNotFound } from "@/routes/-root-not-found";
@@ -36,16 +36,13 @@ export const Route = createRootRoute({
   errorComponent: RootError,
 });
 
-// Keep i18next and <html lang> in sync with the URL (the source of truth for
-// language). changeLanguage runs synchronously during render so children read
-// the right strings on first paint; the <html lang> write stays in an effect.
+// Keep i18next in sync with the URL (the source of truth for language).
+// changeLanguage runs synchronously during render so children read the right
+// strings on first paint; the router updates <html lang> with other metadata.
 // The app subtree is keyed by lang so every consumer re-renders on switch.
 function useLangSync() {
   const lang = useLang();
   if (i18n.language !== lang) i18n.changeLanguage(lang);
-  useEffect(() => {
-    document.documentElement.lang = localeByCode(lang).htmlLang;
-  }, [lang]);
   return lang;
 }
 

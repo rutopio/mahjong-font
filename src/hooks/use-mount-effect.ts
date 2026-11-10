@@ -1,3 +1,4 @@
+// biome-ignore lint/style/noRestrictedImports: The one approved wrapper for mount-only external synchronization.
 import { type EffectCallback, useEffect } from "react";
 
 // For one-time synchronization with systems outside React. Callers should not

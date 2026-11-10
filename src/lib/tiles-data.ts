@@ -27,12 +27,11 @@ export interface TilesData {
   monochrome: Record<string, string>;
 }
 
-let cache: TilesData | null = null;
+let loadPromise: Promise<TilesData> | undefined;
 
-export async function loadTilesData(): Promise<TilesData> {
-  if (cache) return cache;
-  const data = (await import("./tiles-data.json"))
-    .default as unknown as TilesData;
-  cache = data;
-  return data;
+export function loadTilesData(): Promise<TilesData> {
+  loadPromise ??= import("./tiles-data.json").then(
+    (module) => module.default as unknown as TilesData
+  );
+  return loadPromise;
 }

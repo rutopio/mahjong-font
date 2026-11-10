@@ -11,6 +11,7 @@ import {
   resolveRoute,
 } from "../functions/seo-meta";
 import { isValidImageTile } from "./lib/image-input";
+import { localeByCode } from "./lib/locale";
 import { decodeFromQuery, encodeToQuery } from "./lib/url-state";
 import { routeTree } from "./routeTree.gen";
 
@@ -19,6 +20,7 @@ const router = createRouter({ routeTree });
 function syncMetadata(pathname: string) {
   const route = resolveRoute(pathname);
   const { title, description } = metaFor(route);
+  document.documentElement.lang = localeByCode(route.lang).htmlLang;
   const origin = window.location.origin;
   const canonical = `${origin}${route.path}`;
   const state = decodeFromQuery(

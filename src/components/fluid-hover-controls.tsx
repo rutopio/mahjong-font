@@ -1,7 +1,8 @@
-import { type ReactNode, useLayoutEffect, useRef } from "react";
+import { type ReactNode, useRef } from "react";
 import { FluidHoverHighlight } from "@/components/fluid-hover-highlight";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { useFluidHover } from "@/hooks/use-fluid-hover";
+import { useMountEffect } from "@/hooks/use-mount-effect";
 import { cn } from "@/lib/utils";
 
 export function FluidHoverControls({
@@ -43,7 +44,7 @@ export function FluidHoverControls({
             ? "rounded-r-lg"
             : "rounded-none";
 
-  useLayoutEffect(() => {
+  useMountEffect(() => {
     const items = itemsRef.current;
     if (!items) return;
     let registered: HTMLElement[] = [];
@@ -74,7 +75,7 @@ export function FluidHoverControls({
         hover.registerItem(index, null);
       });
     };
-  }, [hover.registerItem]);
+  });
 
   const handleFocus = (target: EventTarget) => {
     const items = itemsRef.current;

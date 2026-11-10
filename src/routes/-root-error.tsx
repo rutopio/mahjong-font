@@ -1,14 +1,9 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 
-export function RootError({ error }: { error: unknown }) {
+export function RootError() {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-6">

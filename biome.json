@@ -64,6 +64,19 @@
         "noExplicitAny": "off",
         "noArrayIndexKey": "error"
       },
+      "style": {
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "paths": {
+              "react": {
+                "importNames": ["useEffect", "useLayoutEffect", "useInsertionEffect"],
+                "message": "Use derived state, event handlers, subscriptions, or useMountEffect instead."
+              }
+            }
+          }
+        }
+      },
       "correctness": {
         "noUnusedVariables": "warn",
         "useExhaustiveDependencies": "off"

@@ -1,6 +1,6 @@
 import { ArrowBendRightUpIcon } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ApiShareButton } from "@/components/api-share-button";
 import { FluidHoverControls } from "@/components/fluid-hover-controls";
@@ -58,35 +58,14 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export function ApiPageActions() {
+export function ApiPageActions({ items }: { items: OutlineItem[] }) {
   const { t } = useTranslation();
-  const [items, setItems] = useState<OutlineItem[]>([]);
   const [activeId, setActiveId] = useState("");
   const [progress, setProgress] = useState(0);
   const [outlineOpen, setOutlineOpen] = useState(false);
   const drawerScrollRef = useRef<HTMLElement>(null);
 
   useMountEffect(() => {
-    const article = document.querySelector("main article");
-    if (!article) return;
-    setItems(
-      Array.from(article.querySelectorAll<HTMLElement>("h2[id], h3[id]"))
-        .map((heading) => {
-          const visibleHeading = heading.cloneNode(true) as HTMLElement;
-          visibleHeading.querySelectorAll(".katex-mathml").forEach((node) => {
-            node.remove();
-          });
-          return {
-            id: heading.id,
-            label: visibleHeading.textContent?.trim() ?? "",
-            depth: heading.tagName === "H3" ? (3 as const) : (2 as const),
-          };
-        })
-        .filter((item) => item.label)
-    );
-  });
-
-  useEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;
@@ -121,11 +100,10 @@ export function ApiPageActions() {
       window.removeEventListener("resize", schedule);
       observer.disconnect();
     };
-  }, [items]);
+  });
 
-  useEffect(() => {
-    if (!outlineOpen) return;
-    const frame = requestAnimationFrame(() => {
+  const centerActiveInDrawer = () => {
+    requestAnimationFrame(() => {
       const viewport = drawerScrollRef.current;
       const active = viewport?.querySelector<HTMLElement>("[data-active]");
       if (!viewport || !active) return;
@@ -137,8 +115,12 @@ export function ApiPageActions() {
         viewport.clientHeight / 2 +
         activeRect.height / 2;
     });
-    return () => cancelAnimationFrame(frame);
-  }, [outlineOpen]);
+  };
+
+  const handleOutlineOpenChange = (open: boolean) => {
+    setOutlineOpen(open);
+    if (open) centerActiveInDrawer();
+  };
 
   const navigateToHeading = (id: string) => {
     setOutlineOpen(false);
@@ -182,7 +164,7 @@ export function ApiPageActions() {
         className="fixed right-4 bottom-[calc(2rem+env(safe-area-inset-bottom))] z-10 h-fit min-[50rem]:hidden"
       >
         {items.length > 0 && (
-          <Drawer open={outlineOpen} onOpenChange={setOutlineOpen}>
+          <Drawer open={outlineOpen} onOpenChange={handleOutlineOpenChange}>
             <DrawerTrigger
               render={
                 <Button

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { ApiPageActions } from "@/components/api-page-actions";
 import { ArticleHeading } from "@/components/article-heading";
+import type { OutlineItem } from "@/components/outline-dropdown";
 
 /** Render `code` and **bold** markers inside a param description. */
 function parseDescription(text: string): ReactNode {
@@ -81,6 +82,18 @@ const PARAMS: {
 
 export function ApiDocs() {
   const { t, ready } = useTranslation();
+  const outlineItems: OutlineItem[] = [
+    { id: "url-format", label: t("imgApi.urlFormatHeading"), depth: 2 },
+    { id: "convert-shared-url", label: t("imgApi.convertHeading"), depth: 2 },
+    { id: "parameters", label: t("imgApi.paramsHeading"), depth: 2 },
+    { id: "examples", label: t("imgApi.examplesHeading"), depth: 2 },
+    ...EXAMPLES.map((example) => ({
+      id: example.id,
+      label: t(example.labelKey),
+      depth: 3 as const,
+    })),
+    { id: "embedding", label: t("imgApi.embedHeading"), depth: 2 },
+  ];
   const origin = typeof window !== "undefined" ? window.location.origin : "";
   const embedUrl = `${origin}/img/${EMBED_TILE}`;
   const embedAlt = t("imgApi.embedAlt", { tile: EMBED_TILE });
@@ -272,7 +285,7 @@ export function ApiDocs() {
           </code>
         </section>
       </article>
-      <ApiPageActions />
+      <ApiPageActions items={outlineItems} />
     </>
   );
 }

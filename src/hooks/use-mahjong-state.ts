@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { optionValues } from "@/lib/constants";
 import { transformString } from "@/lib/transform-string";
@@ -22,31 +22,32 @@ const getInitialState = () => decodeFromQuery(window.location.search);
  * (or a malformed one) always falls back to the default state.
  */
 export function useMahjongState() {
-  const initial = getInitialState();
-  const [input, setInput] = useState(initial.input);
-  const [selectedOption, setSelectedOption] = useState(() =>
-    findMatchingOption(initial.input)
-  );
-  const [theme, setTheme] = useState(initial.theme);
-  const [tileColor, setTileColor] = useState(initial.tileColor);
+  const [state, setState] = useState(getInitialState);
+  const { input, theme, tileColor } = state;
+  const selectedOption = findMatchingOption(input);
 
-  // Keep the query string in sync with state, without adding history entries.
-  useEffect(() => {
-    if (!input) return;
-    const encoded = encodeToQuery({ input, theme, tileColor });
+  // User actions update the URL at the same entry point as React state.
+  const update = (next: typeof state) => {
+    setState(next);
+    if (!next.input) return;
+    const encoded = encodeToQuery(next);
     const current = window.location.search.slice(1);
     if (current !== encoded) {
       const url = `${window.location.pathname}?${encoded}${window.location.hash}`;
       window.history.replaceState(null, "", url);
     }
-  }, [input, theme, tileColor]);
+  };
+
+  const setInput = (value: string) => update({ ...state, input: value });
+  const setTheme = (value: string) => update({ ...state, theme: value });
+  const setTileColor = (value: string) =>
+    update({ ...state, tileColor: value });
 
   const handleOptionChange = (value: string) => {
     const transformedValue = transformString(
       optionValues[value as keyof typeof optionValues]
     );
     setInput(transformedValue);
-    setSelectedOption(value);
   };
 
   return {

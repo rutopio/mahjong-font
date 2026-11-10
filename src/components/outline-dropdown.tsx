@@ -1,12 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import {
-  useCallback,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useId, useMemo, useRef, useState } from "react";
 import { FluidHoverHighlight } from "@/components/fluid-hover-highlight";
 import { Button } from "@/components/ui/button";
 import { useFluidHover } from "@/hooks/use-fluid-hover";
@@ -37,15 +30,16 @@ export function OutlineDropdown({
   const id = useId();
   const reducedMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
+  const openRef = useRef(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const openTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const focusFrame = useRef<number | null>(null);
   const hover = useFluidHover(listRef, { axis: "y", nearest: true });
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const [focusedIndex, setFocusedIndex] = useState(0);
-  const focusAfterOpen = useRef(false);
   const itemRefCallbacks = useMemo(
     () =>
       items.map((_, index) => (element: HTMLAnchorElement | null) => {
@@ -58,6 +52,9 @@ export function OutlineDropdown({
   const close = useCallback(
     (restoreFocus = false) => {
       clearTimeout(openTimer.current);
+      if (focusFrame.current !== null) cancelAnimationFrame(focusFrame.current);
+      focusFrame.current = null;
+      openRef.current = false;
       setOpen(false);
       hover.setActiveIndex(null);
       if (restoreFocus) triggerRef.current?.focus();
@@ -65,52 +62,59 @@ export function OutlineDropdown({
     [hover.setActiveIndex]
   );
 
-  useMountEffect(() => () => clearTimeout(openTimer.current));
+  const openMenu = () => {
+    openRef.current = true;
+    setOpen(true);
+  };
 
-  useEffect(() => {
-    if (!open) return;
+  const scheduleFocus = (index: number) => {
+    if (focusFrame.current !== null) cancelAnimationFrame(focusFrame.current);
+    focusFrame.current = requestAnimationFrame(() => {
+      focusFrame.current = null;
+      itemRefs.current[index]?.focus();
+    });
+  };
+
+  const centerActiveItem = useCallback(
+    (element: HTMLSpanElement | null) => {
+      if (!element || !open) return;
+      const frame = requestAnimationFrame(() => {
+        const viewport = menuRef.current;
+        if (!viewport) return;
+        const viewportRect = viewport.getBoundingClientRect();
+        const activeRect = element.getBoundingClientRect();
+        viewport.scrollTop +=
+          activeRect.top -
+          viewportRect.top -
+          viewport.clientHeight / 2 +
+          activeRect.height / 2;
+      });
+      return () => cancelAnimationFrame(frame);
+    },
+    [open]
+  );
+
+  useMountEffect(() => () => {
+    clearTimeout(openTimer.current);
+    if (focusFrame.current !== null) cancelAnimationFrame(focusFrame.current);
+  });
+
+  useMountEffect(() => {
     const onPointerDown = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) close();
+      if (openRef.current && !rootRef.current?.contains(event.target as Node))
+        close();
     };
     document.addEventListener("pointerdown", onPointerDown, true);
     return () =>
       document.removeEventListener("pointerdown", onPointerDown, true);
-  }, [open, close]);
-
-  useEffect(() => {
-    if (!open || !focusAfterOpen.current) return;
-    const frame = requestAnimationFrame(() => {
-      itemRefs.current[focusedIndex]?.focus();
-      focusAfterOpen.current = false;
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [open, focusedIndex]);
-
-  useEffect(() => {
-    if (!open) return;
-    const frame = requestAnimationFrame(() => {
-      const viewport = menuRef.current;
-      const active = viewport?.querySelector<HTMLElement>(
-        `[href="#${encodeURIComponent(activeId)}"]`
-      );
-      if (!viewport || !active) return;
-      const viewportRect = viewport.getBoundingClientRect();
-      const activeRect = active.getBoundingClientRect();
-      viewport.scrollTop +=
-        activeRect.top -
-        viewportRect.top -
-        viewport.clientHeight / 2 +
-        activeRect.height / 2;
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [open, activeId]);
+  });
 
   const move = (index: number) => {
     const next = (index + items.length) % items.length;
     setFocusedIndex(next);
     hover.setActiveIndex(next);
-    focusAfterOpen.current = true;
-    setOpen(true);
+    openMenu();
+    scheduleFocus(next);
   };
 
   const onKeyDown = (event: React.KeyboardEvent) => {
@@ -142,7 +146,7 @@ export function OutlineDropdown({
       className="relative size-10 rounded-lg border border-border bg-background dark:border-input dark:bg-neutral-800"
       onMouseEnter={() => {
         clearTimeout(openTimer.current);
-        openTimer.current = setTimeout(() => setOpen(true), 200);
+        openTimer.current = setTimeout(openMenu, 200);
       }}
       onMouseLeave={() => close()}
       onBlurCapture={(event) => {
@@ -162,14 +166,13 @@ export function OutlineDropdown({
         aria-controls={open ? id : undefined}
         onClick={() => {
           clearTimeout(openTimer.current);
-          focusAfterOpen.current = true;
-          setFocusedIndex(
-            Math.max(
-              0,
-              items.findIndex((item) => item.id === activeId)
-            )
+          const index = Math.max(
+            0,
+            items.findIndex((item) => item.id === activeId)
           );
-          setOpen(true);
+          setFocusedIndex(index);
+          openMenu();
+          scheduleFocus(index);
         }}
         onKeyDown={onKeyDown}
       >
@@ -230,7 +233,12 @@ export function OutlineDropdown({
                         activeId === item.id ? "font-semibold text-primary" : ""
                       }`}
                     >
-                      <span className={item.depth === 3 ? "pl-4" : undefined}>
+                      <span
+                        ref={
+                          activeId === item.id ? centerActiveItem : undefined
+                        }
+                        className={item.depth === 3 ? "pl-4" : undefined}
+                      >
                         {item.label}
                       </span>
                     </a>
