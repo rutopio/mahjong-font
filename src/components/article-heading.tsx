@@ -26,7 +26,7 @@ export function ArticleHeading({
   return (
     <Heading
       id={id}
-      className={`group flex items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50 ${level === 3 ? "scroll-m-20" : "scroll-mt-14"}`}
+      className="group flex scroll-mt-14 items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50"
     >
       <a
         href={`#${id}`}
