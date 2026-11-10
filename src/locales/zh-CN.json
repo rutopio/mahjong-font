@@ -32,6 +32,7 @@
 
   "about": {
     "title": "关于",
+    "actionsLabel": "关于页面操作",
     "intro": "Mahjong Font 是一个用牌谱文字制作麻将牌图的工具。",
     "features": "输入万子、筒子、索子与字牌等表记，就能预览彩色或黑白牌图，并保存为图片。也可以下载具备 OpenType 功能的字体。",
     "apiPrefix": "如果要在网页中嵌入牌图，可以使用",

@@ -58,8 +58,17 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export function ApiPageActions({ items }: { items: OutlineItem[] }) {
+export function ApiPageActions({
+  items,
+  pageTitle,
+  actionsLabel,
+}: {
+  items: OutlineItem[];
+  pageTitle?: string;
+  actionsLabel?: string;
+}) {
   const { t } = useTranslation();
+  const label = actionsLabel ?? t("apiActions.label");
   const [activeId, setActiveId] = useState("");
   const [progress, setProgress] = useState(0);
   const [outlineOpen, setOutlineOpen] = useState(false);
@@ -160,7 +169,7 @@ export function ApiPageActions({ items }: { items: OutlineItem[] }) {
       <FluidHoverControls
         buttonGroup
         orientation="horizontal"
-        label={t("apiActions.label")}
+        label={label}
         className="fixed right-4 bottom-[calc(2rem+env(safe-area-inset-bottom))] z-10 h-fit min-[50rem]:hidden"
       >
         {items.length > 0 && (
@@ -178,7 +187,7 @@ export function ApiPageActions({ items }: { items: OutlineItem[] }) {
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader className="border-border border-b pb-4">
-                <DrawerTitle>{t("imgApi.title")}</DrawerTitle>
+                <DrawerTitle>{pageTitle ?? t("imgApi.title")}</DrawerTitle>
               </DrawerHeader>
               <nav
                 ref={drawerScrollRef}
@@ -219,7 +228,7 @@ export function ApiPageActions({ items }: { items: OutlineItem[] }) {
       <FluidHoverControls
         buttonGroup
         orientation="vertical"
-        label={t("apiActions.label")}
+        label={label}
         className="fixed top-1/2 left-[var(--gutter-offset)] z-10 hidden h-fit -translate-y-1/2 min-[50rem]:flex"
       >
         {items.length > 0 && (

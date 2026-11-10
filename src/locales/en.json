@@ -32,6 +32,7 @@
 
   "about": {
     "title": "About",
+    "actionsLabel": "About page actions",
     "intro": "Mahjong Font is a tool that turns notation strings into mahjong tile diagrams.",
     "features": "Enter manzu, pinzu, souzu, and honor tile notation to preview a color or monochrome diagram and save it as an image. You can also download the OpenType fonts.",
     "apiPrefix": "To embed a tile diagram on a web page, use the ",
