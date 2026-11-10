@@ -91,7 +91,7 @@ export function ApiDocs() {
         className="flex h-full w-full items-center justify-center p-12"
         role="status"
         aria-busy="true"
-        aria-label="Loading"
+        aria-label={t("ui.loading")}
       >
         <CircleNotchIcon
           className="size-12 animate-spin motion-reduce:animate-none"

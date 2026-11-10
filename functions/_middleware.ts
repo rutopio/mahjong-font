@@ -15,6 +15,7 @@ import { isValidImageTile } from "../src/lib/image-input";
 import { OG_HEIGHT, OG_WIDTH } from "../src/lib/render-og-image";
 import { decodeFromQuery, encodeToQuery } from "../src/lib/url-state";
 import {
+  HREFLANG,
   imageAltFor,
   metaFor,
   OG_LOCALE,
@@ -40,6 +41,13 @@ class TextRewriter {
   constructor(private readonly value: string) {}
   element(el: Element) {
     el.setInnerContent(this.value);
+  }
+}
+
+class LangRewriter {
+  constructor(private readonly lang: string) {}
+  element(el: Element) {
+    el.setAttribute("lang", this.lang);
   }
 }
 
@@ -81,7 +89,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
     : decodeFromQuery("");
   const imageUrl = `${url.origin}/og?${encodeToQuery(imageState)}`;
   const imageAlt = imageAltFor(route.lang, imageState.input);
-  const pageUrl = `${url.origin}${route.path}${isContentPage ? "" : `?${query}`}`;
+  const pageUrl = `${url.origin}${route.path}${isContentPage || !url.search ? "" : `?${query}`}`;
 
   // Canonical points at the current localized page without the share query, so
   // each locale URL is self-canonical and agrees with the hreflang alternates
@@ -95,6 +103,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const zhCnAlt = `${url.origin}${pathFor("zh-CN", route.page)}`;
 
   return new HTMLRewriter()
+    .on("html", new LangRewriter(HREFLANG[route.lang]))
     .on("title", new TextRewriter(title))
     .on('meta[name="description"]', setContent(description))
     .on('link[rel="canonical"]', new MetaHrefRewriter(canonicalUrl))

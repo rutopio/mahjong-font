@@ -23,6 +23,13 @@ const TanStackRouterDevtools = import.meta.env.DEV
     )
   : () => null;
 
+const SKIP_LABEL = {
+  ja: "メインコンテンツへ移動",
+  en: "Skip to main content",
+  "zh-TW": "跳到主要內容",
+  "zh-CN": "跳到主要内容",
+} as const;
+
 export const Route = createRootRoute({
   component: RootComponent,
   notFoundComponent: RootNotFound,
@@ -70,8 +77,18 @@ function RootComponent() {
         key={lang}
         className="mx-auto flex min-h-full w-full max-w-2xl flex-col px-3 min-[360px]:px-6"
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:outline-2 focus:outline-ring"
+        >
+          {SKIP_LABEL[lang]}
+        </a>
         <Navbar />
-        <main className="flex min-w-0 flex-1 justify-center bg-background">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="flex min-w-0 flex-1 justify-center bg-background"
+        >
           <AnimatedOutlet />
         </main>
         <Footer />
