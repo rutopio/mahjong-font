@@ -9,6 +9,7 @@ import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { FluidHoverControls } from "@/components/fluid-hover-controls";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -36,9 +37,9 @@ import { type Locale, withLocale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
 const navLinkClass =
-  "flex h-9 items-center whitespace-nowrap rounded-lg px-3 font-medium text-base text-foreground hover:bg-hover focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted";
+  "flex h-9 items-center whitespace-nowrap rounded-lg px-3 font-medium text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted";
 const actionClass =
-  "cursor-default rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out hover:bg-hover active:scale-[0.96] max-[359px]:size-8";
+  "cursor-default rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0! max-[359px]:size-8";
 const FONT_VERSION = "v2.1";
 
 export function Navbar() {
@@ -150,7 +151,7 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div className="flex items-center gap-2">
+            <FluidHoverControls label={t("ui.navMenu")}>
               <Link
                 to={withLocale("/", language)}
                 activeOptions={{ exact: true, includeSearch: false }}
@@ -175,11 +176,11 @@ export function Navbar() {
               >
                 {t("ui.navAbout")}
               </Link>
-            </div>
+            </FluidHoverControls>
           )}
         </div>
 
-        <div className="flex items-center gap-0 min-[360px]:gap-2">
+        <FluidHoverControls compact>
           <a
             href={GITHUB_REPO_URL}
             target="_blank"
@@ -353,7 +354,7 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
-        </div>
+        </FluidHoverControls>
       </nav>
     </header>
   );
