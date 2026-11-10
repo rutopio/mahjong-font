@@ -180,7 +180,7 @@ export function OutlineDropdown({
       </Button>
       <AnimatePresence>
         {open && (
-          <div className="absolute top-1/2 right-full z-50 w-64 -translate-y-1/2 pr-2">
+          <div className="absolute top-1/2 right-full z-50 w-96 max-w-[calc(100vw-4rem)] -translate-y-1/2 pr-2">
             <motion.div
               initial={
                 reducedMotion
@@ -229,7 +229,7 @@ export function OutlineDropdown({
                         close(true);
                         onNavigate(item.id);
                       }}
-                      className={`relative flex min-h-8 w-full min-w-0 items-center rounded-md px-2.5 py-1.5 text-left text-sm focus-visible:outline-none ${
+                      className={`relative flex min-h-8 w-full min-w-0 items-center rounded-md px-2.5 py-1.5 text-left text-base focus-visible:outline-none ${
                         activeId === item.id ? "font-semibold text-primary" : ""
                       }`}
                     >
@@ -237,7 +237,9 @@ export function OutlineDropdown({
                         ref={
                           activeId === item.id ? centerActiveItem : undefined
                         }
-                        className={item.depth === 3 ? "pl-4" : undefined}
+                        className={
+                          item.depth === 3 ? "min-w-0 pl-4" : "min-w-0"
+                        }
                       >
                         {item.label}
                       </span>
