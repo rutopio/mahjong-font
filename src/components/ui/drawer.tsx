@@ -36,17 +36,24 @@ function DrawerContent({
     return (
         <DrawerPrimitive.Portal>
             <DrawerOverlay />
-            <DrawerPrimitive.Popup
-                data-slot="drawer-content"
-                className={cn(
-                    "group/drawer-content fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[80vh] flex-col rounded-t-xl border-t bg-popover text-base text-popover-foreground shadow-lg transition-transform duration-300 ease-out will-change-transform data-ending-style:translate-y-full data-starting-style:translate-y-full",
-                    className
-                )}
-                {...props}
+            <DrawerPrimitive.Viewport
+                data-slot="drawer-viewport"
+                className="pointer-events-none fixed inset-0 z-50"
             >
-                <div className="mx-auto mt-4 h-1.5 w-[100px] shrink-0 rounded-full bg-muted" />
-                {children}
-            </DrawerPrimitive.Popup>
+                <DrawerPrimitive.Popup
+                    data-slot="drawer-content"
+                    className={cn(
+                        "group/drawer-content pointer-events-auto fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[80vh] flex-col rounded-t-xl border-t bg-popover text-base text-popover-foreground shadow-lg transition-transform duration-300 ease-out will-change-transform data-ending-style:translate-y-full data-starting-style:translate-y-full",
+                        className
+                    )}
+                    {...props}
+                >
+                    <div className="mx-auto mt-4 h-1.5 w-[100px] shrink-0 rounded-full bg-muted" />
+                    <DrawerPrimitive.Content className="flex min-h-0 flex-1 flex-col overflow-hidden overscroll-contain">
+                        {children}
+                    </DrawerPrimitive.Content>
+                </DrawerPrimitive.Popup>
+            </DrawerPrimitive.Viewport>
         </DrawerPrimitive.Portal>
     )
 }

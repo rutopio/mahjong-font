@@ -4,7 +4,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { ApiPageActions } from "@/components/api-page-actions";
 import { ArticleHeading } from "@/components/article-heading";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 /** Render `code` and **bold** markers inside a param description. */
@@ -155,8 +154,10 @@ export function ApiDocs() {
             <Trans
               i18nKey="imgApi.convertIntro"
               components={{
-                from: <Badge variant="outline" className="font-mono" />,
-                to: <Badge variant="outline" className="font-mono" />,
+                from: (
+                  <code className="rounded bg-muted px-1 py-0.5 font-mono" />
+                ),
+                to: <code className="rounded bg-muted px-1 py-0.5 font-mono" />,
               }}
             />
           </p>
@@ -208,9 +209,9 @@ export function ApiDocs() {
                       <div className="flex items-center gap-2">
                         <code className="font-medium font-mono">{p.name}</code>
                         {p.required && (
-                          <Badge variant="secondary" className="font-normal">
+                          <span className="rounded-full bg-secondary px-2 py-0.5 text-base text-secondary-foreground">
                             {t("imgApi.required")}
-                          </Badge>
+                          </span>
                         )}
                       </div>
                     </td>
