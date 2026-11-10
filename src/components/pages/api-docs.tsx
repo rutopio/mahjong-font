@@ -14,7 +14,7 @@ function parseDescription(text: string): ReactNode {
         <code
           // biome-ignore lint/suspicious/noArrayIndexKey: static split, stable order
           key={i}
-          className="rounded bg-muted px-1 py-0.5 font-mono text-xs"
+          className="rounded bg-muted px-1 py-0.5 font-mono text-base"
         >
           {part.slice(1, -1)}
         </code>
@@ -105,6 +105,18 @@ function CopyButton({ text }: { text: string }) {
   );
 }
 
+function SectionHeading({ children }: { children: ReactNode }) {
+  return (
+    <h2 className="flex items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50">
+      {children}
+      <span
+        aria-hidden="true"
+        className="ml-4 h-0.5 min-w-4 flex-1 scale-y-50 bg-border"
+      />
+    </h2>
+  );
+}
+
 export function ApiDocs() {
   const { t, ready } = useTranslation();
   const origin = typeof window !== "undefined" ? window.location.origin : "";
@@ -126,30 +138,26 @@ export function ApiDocs() {
   }
 
   return (
-    <div className="mx-auto flex w-full flex-col gap-10 p-6 lg:max-w-3xl">
-      <header className="flex flex-col gap-3">
-        <h1 className="text-balance font-semibold text-2xl">
+    <article className="flex w-full min-w-0 flex-col gap-6 py-6 text-base text-neutral-800 tabular-nums leading-[1.65] sm:py-12 dark:text-neutral-300">
+      <header className="flex flex-col gap-6">
+        <h1 className="text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50">
           {t("imgApi.title")}
         </h1>
-        <p className="text-pretty text-muted-foreground text-sm leading-relaxed">
+        <p className="text-pretty text-base leading-[1.65]">
           {t("imgApi.intro")}
         </p>
       </header>
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-balance font-semibold text-lg">
-          {t("imgApi.urlFormatHeading")}
-        </h2>
-        <code className="block overflow-x-auto rounded-md bg-muted px-4 py-3 font-mono text-sm">
+      <section className="flex min-w-0 flex-col gap-6">
+        <SectionHeading>{t("imgApi.urlFormatHeading")}</SectionHeading>
+        <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
           {`${origin}/img/<${t("imgApi.tilePlaceholder")}>?theme=color&color=AA7942`}
         </code>
       </section>
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-balance font-semibold text-lg">
-          {t("imgApi.convertHeading")}
-        </h2>
-        <p className="text-pretty text-muted-foreground text-sm leading-relaxed">
+      <section className="flex min-w-0 flex-col gap-6">
+        <SectionHeading>{t("imgApi.convertHeading")}</SectionHeading>
+        <p className="text-pretty text-base leading-[1.65]">
           <Trans
             i18nKey="imgApi.convertIntro"
             components={{
@@ -159,11 +167,11 @@ export function ApiDocs() {
           />
         </p>
         <div className="flex flex-col gap-2">
-          <code className="block overflow-x-auto rounded-md bg-muted px-4 py-3 font-mono text-xs">
+          <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
             {origin}/<span className="text-destructive">?tile=</span>
             7m7m7m2p3p4p8p8p8p4s5s6s8s_8s&amp;theme=color&amp;color=AA7942
           </code>
-          <code className="block overflow-x-auto rounded-md bg-muted px-4 py-3 font-mono text-xs">
+          <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
             {origin}
             <span className="text-destructive">/img/</span>
             7m7m7m2p3p4p8p8p8p4s5s6s8s_8s?theme=color&amp;color=AA7942
@@ -171,12 +179,10 @@ export function ApiDocs() {
         </div>
       </section>
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-balance font-semibold text-lg">
-          {t("imgApi.paramsHeading")}
-        </h2>
+      <section className="flex min-w-0 flex-col gap-6">
+        <SectionHeading>{t("imgApi.paramsHeading")}</SectionHeading>
         <div className="overflow-x-auto rounded-md border">
-          <table className="w-full text-sm">
+          <table className="w-full text-base">
             <thead className="bg-muted text-left text-muted-foreground">
               <tr>
                 <th className="px-4 py-2 font-medium">{t("imgApi.colName")}</th>
@@ -206,18 +212,18 @@ export function ApiDocs() {
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <code className="font-mono text-muted-foreground text-xs">
+                    <code className="font-mono text-base text-muted-foreground">
                       {p.location}
                     </code>
                   </td>
                   <td className="px-4 py-3">
-                    <code className="break-words font-mono text-primary text-xs">
+                    <code className="break-words font-mono text-primary text-sm">
                       {p.type}
                     </code>
                   </td>
                   <td className="px-4 py-3">
                     {p.default ? (
-                      <code className="font-mono text-muted-foreground text-xs">
+                      <code className="font-mono text-base text-muted-foreground">
                         {p.default}
                       </code>
                     ) : (
@@ -234,10 +240,8 @@ export function ApiDocs() {
         </div>
       </section>
 
-      <section className="flex flex-col gap-4">
-        <h2 className="text-balance font-semibold text-lg">
-          {t("imgApi.examplesHeading")}
-        </h2>
+      <section className="flex min-w-0 flex-col gap-6">
+        <SectionHeading>{t("imgApi.examplesHeading")}</SectionHeading>
         {EXAMPLES.map((ex) => {
           const fullUrl = `${origin}${ex.path}`;
           const label = t(ex.labelKey);
@@ -246,9 +250,9 @@ export function ApiDocs() {
               key={ex.path}
               className="flex flex-col gap-2 rounded-md border p-4"
             >
-              <span className="font-medium text-sm">{label}</span>
+              <span className="font-medium text-base">{label}</span>
               <div className="flex items-center gap-2">
-                <code className="flex-1 overflow-x-auto whitespace-nowrap rounded bg-muted px-3 py-2 font-mono text-xs">
+                <code className="flex-1 overflow-x-auto whitespace-nowrap rounded bg-muted px-3 py-2 font-mono text-sm">
                   {fullUrl}
                 </code>
                 <CopyButton text={fullUrl} />
@@ -265,19 +269,17 @@ export function ApiDocs() {
         })}
       </section>
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-balance font-semibold text-lg">
-          {t("imgApi.embedHeading")}
-        </h2>
-        <p className="text-muted-foreground text-sm">Markdown:</p>
-        <code className="block overflow-x-auto rounded-md bg-muted px-4 py-3 font-mono text-xs">
+      <section className="flex min-w-0 flex-col gap-6">
+        <SectionHeading>{t("imgApi.embedHeading")}</SectionHeading>
+        <p className="text-base text-muted-foreground">Markdown:</p>
+        <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
           {`![](${origin}/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)`}
         </code>
-        <p className="text-muted-foreground text-sm">HTML:</p>
-        <code className="block overflow-x-auto rounded-md bg-muted px-4 py-3 font-mono text-xs">
+        <p className="text-base text-muted-foreground">HTML:</p>
+        <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
           {`<img src="${origin}/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s" />`}
         </code>
       </section>
-    </div>
+    </article>
   );
 }

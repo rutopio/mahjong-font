@@ -16,9 +16,6 @@ importers:
       '@base-ui/react':
         specifier: 1.6.0
         version: 1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@fontsource-variable/host-grotesk':
-        specifier: 5.2.8
-        version: 5.2.8
       '@phosphor-icons/react':
         specifier: 2.1.10
         version: 2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -68,9 +65,6 @@ importers:
       '@cloudflare/workers-types':
         specifier: 4.20260621.1
         version: 4.20260621.1
-      '@fontsource-variable/albert-sans':
-        specifier: 5.2.8
-        version: 5.2.8
       '@fontsource-variable/noto-sans-jp':
         specifier: 5.2.10
         version: 5.2.10
@@ -578,12 +572,6 @@ packages:
 
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
-
-  '@fontsource-variable/albert-sans@5.2.8':
-    resolution: {integrity: sha512-hDtxW/K8gj8y+42BvH50UUIgpY7oriWXi+79Aam0MN+BIwk2CyN3kI/NP37e39PvC1625UFHEyBi48IcMy3DiA==}
-
-  '@fontsource-variable/host-grotesk@5.2.8':
-    resolution: {integrity: sha512-9rZBY0DY6eFKVC6+lvYga4tGfYO4pV8gZH2/Zp37KDlyQdR3KfCvh4GvDHCbWQd93OuaaYiPVtd8BGtoMykNQg==}
 
   '@fontsource-variable/noto-sans-jp@5.2.10':
     resolution: {integrity: sha512-m0XfZ38rZtCaGAuAQL0cBPQ6fc/RguYEOqw66zvuLOV9vNRUBf9MFqyoazTu2JVCRIcnkrxbwF29UUaHHgTKdg==}
@@ -3209,10 +3197,6 @@ snapshots:
       react-dom: 19.2.7(react@19.2.7)
 
   '@floating-ui/utils@0.2.11': {}
-
-  '@fontsource-variable/albert-sans@5.2.8': {}
-
-  '@fontsource-variable/host-grotesk@5.2.8': {}
 
   '@fontsource-variable/noto-sans-jp@5.2.10': {}
 

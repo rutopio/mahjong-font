@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -28,36 +28,30 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
 import { useLang } from "@/hooks/use-lang";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
 import { type Locale, withLocale } from "@/lib/locale";
+import { cn } from "@/lib/utils";
 
 const navLinkClass =
-  "inline-flex h-9 items-center rounded-md px-3 py-2 font-medium text-sm transition-colors hover:bg-accent hover:text-accent-foreground";
-
+  "flex h-9 items-center whitespace-nowrap rounded-lg px-1 font-medium text-base text-foreground hover:bg-hover focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted sm:px-3";
+const actionClass =
+  "cursor-default rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out hover:bg-hover active:scale-[0.96]";
 const FONT_VERSION = "v2.1";
 
 export function Navbar() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const pathname = useLocation({ select: (l) => l.pathname });
-  // Active locale comes from the URL (the source of truth), not i18next state.
   const language = useLang();
+  const isHome =
+    pathname.replace(/\/$/, "") ===
+    withLocale("/", language).replace(/\/$/, "");
   const isMobile = useIsMobile();
   const [langDrawerOpen, setLangDrawerOpen] = useState(false);
   const [fontDrawerOpen, setFontDrawerOpen] = useState(false);
 
-  // The font files live on raw.githubusercontent.com (cross-origin), where the
-  // `download` attribute is ignored — the browser would navigate to the file
-  // instead of saving it. Fetch it as a blob and download via an object URL so
-  // it saves with a clean filename; fall back to opening the URL on failure.
   const downloadFont = async (fileUrl: string) => {
     const filename = fileUrl.split("/").pop() || "mahjong-font.otf";
     try {
@@ -75,76 +69,146 @@ export function Navbar() {
     }
   };
 
-  // Switching language is a soft navigation to the same page under the target
-  // locale's prefix (no reload). LangSync in __root then syncs i18next.
   const handleLanguageChange = (value: string) => {
     navigate({ to: withLocale(pathname, value as Locale) });
   };
 
   return (
-    <nav
-      className="container h-fit w-full bg-background p-4 lg:p-12"
-      aria-label="Main navigation"
-    >
-      <div className="flex h-full w-full items-center justify-between gap-0 sm:gap-4">
-        <div className="flex items-center gap-2 sm:gap-4">
+    <header className="w-full bg-background font-heading">
+      <nav
+        aria-label="Main navigation"
+        className="relative flex w-full items-center justify-between pt-6 sm:pt-12"
+      >
+        <div className="flex min-w-0 items-center gap-1 sm:gap-2">
           <Link
             to={withLocale("/", language)}
-            aria-label="Home"
-            className="shrink-0"
+            activeOptions={{ exact: true, includeSearch: false }}
+            aria-label={t("ui.navHome")}
+            className="flex h-12 shrink-0 items-center rounded-md focus-visible:outline-2 focus-visible:outline-ring"
           >
-            <img
-              src="/icon.svg"
-              alt=""
-              className="size-8 transition-transform hover:scale-110"
-            />
+            <span className="flex size-12 items-center justify-center">
+              <img src="/icon.svg" alt="" className="size-8" />
+            </span>
           </Link>
-          <NavigationMenu viewport={false}>
-            <NavigationMenuList>
-              {/* Home is desktop-only; the logo already links home on mobile. */}
-              <NavigationMenuItem className="hidden lg:flex">
-                <NavigationMenuLink
-                  className={navLinkClass}
-                  render={
-                    <Link
-                      to={withLocale("/", language)}
-                      activeOptions={{ exact: true, includeSearch: false }}
-                      activeProps={{
-                        className: "bg-accent",
-                        "aria-current": "page" as const,
-                      }}
-                    >
-                      {t("ui.navHome")}
-                    </Link>
-                  }
-                />
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  className={navLinkClass}
-                  render={
-                    <Link
-                      to={withLocale("/api", language)}
-                      activeProps={{
-                        className: "bg-accent",
-                        "aria-current": "page" as const,
-                      }}
-                    >
-                      {t("ui.navImageApi")}
-                    </Link>
-                  }
-                />
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+          <div className="flex items-center gap-1 sm:gap-2">
+            <Link
+              to={withLocale("/", language)}
+              activeOptions={{ exact: true, includeSearch: false }}
+              aria-current={isHome ? "page" : undefined}
+              className={cn(navLinkClass, isHome && "bg-muted")}
+            >
+              {t("ui.navHome")}
+            </Link>
+            <Link
+              to={withLocale("/api", language)}
+              activeOptions={{ exact: true }}
+              activeProps={{ "aria-current": "page" as const }}
+              className={navLinkClass}
+            >
+              {t("ui.navImageApi")}
+            </Link>
+          </div>
         </div>
-        <div className="flex items-center gap-0 sm:gap-4">
+
+        <div className="flex items-center gap-0 min-[360px]:gap-2">
+          <a
+            href={GITHUB_REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub repository (opens in a new tab)"
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "icon" }),
+              actionClass
+            )}
+          >
+            <GithubLogoIcon className="size-4" aria-hidden="true" />
+          </a>
+
           {isMobile ? (
             <>
               <Button
                 variant="ghost"
+                size="icon"
                 type="button"
-                className="rounded-full sm:rounded-md"
+                className={actionClass}
+                aria-label={t("ui.downloadFont")}
+                onClick={() => setFontDrawerOpen(true)}
+              >
+                <FileArrowDownIcon aria-hidden="true" />
+              </Button>
+              <Drawer open={fontDrawerOpen} onOpenChange={setFontDrawerOpen}>
+                <DrawerContent>
+                  <DrawerHeader>
+                    <DrawerTitle>{t("ui.downloadFont")}</DrawerTitle>
+                    <DrawerDescription className="sr-only">
+                      {t("ui.downloadFont")}
+                    </DrawerDescription>
+                  </DrawerHeader>
+                  <div className="px-4 pb-2">
+                    {fontDownloads.map((font) => (
+                      <button
+                        key={font.labelKey}
+                        type="button"
+                        className="flex w-full items-center justify-between gap-3 rounded-md px-3 py-3 text-sm hover:bg-accent"
+                        onClick={() => {
+                          downloadFont(font.url);
+                          setFontDrawerOpen(false);
+                        }}
+                      >
+                        {t(font.labelKey)}
+                        <Badge variant="secondary">{FONT_VERSION}</Badge>
+                      </button>
+                    ))}
+                  </div>
+                  <DrawerFooter>
+                    <DrawerClose
+                      render={
+                        <Button variant="outline">{t("ui.close")}</Button>
+                      }
+                    />
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
+            </>
+          ) : (
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    type="button"
+                    className={actionClass}
+                    aria-label={t("ui.downloadFont")}
+                  >
+                    <FileArrowDownIcon aria-hidden="true" />
+                  </Button>
+                }
+              />
+              <DropdownMenuContent align="end">
+                <DropdownMenuGroup>
+                  {fontDownloads.map((font) => (
+                    <DropdownMenuItem
+                      key={font.labelKey}
+                      className="justify-between gap-6"
+                      onClick={() => downloadFont(font.url)}
+                    >
+                      {t(font.labelKey)}
+                      <Badge variant="secondary">{FONT_VERSION}</Badge>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+
+          {isMobile ? (
+            <>
+              <Button
+                variant="ghost"
+                size="icon"
+                type="button"
+                className={actionClass}
                 aria-label={t("ui.language")}
                 onClick={() => setLangDrawerOpen(true)}
               >
@@ -192,12 +256,12 @@ export function Navbar() {
                 render={
                   <Button
                     variant="ghost"
+                    size="icon"
                     type="button"
-                    className="rounded-full sm:rounded-md"
+                    className={actionClass}
                     aria-label={t("ui.language")}
                   >
                     <TranslateIcon aria-hidden="true" />
-                    <span className="hidden lg:block">{t("ui.language")}</span>
                   </Button>
                 }
               />
@@ -220,108 +284,8 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
-
-          {isMobile ? (
-            <>
-              <Button
-                variant="ghost"
-                type="button"
-                className="rounded-full sm:rounded-md"
-                aria-label={t("ui.downloadFont")}
-                onClick={() => setFontDrawerOpen(true)}
-              >
-                <FileArrowDownIcon aria-hidden="true" />
-              </Button>
-              <Drawer open={fontDrawerOpen} onOpenChange={setFontDrawerOpen}>
-                <DrawerContent>
-                  <DrawerHeader>
-                    <DrawerTitle>{t("ui.downloadFont")}</DrawerTitle>
-                    <DrawerDescription className="sr-only">
-                      {t("ui.downloadFont")}
-                    </DrawerDescription>
-                  </DrawerHeader>
-                  <div className="px-4 pb-2">
-                    {fontDownloads.map((font) => (
-                      <button
-                        key={font.labelKey}
-                        type="button"
-                        className="flex w-full items-center justify-between gap-3 rounded-md px-3 py-3 text-sm hover:bg-accent"
-                        onClick={() => {
-                          downloadFont(font.url);
-                          setFontDrawerOpen(false);
-                        }}
-                      >
-                        {t(font.labelKey)}
-                        <Badge variant="secondary">{FONT_VERSION}</Badge>
-                      </button>
-                    ))}
-                  </div>
-                  <DrawerFooter>
-                    <DrawerClose
-                      render={
-                        <Button variant="outline">{t("ui.close")}</Button>
-                      }
-                    />
-                  </DrawerFooter>
-                </DrawerContent>
-              </Drawer>
-            </>
-          ) : (
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                render={
-                  <Button
-                    variant="ghost"
-                    type="button"
-                    className="rounded-full sm:rounded-md"
-                    aria-label={t("ui.downloadFont")}
-                  >
-                    <FileArrowDownIcon aria-hidden="true" />
-                    <span className="hidden lg:block">
-                      {t("ui.downloadFont")}
-                    </span>
-                  </Button>
-                }
-              />
-              <DropdownMenuContent align="end">
-                <DropdownMenuGroup>
-                  {fontDownloads.map((font) => (
-                    <DropdownMenuItem
-                      key={font.labelKey}
-                      className="justify-between gap-6"
-                      onClick={() => downloadFont(font.url)}
-                    >
-                      {t(font.labelKey)}
-                      <Badge variant="secondary">{FONT_VERSION}</Badge>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
-
-          <Button
-            variant="ghost"
-            nativeButton={false}
-            className="rounded-full sm:rounded-md"
-            render={
-              <a
-                href={GITHUB_REPO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub repository, opens in new tab"
-              >
-                <GithubLogoIcon />
-                <span className="flex items-center gap-0">
-                  <span>rutopio</span>
-                  <span className="hidden lg:block">{" / "}</span>
-                  <span className="hidden lg:block">mahjong-font</span>
-                </span>
-              </a>
-            }
-          />
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }

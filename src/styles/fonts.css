@@ -1,11 +1,23 @@
-/* Self-hosted via @fontsource (variable, with latin + latin-ext + CJK subsets).
-   Latin: Albert Sans (sans), Host Grotesk (heading).
-   CJK fallback order: Japanese -> Traditional Chinese -> Simplified Chinese. */
-@import "@fontsource-variable/albert-sans";
-@import "@fontsource-variable/host-grotesk";
+/* Inter for Latin, then locale-aware Noto Sans CJK fallbacks. */
 @import "@fontsource-variable/noto-sans-jp";
 @import "@fontsource-variable/noto-sans-tc";
 @import "@fontsource-variable/noto-sans-sc";
+
+@font-face {
+  font-family: "Inter Variable";
+  src: url("/fonts/ui/inter-normal-core.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter Variable";
+  src: url("/fonts/ui/inter-italic-core.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+}
 
 /* Paper Mono — not on @fontsource, self-hosted woff2 */
 @font-face {

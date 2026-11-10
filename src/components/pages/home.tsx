@@ -42,7 +42,7 @@ export function Home() {
   }
 
   return (
-    <div className="mx-auto my-auto flex w-full flex-col items-center gap-8 p-6 lg:max-w-5xl">
+    <div className="mx-auto my-auto flex w-full min-w-0 flex-col items-center gap-8 py-6 sm:py-12 lg:w-[calc(100vw-3rem)] lg:max-w-5xl lg:self-center">
       <h1 className="text-balance text-center font-semibold text-2xl">
         {t("ui.toolTitle")}
       </h1>

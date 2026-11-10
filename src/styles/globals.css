@@ -3,15 +3,26 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark, .dark *));
+
+@theme {
+  --font-weight-normal: 400;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 700;
+
+  --text-xs: 0.625rem;
+  --text-sm: 0.75rem;
+  --text-base: 0.875rem;
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.375rem;
+}
 
 @theme inline {
   --font-sans:
-    "Albert Sans Variable", "Noto Sans JP Variable", "Noto Sans TC Variable",
-    "Noto Sans SC Variable", sans-serif;
-  --font-heading:
-    "Host Grotesk Variable", "Noto Sans JP Variable", "Noto Sans TC Variable",
-    "Noto Sans SC Variable", sans-serif;
+    "Inter Variable", var(--font-cjk-primary), var(--font-cjk-secondary),
+    var(--font-cjk-tertiary), sans-serif;
+  --font-heading: var(--font-sans);
   --font-mono:
     "Paper Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
@@ -47,17 +58,26 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-hover: var(--hover);
 
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
 }
 
 :root {
+  --hover: rgb(0 0 0 / 0.04);
+  --font-cjk-primary: "Noto Sans TC Variable";
+  --font-cjk-secondary: "Noto Sans JP Variable";
+  --font-cjk-tertiary: "Noto Sans SC Variable";
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -69,7 +89,7 @@
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.269 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -81,7 +101,10 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --radius: 0.45rem;
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -93,6 +116,7 @@
 }
 
 .dark {
+  --hover: rgb(255 255 255 / 0.06);
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -126,12 +150,28 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+html:lang(ja) {
+  --font-cjk-primary: "Noto Sans JP Variable";
+  --font-cjk-secondary: "Noto Sans TC Variable";
+}
+
+html:lang(zh-Hans) {
+  --font-cjk-primary: "Noto Sans SC Variable";
+  --font-cjk-secondary: "Noto Sans TC Variable";
+  --font-cjk-tertiary: "Noto Sans JP Variable";
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -139,6 +179,13 @@
   }
   html {
     @apply bg-background font-sans;
+    scrollbar-gutter: stable;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+  p, li, blockquote {
+    text-wrap: pretty;
   }
   html,
   body {
