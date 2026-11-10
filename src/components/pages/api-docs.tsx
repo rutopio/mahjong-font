@@ -151,7 +151,7 @@ export function ApiDocs() {
             {t("imgApi.paramsHeading")}
           </ArticleHeading>
           <div className="overflow-x-auto rounded-md border">
-            <table className="w-full text-base">
+            <table className="w-full text-base leading-[1.65]">
               <thead className="bg-muted text-left text-muted-foreground">
                 <tr>
                   <th className="px-4 py-2 font-medium">
@@ -193,7 +193,7 @@ export function ApiDocs() {
                       </code>
                     </td>
                     <td className="px-4 py-3">
-                      <code className="break-words font-mono text-primary text-sm">
+                      <code className="break-words font-mono text-base text-primary">
                         {p.type}
                       </code>
                     </td>

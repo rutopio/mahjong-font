@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { ArticleHeading } from "@/components/article-heading";
+import { GithubMarkIcon } from "@/components/github-mark-icon";
 import { useLang } from "@/hooks/use-lang";
 import { fontDownloads, GITHUB_REPO_URL } from "@/lib/constants";
 import { withLocale } from "@/lib/locale";
@@ -35,14 +36,19 @@ export function About() {
           {t("about.sourceHeading")}
         </ArticleHeading>
         <p className="text-pretty">
-          GitHub:{" "}
           <a
             href={GITHUB_REPO_URL}
-            className={linkClass}
+            className={`${linkClass} whitespace-nowrap`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            @rutopio/mahjong-font
+            <span
+              aria-hidden="true"
+              className="mr-1 inline-block h-4 w-4 align-[-0.125em] text-primary [&>svg]:size-full"
+            >
+              <GithubMarkIcon />
+            </span>
+            rutopio/mahjong-font
           </a>
         </p>
       </section>
