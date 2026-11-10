@@ -141,7 +141,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               onClick={() => handleDownload("png")}
             >
               <DownloadSimpleIcon aria-hidden="true" />
-              <span className="text-xs">PNG</span>
+              <span>PNG</span>
             </Button>
             <Button
               variant="outline"
@@ -149,7 +149,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               onClick={() => handleDownload("jpg")}
             >
               <DownloadSimpleIcon aria-hidden="true" />
-              <span className="text-xs">JPG</span>
+              <span>JPG</span>
             </Button>
             <Button
               variant="outline"
@@ -157,7 +157,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               onClick={() => handleDownload("svg")}
             >
               <DownloadSimpleIcon aria-hidden="true" />
-              <span className="text-xs">SVG</span>
+              <span>SVG</span>
             </Button>
             <Button
               variant="outline"
@@ -166,7 +166,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               aria-label={t("ui.openImageApiNewTab")}
             >
               <ArrowSquareOutIcon aria-hidden="true" />
-              <span className="text-xs">{t("ui.navImageApi")}</span>
+              <span>{t("ui.navImageApi")}</span>
             </Button>
           </div>
         </DialogContent>
