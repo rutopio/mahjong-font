@@ -45,6 +45,8 @@ const EXAMPLES: { id: string; labelKey: string; path: string }[] = [
   },
 ];
 
+const EMBED_TILE = "7m7m7m2p3p4p8p8p8p4s5s6s8s_8s";
+
 /** Param rows: name/location/type/default are code symbols; only desc is i18n. */
 const PARAMS: {
   name: string;
@@ -80,6 +82,8 @@ const PARAMS: {
 export function ApiDocs() {
   const { t, ready } = useTranslation();
   const origin = typeof window !== "undefined" ? window.location.origin : "";
+  const embedUrl = `${origin}/img/${EMBED_TILE}`;
+  const embedAlt = t("imgApi.embedAlt", { tile: EMBED_TILE });
 
   if (!ready) {
     return (
@@ -115,6 +119,12 @@ export function ApiDocs() {
           </ArticleHeading>
           <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
             {`${origin}/img/<${t("imgApi.tilePlaceholder")}>?theme=color&color=AA7942`}
+          </code>
+          <p className="text-pretty">
+            {parseDescription(t("imgApi.encodingIntro"))}
+          </p>
+          <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
+            {`const imageUrl = \`${origin}/img/\${encodeURIComponent(tile)}\`;`}
           </code>
         </section>
 
@@ -251,11 +261,11 @@ export function ApiDocs() {
           </ArticleHeading>
           <p className="text-base text-muted-foreground">Markdown:</p>
           <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
-            {`![](${origin}/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)`}
+            {`![${embedAlt}](${embedUrl})`}
           </code>
           <p className="text-base text-muted-foreground">HTML:</p>
           <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
-            {`<img src="${origin}/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s" />`}
+            {`<img src="${embedUrl}" alt="${embedAlt}" />`}
           </code>
         </section>
       </article>
