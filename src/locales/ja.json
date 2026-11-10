@@ -44,7 +44,8 @@
   "apiActions": {
     "label": "API ページの操作",
     "outline": "目次",
-    "scrollToTop": "ページの先頭へ"
+    "scrollToTop": "ページの先頭へ",
+    "currentUrl": "現在の URL"
   },
 
   "share": {

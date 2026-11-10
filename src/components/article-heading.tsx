@@ -5,11 +5,14 @@ import { toast } from "sonner";
 export function ArticleHeading({
   id,
   children,
+  level = 2,
 }: {
   id: string;
   children: string;
+  level?: 2 | 3;
 }) {
   const { t } = useTranslation();
+  const Heading = level === 3 ? "h3" : "h2";
 
   const copySectionLink = () => {
     const url = new URL(window.location.href);
@@ -21,9 +24,9 @@ export function ArticleHeading({
   };
 
   return (
-    <h2
+    <Heading
       id={id}
-      className="group flex scroll-mt-14 items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50"
+      className={`group flex items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50 ${level === 3 ? "scroll-m-20" : "scroll-mt-14"}`}
     >
       <a
         href={`#${id}`}
@@ -39,10 +42,12 @@ export function ArticleHeading({
         </span>
         {children}
       </a>
-      <span
-        aria-hidden="true"
-        className="ml-4 h-0.5 min-w-4 flex-1 scale-y-50 bg-border"
-      />
-    </h2>
+      {level === 2 && (
+        <span
+          aria-hidden="true"
+          className="ml-4 h-0.5 min-w-4 flex-1 scale-y-50 bg-border"
+        />
+      )}
+    </Heading>
   );
 }

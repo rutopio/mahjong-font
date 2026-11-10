@@ -29,16 +29,22 @@ function parseDescription(text: string): ReactNode {
 }
 
 /** Example tile strings; labels are i18n keys resolved at render time. */
-const EXAMPLES: { labelKey: string; path: string }[] = [
+const EXAMPLES: { id: string; labelKey: string; path: string }[] = [
   {
+    id: "example-default",
     labelKey: "imgApi.exampleDefault",
     path: "/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s",
   },
   {
+    id: "example-color",
     labelKey: "imgApi.exampleColor",
     path: "/img/1m2m3m4p5p6p7s8s9s?theme=color&color=2D7D46",
   },
-  { labelKey: "imgApi.exampleMono", path: "/img/1z2z3z4z5z6z7z?theme=mono" },
+  {
+    id: "example-mono",
+    labelKey: "imgApi.exampleMono",
+    path: "/img/1z2z3z4z5z6z7z?theme=mono",
+  },
 ];
 
 /** Param rows: name/location/type/default are code symbols; only desc is i18n. */
@@ -248,31 +254,32 @@ export function ApiDocs() {
           <ArticleHeading id="examples">
             {t("imgApi.examplesHeading")}
           </ArticleHeading>
-          {EXAMPLES.map((ex) => {
-            const fullUrl = `${origin}${ex.path}`;
-            const label = t(ex.labelKey);
-            return (
-              <div
-                key={ex.path}
-                className="flex flex-col gap-2 rounded-md border p-4"
-              >
-                <span className="font-medium text-base">{label}</span>
-                <div className="flex items-center gap-2">
-                  <code className="flex-1 overflow-x-auto whitespace-nowrap rounded bg-muted px-3 py-2 font-mono text-sm">
-                    {fullUrl}
-                  </code>
-                  <CopyButton text={fullUrl} />
-                </div>
-                <div className="flex items-center justify-center overflow-x-auto rounded bg-white p-4">
-                  <img
-                    src={ex.path}
-                    alt={label}
-                    className="h-auto max-h-20 w-auto max-w-full"
-                  />
-                </div>
-              </div>
-            );
-          })}
+          <div className="flex min-w-0 flex-col gap-16">
+            {EXAMPLES.map((ex) => {
+              const fullUrl = `${origin}${ex.path}`;
+              const label = t(ex.labelKey);
+              return (
+                <section key={ex.id} className="flex min-w-0 flex-col gap-2">
+                  <ArticleHeading id={ex.id} level={3}>
+                    {label}
+                  </ArticleHeading>
+                  <div className="flex items-center gap-2">
+                    <code className="flex-1 overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
+                      {fullUrl}
+                    </code>
+                    <CopyButton text={fullUrl} />
+                  </div>
+                  <div className="flex min-h-20 items-center justify-center overflow-x-auto">
+                    <img
+                      src={ex.path}
+                      alt={label}
+                      className="h-auto max-h-20 w-auto max-w-full"
+                    />
+                  </div>
+                </section>
+              );
+            })}
+          </div>
         </section>
 
         <section className="flex min-w-0 flex-col gap-6">

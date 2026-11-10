@@ -1,8 +1,13 @@
-import { ArrowBendRightUpIcon, ShareNetworkIcon } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
+import { ArrowBendRightUpIcon } from "@phosphor-icons/react";
+import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
-
+import { ApiShareButton } from "@/components/api-share-button";
+import { FluidHoverControls } from "@/components/fluid-hover-controls";
+import {
+  OutlineDropdown,
+  type OutlineItem,
+} from "@/components/outline-dropdown";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -11,24 +16,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-const headings = [
-  { id: "url-format", label: "imgApi.urlFormatHeading" },
-  { id: "convert-shared-url", label: "imgApi.convertHeading" },
-  { id: "parameters", label: "imgApi.paramsHeading" },
-  { id: "examples", label: "imgApi.examplesHeading" },
-  { id: "embedding", label: "imgApi.embedHeading" },
-] as const;
+import { useMountEffect } from "@/hooks/use-mount-effect";
 
 const circumference = 2 * Math.PI * 6.25;
 
-function ProgressRing({ progress }: { progress: number }) {
+function ReadingProgressRing({ progress }: { progress: number }) {
+  const reducedMotion = useReducedMotion();
   return (
     <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4 -rotate-90">
       <circle
@@ -40,7 +33,7 @@ function ProgressRing({ progress }: { progress: number }) {
         strokeWidth="2.5"
         className="opacity-20"
       />
-      <circle
+      <motion.circle
         cx="8"
         cy="8"
         r="6.25"
@@ -49,8 +42,13 @@ function ProgressRing({ progress }: { progress: number }) {
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeDasharray={circumference}
-        strokeDashoffset={(1 - progress) * circumference}
-        className="transition-[stroke-dashoffset] duration-200 motion-reduce:transition-none"
+        initial={false}
+        animate={{ strokeDashoffset: (1 - progress) * circumference }}
+        transition={
+          reducedMotion
+            ? { duration: 0 }
+            : { type: "spring", stiffness: 200, damping: 30, mass: 0.4 }
+        }
       />
     </svg>
   );
@@ -62,14 +60,37 @@ function prefersReducedMotion() {
 
 export function ApiPageActions() {
   const { t } = useTranslation();
+  const [items, setItems] = useState<OutlineItem[]>([]);
   const [activeId, setActiveId] = useState("");
   const [progress, setProgress] = useState(0);
   const [outlineOpen, setOutlineOpen] = useState(false);
+  const drawerScrollRef = useRef<HTMLElement>(null);
+
+  useMountEffect(() => {
+    const article = document.querySelector("main article");
+    if (!article) return;
+    setItems(
+      Array.from(article.querySelectorAll<HTMLElement>("h2[id], h3[id]"))
+        .map((heading) => {
+          const visibleHeading = heading.cloneNode(true) as HTMLElement;
+          visibleHeading.querySelectorAll(".katex-mathml").forEach((node) => {
+            node.remove();
+          });
+          return {
+            id: heading.id,
+            label: visibleHeading.textContent?.trim() ?? "",
+            depth: heading.tagName === "H3" ? (3 as const) : (2 as const),
+          };
+        })
+        .filter((item) => item.label)
+    );
+  });
 
   useEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;
+      if (document.body.style.position === "fixed") return;
       const scrollY = window.scrollY;
       const scrollable =
         document.documentElement.scrollHeight - window.innerHeight;
@@ -78,12 +99,12 @@ export function ApiPageActions() {
       );
       const line = scrollY + Math.max(120, Math.round(window.innerHeight / 3));
       let current = "";
-      for (const item of headings) {
+      for (const item of items) {
         const heading = document.getElementById(item.id);
         if (heading && heading.getBoundingClientRect().top + scrollY <= line)
           current = item.id;
       }
-      if (scrollY >= scrollable - 2) current = headings.at(-1)?.id ?? current;
+      if (scrollY >= scrollable - 2) current = items.at(-1)?.id ?? current;
       setActiveId(current);
     };
     const schedule = () => {
@@ -100,54 +121,42 @@ export function ApiPageActions() {
       window.removeEventListener("resize", schedule);
       observer.disconnect();
     };
-  }, []);
+  }, [items]);
 
-  const navigateToHeading = (id: string, fromDrawer = false) => {
+  useEffect(() => {
+    if (!outlineOpen) return;
+    const frame = requestAnimationFrame(() => {
+      const viewport = drawerScrollRef.current;
+      const active = viewport?.querySelector<HTMLElement>("[data-active]");
+      if (!viewport || !active) return;
+      const viewportRect = viewport.getBoundingClientRect();
+      const activeRect = active.getBoundingClientRect();
+      viewport.scrollTop +=
+        activeRect.top -
+        viewportRect.top -
+        viewport.clientHeight / 2 +
+        activeRect.height / 2;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [outlineOpen]);
+
+  const navigateToHeading = (id: string) => {
     setOutlineOpen(false);
+    const reduceMotion = prefersReducedMotion();
     window.setTimeout(
       () => {
         const heading = document.getElementById(id);
         if (!heading) return;
-        heading.scrollIntoView({
-          behavior: prefersReducedMotion() ? "auto" : "smooth",
-        });
+        heading.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
         history.replaceState(null, "", `#${encodeURIComponent(id)}`);
       },
-      fromDrawer && !prefersReducedMotion() ? 350 : 0
+      reduceMotion ? 0 : 350
     );
-  };
-
-  const share = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: document.title,
-          url: window.location.href,
-        });
-        return;
-      } catch (error) {
-        if (error instanceof DOMException && error.name === "AbortError")
-          return;
-      }
-    }
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      toast.success(t("share.linkCopied"));
-    } catch {
-      toast.error(t("imgApi.copyFailed"));
-    }
   };
 
   const utilities = (
     <>
-      <Button
-        variant="outline"
-        size="icon-lg"
-        aria-label={t("share.share")}
-        onClick={share}
-      >
-        <ShareNetworkIcon aria-hidden="true" />
-      </Button>
+      <ApiShareButton size="icon-lg" />
       <Button
         variant="outline"
         size="icon-lg"
@@ -159,98 +168,91 @@ export function ApiPageActions() {
           })
         }
       >
-        <ArrowBendRightUpIcon aria-hidden="true" />
+        <ArrowBendRightUpIcon className="size-4" aria-hidden="true" />
       </Button>
     </>
   );
 
-  const outlineLabel = `${Math.round(progress * 100)}% · ${t("apiActions.outline")}`;
-
   return (
     <>
-      <fieldset
-        aria-label={t("apiActions.label")}
-        className="fixed right-4 bottom-[calc(2rem+env(safe-area-inset-bottom))] z-10 flex h-fit gap-1 rounded-lg border bg-background p-1 shadow-xs min-[50rem]:hidden"
+      <FluidHoverControls
+        buttonGroup
+        orientation="horizontal"
+        label={t("apiActions.label")}
+        className="fixed right-4 bottom-[calc(2rem+env(safe-area-inset-bottom))] z-10 h-fit min-[50rem]:hidden"
       >
-        <Drawer open={outlineOpen} onOpenChange={setOutlineOpen}>
-          <DrawerTrigger
-            render={
-              <Button
-                variant="outline"
-                size="icon-lg"
-                aria-label={outlineLabel}
-              />
-            }
-          >
-            <ProgressRing progress={progress} />
-          </DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader className="border-b pb-4">
-              <DrawerTitle>{t("imgApi.title")}</DrawerTitle>
-            </DrawerHeader>
-            <nav
-              aria-label={t("apiActions.outline")}
-              className="min-h-0 flex-1 overflow-y-auto px-4 pt-4 pb-6"
+        {items.length > 0 && (
+          <Drawer open={outlineOpen} onOpenChange={setOutlineOpen}>
+            <DrawerTrigger
+              render={
+                <Button
+                  variant="outline"
+                  size="icon-lg"
+                  aria-label={`${Math.round(progress * 100)}% · ${t("apiActions.outline")}`}
+                />
+              }
             >
-              <ul className="flex flex-col">
-                {headings.map((item) => (
-                  <li key={item.id}>
-                    <a
-                      href={`#${item.id}`}
-                      aria-current={
-                        activeId === item.id ? "location" : undefined
-                      }
-                      onClick={(event) => {
-                        event.preventDefault();
-                        navigateToHeading(item.id, true);
-                      }}
-                      className={`block py-1 text-base ${activeId === item.id ? "font-semibold text-primary" : "text-foreground"}`}
-                    >
-                      {t(item.label)}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </DrawerContent>
-        </Drawer>
-        {utilities}
-      </fieldset>
-
-      <fieldset
-        aria-label={t("apiActions.label")}
-        className="fixed top-1/2 left-[var(--gutter-offset)] z-10 hidden h-fit -translate-y-1/2 flex-col gap-1 rounded-lg border bg-background p-1 shadow-xs min-[50rem]:flex"
-      >
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            render={
-              <Button
-                variant="outline"
-                size="icon-lg"
-                aria-label={outlineLabel}
-              />
-            }
-          >
-            <ProgressRing progress={progress} />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent side="left" align="center" className="w-56">
-            {headings.map((item) => (
-              <DropdownMenuItem
-                key={item.id}
-                onClick={() => navigateToHeading(item.id)}
-                className={
-                  activeId === item.id
-                    ? "font-semibold text-primary"
-                    : undefined
-                }
+              <ReadingProgressRing progress={progress} />
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader className="border-border border-b pb-4">
+                <DrawerTitle>{t("imgApi.title")}</DrawerTitle>
+              </DrawerHeader>
+              <nav
+                ref={drawerScrollRef}
+                aria-label={t("apiActions.outline")}
+                className="min-h-0 flex-1 overflow-y-auto px-4 pt-4 pb-6"
               >
-                {t(item.label)}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+                <ul className="flex flex-col">
+                  {items.map((item) => (
+                    <li
+                      key={item.id}
+                      className={
+                        item.depth === 3
+                          ? "ml-3 border-primary/20 border-l pl-3"
+                          : undefined
+                      }
+                    >
+                      <a
+                        href={`#${encodeURIComponent(item.id)}`}
+                        data-active={activeId === item.id || undefined}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          navigateToHeading(item.id);
+                        }}
+                        className={`block py-1 text-base transition-colors ${activeId === item.id ? "font-semibold text-primary" : "text-foreground"}`}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </DrawerContent>
+          </Drawer>
+        )}
         {utilities}
-      </fieldset>
+      </FluidHoverControls>
+
+      <FluidHoverControls
+        buttonGroup
+        orientation="vertical"
+        label={t("apiActions.label")}
+        className="fixed top-1/2 left-[var(--gutter-offset)] z-10 hidden h-fit -translate-y-1/2 min-[50rem]:flex"
+      >
+        {items.length > 0 && (
+          <OutlineDropdown
+            items={items}
+            activeId={activeId}
+            progress={progress}
+            label={t("apiActions.outline")}
+            onNavigate={navigateToHeading}
+          >
+            <ReadingProgressRing progress={progress} />
+          </OutlineDropdown>
+        )}
+        {utilities}
+      </FluidHoverControls>
     </>
   );
 }

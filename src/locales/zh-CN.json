@@ -44,7 +44,8 @@
   "apiActions": {
     "label": "API 页面操作",
     "outline": "页面目录",
-    "scrollToTop": "返回顶部"
+    "scrollToTop": "返回顶部",
+    "currentUrl": "当前网址"
   },
 
   "share": {

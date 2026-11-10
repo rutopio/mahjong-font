@@ -44,7 +44,8 @@
   "apiActions": {
     "label": "API page actions",
     "outline": "On this page",
-    "scrollToTop": "Scroll to top"
+    "scrollToTop": "Scroll to top",
+    "currentUrl": "Current URL"
   },
 
   "share": {
