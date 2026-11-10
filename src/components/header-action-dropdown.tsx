@@ -174,7 +174,7 @@ export function HeaderActionDropdown({
       </Button>
       <AnimatePresence>
         {open && (
-          <div className="absolute top-full right-0 z-50 min-w-48 pt-2 sm:min-w-56">
+          <div className="absolute top-full right-0 z-50 w-fit min-w-48 max-w-[min(18rem,calc(100vw-2rem))] pt-2">
             <motion.div
               initial={
                 reducedMotion
@@ -190,12 +190,12 @@ export function HeaderActionDropdown({
               }}
               transition={spring.fast}
               style={{ transformOrigin: "top right" }}
-              className="rounded-lg border border-border bg-popover p-1 text-popover-foreground shadow-md"
+              className="w-max min-w-full max-w-full rounded-lg border border-border bg-popover p-1 text-popover-foreground shadow-md"
             >
               <ScrollArea
                 scrollFade
                 overscrollContain
-                className="h-auto! max-h-[calc(50dvh-0.625rem)] w-full [&_[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:right-[-3px]! [&_[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:w-1! [&_[data-slot=scroll-area-scrollbar]]:m-0.5 [&_[data-slot=scroll-area-thumb]]:bg-foreground/10! [&_[data-slot=scroll-area-viewport]]:max-h-[calc(50dvh-0.625rem)] data-has-overflow-y:[&_[role=menu]]:pr-2"
+                className="h-auto! max-h-[calc(50dvh-0.625rem)] w-max! min-w-full max-w-full [&_[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:right-[-3px]! [&_[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:w-1! [&_[data-slot=scroll-area-scrollbar]]:m-0.5 [&_[data-slot=scroll-area-thumb]]:bg-foreground/10! [&_[data-slot=scroll-area-viewport]]:max-h-[calc(50dvh-0.625rem)] data-has-overflow-y:[&_[role=menu]]:pr-2"
               >
                 <div
                   ref={listRef}
@@ -204,7 +204,7 @@ export function HeaderActionDropdown({
                   aria-label={label}
                   onKeyDown={onKeyDown}
                   {...hover.handlers}
-                  className="relative"
+                  className="relative w-max min-w-full max-w-full"
                 >
                   <FluidHoverHighlight hover={hover} className="rounded-md" />
                   {items.map((item, index) => (
