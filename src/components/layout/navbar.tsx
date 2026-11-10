@@ -28,10 +28,7 @@ import { useLang } from "@/hooks/use-lang";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
 import { type Locale, stripLocale, withLocale } from "@/lib/locale";
-import { cn } from "@/lib/utils";
 
-const actionClass =
-  "rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0! max-[359px]:size-8";
 const FONT_VERSION = "v2.1";
 const GITHUB_LABEL: Record<Locale, string> = {
   ja: "GitHub リポジトリ（新しいタブで開く）",
@@ -134,7 +131,6 @@ export function Navbar() {
           titleClassName="font-heading"
           menuIcon={<ListIcon aria-hidden="true" />}
           selectedIcon={<CheckIcon aria-hidden="true" />}
-          triggerClassName={actionClass}
           renderLink={(item, props) => (
             <Link
               to={item.href}
@@ -157,7 +153,6 @@ export function Navbar() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className={actionClass}
                     aria-label={t("ui.downloadFont")}
                   >
                     <FileArrowDownIcon aria-hidden="true" />
@@ -190,7 +185,6 @@ export function Navbar() {
             <ActionMenu
               label={t("ui.downloadFont")}
               trigger={<FileArrowDownIcon aria-hidden="true" />}
-              triggerClassName={actionClass}
               items={fontDownloads.map((font) => ({
                 id: font.labelKey,
                 label: t(font.labelKey),
@@ -205,10 +199,7 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={GITHUB_LABEL[language]}
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "icon" }),
-              actionClass
-            )}
+            className={buttonVariants({ variant: "ghost", size: "icon" })}
           >
             <GithubLogoIcon className="size-4" aria-hidden="true" />
           </a>
@@ -220,7 +211,6 @@ export function Navbar() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className={actionClass}
                     aria-label={t("ui.language")}
                   >
                     <TranslateIcon aria-hidden="true" />
@@ -259,7 +249,6 @@ export function Navbar() {
             <ActionMenu
               label={t("ui.language")}
               trigger={<TranslateIcon aria-hidden="true" />}
-              triggerClassName={actionClass}
               indicator={<CheckIcon className="size-4" />}
               items={languages.map((lang) => ({
                 id: lang.value,
@@ -271,7 +260,7 @@ export function Navbar() {
               }))}
             />
           )}
-          <ThemeToggle className={actionClass} />
+          <ThemeToggle />
         </>
       }
     />
