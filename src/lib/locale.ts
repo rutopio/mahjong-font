@@ -21,14 +21,14 @@ export interface LocaleMeta {
   default?: boolean;
 }
 
-export const LOCALES: LocaleMeta[] = [
+const LOCALES: LocaleMeta[] = [
   { code: "ja", prefix: "", htmlLang: "ja", label: "日本語", default: true },
   { code: "en", prefix: "/en", htmlLang: "en", label: "English" },
   { code: "zh-TW", prefix: "/zh_tw", htmlLang: "zh-Hant", label: "繁體中文" },
   { code: "zh-CN", prefix: "/zh_cn", htmlLang: "zh-Hans", label: "简体中文" },
 ];
 
-export const DEFAULT_LOCALE: LocaleMeta = LOCALES[0];
+const DEFAULT_LOCALE: LocaleMeta = LOCALES[0];
 
 /** Prefixed locales, longest prefix first (so /zh_tw matches before ""). */
 const PREFIXED_LOCALES = LOCALES.filter((l) => !l.default).sort(

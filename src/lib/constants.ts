@@ -3,7 +3,7 @@
 // ============================================================================
 
 /** GitHub profile URL for the project author. */
-export const GITHUB_PROFILE_URL = "https://github.com/rutopio";
+const GITHUB_PROFILE_URL = "https://github.com/rutopio";
 
 /** GitHub repository URL for this project. */
 export const GITHUB_REPO_URL = `${GITHUB_PROFILE_URL}/mahjong-font`;

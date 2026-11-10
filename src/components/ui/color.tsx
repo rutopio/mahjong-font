@@ -4,7 +4,6 @@ import type {
   ColorSwatchPickerProps as AriaColorSwatchPickerProps,
   ColorSwatchProps as AriaColorSwatchProps,
   ColorThumbProps as AriaColorThumbProps,
-  ColorWheelProps as AriaColorWheelProps,
   SliderTrackProps as AriaSliderTrackProps,
 } from "react-aria-components";
 import {
@@ -16,9 +15,6 @@ import {
   ColorSwatchPicker as AriaColorSwatchPicker,
   ColorSwatchPickerItem as AriaColorSwatchPickerItem,
   ColorThumb as AriaColorThumb,
-  ColorWheel as AriaColorWheel,
-  ColorWheelTrack as AriaColorWheelTrack,
-  SliderOutput as AriaSliderOutput,
   SliderTrack as AriaSliderTrack,
   composeRenderProps,
 } from "react-aria-components";
@@ -30,33 +26,7 @@ const ColorSlider = AriaColorSlider;
 
 const ColorField = AriaColorField;
 
-const ColorWheelTrack = AriaColorWheelTrack;
-
 const ColorPicker = AriaColorPicker;
-
-const SliderOutput = AriaSliderOutput;
-
-interface ColorWheelProps
-  extends Omit<AriaColorWheelProps, "outerRadius" | "innerRadius"> {
-  outerRadius?: number;
-  innerRadius?: number;
-}
-
-function ColorWheel({
-  className,
-  outerRadius = 100,
-  innerRadius = 74,
-  ...props
-}: ColorWheelProps) {
-  return (
-    <AriaColorWheel
-      innerRadius={innerRadius}
-      outerRadius={outerRadius}
-      className={composeRenderProps(className, (className) => cn(className))}
-      {...props}
-    />
-  );
-}
 
 function ColorArea({ className, ...props }: AriaColorAreaProps) {
   return (
@@ -144,7 +114,6 @@ function ColorSwatch({ className, ...props }: AriaColorSwatchProps) {
   );
 }
 
-export type { ColorWheelProps };
 export {
   ColorArea,
   ColorField,
@@ -154,8 +123,5 @@ export {
   ColorSwatchPicker,
   ColorSwatchPickerItem,
   ColorThumb,
-  ColorWheel,
-  ColorWheelTrack,
-  SliderOutput,
   SliderTrack,
 };

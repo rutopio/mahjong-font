@@ -1,5 +1,5 @@
 /** Bound public image generation before shaping or rasterizing user input. */
-export const MAX_IMAGE_TILE_LENGTH = 512;
+const MAX_IMAGE_TILE_LENGTH = 512;
 
 export function isValidImageTile(tile: string): boolean {
   return tile.length > 0 && tile.length <= MAX_IMAGE_TILE_LENGTH;
