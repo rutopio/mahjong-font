@@ -116,7 +116,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="inline-grid grid-cols-2 gap-2">
       <Button onClick={handleDownloadClick}>
         <DownloadSimpleIcon aria-hidden="true" />
         {t("ui.saveAsImage")}

@@ -19,11 +19,32 @@
     "saveDescription": "選擇下載格式。",
     "navHome": "製作",
     "navImageApi": "Image API",
+    "navAbout": "關於",
     "openImageApiNewTab": "在新分頁開啟 Image API 圖片連結",
     "close": "關閉",
     "errorOccurred": "發生錯誤",
     "tryAgain": "重試",
     "loading": "載入中"
+  },
+
+  "about": {
+    "title": "關於",
+    "intro": "Mahjong Font 是一個用牌譜文字製作麻將牌圖的工具。",
+    "features": "輸入萬子、筒子、索子與字牌等表記，就能預覽彩色或黑白牌圖，並儲存為圖片。也可以下載具備 OpenType 機能的字型。",
+    "apiPrefix": "如果要在網頁中嵌入牌圖，可以使用",
+    "apiLink": "Image API",
+    "apiSuffix": "。",
+    "sourceHeading": "原始碼",
+    "downloadsHeading": "下載",
+    "licenseHeading": "授權條款",
+    "fontLicense": "字型：SIL Open Font License 1.1",
+    "codeLicense": "程式碼：MIT License"
+  },
+
+  "apiActions": {
+    "label": "API 頁面操作",
+    "outline": "頁面目錄",
+    "scrollToTop": "回到頂端"
   },
 
   "share": {

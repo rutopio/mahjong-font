@@ -63,16 +63,14 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const { title, description } = metaFor(route);
   const locale = OG_LOCALE[route.lang];
 
-  // The /api docs page has no tile of its own: point og:url at the page itself
-  // and use the default tile diagram as a generic cover, instead of inheriting
-  // the home page's share URL. Everything else is the home page: the image is
-  // the shared tile.
-  const isDocsPage = route.page === "api";
+  // Content pages use their own URL and a generic cover. Only the home page
+  // takes its Open Graph image from the tile string in the share URL.
+  const isContentPage = route.page !== "home";
 
-  const state = decodeFromQuery(isDocsPage ? "" : url.search);
+  const state = decodeFromQuery(isContentPage ? "" : url.search);
   const query = encodeToQuery(state);
   const imageUrl = `${url.origin}/og?${query}`;
-  const pageUrl = isDocsPage
+  const pageUrl = isContentPage
     ? `${url.origin}${url.pathname.replace(/\/$/, "")}`
     : `${url.origin}/?${query}`;
 

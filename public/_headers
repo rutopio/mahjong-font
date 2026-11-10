@@ -19,10 +19,16 @@
 /api
   Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
 
+/about
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
 /en
   Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
 
 /en/api
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
+/en/about
   Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
 
 /zh_tw
@@ -31,8 +37,14 @@
 /zh_tw/api
   Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
 
+/zh_tw/about
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
 /zh_cn
   Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
 
 /zh_cn/api
+  Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800
+
+/zh_cn/about
   Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800

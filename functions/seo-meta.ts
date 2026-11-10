@@ -10,7 +10,7 @@
  */
 
 export type Lang = "ja" | "en" | "zh-TW" | "zh-CN";
-export type Page = "home" | "api";
+export type Page = "home" | "api" | "about";
 
 export interface RouteMeta {
   lang: Lang;
@@ -39,6 +39,11 @@ const COPY: Record<Lang, Record<Page, Copy>> = {
       description:
         "牌譜を URL のパスに入れるだけで、そのまま埋め込める SVG 画像が得られます。不足しているパラメータは既定値が自動で適用されます。",
     },
+    about: {
+      title: "このツールについて | 麻雀牌図作成ツール",
+      description:
+        "Mahjong Font は、牌譜の文字列からカラーまたは白黒の麻雀牌図を作成できるツールです。",
+    },
   },
   en: {
     home: {
@@ -50,6 +55,11 @@ const COPY: Record<Lang, Record<Page, Copy>> = {
       title: "Image API | Mahjong Tile Image Generator",
       description:
         "Put a tile string in the URL path to get an SVG image you can embed directly. Missing parameters fall back to defaults.",
+    },
+    about: {
+      title: "About | Mahjong Tile Image Generator",
+      description:
+        "Mahjong Font creates color and monochrome mahjong tile diagrams from notation strings.",
     },
   },
   "zh-TW": {
@@ -63,6 +73,10 @@ const COPY: Record<Lang, Record<Page, Copy>> = {
       description:
         "把牌譜放進網址路徑就能得到一張可直接內嵌的 SVG 圖片。缺少的參數會自動套用預設值。",
     },
+    about: {
+      title: "關於 | 麻將牌圖產生器",
+      description: "Mahjong Font 能用牌譜文字製作彩色或黑白麻將牌圖。",
+    },
   },
   "zh-CN": {
     home: {
@@ -74,6 +88,10 @@ const COPY: Record<Lang, Record<Page, Copy>> = {
       title: "Image API | 麻将牌图生成器",
       description:
         "把牌谱放进网址路径就能得到一张可直接内嵌的 SVG 图片。缺少的参数会自动套用默认值。",
+    },
+    about: {
+      title: "关于 | 麻将牌图生成器",
+      description: "Mahjong Font 能用牌谱文字制作彩色或黑白麻将牌图。",
     },
   },
 };
@@ -106,10 +124,10 @@ export const LANGS: Lang[] = ["ja", "en", "zh-TW", "zh-CN"];
 
 /** Canonical path for a page in a given language. ja is bare, others prefixed. */
 export function pathFor(lang: Lang, page: Page): string {
-  const base = page === "api" ? "/api" : "/";
+  const base = page === "home" ? "/" : `/${page}`;
   const prefix = PREFIX[lang];
   if (!prefix) return base;
-  return page === "api" ? `${prefix}/api` : prefix;
+  return page === "home" ? prefix : `${prefix}${base}`;
 }
 
 /** Resolve a URL pathname to its language, page, and canonical path. */
@@ -126,7 +144,8 @@ export function resolveRoute(pathname: string): RouteMeta {
       break;
     }
   }
-  const page: Page = bare === "/api" ? "api" : "home";
+  const page: Page =
+    bare === "/api" ? "api" : bare === "/about" ? "about" : "home";
   return { lang, page, path: pathFor(lang, page) };
 }
 

@@ -35,9 +35,9 @@ import { type Locale, withLocale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
 const navLinkClass =
-  "flex h-9 items-center whitespace-nowrap rounded-lg px-1 font-medium text-base text-foreground hover:bg-hover focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted sm:px-3";
+  "flex h-9 items-center whitespace-nowrap rounded-lg px-1 font-medium text-base text-foreground hover:bg-hover focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted max-[359px]:text-sm sm:px-3";
 const actionClass =
-  "cursor-default rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out hover:bg-hover active:scale-[0.96]";
+  "cursor-default rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out hover:bg-hover active:scale-[0.96] max-[359px]:size-8";
 const FONT_VERSION = "v2.1";
 
 export function Navbar() {
@@ -114,6 +114,14 @@ export function Navbar() {
               className={navLinkClass}
             >
               {t("ui.navImageApi")}
+            </Link>
+            <Link
+              to={withLocale("/about", language)}
+              activeOptions={{ exact: true }}
+              activeProps={{ "aria-current": "page" as const }}
+              className={navLinkClass}
+            >
+              {t("ui.navAbout")}
             </Link>
           </div>
         </div>

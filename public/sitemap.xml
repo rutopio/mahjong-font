@@ -81,4 +81,44 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://mahjong.chingru.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en/about"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw/about"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/about"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://mahjong.chingru.com/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en/about"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw/about"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/about"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://mahjong.chingru.com/zh_tw/about</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en/about"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw/about"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/about"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://mahjong.chingru.com/zh_cn/about</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://mahjong.chingru.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mahjong.chingru.com/en/about"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://mahjong.chingru.com/zh_tw/about"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://mahjong.chingru.com/zh_cn/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mahjong.chingru.com/about"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

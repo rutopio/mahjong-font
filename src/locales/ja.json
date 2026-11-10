@@ -19,11 +19,32 @@
     "saveDescription": "ダウンロード形式を選択します。",
     "navHome": "作成",
     "navImageApi": "Image API",
+    "navAbout": "概要",
     "openImageApiNewTab": "Image API のリンクを新しいタブで開く",
     "close": "閉じる",
     "errorOccurred": "エラーが発生しました",
     "tryAgain": "再試行",
     "loading": "読み込み中"
+  },
+
+  "about": {
+    "title": "このツールについて",
+    "intro": "Mahjong Font は、牌譜の文字列から麻雀牌の図を作成するツールです。",
+    "features": "萬子・筒子・索子・字牌などの表記を入力すると、カラーまたは白黒の牌図を確認し、画像として保存できます。OpenType 機能付きのフォントもダウンロードできます。",
+    "apiPrefix": "ウェブページに牌図を埋め込むには、",
+    "apiLink": "Image API",
+    "apiSuffix": " を利用できます。",
+    "sourceHeading": "ソースコード",
+    "downloadsHeading": "ダウンロード",
+    "licenseHeading": "ライセンス",
+    "fontLicense": "フォント：SIL Open Font License 1.1",
+    "codeLicense": "コード：MIT License"
+  },
+
+  "apiActions": {
+    "label": "API ページの操作",
+    "outline": "目次",
+    "scrollToTop": "ページの先頭へ"
   },
 
   "share": {

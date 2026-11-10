@@ -19,11 +19,32 @@
     "saveDescription": "Choose a format to download.",
     "navHome": "Make",
     "navImageApi": "Image API",
+    "navAbout": "About",
     "openImageApiNewTab": "Open Image API link in a new tab",
     "close": "Close",
     "errorOccurred": "An error occurred",
     "tryAgain": "Try again",
     "loading": "Loading"
+  },
+
+  "about": {
+    "title": "About",
+    "intro": "Mahjong Font creates mahjong tile diagrams from a notation string.",
+    "features": "Enter manzu, pinzu, souzu, and honor tile notation to preview a color or monochrome diagram and save it as an image. The OpenType fonts are also available to download.",
+    "apiPrefix": "To embed a tile diagram on a web page, use the ",
+    "apiLink": "Image API",
+    "apiSuffix": ".",
+    "sourceHeading": "Source Code",
+    "downloadsHeading": "Downloads",
+    "licenseHeading": "License",
+    "fontLicense": "Font: SIL Open Font License 1.1",
+    "codeLicense": "Code: MIT License"
+  },
+
+  "apiActions": {
+    "label": "API page actions",
+    "outline": "On this page",
+    "scrollToTop": "Scroll to top"
   },
 
   "share": {
