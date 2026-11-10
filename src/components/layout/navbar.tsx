@@ -196,19 +196,6 @@ export function Navbar() {
         </div>
 
         <FluidHoverControls compact>
-          <a
-            href={GITHUB_REPO_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={GITHUB_LABEL[language]}
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "icon" }),
-              actionClass
-            )}
-          >
-            <GithubLogoIcon className="size-4" aria-hidden="true" />
-          </a>
-
           {isMobile ? (
             <>
               <Button
@@ -286,6 +273,19 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
+
+          <a
+            href={GITHUB_REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={GITHUB_LABEL[language]}
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "icon" }),
+              actionClass
+            )}
+          >
+            <GithubLogoIcon className="size-4" aria-hidden="true" />
+          </a>
 
           {isMobile ? (
             <>
