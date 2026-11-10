@@ -3,7 +3,7 @@
 <h2>Mahjong Font / Mahjong Tile Image Generator</h2>
 <h3>OpenType 機能付き麻雀牌図フォント / 麻雀牌図作成ツール</h3>
 
-🔗&nbsp;&nbsp;Playground: https://mahjong.chingru.com/ &nbsp;&**nbsp**;🔗
+🔗&nbsp;&nbsp;Playground: https://mahjong.chingru.com/ &nbsp;&nbsp;🔗
 
 ![pnpm](https://img.shields.io/badge/pnpm-v11-F69220?style=flat-square&logo=pnpm&logoColor=white)
 ![Node](https://img.shields.io/badge/Node.js-v24-339933?style=flat-square&logo=nodedotjs&logoColor=white)
@@ -16,7 +16,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?style=flat-square&logo=tailwind-css)
 ![ShadCN](https://img.shields.io/badge/shadcn%2Fui-4-000000?style=flat-square&logo=shadcnui&logoColor=white)
 
-Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflarepages&logoColor=fff&style=flat-square)
+Hosted on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflarepages&logoColor=fff&style=flat-square)
 
 
 ![](/assets/banner.png)
@@ -28,25 +28,25 @@ Host on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F380
 
 ## Notation
 
-1. Man（**M**anzu）：`1m`~`9m`
-2. Pin（**P**inzu）：`1p`~`9p`
-3. Sou（**S**ouzu）：`1s`~`9s`
-4. Zi（**Z**ihai）：`1z`~`9z` (Sorted by Fonpai - Sangenpai)
-   - `1z`：Higashi, East
-   - `2z`：Minami, South
-   - `3z`：Nishi, West
-   - `4z`：Kita, North
-   - `5z`：Haku, Shiro
-   - `6z`：Hatsu
-   - `7z`：Chun, Naka
-5. Dice: `1.`~`6.`
-6. Aka-Dora：Follow by a asterisk (`*`). E.g., `5p*`, `5s*`, `5m*` .
-7. Fuuro：Follow by a minus sign (`-`). E.g., `3m3m3m-`, `4s5s-6s`.
-   - Chi：`4s5s-6s`
-   - Pon：`3m3m3m-`
-   - Dai-Minkan：`6m6m6m-6m`
-8. Ka-Kan：Follow by an equal mark (`=`). E.g., `3m3m3m-3m=`, `6m`.
-9. An-Kan：Use `0p`, `0s`, `0m`, `0z` to show the reversed one.
+1. Man (**M**anzu): `1m` to `9m`
+2. Pin (**P**inzu): `1p` to `9p`
+3. Sou (**S**ouzu): `1s` to `9s`
+4. Zi (**Z**ihai): `1z` to `7z` (winds, then dragons)
+   - `1z`: East (Higashi)
+   - `2z`: South (Minami)
+   - `3z`: West (Nishi)
+   - `4z`: North (Kita)
+   - `5z`: White (Haku)
+   - `6z`: Green (Hatsu)
+   - `7z`: Red (Chun)
+5. Dice: `1.` to `6.`
+6. Aka-dora (red five): add an asterisk (`*`) after the tile, for example `5p*`, `5s*`, `5m*`.
+7. Fuuro (open meld): add a minus sign (`-`) after the called tile, for example `3m3m3m-`, `4s5s-6s`.
+   - Chi (sequence): `4s5s-6s`
+   - Pon (triplet): `3m3m3m-`
+   - Dai-minkan (open quad): `6m6m6m-6m`
+8. Ka-kan (added quad): add an equals sign (`=`) after the added tile, for example `3m3m3m-3m=`.
+9. An-kan (closed quad): use `0p`, `0s`, `0m`, `0z` for the face-down tiles.
 
 ## 表記法
 
@@ -131,9 +131,9 @@ into `src/lib/tiles-data.json`, which the web app and the Image API both read.
 
 ## Image API
 
-Put a tile string in the URL path to get an inline SVG image you can embed
-anywhere, shields.io-style. The tile path is required (up to 512 characters);
-omitted theme and color parameters use their defaults.
+Add a tile string to the URL path to get an inline SVG image you can embed
+anywhere, shields.io-style. The tile path is required (up to 512 characters).
+Theme and color fall back to their defaults when omitted.
 
 ```
 https://mahjong.chingru.com/img/<tile>?theme=color&color=AA7942
@@ -141,9 +141,9 @@ https://mahjong.chingru.com/img/<tile>?theme=color&color=AA7942
 
 | Parameter | Location | Type            | Default  | Description                                                                  |
 | --------- | -------- | --------------- | -------- | ---------------------------------------------------------------------------- |
-| `tile`    | path     | `string`        | required | Tile string (same [notation](#Notation)). `_` for a gap, e.g. `123m456p_5z`. |
-| `theme`   | query    | `color \| mono` | `color`  | `color` for colorful tiles, `mono` for monochrome.                           |
-| `color`   | query    | `string` (hex)  | `AA7942` | Main tile color, six-digit hex without `#`. Only when `theme=color`.         |
+| `tile`    | path     | `string`        | required | Tile string (same [notation](#Notation)). `_` for a gap, for example `123m456p_5z`. |
+| `theme`   | query    | `color \| mono` | `color`  | `color` for colorful tiles, `mono` for monochrome.                                  |
+| `color`   | query    | `string` (hex)  | `AA7942` | Main tile color, six-digit hex without `#`. Only applies when `theme=color`.        |
 
 The SVG is rendered at a fixed height of 500px; width scales proportionally.
 
@@ -157,8 +157,8 @@ It is a vector, so you can resize it freely when embedding. For example:
 
 
 
-Tip: take any share URL from the app and swap `?tile=` for the `/img/` path.
-Full docs and live examples: https://mahjong.chingru.com/api
+Tip: take any share URL from the app and swap `?tile=` for the `/img/` path to
+get the matching image. Full docs and live examples: https://mahjong.chingru.com/api
 
 ## Site Files
 

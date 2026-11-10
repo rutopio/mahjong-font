@@ -41,6 +41,12 @@ const navLinkClass =
 const actionClass =
   "cursor-default rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0! max-[359px]:size-8";
 const FONT_VERSION = "v2.1";
+const GITHUB_LABEL: Record<Locale, string> = {
+  ja: "GitHub リポジトリ（新しいタブで開く）",
+  en: "GitHub repository (opens in a new tab)",
+  "zh-TW": "GitHub 原始碼（在新分頁開啟）",
+  "zh-CN": "GitHub 源代码（在新标签页打开）",
+};
 
 export function Navbar() {
   const { t } = useTranslation();
@@ -80,7 +86,15 @@ export function Navbar() {
   return (
     <header className="w-full bg-background font-heading">
       <nav
-        aria-label="Main navigation"
+        aria-label={
+          language === "ja"
+            ? "メインナビゲーション"
+            : language === "en"
+              ? "Main navigation"
+              : language === "zh-TW"
+                ? "主要導覽"
+                : "主要导航"
+        }
         className="relative flex w-full items-center justify-between pt-6 sm:pt-12"
       >
         <div className="flex min-w-0 items-center gap-1 sm:gap-2">
@@ -185,7 +199,7 @@ export function Navbar() {
             href={GITHUB_REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub repository (opens in a new tab)"
+            aria-label={GITHUB_LABEL[language]}
             className={cn(
               buttonVariants({ variant: "ghost", size: "icon" }),
               actionClass
