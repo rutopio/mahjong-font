@@ -30,7 +30,7 @@ import { cn } from "@/lib/utils";
 const navLinkClass =
   "flex h-9 items-center whitespace-nowrap rounded-lg px-3 font-medium text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted";
 const drawerLinkClass =
-  "flex min-h-12 items-center justify-between rounded-lg px-3 text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted";
+  "flex min-h-10 items-center justify-between rounded-lg px-3 text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted";
 const actionClass =
   "cursor-default rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0! max-[359px]:size-8";
 const FONT_VERSION = "v2.1";
@@ -219,7 +219,7 @@ export function Navbar() {
                     <button
                       key={font.labelKey}
                       type="button"
-                      className="flex min-h-12 items-center justify-between gap-3 rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+                      className="flex min-h-10 items-center justify-between gap-3 rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring"
                       onClick={() => {
                         setDownloadOpen(false);
                         void downloadFont(font.url);
@@ -286,7 +286,7 @@ export function Navbar() {
                       aria-current={
                         language === lang.value ? "true" : undefined
                       }
-                      className="flex min-h-12 items-center justify-between rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=true]:bg-muted"
+                      className="flex min-h-10 items-center justify-between rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=true]:bg-muted"
                       onClick={() => {
                         setLanguageOpen(false);
                         handleLanguageChange(lang.value);

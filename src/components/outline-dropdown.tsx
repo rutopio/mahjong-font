@@ -1,3 +1,4 @@
+import { ArrowLeftIcon } from "@phosphor-icons/react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useId, useMemo, useRef, useState } from "react";
 import { FluidHoverHighlight } from "@/components/fluid-hover-highlight";
@@ -224,6 +225,9 @@ export function OutlineDropdown({
                       role="menuitem"
                       href={`#${encodeURIComponent(item.id)}`}
                       data-active={activeId === item.id || undefined}
+                      aria-current={
+                        activeId === item.id ? "location" : undefined
+                      }
                       onPointerMove={() => setFocusedIndex(index)}
                       onFocus={() => {
                         setFocusedIndex(index);
@@ -234,7 +238,7 @@ export function OutlineDropdown({
                         close(true);
                         onNavigate(item.id);
                       }}
-                      className={`relative flex min-h-8 w-full min-w-0 items-center rounded-md px-2.5 py-1.5 text-left text-base focus-visible:outline-none ${
+                      className={`relative flex min-h-8 w-full min-w-0 items-center justify-between gap-3 rounded-md px-2.5 py-1.5 text-left text-base focus-visible:outline-none ${
                         activeId === item.id ? "font-bold text-primary" : ""
                       }`}
                     >
@@ -248,6 +252,10 @@ export function OutlineDropdown({
                       >
                         {item.label}
                       </span>
+                      <ArrowLeftIcon
+                        className={`size-4 shrink-0 ${activeId === item.id ? "" : "invisible"}`}
+                        aria-hidden="true"
+                      />
                     </a>
                   ))}
                 </div>
