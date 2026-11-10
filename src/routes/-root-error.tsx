@@ -1,6 +1,5 @@
+import { Button } from "@rutopio/base-component/button";
 import { useTranslation } from "react-i18next";
-
-import { Button } from "@/components/ui/button";
 
 export function RootError() {
   const { t } = useTranslation();

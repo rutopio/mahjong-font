@@ -1,8 +1,24 @@
 import { BookmarkSimpleIcon } from "@phosphor-icons/react";
+import { Button } from "@rutopio/base-component/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@rutopio/base-component/dialog";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from "@rutopio/base-component/drawer";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -12,23 +28,6 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { yakuGroups } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -116,7 +115,9 @@ export function YakuSelector({
         <Drawer open={open} onOpenChange={setOpen}>
           <DrawerContent>
             <DrawerHeader>
-              <DrawerTitle>{t("ui.examples")}</DrawerTitle>
+              <DrawerTitle className="font-heading">
+                {t("ui.examples")}
+              </DrawerTitle>
               <DrawerDescription className="sr-only">
                 {t("ui.examples")}
               </DrawerDescription>
@@ -148,7 +149,7 @@ export function YakuSelector({
       <DialogTrigger render={triggerButton} />
       <DialogContent className="gap-0 p-0">
         <DialogHeader className="px-4 pt-4">
-          <DialogTitle>{t("ui.examples")}</DialogTitle>
+          <DialogTitle className="font-heading">{t("ui.examples")}</DialogTitle>
           <DialogDescription className="sr-only">
             {t("ui.examples")}
           </DialogDescription>

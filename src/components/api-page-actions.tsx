@@ -1,24 +1,24 @@
 import { ArrowBendRightUpIcon, ArrowLeftIcon } from "@phosphor-icons/react";
 import { ActionMenu } from "@rutopio/base-component/action-menu";
-import {
-  OutlineList,
-  type OutlineListItem,
-} from "@rutopio/base-component/outline-list";
-import { PageActionRail } from "@rutopio/base-component/page-action-rail";
-import { navigateToSection } from "@rutopio/base-component/section-navigation";
-import { motion, useReducedMotion } from "motion/react";
-import { useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { ApiShareButton } from "@/components/api-share-button";
-import { Button } from "@/components/ui/button";
+import { Button } from "@rutopio/base-component/button";
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import { useMountEffect } from "@/hooks/use-mount-effect";
+} from "@rutopio/base-component/drawer";
+import {
+  OutlineList,
+  type OutlineListItem,
+} from "@rutopio/base-component/outline-list";
+import { PageActionRail } from "@rutopio/base-component/page-action-rail";
+import { navigateToSection } from "@rutopio/base-component/section-navigation";
+import { useMountEffect } from "@rutopio/base-component/use-mount-effect";
+import { motion, useReducedMotion } from "motion/react";
+import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ApiShareButton } from "@/components/api-share-button";
 
 const circumference = 2 * Math.PI * 6.25;
 
@@ -177,7 +177,9 @@ export function ApiPageActions({
               </DrawerTrigger>
               <DrawerContent>
                 <DrawerHeader className="border-border border-b pb-4">
-                  <DrawerTitle>{pageTitle ?? t("imgApi.title")}</DrawerTitle>
+                  <DrawerTitle className="font-heading">
+                    {pageTitle ?? t("imgApi.title")}
+                  </DrawerTitle>
                 </DrawerHeader>
                 <nav
                   ref={drawerScrollRef}

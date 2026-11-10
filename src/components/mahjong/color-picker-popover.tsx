@@ -5,6 +5,7 @@
  */
 
 import { CopyIcon, EyedropperIcon } from "@phosphor-icons/react";
+import { Button } from "@rutopio/base-component/button";
 import { use, useRef } from "react";
 import type { Color } from "react-aria-components";
 import {
@@ -18,7 +19,6 @@ import {
   parseColor,
 } from "react-aria-components";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
 import {
   ColorArea,
   ColorField,

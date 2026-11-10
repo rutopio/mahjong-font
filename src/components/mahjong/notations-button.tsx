@@ -1,7 +1,6 @@
 import { InfoIcon } from "@phosphor-icons/react";
+import { Button } from "@rutopio/base-component/button";
 import { useTranslation } from "react-i18next";
-
-import { Button } from "@/components/ui/button";
 
 interface NotationsButtonProps {
   onClick: () => void;

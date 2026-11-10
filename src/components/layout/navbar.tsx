@@ -6,6 +6,14 @@ import {
   TranslateIcon,
 } from "@phosphor-icons/react";
 import { ActionMenu } from "@rutopio/base-component/action-menu";
+import { Button, buttonVariants } from "@rutopio/base-component/button";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@rutopio/base-component/drawer";
 import {
   HeaderNavigation,
   SiteHeader,
@@ -13,17 +21,8 @@ import {
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
 import { useLang } from "@/hooks/use-lang";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
@@ -161,7 +160,9 @@ export function Navbar() {
               />
               <DrawerContent>
                 <DrawerHeader className="border-border border-b pb-4">
-                  <DrawerTitle>{t("ui.downloadFont")}</DrawerTitle>
+                  <DrawerTitle className="font-heading">
+                    {t("ui.downloadFont")}
+                  </DrawerTitle>
                 </DrawerHeader>
                 <div className="flex flex-col gap-1 px-4 pt-4 pb-6">
                   {fontDownloads.map((font) => (
@@ -219,7 +220,9 @@ export function Navbar() {
               />
               <DrawerContent>
                 <DrawerHeader className="border-border border-b pb-4">
-                  <DrawerTitle>{t("ui.language")}</DrawerTitle>
+                  <DrawerTitle className="font-heading">
+                    {t("ui.language")}
+                  </DrawerTitle>
                 </DrawerHeader>
                 <div className="flex flex-col gap-1 px-4 pt-4 pb-6">
                   {languages.map((lang) => (

@@ -1,7 +1,4 @@
-import { useTranslation } from "react-i18next";
-
-import { Notations } from "@/components/mahjong/notations";
-import { Button } from "@/components/ui/button";
+import { Button } from "@rutopio/base-component/button";
 import {
   Drawer,
   DrawerClose,
@@ -10,7 +7,9 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
+} from "@rutopio/base-component/drawer";
+import { useTranslation } from "react-i18next";
+import { Notations } from "@/components/mahjong/notations";
 import {
   Sheet,
   SheetContent,
@@ -39,7 +38,9 @@ export function NotationsModal({
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>{t("ui.howToUse")}</DrawerTitle>
+            <DrawerTitle className="font-heading">
+              {t("ui.howToUse")}
+            </DrawerTitle>
             <DrawerDescription className="sr-only">
               {t("ui.howToUse")}
             </DrawerDescription>
