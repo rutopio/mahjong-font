@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useFluidHover } from "@/hooks/use-fluid-hover";
 import { useMountEffect } from "@/hooks/use-mount-effect";
 import { spring } from "@/lib/springs";
+import { cn } from "@/lib/utils";
 
 export type HeaderActionItem = {
   id: string;
@@ -198,7 +199,10 @@ export function HeaderActionDropdown({
                       close(true);
                       item.onSelect();
                     }}
-                    className="relative flex min-h-9 w-full items-center justify-between gap-3 whitespace-nowrap rounded-md px-3 py-1.5 text-left text-base focus-visible:outline-none sm:gap-6"
+                    className={cn(
+                      "relative flex min-h-8 w-full items-center justify-between gap-3 whitespace-nowrap rounded-md px-2.5 py-1.5 text-left text-sm focus-visible:outline-none sm:gap-6",
+                      selectedId === item.id && "font-semibold text-primary"
+                    )}
                   >
                     <span>{item.label}</span>
                     {selectedId === item.id ? (
