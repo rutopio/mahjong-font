@@ -32,6 +32,7 @@ export function HeaderActionDropdown({
   const reducedMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
+  const openModeRef = useRef<"hover" | "click" | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -54,22 +55,30 @@ export function HeaderActionDropdown({
     if (focusFrame.current !== null) cancelAnimationFrame(focusFrame.current);
     focusFrame.current = null;
     openRef.current = false;
+    openModeRef.current = null;
     setOpen(false);
     hover.setActiveIndex(null);
     if (restoreFocus) triggerRef.current?.focus();
   };
 
-  const openMenu = (focus = false) => {
+  const openMenu = (mode: "hover" | "click", focus = false) => {
     clearTimeout(timer.current);
-    if (openRef.current) return;
+    if (openRef.current && mode === "hover") return;
     const index = Math.max(
       0,
       items.findIndex((item) => item.id === selectedId)
     );
-    setFocusedIndex(index);
-    openRef.current = true;
-    setOpen(true);
+    if (!openRef.current) {
+      setFocusedIndex(index);
+      openRef.current = true;
+      openModeRef.current = mode;
+      setOpen(true);
+    } else if (mode === "click") {
+      openModeRef.current = "click";
+      if (focus) setFocusedIndex(index);
+    }
     if (focus) {
+      if (focusFrame.current !== null) cancelAnimationFrame(focusFrame.current);
       focusFrame.current = requestAnimationFrame(() => {
         focusFrame.current = null;
         itemRefs.current[index]?.focus();
@@ -94,7 +103,7 @@ export function HeaderActionDropdown({
     const next = (index + items.length) % items.length;
     setFocusedIndex(next);
     hover.setActiveIndex(next);
-    openMenu();
+    openMenu("click");
     if (focusFrame.current !== null) cancelAnimationFrame(focusFrame.current);
     focusFrame.current = requestAnimationFrame(() => {
       focusFrame.current = null;
@@ -130,11 +139,16 @@ export function HeaderActionDropdown({
       className="relative"
       onMouseEnter={() => {
         clearTimeout(timer.current);
-        timer.current = setTimeout(() => openMenu(), 200);
+        timer.current = setTimeout(() => openMenu("hover"), 200);
       }}
-      onMouseLeave={() => close()}
+      onMouseLeave={() => {
+        if (openModeRef.current !== "click") close();
+      }}
       onBlurCapture={(event) => {
-        if (!rootRef.current?.contains(event.relatedTarget as Node | null))
+        if (
+          openModeRef.current !== "click" &&
+          !rootRef.current?.contains(event.relatedTarget as Node | null)
+        )
           close();
       }}
     >
@@ -148,7 +162,11 @@ export function HeaderActionDropdown({
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={open ? id : undefined}
-        onClick={() => (openRef.current ? close() : openMenu(true))}
+        onClick={() =>
+          openRef.current && openModeRef.current === "click"
+            ? close()
+            : openMenu("click", true)
+        }
         onKeyDown={onKeyDown}
       >
         {icon}
