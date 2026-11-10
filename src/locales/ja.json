@@ -9,6 +9,8 @@
     "placeholder": "表記入力...",
     "examples": "使用例...",
     "theme": "テーマ",
+    "switchToDark": "ダークモードに切り替える",
+    "switchToLight": "ライトモードに切り替える",
     "monochrome": "白黒",
     "colorful": "彩色",
     "howToUse": "表記法",

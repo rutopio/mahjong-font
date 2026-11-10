@@ -9,6 +9,8 @@
     "placeholder": "輸入表記...",
     "examples": "使用範例...",
     "theme": "字型主題",
+    "switchToDark": "切換至深色模式",
+    "switchToLight": "切換至淺色模式",
     "monochrome": "黑白",
     "colorful": "彩色",
     "howToUse": "表記方法",

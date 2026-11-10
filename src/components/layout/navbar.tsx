@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { FluidHoverControls } from "@/components/fluid-hover-controls";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -368,6 +369,7 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
+          <ThemeToggle className={actionClass} />
         </FluidHoverControls>
       </nav>
     </header>

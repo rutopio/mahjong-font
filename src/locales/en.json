@@ -9,6 +9,8 @@
     "placeholder": "Enter notation...",
     "examples": "Examples...",
     "theme": "Font Theme",
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode",
     "monochrome": "Monochrome",
     "colorful": "Colorful",
     "howToUse": "How to Use",

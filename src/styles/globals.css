@@ -225,6 +225,15 @@ html:lang(zh-Hans) {
   }
 }
 
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+.theme-transitioning,
+.theme-transitioning * {
+  transition: none !important;
+}
+
 @utility container {
   width: 100%;
   margin-left: auto;
