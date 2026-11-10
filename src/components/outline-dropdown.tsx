@@ -235,7 +235,7 @@ export function OutlineDropdown({
                         onNavigate(item.id);
                       }}
                       className={`relative flex min-h-8 w-full min-w-0 items-center rounded-md px-2.5 py-1.5 text-left text-base focus-visible:outline-none ${
-                        activeId === item.id ? "font-semibold text-primary" : ""
+                        activeId === item.id ? "font-bold text-primary" : ""
                       }`}
                     >
                       <span

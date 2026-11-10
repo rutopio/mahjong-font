@@ -202,7 +202,7 @@ export function ApiPageActions({ items }: { items: OutlineItem[] }) {
                           event.preventDefault();
                           navigateToHeading(item.id);
                         }}
-                        className={`block py-1 text-base transition-colors ${activeId === item.id ? "font-semibold text-primary" : "text-foreground"}`}
+                        className={`block py-1 text-base transition-colors ${activeId === item.id ? "font-bold text-primary" : "text-foreground"}`}
                       >
                         {item.label}
                       </a>

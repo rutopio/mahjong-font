@@ -74,6 +74,7 @@
 }
 
 :root {
+  text-autospace: normal;
   --gutter-offset: calc(50% + 21rem + 0.5rem);
   --hover: rgb(0 0 0 / 0.04);
   --font-cjk-primary: "Noto Sans TC Variable";
