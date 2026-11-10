@@ -87,7 +87,15 @@ export function Navbar() {
             className="flex h-12 shrink-0 items-center rounded-md focus-visible:outline-2 focus-visible:outline-ring"
           >
             <span className="flex size-12 items-center justify-center">
-              <img src="/icon.svg" alt="" className="size-8" />
+              <svg
+                aria-hidden="true"
+                className="size-8 text-foreground"
+                fill="currentColor"
+                viewBox="0 0 735 734"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M368,734c203,0,367-164,367-367s-164-367-367-367c-204,0-368,164-368,367s164,367,368,367ZM368,669c-167,0-298-139-298-302c0-165,133-302,298-302c162,0,297,135,297,302c0,162-131,302-297,302ZM368,530c91,0,165-71,165-160c0-91-73-162-165-162c-91,0-165,71-165,162c0,89,74,160,165,160ZM368,468c-55,0-97-44-97-99s42-99,97-99c53,0,97,44,97,99s-44,99-97,99Z" />
+              </svg>
             </span>
           </Link>
           <div className="flex items-center gap-1 sm:gap-2">
