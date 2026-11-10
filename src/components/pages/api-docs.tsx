@@ -1,10 +1,8 @@
-import { CheckIcon, CircleNotchIcon, CopyIcon } from "@phosphor-icons/react";
-import { type ReactNode, useState } from "react";
+import { CircleNotchIcon } from "@phosphor-icons/react";
+import type { ReactNode } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { toast } from "sonner";
 import { ApiPageActions } from "@/components/api-page-actions";
 import { ArticleHeading } from "@/components/article-heading";
-import { Button } from "@/components/ui/button";
 
 /** Render `code` and **bold** markers inside a param description. */
 function parseDescription(text: string): ReactNode {
@@ -79,38 +77,6 @@ const PARAMS: {
   },
 ];
 
-function CopyButton({ text }: { text: string }) {
-  const { t } = useTranslation();
-  const [copied, setCopied] = useState(false);
-
-  const onCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      toast.success(t("imgApi.copied"));
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      toast.error(t("imgApi.copyFailed"));
-    }
-  };
-
-  return (
-    <Button
-      variant="ghost"
-      size="icon"
-      type="button"
-      aria-label={t("imgApi.copyAria")}
-      onClick={onCopy}
-    >
-      {copied ? (
-        <CheckIcon aria-hidden="true" />
-      ) : (
-        <CopyIcon aria-hidden="true" />
-      )}
-    </Button>
-  );
-}
-
 export function ApiDocs() {
   const { t, ready } = useTranslation();
   const origin = typeof window !== "undefined" ? window.location.origin : "";
@@ -167,7 +133,7 @@ export function ApiDocs() {
               }}
             />
           </p>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-6">
             <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
               {origin}/<span className="text-destructive">?tile=</span>
               7m7m7m2p3p4p8p8p8p4s5s6s8s_8s&amp;theme=color&amp;color=AA7942
@@ -259,16 +225,13 @@ export function ApiDocs() {
               const fullUrl = `${origin}${ex.path}`;
               const label = t(ex.labelKey);
               return (
-                <section key={ex.id} className="flex min-w-0 flex-col gap-2">
+                <section key={ex.id} className="flex min-w-0 flex-col gap-6">
                   <ArticleHeading id={ex.id} level={3}>
                     {label}
                   </ArticleHeading>
-                  <div className="flex items-center gap-2">
-                    <code className="flex-1 overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
-                      {fullUrl}
-                    </code>
-                    <CopyButton text={fullUrl} />
-                  </div>
+                  <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
+                    {fullUrl}
+                  </code>
                   <div className="flex min-h-20 items-center justify-center overflow-x-auto">
                     <img
                       src={ex.path}
