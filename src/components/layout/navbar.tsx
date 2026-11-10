@@ -52,6 +52,7 @@ export function Navbar() {
   const isAbout = currentPage === "/about";
   const isMobile = useIsMobile();
   const [navOpen, setNavOpen] = useState(false);
+  const [downloadOpen, setDownloadOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
 
   const downloadFont = async (fileUrl: string) => {
@@ -195,17 +196,55 @@ export function Navbar() {
         </div>
 
         <FluidHoverControls compact>
-          <HeaderActionDropdown
-            label={t("ui.downloadFont")}
-            icon={<FileArrowDownIcon aria-hidden="true" />}
-            className={actionClass}
-            items={fontDownloads.map((font) => ({
-              id: font.labelKey,
-              label: t(font.labelKey),
-              suffix: <Badge variant="secondary">{FONT_VERSION}</Badge>,
-              onSelect: () => downloadFont(font.url),
-            }))}
-          />
+          {isMobile ? (
+            <Drawer open={downloadOpen} onOpenChange={setDownloadOpen}>
+              <DrawerTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className={actionClass}
+                    aria-label={t("ui.downloadFont")}
+                  >
+                    <FileArrowDownIcon aria-hidden="true" />
+                  </Button>
+                }
+              />
+              <DrawerContent>
+                <DrawerHeader className="border-border border-b pb-4">
+                  <DrawerTitle>{t("ui.downloadFont")}</DrawerTitle>
+                </DrawerHeader>
+                <div className="flex flex-col gap-1 px-4 pt-4 pb-6">
+                  {fontDownloads.map((font) => (
+                    <button
+                      key={font.labelKey}
+                      type="button"
+                      className="flex min-h-12 items-center justify-between gap-3 rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+                      onClick={() => {
+                        setDownloadOpen(false);
+                        void downloadFont(font.url);
+                      }}
+                    >
+                      {t(font.labelKey)}
+                      <Badge variant="secondary">{FONT_VERSION}</Badge>
+                    </button>
+                  ))}
+                </div>
+              </DrawerContent>
+            </Drawer>
+          ) : (
+            <HeaderActionDropdown
+              label={t("ui.downloadFont")}
+              icon={<FileArrowDownIcon aria-hidden="true" />}
+              className={actionClass}
+              items={fontDownloads.map((font) => ({
+                id: font.labelKey,
+                label: t(font.labelKey),
+                suffix: <Badge variant="secondary">{FONT_VERSION}</Badge>,
+                onSelect: () => downloadFont(font.url),
+              }))}
+            />
+          )}
 
           <a
             href={GITHUB_REPO_URL}
