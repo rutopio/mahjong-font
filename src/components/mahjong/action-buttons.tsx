@@ -186,7 +186,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               onClick={shareToFacebook}
             >
               <FacebookLogoIcon aria-hidden="true" />
-              <span className="text-xs">Facebook</span>
+              <span>Facebook</span>
             </Button>
             <Button
               variant="outline"
@@ -194,7 +194,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               onClick={shareToX}
             >
               <XLogoIcon aria-hidden="true" />
-              <span className="text-xs">X</span>
+              <span>X</span>
             </Button>
             <Button
               variant="outline"
@@ -202,7 +202,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               onClick={shareToThreads}
             >
               <ThreadsLogoIcon aria-hidden="true" />
-              <span className="text-xs">Threads</span>
+              <span>Threads</span>
             </Button>
             <Button
               variant="outline"
@@ -214,9 +214,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
               ) : (
                 <LinkIcon aria-hidden="true" />
               )}
-              <span className="text-xs">
-                {copied ? t("share.copied") : t("share.copyLink")}
-              </span>
+              <span>{copied ? t("share.copied") : t("share.copyLink")}</span>
             </Button>
           </div>
         </DialogContent>
