@@ -177,6 +177,7 @@ html:lang(zh-Hans) {
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     font-optical-sizing: auto;
+    font-variant-numeric: tabular-nums;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
