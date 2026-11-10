@@ -5,8 +5,6 @@
 @import "@rutopio/base-component/styles.css";
 @import "@rutopio/base-component/neutral-theme.css";
 
-@custom-variant dark (&:is(.dark, .dark *));
-
 @theme inline {
   --font-sans:
     "Inter Variable", var(--font-cjk-primary), var(--font-cjk-secondary),
@@ -18,7 +16,6 @@
 }
 
 :root {
-  text-autospace: normal;
   --font-cjk-primary: "Noto Sans TC Variable";
   --font-cjk-secondary: "Noto Sans JP Variable";
   --font-cjk-tertiary: "Noto Sans SC Variable";
@@ -33,24 +30,4 @@ html:lang(zh-Hans) {
   --font-cjk-primary: "Noto Sans SC Variable";
   --font-cjk-secondary: "Noto Sans TC Variable";
   --font-cjk-tertiary: "Noto Sans JP Variable";
-}
-
-@layer base {
-  body {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-normal);
-    font-optical-sizing: auto;
-    font-variant-numeric: tabular-nums;
-  }
-  html {
-    @apply bg-background font-sans;
-    scrollbar-gutter: stable;
-  }
-
-  html,
-  body {
-    /* Prevent iOS Chrome's collapsing toolbar from exposing a strip of
-       body background below the footer when rubber-band scrolling. */
-    overscroll-behavior-y: contain;
-  }
 }
