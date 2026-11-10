@@ -2,6 +2,7 @@ import {
   CheckIcon,
   FileArrowDownIcon,
   GithubLogoIcon,
+  ListIcon,
   TranslateIcon,
 } from "@phosphor-icons/react";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
@@ -35,7 +36,7 @@ import { type Locale, withLocale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
 const navLinkClass =
-  "flex h-9 items-center whitespace-nowrap rounded-lg px-1 font-medium text-base text-foreground hover:bg-hover focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted max-[359px]:text-sm sm:px-3";
+  "flex h-9 items-center whitespace-nowrap rounded-lg px-3 font-medium text-base text-foreground hover:bg-hover focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted";
 const actionClass =
   "cursor-default rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out hover:bg-hover active:scale-[0.96] max-[359px]:size-8";
 const FONT_VERSION = "v2.1";
@@ -48,6 +49,8 @@ export function Navbar() {
   const isHome =
     pathname.replace(/\/$/, "") ===
     withLocale("/", language).replace(/\/$/, "");
+  const isApi = pathname === withLocale("/api", language);
+  const isAbout = pathname === withLocale("/about", language);
   const isMobile = useIsMobile();
   const [langDrawerOpen, setLangDrawerOpen] = useState(false);
   const [fontDrawerOpen, setFontDrawerOpen] = useState(false);
@@ -98,32 +101,82 @@ export function Navbar() {
               </svg>
             </span>
           </Link>
-          <div className="flex items-center gap-1 sm:gap-2">
-            <Link
-              to={withLocale("/", language)}
-              activeOptions={{ exact: true, includeSearch: false }}
-              aria-current={isHome ? "page" : undefined}
-              className={cn(navLinkClass, isHome && "bg-muted")}
-            >
-              {t("ui.navHome")}
-            </Link>
-            <Link
-              to={withLocale("/api", language)}
-              activeOptions={{ exact: true }}
-              activeProps={{ "aria-current": "page" as const }}
-              className={navLinkClass}
-            >
-              {t("ui.navImageApi")}
-            </Link>
-            <Link
-              to={withLocale("/about", language)}
-              activeOptions={{ exact: true }}
-              activeProps={{ "aria-current": "page" as const }}
-              className={navLinkClass}
-            >
-              {t("ui.navAbout")}
-            </Link>
-          </div>
+          {isMobile ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    type="button"
+                    className={actionClass}
+                    aria-label={t("ui.navMenu")}
+                  >
+                    <ListIcon aria-hidden="true" />
+                  </Button>
+                }
+              />
+              <DropdownMenuContent align="start" className="min-w-40">
+                <DropdownMenuGroup>
+                  <DropdownMenuItem
+                    aria-current={isHome ? "page" : undefined}
+                    className="justify-between px-3"
+                    onClick={() => navigate({ to: withLocale("/", language) })}
+                  >
+                    {t("ui.navHome")}
+                    {isHome && <CheckIcon aria-hidden="true" />}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    aria-current={isApi ? "page" : undefined}
+                    className="justify-between px-3"
+                    onClick={() =>
+                      navigate({ to: withLocale("/api", language) })
+                    }
+                  >
+                    {t("ui.navImageApi")}
+                    {isApi && <CheckIcon aria-hidden="true" />}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    aria-current={isAbout ? "page" : undefined}
+                    className="justify-between px-3"
+                    onClick={() =>
+                      navigate({ to: withLocale("/about", language) })
+                    }
+                  >
+                    {t("ui.navAbout")}
+                    {isAbout && <CheckIcon aria-hidden="true" />}
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link
+                to={withLocale("/", language)}
+                activeOptions={{ exact: true, includeSearch: false }}
+                aria-current={isHome ? "page" : undefined}
+                className={cn(navLinkClass, isHome && "bg-muted")}
+              >
+                {t("ui.navHome")}
+              </Link>
+              <Link
+                to={withLocale("/api", language)}
+                activeOptions={{ exact: true }}
+                activeProps={{ "aria-current": "page" as const }}
+                className={navLinkClass}
+              >
+                {t("ui.navImageApi")}
+              </Link>
+              <Link
+                to={withLocale("/about", language)}
+                activeOptions={{ exact: true }}
+                activeProps={{ "aria-current": "page" as const }}
+                className={navLinkClass}
+              >
+                {t("ui.navAbout")}
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-0 min-[360px]:gap-2">
