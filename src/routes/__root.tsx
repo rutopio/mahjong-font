@@ -1,4 +1,5 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
+import { motion, useReducedMotion } from "motion/react";
 import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "sonner";
 
@@ -9,7 +10,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { ScreenSize } from "@/components/layout/screen-size";
 import { useLang } from "@/hooks/use-lang";
 import i18n from "@/lib/i18n";
-import { localeByCode } from "@/lib/locale";
+import { localeByCode, stripLocale } from "@/lib/locale";
 import { I18nProvider } from "@/provider/i18n-provider";
 import { RootError } from "@/routes/-root-error";
 import { RootNotFound } from "@/routes/-root-not-found";
@@ -41,6 +42,26 @@ function useLangSync() {
   return lang;
 }
 
+// Match intd's soft fade on pathname changes. Query and hash updates do not
+// remount the page, and reduced-motion preferences skip the entrance fade.
+function AnimatedOutlet() {
+  const pathname = useLocation({ select: (location) => location.pathname });
+  const reduceMotion = useReducedMotion();
+  const isHome = stripLocale(pathname) === "/";
+
+  return (
+    <motion.div
+      key={pathname}
+      initial={reduceMotion ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className={`flex min-w-0 flex-auto flex-col ${isHome ? "w-full lg:w-[calc(100vw-3rem)] lg:max-w-5xl lg:flex-none" : "w-full"}`}
+    >
+      <Outlet />
+    </motion.div>
+  );
+}
+
 function RootComponent() {
   const lang = useLangSync();
   return (
@@ -50,8 +71,8 @@ function RootComponent() {
         className="mx-auto flex min-h-full w-full max-w-2xl flex-col px-3 min-[360px]:px-6"
       >
         <Navbar />
-        <main className="flex min-w-0 flex-1 bg-background">
-          <Outlet />
+        <main className="flex min-w-0 flex-1 justify-center bg-background">
+          <AnimatedOutlet />
         </main>
         <Footer />
       </div>
