@@ -24,7 +24,7 @@ import {
 import { useLang } from "@/hooks/use-lang";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
-import { type Locale, withLocale } from "@/lib/locale";
+import { type Locale, stripLocale, withLocale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
 const navLinkClass =
@@ -46,13 +46,13 @@ export function Navbar() {
   const navigate = useNavigate();
   const pathname = useLocation({ select: (l) => l.pathname });
   const language = useLang();
-  const isHome =
-    pathname.replace(/\/$/, "") ===
-    withLocale("/", language).replace(/\/$/, "");
-  const isApi = pathname === withLocale("/api", language);
-  const isAbout = pathname === withLocale("/about", language);
+  const currentPage = stripLocale(pathname).replace(/\/$/, "") || "/";
+  const isHome = currentPage === "/";
+  const isApi = currentPage === "/api";
+  const isAbout = currentPage === "/about";
   const isMobile = useIsMobile();
   const [navOpen, setNavOpen] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
 
   const downloadFont = async (fileUrl: string) => {
     const filename = fileUrl.split("/").pop() || "mahjong-font.otf";
@@ -133,6 +133,7 @@ export function Navbar() {
                 >
                   <Link
                     to={withLocale("/", language)}
+                    activeOptions={{ exact: true }}
                     aria-current={isHome ? "page" : undefined}
                     onClick={() => setNavOpen(false)}
                     className={drawerLinkClass}
@@ -142,6 +143,7 @@ export function Navbar() {
                   </Link>
                   <Link
                     to={withLocale("/api", language)}
+                    activeOptions={{ exact: true }}
                     aria-current={isApi ? "page" : undefined}
                     onClick={() => setNavOpen(false)}
                     className={drawerLinkClass}
@@ -151,6 +153,7 @@ export function Navbar() {
                   </Link>
                   <Link
                     to={withLocale("/about", language)}
+                    activeOptions={{ exact: true }}
                     aria-current={isAbout ? "page" : undefined}
                     onClick={() => setNavOpen(false)}
                     className={drawerLinkClass}
@@ -167,14 +170,14 @@ export function Navbar() {
                 to={withLocale("/", language)}
                 activeOptions={{ exact: true, includeSearch: false }}
                 aria-current={isHome ? "page" : undefined}
-                className={cn(navLinkClass, isHome && "bg-muted")}
+                className={navLinkClass}
               >
                 {t("ui.navHome")}
               </Link>
               <Link
                 to={withLocale("/api", language)}
                 activeOptions={{ exact: true }}
-                activeProps={{ "aria-current": "page" as const }}
+                aria-current={isApi ? "page" : undefined}
                 className={navLinkClass}
               >
                 {t("ui.navImageApi")}
@@ -182,7 +185,7 @@ export function Navbar() {
               <Link
                 to={withLocale("/about", language)}
                 activeOptions={{ exact: true }}
-                activeProps={{ "aria-current": "page" as const }}
+                aria-current={isAbout ? "page" : undefined}
                 className={navLinkClass}
               >
                 {t("ui.navAbout")}
@@ -217,17 +220,61 @@ export function Navbar() {
             <GithubLogoIcon className="size-4" aria-hidden="true" />
           </a>
 
-          <HeaderActionDropdown
-            label={t("ui.language")}
-            icon={<TranslateIcon aria-hidden="true" />}
-            className={actionClass}
-            selectedId={language}
-            items={languages.map((lang) => ({
-              id: lang.value,
-              label: lang.label,
-              onSelect: () => handleLanguageChange(lang.value),
-            }))}
-          />
+          {isMobile ? (
+            <Drawer open={languageOpen} onOpenChange={setLanguageOpen}>
+              <DrawerTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className={actionClass}
+                    aria-label={t("ui.language")}
+                  >
+                    <TranslateIcon aria-hidden="true" />
+                  </Button>
+                }
+              />
+              <DrawerContent>
+                <DrawerHeader className="border-border border-b pb-4">
+                  <DrawerTitle>{t("ui.language")}</DrawerTitle>
+                </DrawerHeader>
+                <div className="flex flex-col gap-1 px-4 pt-4 pb-6">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.value}
+                      type="button"
+                      lang={lang.value}
+                      aria-current={
+                        language === lang.value ? "true" : undefined
+                      }
+                      className="flex min-h-12 items-center justify-between rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=true]:bg-muted"
+                      onClick={() => {
+                        setLanguageOpen(false);
+                        handleLanguageChange(lang.value);
+                      }}
+                    >
+                      {lang.label}
+                      {language === lang.value && (
+                        <CheckIcon aria-hidden="true" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </DrawerContent>
+            </Drawer>
+          ) : (
+            <HeaderActionDropdown
+              label={t("ui.language")}
+              icon={<TranslateIcon aria-hidden="true" />}
+              className={actionClass}
+              selectedId={language}
+              items={languages.map((lang) => ({
+                id: lang.value,
+                label: lang.label,
+                onSelect: () => handleLanguageChange(lang.value),
+              }))}
+            />
+          )}
           <ThemeToggle className={actionClass} />
         </FluidHoverControls>
       </nav>
