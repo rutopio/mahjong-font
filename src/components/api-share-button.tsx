@@ -5,7 +5,10 @@ import {
   ThreadsLogoIcon,
   XLogoIcon,
 } from "@phosphor-icons/react";
-import { useState } from "react";
+import {
+  openShareWindow,
+  usePageShare,
+} from "@rutopio/base-component/page-share";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -18,49 +21,17 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
-function openShareWindow(url: string) {
-  window.open(url, "_blank", "noopener,noreferrer,width=600,height=600");
-}
-
 export function ApiShareButton({
   size = "icon",
 }: {
   size?: "icon" | "icon-lg";
 }) {
   const { t } = useTranslation();
-  const [open, setOpen] = useState(false);
-
-  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
-  const encodedUrl = encodeURIComponent(shareUrl);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(shareUrl);
-      toast.success(t("share.linkCopied"), { description: shareUrl });
-    } catch {
-      toast.error(t("imgApi.copyFailed"));
-    }
-  };
-
-  // Touch devices prefer the native share sheet; pointer devices use the dialog.
-  // navigator.share only exists on secure origins, so dev over a LAN IP falls back to the dialog.
-  const handleShareClick = async () => {
-    const isTouch =
-      typeof window !== "undefined" &&
-      window.matchMedia("(pointer: coarse)").matches;
-
-    if (isTouch && navigator.share) {
-      try {
-        await navigator.share({ title: document.title, url: shareUrl });
-      } catch (err) {
-        if (!(err instanceof Error && err.name === "AbortError")) {
-          setOpen(true);
-        }
-      }
-      return;
-    }
-    setOpen(true);
-  };
+  const { open, setOpen, shareUrl, targets, copy, share } = usePageShare({
+    onCopied: (url) =>
+      toast.success(t("share.linkCopied"), { description: url }),
+    onCopyError: () => toast.error(t("imgApi.copyFailed")),
+  });
 
   return (
     <>
@@ -68,7 +39,7 @@ export function ApiShareButton({
         variant="outline"
         size={size}
         aria-label={t("share.share")}
-        onClick={handleShareClick}
+        onClick={share}
       >
         <ShareNetworkIcon aria-hidden="true" />
       </Button>
@@ -89,11 +60,7 @@ export function ApiShareButton({
             <Button
               variant="outline"
               className="h-auto flex-col gap-1.5 py-3 [&_svg:not([class*='size-'])]:size-6"
-              onClick={() =>
-                openShareWindow(
-                  `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`
-                )
-              }
+              onClick={() => openShareWindow(targets[0].url)}
             >
               <FacebookLogoIcon aria-hidden="true" />
               <span className="text-sm">Facebook</span>
@@ -101,11 +68,7 @@ export function ApiShareButton({
             <Button
               variant="outline"
               className="h-auto flex-col gap-1.5 py-3 [&_svg:not([class*='size-'])]:size-6"
-              onClick={() =>
-                openShareWindow(
-                  `https://twitter.com/intent/tweet?url=${encodedUrl}`
-                )
-              }
+              onClick={() => openShareWindow(targets[1].url)}
             >
               <XLogoIcon aria-hidden="true" />
               <span className="text-sm">X</span>
@@ -113,11 +76,7 @@ export function ApiShareButton({
             <Button
               variant="outline"
               className="h-auto flex-col gap-1.5 py-3 [&_svg:not([class*='size-'])]:size-6"
-              onClick={() =>
-                openShareWindow(
-                  `https://www.threads.net/intent/post?url=${encodedUrl}`
-                )
-              }
+              onClick={() => openShareWindow(targets[2].url)}
             >
               <ThreadsLogoIcon aria-hidden="true" />
               <span className="text-sm">Threads</span>
@@ -125,7 +84,7 @@ export function ApiShareButton({
             <Button
               variant="outline"
               className="h-auto flex-col gap-1.5 py-3 [&_svg:not([class*='size-'])]:size-6"
-              onClick={handleCopy}
+              onClick={copy}
             >
               <LinkIcon aria-hidden="true" />
               <span className="text-sm">{t("share.copyLink")}</span>

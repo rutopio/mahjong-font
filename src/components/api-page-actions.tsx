@@ -4,11 +4,12 @@ import {
   OutlineList,
   type OutlineListItem,
 } from "@rutopio/base-component/outline-list";
+import { PageActionRail } from "@rutopio/base-component/page-action-rail";
+import { navigateToSection } from "@rutopio/base-component/section-navigation";
 import { motion, useReducedMotion } from "motion/react";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ApiShareButton } from "@/components/api-share-button";
-import { FluidHoverControls } from "@/components/fluid-hover-controls";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -134,17 +135,7 @@ export function ApiPageActions({
   };
 
   const navigateToHeading = (id: string) => {
-    setOutlineOpen(false);
-    const reduceMotion = prefersReducedMotion();
-    window.setTimeout(
-      () => {
-        const heading = document.getElementById(id);
-        if (!heading) return;
-        heading.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
-        history.replaceState(null, "", `#${encodeURIComponent(id)}`);
-      },
-      reduceMotion ? 0 : 350
-    );
+    navigateToSection(id, () => setOutlineOpen(false));
   };
 
   const utilities = (
@@ -167,76 +158,69 @@ export function ApiPageActions({
   );
 
   return (
-    <>
-      <FluidHoverControls
-        buttonGroup
-        orientation="horizontal"
-        label={label}
-        className="fixed right-4 bottom-[calc(2rem+env(safe-area-inset-bottom))] z-10 h-fit min-[50rem]:hidden"
-      >
-        {items.length > 0 && (
-          <Drawer open={outlineOpen} onOpenChange={handleOutlineOpenChange}>
-            <DrawerTrigger
-              render={
-                <Button
-                  variant="outline"
-                  size="icon-lg"
-                  aria-label={`${Math.round(progress * 100)}% · ${t("apiActions.outline")}`}
-                />
-              }
-            >
-              <ReadingProgressRing progress={progress} />
-            </DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader className="border-border border-b pb-4">
-                <DrawerTitle>{pageTitle ?? t("imgApi.title")}</DrawerTitle>
-              </DrawerHeader>
-              <nav
-                ref={drawerScrollRef}
-                aria-label={t("apiActions.outline")}
-                className="min-h-0 flex-1 overflow-y-auto px-4 pt-4 pb-6"
+    <PageActionRail
+      label={label}
+      mobileOutline={
+        <>
+          {items.length > 0 && (
+            <Drawer open={outlineOpen} onOpenChange={handleOutlineOpenChange}>
+              <DrawerTrigger
+                render={
+                  <Button
+                    variant="outline"
+                    size="icon-lg"
+                    aria-label={`${Math.round(progress * 100)}% · ${t("apiActions.outline")}`}
+                  />
+                }
               >
-                <OutlineList
-                  items={items}
-                  activeId={selectedId}
-                  onNavigate={navigateToHeading}
-                  indicator={<ArrowLeftIcon className="size-4" />}
-                />
-              </nav>
-            </DrawerContent>
-          </Drawer>
-        )}
-        {utilities}
-      </FluidHoverControls>
-
-      <FluidHoverControls
-        buttonGroup
-        orientation="vertical"
-        label={label}
-        className="fixed top-1/2 left-[var(--gutter-offset)] z-10 hidden h-fit -translate-y-1/2 min-[50rem]:flex"
-      >
-        {items.length > 0 && (
-          <ActionMenu
-            label={t("apiActions.outline")}
-            triggerLabel={`${Math.round(progress * 100)}% · ${t("apiActions.outline")}`}
-            trigger={<ReadingProgressRing progress={progress} />}
-            side="left"
-            indicator={<ArrowLeftIcon className="size-4" />}
-            items={items.map((item) => ({
-              ...item,
-              active: item.id === selectedId,
-              ariaCurrent:
-                item.id === selectedId ? ("location" as const) : undefined,
-              href: `#${encodeURIComponent(item.id)}`,
-              onSelect: (event) => {
-                event.preventDefault();
-                navigateToHeading(item.id);
-              },
-            }))}
-          />
-        )}
-        {utilities}
-      </FluidHoverControls>
-    </>
+                <ReadingProgressRing progress={progress} />
+              </DrawerTrigger>
+              <DrawerContent>
+                <DrawerHeader className="border-border border-b pb-4">
+                  <DrawerTitle>{pageTitle ?? t("imgApi.title")}</DrawerTitle>
+                </DrawerHeader>
+                <nav
+                  ref={drawerScrollRef}
+                  aria-label={t("apiActions.outline")}
+                  className="min-h-0 flex-1 overflow-y-auto px-4 pt-4 pb-6"
+                >
+                  <OutlineList
+                    items={items}
+                    activeId={selectedId}
+                    onNavigate={navigateToHeading}
+                    indicator={<ArrowLeftIcon className="size-4" />}
+                  />
+                </nav>
+              </DrawerContent>
+            </Drawer>
+          )}
+        </>
+      }
+      desktopOutline={
+        <>
+          {items.length > 0 && (
+            <ActionMenu
+              label={t("apiActions.outline")}
+              triggerLabel={`${Math.round(progress * 100)}% · ${t("apiActions.outline")}`}
+              trigger={<ReadingProgressRing progress={progress} />}
+              side="left"
+              indicator={<ArrowLeftIcon className="size-4" />}
+              items={items.map((item) => ({
+                ...item,
+                active: item.id === selectedId,
+                ariaCurrent:
+                  item.id === selectedId ? ("location" as const) : undefined,
+                href: `#${encodeURIComponent(item.id)}`,
+                onSelect: (event) => {
+                  event.preventDefault();
+                  navigateToHeading(item.id);
+                },
+              }))}
+            />
+          )}
+        </>
+      }
+      actions={utilities}
+    />
   );
 }
