@@ -6,6 +6,7 @@ import {
   TranslateIcon,
 } from "@phosphor-icons/react";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { FluidHoverControls } from "@/components/fluid-hover-controls";
@@ -14,12 +15,12 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { useLang } from "@/hooks/use-lang";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
@@ -28,6 +29,8 @@ import { cn } from "@/lib/utils";
 
 const navLinkClass =
   "flex h-9 items-center whitespace-nowrap rounded-lg px-3 font-medium text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted";
+const drawerLinkClass =
+  "flex min-h-12 items-center justify-between rounded-lg px-3 text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted";
 const actionClass =
   "cursor-default rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0! max-[359px]:size-8";
 const FONT_VERSION = "v2.1";
@@ -49,6 +52,7 @@ export function Navbar() {
   const isApi = pathname === withLocale("/api", language);
   const isAbout = pathname === withLocale("/about", language);
   const isMobile = useIsMobile();
+  const [navOpen, setNavOpen] = useState(false);
 
   const downloadFont = async (fileUrl: string) => {
     const filename = fileUrl.split("/").pop() || "mahjong-font.otf";
@@ -105,8 +109,8 @@ export function Navbar() {
             </span>
           </Link>
           {isMobile ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger
+            <Drawer open={navOpen} onOpenChange={setNavOpen}>
+              <DrawerTrigger
                 render={
                   <Button
                     variant="ghost"
@@ -119,39 +123,44 @@ export function Navbar() {
                   </Button>
                 }
               />
-              <DropdownMenuContent align="start" className="min-w-40">
-                <DropdownMenuGroup>
-                  <DropdownMenuItem
+              <DrawerContent>
+                <DrawerHeader className="border-border border-b pb-4">
+                  <DrawerTitle>Mahjong Font</DrawerTitle>
+                </DrawerHeader>
+                <nav
+                  aria-label={t("ui.navMenu")}
+                  className="flex flex-col gap-1 px-4 pb-6"
+                >
+                  <Link
+                    to={withLocale("/", language)}
                     aria-current={isHome ? "page" : undefined}
-                    className="justify-between px-3"
-                    onClick={() => navigate({ to: withLocale("/", language) })}
+                    onClick={() => setNavOpen(false)}
+                    className={drawerLinkClass}
                   >
                     {t("ui.navHome")}
                     {isHome && <CheckIcon aria-hidden="true" />}
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
+                  </Link>
+                  <Link
+                    to={withLocale("/api", language)}
                     aria-current={isApi ? "page" : undefined}
-                    className="justify-between px-3"
-                    onClick={() =>
-                      navigate({ to: withLocale("/api", language) })
-                    }
+                    onClick={() => setNavOpen(false)}
+                    className={drawerLinkClass}
                   >
                     {t("ui.navImageApi")}
                     {isApi && <CheckIcon aria-hidden="true" />}
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
+                  </Link>
+                  <Link
+                    to={withLocale("/about", language)}
                     aria-current={isAbout ? "page" : undefined}
-                    className="justify-between px-3"
-                    onClick={() =>
-                      navigate({ to: withLocale("/about", language) })
-                    }
+                    onClick={() => setNavOpen(false)}
+                    className={drawerLinkClass}
                   >
                     {t("ui.navAbout")}
                     {isAbout && <CheckIcon aria-hidden="true" />}
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  </Link>
+                </nav>
+              </DrawerContent>
+            </Drawer>
           ) : (
             <FluidHoverControls label={t("ui.navMenu")}>
               <Link
