@@ -224,7 +224,7 @@ export function HeaderActionDropdown({
                         item.onSelect();
                       }}
                       className={cn(
-                        "relative flex min-h-8 w-full items-center justify-between gap-3 whitespace-nowrap rounded-md px-2.5 py-1.5 text-left text-base focus-visible:outline-none sm:gap-6",
+                        "relative flex min-h-8 w-full items-center justify-between gap-3 whitespace-nowrap rounded-md px-2.5 py-1.5 text-left text-base focus-visible:outline-none",
                         selectedId === item.id && "font-bold text-primary"
                       )}
                     >

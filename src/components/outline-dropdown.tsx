@@ -33,6 +33,7 @@ export function OutlineDropdown({
   const reducedMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
+  const openModeRef = useRef<"hover" | "click" | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -57,6 +58,7 @@ export function OutlineDropdown({
       if (focusFrame.current !== null) cancelAnimationFrame(focusFrame.current);
       focusFrame.current = null;
       openRef.current = false;
+      openModeRef.current = null;
       setOpen(false);
       hover.setActiveIndex(null);
       if (restoreFocus) triggerRef.current?.focus();
@@ -64,8 +66,10 @@ export function OutlineDropdown({
     [hover.setActiveIndex]
   );
 
-  const openMenu = () => {
+  const openMenu = (mode: "hover" | "click") => {
+    if (mode === "hover" && openModeRef.current === "click") return;
     openRef.current = true;
+    openModeRef.current = mode;
     setOpen(true);
   };
 
@@ -117,7 +121,7 @@ export function OutlineDropdown({
     const next = (index + items.length) % items.length;
     setFocusedIndex(next);
     hover.setActiveIndex(next);
-    openMenu();
+    openMenu("click");
     scheduleFocus(next);
   };
 
@@ -149,12 +153,18 @@ export function OutlineDropdown({
       data-slot="button"
       className="relative size-10 rounded-lg border border-border bg-background dark:border-input dark:bg-neutral-800"
       onMouseEnter={() => {
+        if (openModeRef.current === "click") return;
         clearTimeout(openTimer.current);
-        openTimer.current = setTimeout(openMenu, 200);
+        openTimer.current = setTimeout(() => openMenu("hover"), 200);
       }}
-      onMouseLeave={() => close()}
+      onMouseLeave={() => {
+        if (openModeRef.current !== "click") close();
+      }}
       onBlurCapture={(event) => {
-        if (!rootRef.current?.contains(event.relatedTarget as Node | null))
+        if (
+          openModeRef.current !== "click" &&
+          !rootRef.current?.contains(event.relatedTarget as Node | null)
+        )
           close();
       }}
     >
@@ -170,12 +180,16 @@ export function OutlineDropdown({
         aria-controls={open ? id : undefined}
         onClick={() => {
           clearTimeout(openTimer.current);
+          if (openRef.current && openModeRef.current === "click") {
+            close();
+            return;
+          }
           const index = Math.max(
             0,
             items.findIndex((item) => item.id === activeId)
           );
           setFocusedIndex(index);
-          openMenu();
+          openMenu("click");
           scheduleFocus(index);
         }}
         onKeyDown={onKeyDown}
