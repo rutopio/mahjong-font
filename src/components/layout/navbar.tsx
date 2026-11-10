@@ -6,29 +6,18 @@ import {
   TranslateIcon,
 } from "@phosphor-icons/react";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { FluidHoverControls } from "@/components/fluid-hover-controls";
+import { HeaderActionDropdown } from "@/components/header-action-dropdown";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useLang } from "@/hooks/use-lang";
@@ -60,8 +49,6 @@ export function Navbar() {
   const isApi = pathname === withLocale("/api", language);
   const isAbout = pathname === withLocale("/about", language);
   const isMobile = useIsMobile();
-  const [langDrawerOpen, setLangDrawerOpen] = useState(false);
-  const [fontDrawerOpen, setFontDrawerOpen] = useState(false);
 
   const downloadFont = async (fileUrl: string) => {
     const filename = fileUrl.split("/").pop() || "mahjong-font.otf";
@@ -196,83 +183,17 @@ export function Navbar() {
         </div>
 
         <FluidHoverControls compact>
-          {isMobile ? (
-            <>
-              <Button
-                variant="ghost"
-                size="icon"
-                type="button"
-                className={actionClass}
-                aria-label={t("ui.downloadFont")}
-                onClick={() => setFontDrawerOpen(true)}
-              >
-                <FileArrowDownIcon aria-hidden="true" />
-              </Button>
-              <Drawer open={fontDrawerOpen} onOpenChange={setFontDrawerOpen}>
-                <DrawerContent>
-                  <DrawerHeader>
-                    <DrawerTitle>{t("ui.downloadFont")}</DrawerTitle>
-                    <DrawerDescription className="sr-only">
-                      {t("ui.downloadFont")}
-                    </DrawerDescription>
-                  </DrawerHeader>
-                  <div className="px-4 pb-2">
-                    {fontDownloads.map((font) => (
-                      <button
-                        key={font.labelKey}
-                        type="button"
-                        className="flex w-full items-center justify-between gap-3 rounded-md px-3 py-3 text-sm hover:bg-accent"
-                        onClick={() => {
-                          downloadFont(font.url);
-                          setFontDrawerOpen(false);
-                        }}
-                      >
-                        {t(font.labelKey)}
-                        <Badge variant="secondary">{FONT_VERSION}</Badge>
-                      </button>
-                    ))}
-                  </div>
-                  <DrawerFooter>
-                    <DrawerClose
-                      render={
-                        <Button variant="outline">{t("ui.close")}</Button>
-                      }
-                    />
-                  </DrawerFooter>
-                </DrawerContent>
-              </Drawer>
-            </>
-          ) : (
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                render={
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    type="button"
-                    className={actionClass}
-                    aria-label={t("ui.downloadFont")}
-                  >
-                    <FileArrowDownIcon aria-hidden="true" />
-                  </Button>
-                }
-              />
-              <DropdownMenuContent align="end">
-                <DropdownMenuGroup>
-                  {fontDownloads.map((font) => (
-                    <DropdownMenuItem
-                      key={font.labelKey}
-                      className="justify-between gap-6"
-                      onClick={() => downloadFont(font.url)}
-                    >
-                      {t(font.labelKey)}
-                      <Badge variant="secondary">{FONT_VERSION}</Badge>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
+          <HeaderActionDropdown
+            label={t("ui.downloadFont")}
+            icon={<FileArrowDownIcon aria-hidden="true" />}
+            className={actionClass}
+            items={fontDownloads.map((font) => ({
+              id: font.labelKey,
+              label: t(font.labelKey),
+              suffix: <Badge variant="secondary">{FONT_VERSION}</Badge>,
+              onSelect: () => downloadFont(font.url),
+            }))}
+          />
 
           <a
             href={GITHUB_REPO_URL}
@@ -287,88 +208,17 @@ export function Navbar() {
             <GithubLogoIcon className="size-4" aria-hidden="true" />
           </a>
 
-          {isMobile ? (
-            <>
-              <Button
-                variant="ghost"
-                size="icon"
-                type="button"
-                className={actionClass}
-                aria-label={t("ui.language")}
-                onClick={() => setLangDrawerOpen(true)}
-              >
-                <TranslateIcon aria-hidden="true" />
-              </Button>
-              <Drawer open={langDrawerOpen} onOpenChange={setLangDrawerOpen}>
-                <DrawerContent>
-                  <DrawerHeader>
-                    <DrawerTitle>{t("ui.language")}</DrawerTitle>
-                    <DrawerDescription className="sr-only">
-                      {t("ui.language")}
-                    </DrawerDescription>
-                  </DrawerHeader>
-                  <div className="px-4 pb-2">
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.value}
-                        type="button"
-                        className="flex w-full items-center justify-between rounded-md px-3 py-3 text-sm hover:bg-accent"
-                        onClick={() => {
-                          handleLanguageChange(lang.value);
-                          setLangDrawerOpen(false);
-                        }}
-                      >
-                        {lang.label}
-                        {language === lang.value && (
-                          <CheckIcon aria-hidden="true" />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                  <DrawerFooter>
-                    <DrawerClose
-                      render={
-                        <Button variant="outline">{t("ui.close")}</Button>
-                      }
-                    />
-                  </DrawerFooter>
-                </DrawerContent>
-              </Drawer>
-            </>
-          ) : (
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                render={
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    type="button"
-                    className={actionClass}
-                    aria-label={t("ui.language")}
-                  >
-                    <TranslateIcon aria-hidden="true" />
-                  </Button>
-                }
-              />
-              <DropdownMenuContent align="end">
-                <DropdownMenuGroup>
-                  <DropdownMenuRadioGroup
-                    value={language}
-                    onValueChange={handleLanguageChange}
-                  >
-                    {languages.map((lang) => (
-                      <DropdownMenuRadioItem
-                        key={lang.value}
-                        value={lang.value}
-                      >
-                        {lang.label}
-                      </DropdownMenuRadioItem>
-                    ))}
-                  </DropdownMenuRadioGroup>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
+          <HeaderActionDropdown
+            label={t("ui.language")}
+            icon={<TranslateIcon aria-hidden="true" />}
+            className={actionClass}
+            selectedId={language}
+            items={languages.map((lang) => ({
+              id: lang.value,
+              label: lang.label,
+              onSelect: () => handleLanguageChange(lang.value),
+            }))}
+          />
           <ThemeToggle className={actionClass} />
         </FluidHoverControls>
       </nav>
