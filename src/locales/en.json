@@ -131,6 +131,7 @@
     "paramTileDesc": "The tile string, placed in the path after `/img/`, e.g. `/img/7m7m7m2p3p4p`. A number followed by a suit: `m` characters, `p` circles, `s` bamboo, `z` honors (East/South/West/North/White/Green/Red are `1z`~`7z`). Use `_` for a gap between tile groups, e.g. `123m456p_5z`. This path is required; if there are no renderable tiles, the endpoint returns HTTP 400 (`No tiles to render`).",
     "paramThemeDesc": "Tile color theme. `color` for colorful tiles, `mono` for monochrome (black & white). Any other value or omission is treated as `color`.",
     "paramColorDesc": "Main tile color, a six-digit hex code **without** the `#`, e.g. `2D7D46`. Only applies when `theme=color`; ignored when `theme=mono`.",
+    "inputRules": "Tile notation is limited to 512 characters; invalid color codes use the default color.",
     "examplesHeading": "Examples",
     "exampleDefault": "Default (colorful / #AA7942)",
     "exampleColor": "Custom color",

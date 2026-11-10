@@ -132,7 +132,8 @@ into `src/lib/tiles-data.json`, which the web app and the Image API both read.
 ## Image API
 
 Put a tile string in the URL path to get an inline SVG image you can embed
-anywhere, shields.io-style. Missing parameters fall back to defaults.
+anywhere, shields.io-style. The tile path is required (up to 512 characters);
+omitted theme and color parameters use their defaults.
 
 ```
 https://mahjong.chingru.com/img/<tile>?theme=color&color=AA7942
@@ -149,10 +150,10 @@ The SVG is rendered at a fixed height of 500px; width scales proportionally.
 It is a vector, so you can resize it freely when embedding. For example:
 
 ```md
-![](https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
+![Mahjong tile diagram: 7m7m7m2p3p4p8p8p8p4s5s6s8s_8s](https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
 ```
 
-![](https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
+![Mahjong tile diagram: 7m7m7m2p3p4p8p8p8p4s5s6s8s_8s](https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
 
 
 

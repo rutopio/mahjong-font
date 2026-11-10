@@ -131,6 +131,7 @@
     "paramTileDesc": "牌谱字符串，放在 `/img/` 之后的路径上，例如 `/img/7m7m7m2p3p4p`。数字接花色：`m` 万、`p` 筒、`s` 索、`z` 字牌（东南西北白发中为 `1z`~`7z`）。用 `_` 表示牌组间的空隙，例如 `123m456p_5z`。此路径为必填；如果牌谱中没有可显示的牌，端点会返回 HTTP 400（`No tiles to render`）。",
     "paramThemeDesc": "牌面配色主题。`color` 为彩色牌面，`mono` 为单色（黑白）牌面。其他值或省略时视为 `color`。",
     "paramColorDesc": "牌面主色，六位十六进制色码，**不含** `#`，例如 `2D7D46`。仅在 `theme=color` 时生效；`theme=mono` 时忽略。",
+    "inputRules": "牌谱最多 512 个字符；无效的色码会改用默认颜色。",
     "examplesHeading": "示例",
     "exampleDefault": "默认（彩色 / #AA7942）",
     "exampleColor": "指定颜色",

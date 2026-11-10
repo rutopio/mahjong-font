@@ -4,6 +4,7 @@
  * JS so it does not depend on browser COLR/CPAL support.
  */
 
+import { DEFAULT_TILE_COLOR } from "./constants";
 import { shapeTiles } from "./shape-tiles";
 import type { TilesData } from "./tiles-data";
 
@@ -32,7 +33,7 @@ function resolveColor(
 interface RenderOptions {
   text: string;
   theme: string;
-  /** Hex/rgb color overriding the tile base (colorful only). */
+  /** Six-digit hex color overriding the tile base (colorful only). */
   tileColor: string;
   data: TilesData;
 }
@@ -58,6 +59,11 @@ export function buildTilesContent({
 }: RenderOptions): TilesContent | null {
   const { palette, ligatures, advances, bounds, colorful, monochrome } = data;
   const isColorful = theme !== "monochrome";
+  // This renderer also feeds inline HTML and a directly served SVG. Never
+  // interpolate an unchecked attribute value, even if the caller validated it.
+  const safeTileColor = /^#[0-9a-f]{6}$/i.test(tileColor)
+    ? tileColor
+    : DEFAULT_TILE_COLOR;
 
   const glyphs = shapeTiles(text, ligatures);
   if (glyphs.length === 0) return null;
@@ -78,7 +84,7 @@ export function buildTilesContent({
 
     if (isColorful) {
       for (const layer of colorful[name] ?? []) {
-        const fill = resolveColor(layer.p, palette, tileColor);
+        const fill = resolveColor(layer.p, palette, safeTileColor);
         paths += `<path d="${layer.d}" fill="${fill}"/>`;
       }
     } else {

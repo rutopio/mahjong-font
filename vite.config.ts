@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-vite-plugin";
 import react from "@vitejs/plugin-react";
 import { defineConfig, type Plugin } from "vite";
+import { decodeImageTilePath } from "./src/lib/image-input";
 import { renderBadgeSvg } from "./src/lib/render-badge-svg";
 import type { TilesData } from "./src/lib/tiles-data";
 import { decodeFromQuery } from "./src/lib/url-state";
@@ -25,9 +26,15 @@ function imgBadgePlugin(): Plugin {
         const url = new URL(req.url ?? "", "http://localhost");
         if (!url.pathname.startsWith("/img/")) return next();
 
-        const tile = decodeURIComponent(url.pathname.slice("/img/".length));
+        const rawTile = url.pathname.slice("/img/".length);
         // /img and /img/ (no tile) fall through to the SPA help page.
-        if (!tile) return next();
+        if (!rawTile) return next();
+        const tile = decodeImageTilePath(rawTile);
+        if (tile === null) {
+          res.statusCode = 400;
+          res.end("Invalid tile path");
+          return;
+        }
         const state = decodeFromQuery(url.search, tile);
         const svg = renderBadgeSvg({
           text: state.input,

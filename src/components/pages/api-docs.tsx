@@ -224,6 +224,9 @@ export function ApiDocs() {
               </tbody>
             </table>
           </div>
+          <p className="text-pretty text-muted-foreground">
+            {t("imgApi.inputRules")}
+          </p>
         </section>
 
         <section className="flex min-w-0 flex-col gap-6">

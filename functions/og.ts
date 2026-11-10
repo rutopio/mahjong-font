@@ -10,7 +10,7 @@
 import { initWasm, Resvg } from "@resvg/resvg-wasm";
 // The .wasm is imported as a module so Wrangler bundles it with the function.
 import resvgWasm from "@resvg/resvg-wasm/index_bg.wasm";
-
+import { isValidImageTile } from "../src/lib/image-input";
 import { OG_WIDTH, renderOgSvg } from "../src/lib/render-og-image";
 import type { TilesData } from "../src/lib/tiles-data";
 import tilesData from "../src/lib/tiles-data.json";
@@ -27,9 +27,17 @@ function ensureWasm(): Promise<void> {
   return wasmReady;
 }
 
-export const onRequestGet: PagesFunction = async ({ request }) => {
+export const onRequestGet: PagesFunction = async (context) => {
+  const { request } = context;
   const url = new URL(request.url);
+  const requestedTile = url.searchParams.get("tile");
+  if (requestedTile !== null && !isValidImageTile(requestedTile)) {
+    return new Response("Invalid tile string", { status: 400 });
+  }
   const state = decodeFromQuery(url.search);
+  const cache = await caches.open("mahjong-images");
+  const cached = await cache.match(request);
+  if (cached) return cached;
 
   const svg = renderOgSvg({
     text: state.input,
@@ -48,13 +56,14 @@ export const onRequestGet: PagesFunction = async ({ request }) => {
   });
   const png = resvg.render().asPng();
 
-  return new Response(png.buffer as ArrayBuffer, {
+  const response = new Response(png.buffer as ArrayBuffer, {
     headers: {
       "content-type": "image/png",
-      // Cache aggressively at the edge; the image is a pure function of the query.
-      "cache-control": "public, max-age=86400, s-maxage=2592000, immutable",
+      "cache-control": "public, max-age=3600, s-maxage=86400",
     },
   });
+  context.waitUntil(cache.put(request, response.clone()));
+  return response;
 };
 
 export const config = { runtime: "edge" };

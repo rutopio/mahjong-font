@@ -11,9 +11,16 @@
  * Only the HTML app shell is rewritten; /og and static assets pass through.
  */
 
+import { isValidImageTile } from "../src/lib/image-input";
 import { OG_HEIGHT, OG_WIDTH } from "../src/lib/render-og-image";
 import { decodeFromQuery, encodeToQuery } from "../src/lib/url-state";
-import { metaFor, OG_LOCALE, pathFor, resolveRoute } from "./seo-meta";
+import {
+  imageAltFor,
+  metaFor,
+  OG_LOCALE,
+  pathFor,
+  resolveRoute,
+} from "./seo-meta";
 
 class MetaContentRewriter {
   constructor(private readonly content: string) {}
@@ -69,10 +76,12 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
 
   const state = decodeFromQuery(isContentPage ? "" : url.search);
   const query = encodeToQuery(state);
-  const imageUrl = `${url.origin}/og?${query}`;
-  const pageUrl = isContentPage
-    ? `${url.origin}${url.pathname.replace(/\/$/, "")}`
-    : `${url.origin}/?${query}`;
+  const imageState = isValidImageTile(state.input)
+    ? state
+    : decodeFromQuery("");
+  const imageUrl = `${url.origin}/og?${encodeToQuery(imageState)}`;
+  const imageAlt = imageAltFor(route.lang, imageState.input);
+  const pageUrl = `${url.origin}${route.path}${isContentPage ? "" : `?${query}`}`;
 
   // Canonical points at the current localized page without the share query, so
   // each locale URL is self-canonical and agrees with the hreflang alternates
@@ -99,10 +108,12 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
     .on('meta[property="og:title"]', setContent(title))
     .on('meta[property="og:description"]', setContent(description))
     .on('meta[property="og:image"]', setContent(imageUrl))
+    .on('meta[property="og:image:alt"]', setContent(imageAlt))
     .on('meta[property="og:image:width"]', setContent(String(OG_WIDTH)))
     .on('meta[property="og:image:height"]', setContent(String(OG_HEIGHT)))
     .on('meta[name="twitter:title"]', setContent(title))
     .on('meta[name="twitter:description"]', setContent(description))
     .on('meta[name="twitter:image"]', setContent(imageUrl))
+    .on('meta[name="twitter:image:alt"]', setContent(imageAlt))
     .transform(response);
 };

@@ -17,6 +17,7 @@ const THEME_INTERNAL_MAP: Record<string, string> = {
 
 const DEFAULT_INPUT = "7m7m7m2p3p4p8p8p8p4s5s6s8s_8s";
 const DEFAULT_THEME = "colorful";
+const HEX_COLOR = /^[0-9a-f]{6}$/i;
 
 interface MahjongUrlState {
   input: string;
@@ -32,7 +33,7 @@ const DEFAULT_STATE: MahjongUrlState = {
 
 /** Serialize state into a query string (without the leading "?"). */
 export function encodeToQuery(state: MahjongUrlState): string {
-  const urlTheme = THEME_INTERNAL_MAP[state.theme] || "mono";
+  const urlTheme = THEME_INTERNAL_MAP[state.theme] || "color";
   const params = new URLSearchParams({ tile: state.input, theme: urlTheme });
   if (urlTheme === "color") {
     params.set("color", state.tileColor.replace("#", ""));
@@ -41,13 +42,11 @@ export function encodeToQuery(state: MahjongUrlState): string {
 }
 
 /**
- * Parse a query string into state. Returns the full default state when any
- * required field is missing or invalid, rather than partially merging — a
- * malformed URL falls back entirely to the default.
+ * Parse a query string into state. A missing tile uses the default state;
+ * missing or unrecognised optional parameters use their individual defaults.
  *
  * `tileOverride` supplies the tile sequence from outside the query (e.g. the
- * URL path for the /img endpoint); when given, missing theme/color params fall
- * back to their individual defaults instead of discarding the tiles.
+ * URL path for the /img endpoint).
  */
 export function decodeFromQuery(
   search: string,
@@ -58,15 +57,13 @@ export function decodeFromQuery(
   const urlTheme = params.get("theme");
   const theme = urlTheme ? THEME_URL_MAP[urlTheme] : undefined;
 
-  // Without an explicit tile source, a missing tile/theme means a bare URL:
-  // fall back entirely to the default share.
+  // A bare URL still shows the default tiles.
   if (!input) return DEFAULT_STATE;
-  if (!theme && !tileOverride) return DEFAULT_STATE;
 
   const resolvedTheme = theme || DEFAULT_THEME;
   const urlColor = params.get("color");
   const tileColor =
-    resolvedTheme === "colorful" && urlColor
+    resolvedTheme === "colorful" && urlColor && HEX_COLOR.test(urlColor)
       ? `#${urlColor}`
       : DEFAULT_TILE_COLOR;
 

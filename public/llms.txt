@@ -54,7 +54,8 @@ the tile string produces no tiles.
 | `theme`   | query    | `color` \| `mono`| `color`  | `color` for colorful tiles, `mono` for monochrome.           |
 | `color`   | query    | string (hex)     | `AA7942` | Main tile color, six-digit hex without `#`. Only when `theme=color`. |
 
-Omitted parameters fall back to their defaults.
+The tile path is required and limited to 512 characters. Omitted theme and
+color parameters use their defaults.
 
 ### Examples
 
@@ -70,13 +71,13 @@ Omitted parameters fall back to their defaults.
 Markdown:
 
 ```md
-![](https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
+![Mahjong tile diagram: 7m7m7m2p3p4p8p8p8p4s5s6s8s_8s](https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s)
 ```
 
 HTML:
 
 ```html
-<img src="https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s" />
+<img src="https://mahjong.chingru.com/img/7m7m7m2p3p4p8p8p8p4s5s6s8s_8s" alt="Mahjong tile diagram: 7m7m7m2p3p4p8p8p8p4s5s6s8s_8s" />
 ```
 
 ### Tip

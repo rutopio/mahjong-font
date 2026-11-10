@@ -37,7 +37,7 @@ const COPY: Record<Lang, Record<Page, Copy>> = {
     api: {
       title: "Image API | 麻雀牌図作成ツール",
       description:
-        "牌譜を URL のパスに入れるだけで、そのまま埋め込める SVG 画像が得られます。不足しているパラメータは既定値が自動で適用されます。",
+        "牌譜を URL のパスに入れるだけで、そのまま埋め込める SVG 画像が得られます。配色テーマと色の省略時は既定値が適用されます。",
     },
     about: {
       title: "このツールについて | 麻雀牌図作成ツール",
@@ -54,7 +54,7 @@ const COPY: Record<Lang, Record<Page, Copy>> = {
     api: {
       title: "Image API | Mahjong Tile Image Generator",
       description:
-        "Put a tile string in the URL path to get an SVG image you can embed directly. Missing parameters fall back to defaults.",
+        "Put a tile string in the URL path to get an SVG image you can embed directly. Omitted theme and color parameters use their defaults.",
     },
     about: {
       title: "About | Mahjong Tile Image Generator",
@@ -71,7 +71,7 @@ const COPY: Record<Lang, Record<Page, Copy>> = {
     api: {
       title: "Image API | 麻將牌圖產生器",
       description:
-        "把牌譜放進網址路徑就能得到一張可直接內嵌的 SVG 圖片。缺少的參數會自動套用預設值。",
+        "把牌譜放進網址路徑就能得到一張可直接內嵌的 SVG 圖片。配色主題與顏色省略時會套用預設值。",
     },
     about: {
       title: "關於 | 麻將牌圖產生器",
@@ -87,7 +87,7 @@ const COPY: Record<Lang, Record<Page, Copy>> = {
     api: {
       title: "Image API | 麻将牌图生成器",
       description:
-        "把牌谱放进网址路径就能得到一张可直接内嵌的 SVG 图片。缺少的参数会自动套用默认值。",
+        "把牌谱放进网址路径就能得到一张可直接内嵌的 SVG 图片。配色主题与颜色省略时会套用默认值。",
     },
     about: {
       title: "关于 | 麻将牌图生成器",
@@ -111,6 +111,17 @@ export const HREFLANG: Record<Lang, string> = {
   "zh-TW": "zh-Hant",
   "zh-CN": "zh-Hans",
 };
+
+const IMAGE_ALT: Record<Lang, string> = {
+  ja: "麻雀牌の画像、牌譜：",
+  en: "Mahjong tile diagram, notation: ",
+  "zh-TW": "麻雀牌圖，牌譜：",
+  "zh-CN": "麻将牌图，牌谱：",
+};
+
+export function imageAltFor(lang: Lang, tile: string): string {
+  return `${IMAGE_ALT[lang]}${tile}`;
+}
 
 /** URL prefix per language (ja is bare). */
 const PREFIX: Record<Lang, string> = {
