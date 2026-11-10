@@ -21,7 +21,7 @@
     "@base-ui/react": "1.6.0",
     "@phosphor-icons/react": "2.1.10",
     "@resvg/resvg-wasm": "2.6.2",
-    "@rutopio/base-component": "github:rutopio/base-component#v0.9.0",
+    "@rutopio/base-component": "github:rutopio/base-component#v0.11.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "cmdk": "1.1.1",

@@ -3,7 +3,6 @@ import {
   FileArrowDownIcon,
   GithubLogoIcon,
   ListIcon,
-  TranslateIcon,
 } from "@phosphor-icons/react";
 import { ActionMenu } from "@rutopio/base-component/action-menu";
 import { Button, buttonVariants } from "@rutopio/base-component/button";
@@ -14,6 +13,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@rutopio/base-component/drawer";
+import { LanguageToggle } from "@rutopio/base-component/language-toggle";
 import {
   HeaderNavigation,
   SiteHeader,
@@ -47,7 +47,6 @@ export function Navbar() {
   const isAbout = currentPage === "/about";
   const isMobile = useIsMobile();
   const [downloadOpen, setDownloadOpen] = useState(false);
-  const [languageOpen, setLanguageOpen] = useState(false);
 
   const downloadFont = async (fileUrl: string) => {
     const filename = fileUrl.split("/").pop() || "mahjong-font.otf";
@@ -205,64 +204,18 @@ export function Navbar() {
             <GithubLogoIcon className="size-4" aria-hidden="true" />
           </a>
 
-          {isMobile ? (
-            <Drawer open={languageOpen} onOpenChange={setLanguageOpen}>
-              <DrawerTrigger
-                render={
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    aria-label={t("ui.language")}
-                  >
-                    <TranslateIcon aria-hidden="true" />
-                  </Button>
-                }
-              />
-              <DrawerContent>
-                <DrawerHeader className="border-border border-b pb-4">
-                  <DrawerTitle className="font-heading">
-                    {t("ui.language")}
-                  </DrawerTitle>
-                </DrawerHeader>
-                <div className="flex flex-col gap-1 px-4 pt-4 pb-6">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.value}
-                      type="button"
-                      lang={lang.value}
-                      aria-current={
-                        language === lang.value ? "true" : undefined
-                      }
-                      className="flex min-h-10 items-center justify-between rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=true]:bg-muted"
-                      onClick={() => {
-                        setLanguageOpen(false);
-                        handleLanguageChange(lang.value);
-                      }}
-                    >
-                      {lang.label}
-                      {language === lang.value && (
-                        <CheckIcon aria-hidden="true" />
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </DrawerContent>
-            </Drawer>
-          ) : (
-            <ActionMenu
-              label={t("ui.language")}
-              trigger={<TranslateIcon aria-hidden="true" />}
-              indicator={<CheckIcon className="size-4" />}
-              items={languages.map((lang) => ({
-                id: lang.value,
-                label: lang.label,
-                active: language === lang.value,
-                ariaCurrent:
-                  language === lang.value ? ("true" as const) : undefined,
-                onSelect: () => handleLanguageChange(lang.value),
-              }))}
-            />
-          )}
+          <LanguageToggle
+            label={t("ui.language")}
+            current={language}
+            options={languages.map((lang) => ({
+              value: lang.value as Locale,
+              label: lang.label,
+              htmlLang: lang.value,
+            }))}
+            isMobile={isMobile}
+            titleClassName="font-heading"
+            onChange={(value) => handleLanguageChange(value)}
+          />
           <ThemeToggle />
         </>
       }

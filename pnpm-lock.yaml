@@ -23,8 +23,8 @@ importers:
         specifier: 2.6.2
         version: 2.6.2
       '@rutopio/base-component':
-        specifier: github:rutopio/base-component#v0.9.0
-        version: https://codeload.github.com/rutopio/base-component/tar.gz/1790cb323cb7a9eb92611db76704242a29d9cf08(@base-ui/react@1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@phosphor-icons/react@2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(motion@12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(next-themes@0.4.6(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        specifier: github:rutopio/base-component#v0.11.0
+        version: https://codeload.github.com/rutopio/base-component/tar.gz/6ca9a69dbeda3359046589431c0cdb5dd6d5a11f(@base-ui/react@1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@phosphor-icons/react@2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(motion@12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(next-themes@0.4.6(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       class-variance-authority:
         specifier: 0.7.1
         version: 0.7.1
@@ -1009,18 +1009,21 @@ packages:
   '@rolldown/pluginutils@1.1.0':
     resolution: {integrity: sha512-K+NU2HDCEem4sClgHH4ZZXwdJeNFkJo+hRk479DIwdIviAPN2hFJH1KHHwg8CxHQXvi0M5XY4deTXINfIiSG6w==}
 
-  '@rutopio/base-component@https://codeload.github.com/rutopio/base-component/tar.gz/1790cb323cb7a9eb92611db76704242a29d9cf08':
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/rutopio/base-component/tar.gz/1790cb323cb7a9eb92611db76704242a29d9cf08}
-    version: 0.9.0
+  '@rutopio/base-component@https://codeload.github.com/rutopio/base-component/tar.gz/6ca9a69dbeda3359046589431c0cdb5dd6d5a11f':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/rutopio/base-component/tar.gz/6ca9a69dbeda3359046589431c0cdb5dd6d5a11f}
+    version: 0.11.0
     peerDependencies:
       '@base-ui/react': ^1.6.0
       '@phosphor-icons/react': ^2.1.10
+      canvas-confetti: ^1.9.4
       motion: ^12.40.0
       next-themes: ^0.4.6
       react: ^19.2.0
       react-dom: ^19.2.0
       react-medium-image-zoom: ^5.4.8
     peerDependenciesMeta:
+      canvas-confetti:
+        optional: true
       react-medium-image-zoom:
         optional: true
 
@@ -2604,7 +2607,7 @@ snapshots:
 
   '@rolldown/pluginutils@1.1.0': {}
 
-  '@rutopio/base-component@https://codeload.github.com/rutopio/base-component/tar.gz/1790cb323cb7a9eb92611db76704242a29d9cf08(@base-ui/react@1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@phosphor-icons/react@2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(motion@12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(next-themes@0.4.6(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@rutopio/base-component@https://codeload.github.com/rutopio/base-component/tar.gz/6ca9a69dbeda3359046589431c0cdb5dd6d5a11f(@base-ui/react@1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@phosphor-icons/react@2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(motion@12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(next-themes@0.4.6(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@base-ui/react': 1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@phosphor-icons/react': 2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
