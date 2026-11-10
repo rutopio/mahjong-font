@@ -2,6 +2,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useId, useMemo, useRef, useState } from "react";
 import { FluidHoverHighlight } from "@/components/fluid-hover-highlight";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { useFluidHover } from "@/hooks/use-fluid-hover";
 import { useMountEffect } from "@/hooks/use-mount-effect";
 import { spring } from "@/lib/springs";
@@ -79,7 +80,9 @@ export function OutlineDropdown({
     (element: HTMLSpanElement | null) => {
       if (!element || !open) return;
       const frame = requestAnimationFrame(() => {
-        const viewport = menuRef.current;
+        const viewport = menuRef.current?.querySelector<HTMLElement>(
+          '[data-slot="scroll-area-viewport"]'
+        );
         if (!viewport) return;
         const viewportRect = viewport.getBoundingClientRect();
         const activeRect = element.getBoundingClientRect();
@@ -198,9 +201,11 @@ export function OutlineDropdown({
               style={{ transformOrigin: "center right" }}
               className="rounded-lg border border-border bg-popover p-1 text-popover-foreground shadow-md"
             >
-              <div
+              <ScrollArea
                 ref={menuRef}
-                className="max-h-[calc(50dvh-0.625rem)] overflow-y-auto overscroll-contain"
+                scrollFade
+                overscrollContain
+                className="h-auto! max-h-[calc(50dvh-0.625rem)] w-full [&_[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:right-[-3px]! [&_[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:w-1! [&_[data-slot=scroll-area-scrollbar]]:m-0.5 [&_[data-slot=scroll-area-thumb]]:bg-foreground/10! [&_[data-slot=scroll-area-viewport]]:max-h-[calc(50dvh-0.625rem)] data-has-overflow-y:[&_[role=menu]]:pr-2"
               >
                 <div
                   ref={listRef}
@@ -246,7 +251,7 @@ export function OutlineDropdown({
                     </a>
                   ))}
                 </div>
-              </div>
+              </ScrollArea>
             </motion.div>
           </div>
         )}

@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { type ReactNode, useId, useMemo, useRef, useState } from "react";
 import { FluidHoverHighlight } from "@/components/fluid-hover-highlight";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { useFluidHover } from "@/hooks/use-fluid-hover";
 import { useMountEffect } from "@/hooks/use-mount-effect";
 import { spring } from "@/lib/springs";
@@ -191,46 +192,52 @@ export function HeaderActionDropdown({
               style={{ transformOrigin: "top right" }}
               className="rounded-lg border border-border bg-popover p-1 text-popover-foreground shadow-md"
             >
-              <div
-                ref={listRef}
-                id={id}
-                role="menu"
-                aria-label={label}
-                onKeyDown={onKeyDown}
-                {...hover.handlers}
-                className="relative"
+              <ScrollArea
+                scrollFade
+                overscrollContain
+                className="h-auto! max-h-[calc(50dvh-0.625rem)] w-full [&_[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:right-[-3px]! [&_[data-slot=scroll-area-scrollbar][data-orientation=vertical]]:w-1! [&_[data-slot=scroll-area-scrollbar]]:m-0.5 [&_[data-slot=scroll-area-thumb]]:bg-foreground/10! [&_[data-slot=scroll-area-viewport]]:max-h-[calc(50dvh-0.625rem)] data-has-overflow-y:[&_[role=menu]]:pr-2"
               >
-                <FluidHoverHighlight hover={hover} className="rounded-md" />
-                {items.map((item, index) => (
-                  <button
-                    key={item.id}
-                    ref={itemRefCallbacks[index]}
-                    type="button"
-                    role="menuitem"
-                    aria-current={selectedId === item.id ? "true" : undefined}
-                    onPointerMove={() => setFocusedIndex(index)}
-                    onFocus={() => {
-                      setFocusedIndex(index);
-                      hover.setActiveIndex(index);
-                    }}
-                    onClick={() => {
-                      close(true);
-                      item.onSelect();
-                    }}
-                    className={cn(
-                      "relative flex min-h-8 w-full items-center justify-between gap-3 whitespace-nowrap rounded-md px-2.5 py-1.5 text-left text-base focus-visible:outline-none sm:gap-6",
-                      selectedId === item.id && "font-semibold text-primary"
-                    )}
-                  >
-                    <span>{item.label}</span>
-                    {selectedId === item.id ? (
-                      <CheckIcon aria-hidden="true" />
-                    ) : (
-                      item.suffix
-                    )}
-                  </button>
-                ))}
-              </div>
+                <div
+                  ref={listRef}
+                  id={id}
+                  role="menu"
+                  aria-label={label}
+                  onKeyDown={onKeyDown}
+                  {...hover.handlers}
+                  className="relative"
+                >
+                  <FluidHoverHighlight hover={hover} className="rounded-md" />
+                  {items.map((item, index) => (
+                    <button
+                      key={item.id}
+                      ref={itemRefCallbacks[index]}
+                      type="button"
+                      role="menuitem"
+                      aria-current={selectedId === item.id ? "true" : undefined}
+                      onPointerMove={() => setFocusedIndex(index)}
+                      onFocus={() => {
+                        setFocusedIndex(index);
+                        hover.setActiveIndex(index);
+                      }}
+                      onClick={() => {
+                        close(true);
+                        item.onSelect();
+                      }}
+                      className={cn(
+                        "relative flex min-h-8 w-full items-center justify-between gap-3 whitespace-nowrap rounded-md px-2.5 py-1.5 text-left text-base focus-visible:outline-none sm:gap-6",
+                        selectedId === item.id && "font-semibold text-primary"
+                      )}
+                    >
+                      <span>{item.label}</span>
+                      {selectedId === item.id ? (
+                        <CheckIcon aria-hidden="true" />
+                      ) : (
+                        item.suffix
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </ScrollArea>
             </motion.div>
           </div>
         )}
