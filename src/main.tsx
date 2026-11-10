@@ -84,7 +84,7 @@ router.subscribe("onResolved", ({ fromLocation, toLocation }) => {
   syncMetadata(toLocation.pathname);
   if (fromLocation && fromLocation.pathname !== toLocation.pathname) {
     requestAnimationFrame(() =>
-      document.getElementById("main-content")?.focus()
+      document.getElementById("main-content")?.focus({ preventScroll: true })
     );
   }
   window.gtag?.("event", "page_view", {
