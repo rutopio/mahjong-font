@@ -70,7 +70,11 @@
           "options": {
             "paths": {
               "react": {
-                "importNames": ["useEffect", "useLayoutEffect", "useInsertionEffect"],
+                "importNames": [
+                  "useEffect",
+                  "useLayoutEffect",
+                  "useInsertionEffect"
+                ],
                 "message": "Use derived state, event handlers, subscriptions, or useMountEffect instead."
               }
             }
