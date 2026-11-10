@@ -31,7 +31,7 @@ import { type Locale, stripLocale, withLocale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
 const actionClass =
-  "cursor-default rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0! max-[359px]:size-8";
+  "rounded-lg transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0! max-[359px]:size-8";
 const FONT_VERSION = "v2.1";
 const GITHUB_LABEL: Record<Locale, string> = {
   ja: "GitHub リポジトリ（新しいタブで開く）",

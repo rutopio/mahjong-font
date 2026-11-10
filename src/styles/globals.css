@@ -2,6 +2,7 @@
 @import "./fonts.css";
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "@rutopio/base-component/styles.css";
 @import "./shadcn-utilities.css";
 
 @custom-variant dark (&:is(.dark, .dark *));
@@ -182,10 +183,6 @@ html:lang(zh-Hans) {
     font-variant-numeric: tabular-nums;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    cursor: pointer;
   }
   html {
     @apply bg-background font-sans;

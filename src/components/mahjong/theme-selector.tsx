@@ -36,7 +36,7 @@ export function ThemeSelector({
             <label
               key={option.value}
               htmlFor={`${id}-${option.value}`}
-              className="relative z-10 inline-flex h-full cursor-pointer select-none items-center justify-center whitespace-nowrap px-3 text-muted-foreground transition-colors data-active:text-foreground"
+              className="relative z-10 inline-flex h-full select-none items-center justify-center whitespace-nowrap px-3 text-muted-foreground transition-colors data-active:text-foreground"
               data-active={theme === option.value ? "" : undefined}
             >
               {t(option.labelKey)}

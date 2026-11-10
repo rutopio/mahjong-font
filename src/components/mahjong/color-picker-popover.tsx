@@ -138,7 +138,7 @@ export function ColorPickerPopover({
   if (isTouchDevice()) {
     return (
       <label
-        className="relative inline-flex size-8 cursor-pointer overflow-hidden rounded-md outline-none focus-within:ring focus-within:ring-offset-2"
+        className="relative inline-flex size-8 overflow-hidden rounded-md outline-none focus-within:ring focus-within:ring-offset-2"
         style={{ backgroundColor: color }}
       >
         <input
@@ -146,7 +146,7 @@ export function ColorPickerPopover({
           aria-label={labels.picker}
           value={color}
           onChange={(e) => onColorChange(e.target.value)}
-          className="absolute inset-0 size-full cursor-pointer opacity-0"
+          className="absolute inset-0 size-full opacity-0"
         />
       </label>
     );
@@ -165,7 +165,7 @@ export function ColorPickerPopover({
     <DialogTrigger>
       <AriaButton
         aria-label={labels.picker}
-        className="size-8 cursor-pointer rounded-md p-0 outline-none focus:ring focus:ring-offset-2"
+        className="size-8 rounded-md p-0 outline-none focus:ring focus:ring-offset-2"
         style={{ backgroundColor: color }}
       >
         <ColorSwatch />
