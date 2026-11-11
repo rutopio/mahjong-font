@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { useMountEffect } from "@rutopio/ui/use-mount-effect";
 import { Window } from "happy-dom";
 import * as React from "react";
 import * as jsx from "react/jsx-runtime";
@@ -51,6 +52,7 @@ test("copy link feedback waits for success, reports failure and renews expiry", 
       globals: { window },
       imports: {
         react: React,
+        "@rutopio/ui/use-mount-effect": { useMountEffect },
         "react/jsx-runtime": jsx,
         "@phosphor-icons/react": Object.fromEntries(
           [

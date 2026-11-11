@@ -16,7 +16,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@rutopio/ui/dialog";
-import { useEffect, useRef, useState } from "react";
+import { useMountEffect } from "@rutopio/ui/use-mount-effect";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { TileSvg } from "@/components/mahjong/tile-svg";
@@ -43,14 +44,16 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
   const { t } = useTranslation();
   const [downloadOpen, setDownloadOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
-  const [copyId, setCopyId] = useState<number | null>(null);
-  const nextCopyId = useRef(0);
-  const copied = copyId !== null;
-  useEffect(() => {
-    if (copyId === null) return;
-    const timer = window.setTimeout(() => setCopyId(null), 2000);
-    return () => window.clearTimeout(timer);
-  }, [copyId]);
+  const [copied, setCopied] = useState(false);
+  const copyTimer = useRef<number | undefined>(undefined);
+  const mounted = useRef(false);
+  useMountEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      window.clearTimeout(copyTimer.current);
+    };
+  });
 
   const handleDownload = async (format: "png" | "jpg" | "svg") => {
     const filename = text || "mahjong";
@@ -102,7 +105,13 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
   const handleCopy = async () => {
     try {
       await copyLink();
-      setCopyId(++nextCopyId.current);
+      if (!mounted.current) return;
+      window.clearTimeout(copyTimer.current);
+      setCopied(true);
+      copyTimer.current = window.setTimeout(() => {
+        copyTimer.current = undefined;
+        setCopied(false);
+      }, 2000);
     } catch {
       toast.error(t("imgApi.copyFailed"));
     }
