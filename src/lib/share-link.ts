@@ -24,5 +24,5 @@ export function shareToThreads() {
 /** Copies the current page URL to the clipboard. */
 export function copyLink() {
   const currentUrl = window.location.href;
-  navigator.clipboard.writeText(currentUrl);
+  return navigator.clipboard.writeText(currentUrl);
 }

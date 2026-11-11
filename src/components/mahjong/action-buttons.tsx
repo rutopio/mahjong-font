@@ -16,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@rutopio/ui/dialog";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { TileSvg } from "@/components/mahjong/tile-svg";
@@ -43,7 +43,14 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
   const { t } = useTranslation();
   const [downloadOpen, setDownloadOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [copyId, setCopyId] = useState<number | null>(null);
+  const nextCopyId = useRef(0);
+  const copied = copyId !== null;
+  useEffect(() => {
+    if (copyId === null) return;
+    const timer = window.setTimeout(() => setCopyId(null), 2000);
+    return () => window.clearTimeout(timer);
+  }, [copyId]);
 
   const handleDownload = async (format: "png" | "jpg" | "svg") => {
     const filename = text || "mahjong";
@@ -92,10 +99,13 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  const handleCopy = () => {
-    copyLink();
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await copyLink();
+      setCopyId(++nextCopyId.current);
+    } catch {
+      toast.error(t("imgApi.copyFailed"));
+    }
   };
 
   // On touch devices, only use the native share sheet (no dialog fallback);
