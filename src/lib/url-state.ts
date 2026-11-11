@@ -53,12 +53,12 @@ export function decodeFromQuery(
   tileOverride?: string
 ): MahjongUrlState {
   const params = new URLSearchParams(search);
-  const input = tileOverride || params.get("tile");
+  const input = tileOverride ?? params.get("tile");
   const urlTheme = params.get("theme");
   const theme = urlTheme ? THEME_URL_MAP[urlTheme] : undefined;
 
   // A bare URL still shows the default tiles.
-  if (!input) return DEFAULT_STATE;
+  if (input === null) return DEFAULT_STATE;
 
   const resolvedTheme = theme || DEFAULT_THEME;
   const urlColor = params.get("color");

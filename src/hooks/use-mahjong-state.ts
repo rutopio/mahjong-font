@@ -29,7 +29,6 @@ export function useMahjongState() {
   // User actions update the URL at the same entry point as React state.
   const update = (next: typeof state) => {
     setState(next);
-    if (!next.input) return;
     const encoded = encodeToQuery(next);
     const current = window.location.search.slice(1);
     if (current !== encoded) {
