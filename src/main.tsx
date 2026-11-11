@@ -1,3 +1,4 @@
+import { NOT_FOUND_TITLE } from "@rutopio/ui/not-found";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { ThemeProvider } from "next-themes";
 import React from "react";
@@ -47,7 +48,7 @@ function syncMetadata(pathname: string) {
       ?.setAttribute("href", value);
   };
 
-  document.title = title;
+  document.title = router.state.statusCode === 404 ? NOT_FOUND_TITLE : title;
   setContent('meta[name="description"]', description);
   setHref('link[rel="canonical"]', canonical);
   for (const lang of LANGS) {

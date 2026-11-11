@@ -1,4 +1,5 @@
 import { PageTransition } from "@rutopio/ui/page-transition";
+import { ScreenSize } from "@rutopio/ui/screen-size";
 import { SiteLayout } from "@rutopio/ui/site-layout";
 import { Toaster } from "@rutopio/ui/sonner";
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
@@ -8,13 +9,12 @@ import "@/styles/globals.css";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
-import { ScreenSize } from "@/components/layout/screen-size";
 import { useLang } from "@/hooks/use-lang";
 import i18n from "@/lib/i18n";
 import { stripLocale } from "@/lib/locale";
 import { I18nProvider } from "@/provider/i18n-provider";
 import { RootError } from "@/routes/-root-error";
-import { RootNotFound } from "@/routes/-root-not-found";
+import { NotFound } from "@/components/not-found";
 
 const TanStackRouterDevtools = import.meta.env.DEV
   ? lazy(() =>
@@ -33,7 +33,7 @@ const SKIP_LABEL = {
 
 export const Route = createRootRoute({
   component: RootComponent,
-  notFoundComponent: RootNotFound,
+  notFoundComponent: NotFound,
   errorComponent: RootError,
 });
 
@@ -89,7 +89,7 @@ function RootComponent() {
         <Footer />
       </SiteLayout>
       <Toaster expand={false} closeButton position="top-center" />
-      <ScreenSize />
+      {import.meta.env.DEV && <ScreenSize />}
       <Suspense>
         <TanStackRouterDevtools />
       </Suspense>
