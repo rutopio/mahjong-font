@@ -13,7 +13,7 @@ import { withLocale } from "@/lib/locale";
 const linkClass =
   "break-words text-primary underline decoration-[0.5px] underline-offset-4 transition-[color,text-decoration-thickness] duration-150 hover:decoration-[1px]";
 
-export function About() {
+export function AboutPage() {
   const { t } = useTranslation();
   const lang = useLang();
   const outlineItems: OutlineItem[] = [

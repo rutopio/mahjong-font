@@ -9,7 +9,7 @@ import { NotationHelpPanel } from "@/components/mahjong/notation-help-panel";
 import { useMahjongState } from "@/hooks/use-mahjong-state";
 import { expandMahjongNotation } from "@/lib/mahjong-notation";
 
-export function Home() {
+export function HomePage() {
   const { t, ready } = useTranslation();
   const {
     input,

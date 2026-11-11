@@ -104,18 +104,18 @@ The glyph data is extracted ahead of time from the Riichi-Mahjong woff2 fonts
 into `src/data/tiles-data.json`, which the web app and the Image API both read.
 
 - Tile glyph data: extract ligatures, SVG paths, bounds and the COLR/CPAL
-  palette from `preprocess/fonts/*.woff2` into `src/data/tiles-data.json`.
+  palette from `assets/fonts/woff2/*.woff2` into `src/data/tiles-data.json`.
   Requires Python with [fontTools](https://github.com/fonttools/fonttools).
   Re-run after changing the source fonts:
 
   ```
   pip install fonttools
-  python3 preprocess/extract-tiles.py
+  python3 scripts/extract-tiles.py
   ```
 
-- Web fonts: UI fonts are self-hosted via `@fontsource` packages, imported
-  directly in `src/styles/fonts.css` (Vite bundles and hashes the woff2). Paper
-  Mono (not on @fontsource) stays as a local `public/fonts/` woff2.
+- Web fonts: Inter and Paper Mono are served from `public/fonts/`. CJK fonts
+  are imported from Fontsource packages in `src/styles/fonts.css` and bundled
+  by Vite.
 
 ## Image API
 
@@ -202,3 +202,8 @@ Tailwind class sorting uses `src/styles/globals.css` and the shared design token
 `pnpm-workspace.yaml` records dependency overrides and the security advisories
 they address. Remove the `seroval` override when upstream dependencies resolve
 a version compatible with `seroval-plugins`.
+
+## Repository structure
+
+See [Repository structure](docs/repository-structure.md) for shared directory
+roles, naming rules, asset placement, and the exceptions used by these sites.

@@ -8,7 +8,7 @@ import { lazy, Suspense } from "react";
 import "@/styles/globals.css";
 
 import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/header";
+import { Header } from "@/components/layout/header";
 import { NotFound } from "@/components/layout/not-found";
 import { useLang } from "@/hooks/use-lang";
 import i18n from "@/lib/i18n";
@@ -78,7 +78,7 @@ function RootComponent() {
         >
           {SKIP_LABEL[lang]}
         </a>
-        <Navbar />
+        <Header />
         <main
           id="main-content"
           tabIndex={-1}

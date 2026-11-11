@@ -84,7 +84,7 @@ const PARAMS: {
   },
 ];
 
-export function ApiDocs() {
+export function ApiDocsPage() {
   const { t, ready } = useTranslation();
   const outlineItems: OutlineItem[] = [
     { id: "url-format", label: t("imgApi.urlFormatHeading"), depth: 2 },

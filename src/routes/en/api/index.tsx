@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ApiDocs } from "@/components/pages/api-docs-page";
+import { ApiDocsPage } from "@/components/pages/api-docs-page";
 
 export const Route = createFileRoute("/en/api/")({
-  component: ApiDocs,
+  component: ApiDocsPage,
 });

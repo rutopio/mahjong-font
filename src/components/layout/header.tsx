@@ -35,7 +35,7 @@ const GITHUB_LABEL: Record<Locale, string> = {
   "zh-CN": "GitHub 源代码（在新标签页打开）",
 };
 
-export function Navbar() {
+export function Header() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const pathname = useLocation({ select: (l) => l.pathname });
