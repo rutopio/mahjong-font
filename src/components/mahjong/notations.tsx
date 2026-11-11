@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { TileSvg } from "@/components/mahjong/tile-svg";
 import type { NotationItem } from "@/lib/constants";
 import { notationExamples, notationItems } from "@/lib/constants";
-import { transformString } from "@/lib/transform-string";
+import { expandMahjongNotation } from "@/lib/mahjong-notation";
 import { cn } from "@/lib/utils";
 
 function NotationBadge({ children }: { children: React.ReactNode }) {
@@ -138,7 +138,7 @@ export function Notations({ theme }: { theme: string }) {
             </div>
 
             <TileSvg
-              text={transformString(example.notation)}
+              text={expandMahjongNotation(example.notation)}
               theme={theme}
               className="[&>svg]:h-auto [&>svg]:max-h-16 [&>svg]:w-auto [&>svg]:max-w-full sm:[&>svg]:max-h-28"
             />

@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 import { optionValues } from "@/lib/constants";
-import { transformString } from "@/lib/transform-string";
+import { expandMahjongNotation } from "@/lib/mahjong-notation";
 import { decodeFromQuery, encodeToQuery } from "@/lib/url-state";
 
 const findMatchingOption = (inputValue: string): string => {
   for (const [key, value] of Object.entries(optionValues)) {
-    if (value === inputValue || transformString(value) === inputValue) {
+    if (value === inputValue || expandMahjongNotation(value) === inputValue) {
       return key;
     }
   }
@@ -46,7 +46,7 @@ export function useMahjongState() {
   const handleOptionChange = (value: string) => {
     const option = optionValues[value as keyof typeof optionValues];
     if (option === undefined) return;
-    const transformedValue = transformString(option);
+    const transformedValue = expandMahjongNotation(option);
     setInput(transformedValue);
   };
 

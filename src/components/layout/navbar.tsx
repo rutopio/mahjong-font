@@ -16,7 +16,7 @@ import {
 } from "@rutopio/ui/drawer";
 import { LanguageToggle } from "@rutopio/ui/language-toggle";
 import { HeaderNavigation, SiteHeader } from "@rutopio/ui/site-header";
-import { useIsMobile } from "@rutopio/ui/use-mobile";
+import { useIsNarrowViewport } from "@rutopio/ui/use-is-narrow-viewport";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -42,7 +42,7 @@ export function Navbar() {
   const isHome = currentPage === "/";
   const isApi = currentPage === "/api";
   const isAbout = currentPage === "/about";
-  const isMobile = useIsMobile();
+  const isNarrowViewport = useIsNarrowViewport();
   const [downloadOpen, setDownloadOpen] = useState(false);
 
   const downloadFont = async (fileUrl: string) => {
@@ -139,7 +139,7 @@ export function Navbar() {
       }
       actions={
         <>
-          {isMobile ? (
+          {isNarrowViewport ? (
             <Drawer open={downloadOpen} onOpenChange={setDownloadOpen}>
               <DrawerTrigger
                 render={
@@ -205,7 +205,7 @@ export function Navbar() {
               label: lang.label,
               htmlLang: lang.value,
             }))}
-            isMobile={isMobile}
+            isNarrowViewport={isNarrowViewport}
             onChange={(value) => handleLanguageChange(value)}
           />
           <ThemeToggle />

@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 import { ActionButtons } from "@/components/mahjong/action-buttons";
 import { InputSection } from "@/components/mahjong/input-section";
 import { MahjongPreview } from "@/components/mahjong/mahjong-preview";
-import { NotationsModal } from "@/components/mahjong/notations-modal";
+import { NotationHelpPanel } from "@/components/mahjong/notation-help-panel";
 import { useMahjongState } from "@/hooks/use-mahjong-state";
-import { transformString } from "@/lib/transform-string";
+import { expandMahjongNotation } from "@/lib/mahjong-notation";
 
 export function Home() {
   const { t, ready } = useTranslation();
@@ -23,7 +23,7 @@ export function Home() {
   } = useMahjongState();
   const [showNotations, setShowNotations] = useState(false);
 
-  const transformedText = transformString(input);
+  const transformedText = expandMahjongNotation(input);
 
   if (!ready) {
     return (
@@ -75,7 +75,7 @@ export function Home() {
         />
       </div>
 
-      <NotationsModal
+      <NotationHelpPanel
         open={showNotations}
         onOpenChange={setShowNotations}
         theme={theme}

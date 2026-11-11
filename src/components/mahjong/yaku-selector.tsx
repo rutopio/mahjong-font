@@ -17,7 +17,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@rutopio/ui/drawer";
-import { useIsMobile } from "@rutopio/ui/use-mobile";
+import { useIsNarrowViewport } from "@rutopio/ui/use-is-narrow-viewport";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -81,7 +81,7 @@ export function YakuSelector({
   onOptionChange,
 }: YakuSelectorProps) {
   const { t } = useTranslation();
-  const isMobile = useIsMobile();
+  const isNarrowViewport = useIsNarrowViewport();
   const [open, setOpen] = useState(false);
 
   const selectedLabel = selectedOption
@@ -97,7 +97,7 @@ export function YakuSelector({
       aria-expanded={open}
       aria-label={t("ui.examples")}
       className="border-input bg-background hover:bg-muted w-fit min-w-[180px] justify-start px-3 font-normal"
-      onClick={() => isMobile && setOpen(true)}
+      onClick={() => isNarrowViewport && setOpen(true)}
     >
       <BookmarkSimpleIcon aria-hidden="true" />
       <span
@@ -108,7 +108,7 @@ export function YakuSelector({
     </Button>
   );
 
-  if (isMobile) {
+  if (isNarrowViewport) {
     return (
       <>
         {triggerButton}

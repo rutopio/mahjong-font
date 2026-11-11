@@ -1,5 +1,5 @@
+import { BreakpointIndicator } from "@rutopio/ui/breakpoint-indicator";
 import { PageTransition } from "@rutopio/ui/page-transition";
-import { ScreenSize } from "@rutopio/ui/screen-size";
 import { SiteLayout } from "@rutopio/ui/site-layout";
 import { Toaster } from "@rutopio/ui/sonner";
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
@@ -89,7 +89,7 @@ function RootComponent() {
         <Footer />
       </SiteLayout>
       <Toaster expand={false} closeButton position="top-center" />
-      {import.meta.env.DEV && <ScreenSize />}
+      {import.meta.env.DEV && <BreakpointIndicator />}
       <Suspense>
         <TanStackRouterDevtools />
       </Suspense>

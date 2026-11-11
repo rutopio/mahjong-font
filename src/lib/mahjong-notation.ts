@@ -2,7 +2,7 @@
  * Transforms mahjong notation string into displayable characters.
  * Example: "123m" -> "1m2m3m", "123." -> "1.2.3."
  */
-export function transformString(text: string) {
+export function expandMahjongNotation(text: string) {
   const charArr = text.trim().split("");
   const result: string[] = [];
   let stack: string[] = [];

@@ -8,7 +8,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@rutopio/ui/drawer";
-import { useIsMobile } from "@rutopio/ui/use-mobile";
+import { useIsNarrowViewport } from "@rutopio/ui/use-is-narrow-viewport";
 import { useTranslation } from "react-i18next";
 import { Notations } from "@/components/mahjong/notations";
 import {
@@ -19,21 +19,21 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-interface NotationsModalProps {
+interface NotationHelpPanelProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   theme: string;
 }
 
-export function NotationsModal({
+export function NotationHelpPanel({
   open,
   onOpenChange,
   theme,
-}: NotationsModalProps) {
+}: NotationHelpPanelProps) {
   const { t } = useTranslation();
-  const isMobile = useIsMobile();
+  const isNarrowViewport = useIsNarrowViewport();
 
-  if (isMobile) {
+  if (isNarrowViewport) {
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent>
