@@ -104,8 +104,7 @@ pnpm dev
 - Build
 
 ```
-pnpm check
-pnpm build
+pnpm build # includes formatting, lint and type checks
 ```
 
 ## Preprocess
@@ -191,11 +190,22 @@ The font files are licensed under the [SIL Open Font License, Version 1.1](./LIC
 Use Node.js 26.13.0 (`nvm use`) and pnpm 12.18.0, as pinned in
 `.nvmrc` and `package.json`. Install with `pnpm install --frozen-lockfile`.
 
-- `pnpm check`: read-only Biome formatting/lint and browser/Functions type checks
-- `pnpm check:fix`: apply safe Biome fixes
-- `pnpm format`: format source files
-- `pnpm build`: create the production output
-- `pnpm audit`: check direct and transitive dependencies
+| Command | Purpose |
+| --- | --- |
+| `pnpm dev` | Start the Vite development server. |
+| `pnpm build` | Run `check`, then create the production output in `dist/`. |
+| `pnpm format` | Format code, organize imports and apply safe Biome lint fixes. |
+| `pnpm check` | Check formatting, lint and browser/Functions types without modifying files. |
+| `pnpm preview` | Serve the existing production build locally. |
+
+`format` replaces `lint:fix` and `check:fix`; `check` replaces `lint`,
+`format:check` and `check-types`. Fixes that need manual review still fail `check`.
+For dependency maintenance, use pnpm's built-in `outdated`, `update` and `audit`
+commands instead of repository aliases.
+
+`pnpm preview:cf` builds the site and starts the local Cloudflare Pages runtime
+with Functions support. Use it when testing server routes; `preview` serves the
+static build only.
 
 The five personal sites share the same `biome.json`, `.editorconfig`,
 `.gitattributes`, `tsconfig.base.json`, Functions compiler settings and pnpm

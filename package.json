@@ -7,18 +7,11 @@
   "packageManager": "pnpm@12.18.0",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build && tsc -p tsconfig.json",
+    "build": "pnpm check && vite build",
     "preview": "vite preview",
-    "preview:cf": "pnpm build && wrangler pages dev dist",
-    "lint": "biome lint .",
-    "format": "biome format --write .",
-    "check-types": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p functions/tsconfig.json",
-    "check": "biome check . && pnpm check-types",
-    "deps": "pnpm dlx taze@latest -Ilw",
-    "deps:major": "pnpm dlx taze@latest major -Ilw",
-    "lint:fix": "biome lint --write .",
-    "format:check": "biome format .",
-    "check:fix": "biome check --write ."
+    "format": "biome check --write .",
+    "check": "biome check . && tsc --noEmit -p tsconfig.json && tsc --noEmit -p functions/tsconfig.json",
+    "preview:cf": "pnpm build && wrangler pages dev dist"
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",
