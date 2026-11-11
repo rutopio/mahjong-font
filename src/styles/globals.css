@@ -1,8 +1,7 @@
 @source "../../node_modules/@rutopio/ui/dist";
-@import "./fonts.css";
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@rutopio/ui/styles.css";
-@import "@rutopio/ui/article.css";
+@import "@rutopio/ui/globals.css";
 @import "@rutopio/ui/neutral-theme.css";
-@import "@rutopio/ui/cjk-fonts.css";
+@import "@rutopio/ui/article.css";
+@import "./fonts.css";

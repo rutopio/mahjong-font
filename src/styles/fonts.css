@@ -1,3 +1,4 @@
+@import "@rutopio/ui/cjk-fonts.css";
 /* Inter for Latin, then locale-aware Noto Sans CJK fallbacks. */
 @import "@fontsource-variable/noto-sans-jp";
 @import "@fontsource-variable/noto-sans-tc";
