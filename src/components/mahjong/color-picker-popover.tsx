@@ -92,7 +92,7 @@ function EyeDropperButton() {
   return (
     <AriaButton
       aria-label={labels.eyedropper}
-      className="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background font-medium text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-offset-2"
+      className="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background font-semibold text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-offset-2"
       onPress={() => {
         // @ts-expect-error - EyeDropper API may not be available
         new EyeDropper()

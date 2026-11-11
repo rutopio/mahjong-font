@@ -186,19 +186,19 @@ export function ApiDocs() {
             <table className="w-full text-base leading-[1.65]">
               <thead className="bg-muted text-left text-muted-foreground">
                 <tr>
-                  <th className="px-4 py-2 font-medium">
+                  <th className="px-4 py-2 font-semibold">
                     {t("imgApi.colName")}
                   </th>
-                  <th className="px-4 py-2 font-medium">
+                  <th className="px-4 py-2 font-semibold">
                     {t("imgApi.colLocation")}
                   </th>
-                  <th className="px-4 py-2 font-medium">
+                  <th className="px-4 py-2 font-semibold">
                     {t("imgApi.colType")}
                   </th>
-                  <th className="px-4 py-2 font-medium">
+                  <th className="px-4 py-2 font-semibold">
                     {t("imgApi.colDefault")}
                   </th>
-                  <th className="px-4 py-2 font-medium">
+                  <th className="px-4 py-2 font-semibold">
                     {t("imgApi.colDescription")}
                   </th>
                 </tr>
@@ -211,7 +211,7 @@ export function ApiDocs() {
                   >
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <code className="font-medium font-mono">{p.name}</code>
+                        <code className="font-mono font-semibold">{p.name}</code>
                         {p.required && (
                           <span className="rounded-full bg-secondary px-2 py-0.5 text-base text-secondary-foreground">
                             {t("imgApi.required")}
