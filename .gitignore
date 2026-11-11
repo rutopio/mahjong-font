@@ -139,3 +139,16 @@ src/routeTree.gen.ts
 
 **/*.DS_Store
 /tasks
+
+# Local credentials and machine-specific metadata
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+*.pem
+*.key
+*.p12
+*.pfx
+.DS_Store
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
