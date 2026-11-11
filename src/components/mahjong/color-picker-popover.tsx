@@ -149,7 +149,6 @@ export function ColorPickerPopover({
           aria-label={labels.picker}
         >
           <ColorPicker value={colorValue} onChange={handleColorChange}>
-            {/* Color Area for saturation and brightness */}
             <div
               onPointerDown={() => {
                 isDraggingRef.current = true;
@@ -170,7 +169,6 @@ export function ColorPickerPopover({
               >
                 <ColorThumb className="z-50" />
               </ColorArea>
-              {/* Hue Slider */}
               <ColorSlider
                 aria-label={labels.hue}
                 colorSpace="hsb"
@@ -182,7 +180,6 @@ export function ColorPickerPopover({
               </ColorSlider>
             </div>
 
-            {/* Hex Input Field */}
             <ColorField className="flex w-full gap-2">
               <AriaLabel className="sr-only">{labels.hex}</AriaLabel>
               <AriaInput
@@ -209,7 +206,6 @@ export function ColorPickerPopover({
               </Button>
             </ColorField>
 
-            {/* Color Swatch Picker */}
             <div className="grid grid-cols-6 gap-2">
               <EyeDropperButton />
               {PRESET_COLORS.map((presetColor) => (

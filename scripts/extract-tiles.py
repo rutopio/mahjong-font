@@ -45,12 +45,8 @@ def glyph_path(glyph_set, name):
 
 
 def extract_colorful(font, glyph_names):
-    """For each tile glyph, list its COLR layers as {d, p}.
-
-    Glyphs without COLR layers are emitted as a single layer using their own
-    outline with palette index 0 (black).
-    """
-    colr = font["COLR"].ColorLayers  # dict: glyphName -> [LayerRecord]
+    """Per-glyph layers: d is SVG path data; p is a CPAL index."""
+    colr = font["COLR"].ColorLayers
     glyph_set = font.getGlyphSet()
     out = {}
     for name in glyph_names:
@@ -81,11 +77,9 @@ def extract_monochrome(font, glyph_names):
 
 
 def extract_bounds(font, glyph_names):
-    """Visible bounding box per tile glyph as [xMin, yMin, xMax, yMax].
+    """Return [xMin, yMin, xMax, yMax] across all visible layers.
 
-    For COLR glyphs the bounds are the union of all layer glyph bounds; advance
-    width understates the visible width (tiles overlap), so layout/viewBox must
-    use these bounds, not the advance.
+    Tile outlines overlap, so advance widths would clip the exported SVG.
     """
     colr = font["COLR"].ColorLayers
     glyph_set = font.getGlyphSet()
@@ -113,7 +107,7 @@ def extract_bounds(font, glyph_names):
 
 
 def extract_palette(font):
-    """The 6 base CPAL colors as [r, g, b]."""
+    """Base CPAL colors as [r, g, b] bytes."""
     cpal = font["CPAL"]
     return [[c.red, c.green, c.blue] for c in cpal.palettes[0]]
 
@@ -123,7 +117,6 @@ GAP_CHARS = [" ", "_"]
 
 
 def add_gap_chars(font, ligatures):
-    """Register gap chars as single-char 'ligatures' so the shaper keeps them."""
     cmap = font.getBestCmap()
     for ch in GAP_CHARS:
         glyph = cmap.get(ord(ch))
