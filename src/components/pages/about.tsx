@@ -1,7 +1,7 @@
-import { Article, ArticleSection } from "@rutopio/base-component/article";
-import { GithubMarkIcon } from "@rutopio/base-component/github-mark-icon";
-import type { OutlineListItem as OutlineItem } from "@rutopio/base-component/outline-list";
-import { PageIntro } from "@rutopio/base-component/page-intro";
+import { Article, ArticleSection } from "@rutopio/ui/article";
+import { GithubMarkIcon } from "@rutopio/ui/github-mark-icon";
+import type { OutlineListItem as OutlineItem } from "@rutopio/ui/outline-list";
+import { PageIntro } from "@rutopio/ui/page-intro";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ApiPageActions } from "@/components/api-page-actions";

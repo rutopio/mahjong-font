@@ -1,4 +1,4 @@
-import { Badge } from "@rutopio/base-component/badge";
+import { Badge } from "@rutopio/ui/badge";
 import {
   Table,
   TableBody,
@@ -6,7 +6,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@rutopio/base-component/table";
+} from "@rutopio/ui/table";
 import { useTranslation } from "react-i18next";
 import { TileSvg } from "@/components/mahjong/tile-svg";
 import type { NotationItem } from "@/lib/constants";

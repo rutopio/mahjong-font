@@ -1,7 +1,7 @@
 import { CircleNotchIcon } from "@phosphor-icons/react";
-import { Article, ArticleSection } from "@rutopio/base-component/article";
-import type { OutlineListItem as OutlineItem } from "@rutopio/base-component/outline-list";
-import { PageIntro } from "@rutopio/base-component/page-intro";
+import { Article, ArticleSection } from "@rutopio/ui/article";
+import type { OutlineListItem as OutlineItem } from "@rutopio/ui/outline-list";
+import { PageIntro } from "@rutopio/ui/page-intro";
 import type { ReactNode } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { ApiPageActions } from "@/components/api-page-actions";

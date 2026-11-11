@@ -1,4 +1,4 @@
-import { Button } from "@rutopio/base-component/button";
+import { Button } from "@rutopio/ui/button";
 import { useTranslation } from "react-i18next";
 
 export function RootError() {

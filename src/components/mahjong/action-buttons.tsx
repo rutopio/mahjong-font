@@ -8,14 +8,14 @@ import {
   ThreadsLogoIcon,
   XLogoIcon,
 } from "@phosphor-icons/react";
-import { Button } from "@rutopio/base-component/button";
+import { Button } from "@rutopio/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@rutopio/base-component/dialog";
+} from "@rutopio/ui/dialog";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";

@@ -3,7 +3,7 @@ import { Dialog as SheetPrimitive } from "@base-ui/react/dialog"
 import { XIcon } from "@phosphor-icons/react"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@rutopio/base-component/button"
+import { Button } from "@rutopio/ui/button"
 
 function Sheet({ ...props }: SheetPrimitive.Root.Props) {
     return <SheetPrimitive.Root data-slot="sheet" {...props} />

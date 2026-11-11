@@ -1,4 +1,4 @@
-import { AttributionFooter } from "@rutopio/base-component/footer";
+import { AttributionFooter } from "@rutopio/ui/footer";
 
 export function Footer() {
   return (

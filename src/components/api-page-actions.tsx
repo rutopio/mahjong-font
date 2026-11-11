@@ -1,21 +1,21 @@
 import { ArrowBendRightUpIcon, ArrowLeftIcon } from "@phosphor-icons/react";
-import { ActionMenu } from "@rutopio/base-component/action-menu";
-import { Button } from "@rutopio/base-component/button";
+import { ActionMenu } from "@rutopio/ui/action-menu";
+import { Button } from "@rutopio/ui/button";
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@rutopio/base-component/drawer";
+} from "@rutopio/ui/drawer";
 import {
   OutlineList,
   type OutlineListItem,
-} from "@rutopio/base-component/outline-list";
-import { ReadingProgressRing } from "@rutopio/base-component/outline-nav";
-import { PageActionRail } from "@rutopio/base-component/page-action-rail";
-import { navigateToSection } from "@rutopio/base-component/section-navigation";
-import { useMountEffect } from "@rutopio/base-component/use-mount-effect";
+} from "@rutopio/ui/outline-list";
+import { ReadingProgressRing } from "@rutopio/ui/outline-nav";
+import { PageActionRail } from "@rutopio/ui/page-action-rail";
+import { navigateToSection } from "@rutopio/ui/section-navigation";
+import { useMountEffect } from "@rutopio/ui/use-mount-effect";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ApiShareButton } from "@/components/api-share-button";

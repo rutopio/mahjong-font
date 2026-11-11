@@ -1,4 +1,4 @@
-import { Input } from "@rutopio/base-component/input";
+import { Input } from "@rutopio/ui/input";
 import { useTranslation } from "react-i18next";
 import { NotationsButton } from "@/components/mahjong/notations-button";
 import { ThemeSelector } from "@/components/mahjong/theme-selector";

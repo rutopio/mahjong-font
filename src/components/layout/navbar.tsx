@@ -4,22 +4,22 @@ import {
   GithubLogoIcon,
   ListIcon,
 } from "@phosphor-icons/react";
-import { ActionMenu } from "@rutopio/base-component/action-menu";
-import { Badge } from "@rutopio/base-component/badge";
-import { Button, buttonVariants } from "@rutopio/base-component/button";
+import { ActionMenu } from "@rutopio/ui/action-menu";
+import { Badge } from "@rutopio/ui/badge";
+import { Button, buttonVariants } from "@rutopio/ui/button";
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@rutopio/base-component/drawer";
-import { LanguageToggle } from "@rutopio/base-component/language-toggle";
+} from "@rutopio/ui/drawer";
+import { LanguageToggle } from "@rutopio/ui/language-toggle";
 import {
   HeaderNavigation,
   SiteHeader,
-} from "@rutopio/base-component/site-header";
-import { useIsMobile } from "@rutopio/base-component/use-mobile";
+} from "@rutopio/ui/site-header";
+import { useIsMobile } from "@rutopio/ui/use-mobile";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";

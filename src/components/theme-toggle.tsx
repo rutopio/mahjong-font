@@ -1,4 +1,4 @@
-import { ThemeToggle as BaseThemeToggle } from "@rutopio/base-component/theme-toggle";
+import { ThemeToggle as BaseThemeToggle } from "@rutopio/ui/theme-toggle";
 import type { ComponentProps } from "react";
 import { useTranslation } from "react-i18next";
 

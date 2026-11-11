@@ -5,19 +5,19 @@ import {
   ThreadsLogoIcon,
   XLogoIcon,
 } from "@phosphor-icons/react";
-import { Button } from "@rutopio/base-component/button";
+import { Button } from "@rutopio/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@rutopio/base-component/dialog";
-import { Input } from "@rutopio/base-component/input";
+} from "@rutopio/ui/dialog";
+import { Input } from "@rutopio/ui/input";
 import {
   openShareWindow,
   usePageShare,
-} from "@rutopio/base-component/page-share";
+} from "@rutopio/ui/page-share";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 

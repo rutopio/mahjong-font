@@ -1,6 +1,6 @@
-import { PageTransition } from "@rutopio/base-component/page-transition";
-import { SiteLayout } from "@rutopio/base-component/site-layout";
-import { Toaster } from "@rutopio/base-component/sonner";
+import { PageTransition } from "@rutopio/ui/page-transition";
+import { SiteLayout } from "@rutopio/ui/site-layout";
+import { Toaster } from "@rutopio/ui/sonner";
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
 import { lazy, Suspense } from "react";
 

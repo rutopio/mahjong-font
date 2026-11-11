@@ -1,4 +1,4 @@
-import { Button } from "@rutopio/base-component/button";
+import { Button } from "@rutopio/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -7,8 +7,8 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-} from "@rutopio/base-component/drawer";
-import { useIsMobile } from "@rutopio/base-component/use-mobile";
+} from "@rutopio/ui/drawer";
+import { useIsMobile } from "@rutopio/ui/use-mobile";
 import { useTranslation } from "react-i18next";
 import { Notations } from "@/components/mahjong/notations";
 import {
