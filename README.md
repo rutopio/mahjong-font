@@ -1,27 +1,27 @@
 <div align="center">
 
-<h2>Mahjong Font / Mahjong Tile Image Generator</h2>
+<h2>Mahjong Font and tile image generator</h2>
 <h3>OpenType 機能付き麻雀牌図フォント / 麻雀牌図作成ツール</h3>
 
 🔗&nbsp;&nbsp;Playground: https://mahjong.chingru.com/ &nbsp;&nbsp;🔗
 
-![pnpm](https://img.shields.io/badge/pnpm-v11-F69220?style=flat-square&logo=pnpm&logoColor=white)
-![Node](https://img.shields.io/badge/Node.js-v24-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![pnpm](https://img.shields.io/badge/pnpm-v12-F69220?style=flat-square&logo=pnpm&logoColor=white)
+![Node](https://img.shields.io/badge/Node.js-v26-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 [![License: OFL 1.1 (Font) / MIT (Code)](https://img.shields.io/badge/License-OFL_1.1_(Font)_/_MIT_(Code)-yellow.svg)](./LICENSE-FONT)
 
-![TypeScript](https://img.shields.io/badge/TypeScript-6-blue?style=flat-square&logo=typescript)
+![TypeScript](https://img.shields.io/badge/TypeScript-7-blue?style=flat-square&logo=typescript)
 ![React](https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react)
-![Tanstack](https://img.shields.io/badge/Tanstack-1-black?style=flat-square&logo=tanstack)
+![TanStack Router](https://img.shields.io/badge/TanStack_Router-1-black?style=flat-square&logo=tanstack)
 
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?style=flat-square&logo=tailwind-css)
-![ShadCN](https://img.shields.io/badge/shadcn%2Fui-4-000000?style=flat-square&logo=shadcnui&logoColor=white)
+[![Rutopio UI](https://img.shields.io/badge/Rutopio_UI-2-000000?style=flat-square)](https://github.com/rutopio/ui)
 
 Hosted on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflarepages&logoColor=fff&style=flat-square)
 
 
 ![](/assets/banner.png)
 
-[[Notation (en)]](#Notation) ・ [[表記法 (ja)]](#表記法) ・ [[表記方式 (zh)]](#表記方式)
+[[Notation (en)]](#notation) ・ [[表記法 (ja)]](#表記法) ・ [[表記方式 (zh)]](#表記方式)
 
 
 </div>
@@ -92,29 +92,18 @@ Hosted on ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F3
 8. 加槓：在表記牌的後面加上等號（`=`）。例：`3m3m3m-3m=`.
 9. 暗槓：使用 `0p`, `0s`, `0m`, `0z` 表示翻過來的牌。
 
-## Develop & Build
+## Development
 
-- Develop
+See [Development toolchain](#development-toolchain) for setup and commands.
 
-```
-pnpm install
-pnpm dev
-```
+## Generate tile data
 
-- Build
-
-```
-pnpm build # includes formatting, lint and type checks
-```
-
-## Preprocess
-
-The app renders tiles as inline SVG (not as a webfont), which fixes iOS
-download blanks and gives consistent cross-browser COLR/CPAL color support.
+The app renders tiles as inline SVG. This avoids blank image downloads on iOS
+and displays font palette colors consistently across browsers.
 The glyph data is extracted ahead of time from the Riichi-Mahjong woff2 fonts
 into `src/lib/tiles-data.json`, which the web app and the Image API both read.
 
-- Tile glyph data — extract ligatures, SVG paths, bounds and the COLR/CPAL
+- Tile glyph data: extract ligatures, SVG paths, bounds and the COLR/CPAL
   palette from `preprocess/fonts/*.woff2` into `src/lib/tiles-data.json`.
   Requires Python with [fontTools](https://github.com/fonttools/fonttools).
   Re-run after changing the source fonts:
@@ -124,14 +113,13 @@ into `src/lib/tiles-data.json`, which the web app and the Image API both read.
   python3 preprocess/extract-tiles.py
   ```
 
-- Web fonts — UI fonts are self-hosted via `@fontsource` packages, imported
+- Web fonts: UI fonts are self-hosted via `@fontsource` packages, imported
   directly in `src/styles/fonts.css` (Vite bundles and hashes the woff2). Paper
   Mono (not on @fontsource) stays as a local `public/fonts/` woff2.
 
 ## Image API
 
-Add a tile string to the URL path to get an inline SVG image you can embed
-anywhere, shields.io-style. The tile path is required (up to 512 characters).
+Add a tile string to the URL path to generate an SVG image for embedding. The tile path is required (up to 512 characters).
 Theme and color fall back to their defaults when omitted.
 
 ```
@@ -140,7 +128,7 @@ https://mahjong.chingru.com/img/<tile>?theme=color&color=AA7942
 
 | Parameter | Location | Type            | Default  | Description                                                                  |
 | --------- | -------- | --------------- | -------- | ---------------------------------------------------------------------------- |
-| `tile`    | path     | `string`        | required | Tile string (same [notation](#Notation)). `_` for a gap, for example `123m456p_5z`. |
+| `tile`    | path     | `string`        | required | Tile string (same [notation](#notation)). `_` for a gap, for example `123m456p_5z`. |
 | `theme`   | query    | `color \| mono` | `color`  | `color` for colorful tiles, `mono` for monochrome.                                  |
 | `color`   | query    | `string` (hex)  | `AA7942` | Main tile color, six-digit hex without `#`. Only applies when `theme=color`.        |
 
@@ -157,18 +145,18 @@ It is a vector, so you can resize it freely when embedding. For example:
 
 
 Tip: take any share URL from the app and swap `?tile=` for the `/img/` path to
-get the matching image. Full docs and live examples: https://mahjong.chingru.com/api
+get the matching image. See the [API documentation and examples](https://mahjong.chingru.com/en/api).
 
-## Site Files
+## Site files
 
 Static files served from `public/` for crawlers and agents:
 
-- [`robots.txt`](public/robots.txt) — allows all crawlers, points to the sitemap.
-- [`sitemap.xml`](public/sitemap.xml) — lists the page routes across all locales, with hreflang alternates.
-- [`llms.txt`](public/llms.txt) — project and Image API overview for LLMs,
+- [`robots.txt`](public/robots.txt): allows all crawlers, points to the sitemap.
+- [`sitemap.xml`](public/sitemap.xml): lists the page routes across all locales, with hreflang alternates.
+- [`llms.txt`](public/llms.txt): project and Image API overview for LLMs,
   following the [llms.txt](https://llmstxt.org/) convention.
 
-## Font Download
+## Download fonts
 
 See [Releases](https://github.com/rutopio/mahjong-font/releases).
 
@@ -178,7 +166,7 @@ The source code is licensed under the [MIT License](./LICENSE).
 
 The font files are licensed under the [SIL Open Font License, Version 1.1](./LICENSE-FONT).
 
-## Special Thanks
+## Acknowledgments
 
 - [I.Mahjong - @SyaoranHinata](https://github.com/SyaoranHinata/I.Mahjong/tree/main)
 - [Gutenberg Labo](http://gutenberg.osdn.jp)
@@ -195,25 +183,22 @@ Use Node.js 26.13.0 (`nvm use`) and pnpm 12.18.0, as pinned in
 | `pnpm dev` | Start the Vite development server. |
 | `pnpm build` | Run `check`, then create the production output in `dist/`. |
 | `pnpm format` | Format code, organize imports and apply safe Biome lint fixes. |
-| `pnpm check` | Check formatting, lint and browser/Functions types without modifying files. |
+| `pnpm check` | Check formatting, lint rules, and types for the browser and Pages Functions. |
 | `pnpm preview` | Serve the existing production build locally. |
 
-`format` replaces `lint:fix` and `check:fix`; `check` replaces `lint`,
-`format:check` and `check-types`. Fixes that need manual review still fail `check`.
-For dependency maintenance, use pnpm's built-in `outdated`, `update` and `audit`
-commands instead of repository aliases.
+`pnpm format` applies safe fixes. Resolve any remaining errors before running
+`pnpm check` again. Use `pnpm outdated`, `pnpm update`, and `pnpm audit` to
+maintain dependencies.
 
 `pnpm preview:cf` builds the site and starts the local Cloudflare Pages runtime
 with Functions support. Use it when testing server routes; `preview` serves the
 static build only.
 
-The five personal sites share the same `biome.json`, `.editorconfig`,
-`.gitattributes`, `tsconfig.base.json`, Functions compiler settings and pnpm
-policy. Keep shared package versions aligned when upgrading. Project aliases,
-content pipelines and Cloudflare bindings remain specific to each site.
-CSS formatting stays outside Biome; Tailwind class sorting reads
-`src/styles/globals.css` and its shared design tokens.
+The five sites share formatting, lint, TypeScript, and pnpm settings. Keep
+shared dependency versions aligned when upgrading. Each site maintains its own
+aliases, content pipeline, and Cloudflare bindings. Biome does not format CSS.
+Tailwind class sorting uses `src/styles/globals.css` and the shared design tokens.
 
-Security overrides in `pnpm-workspace.yaml` document the advisories they fix.
-The serializer override aligns `seroval` with `seroval-plugins`; remove it once
-the upstream dependency graph consistently resolves compatible versions.
+`pnpm-workspace.yaml` records dependency overrides and the security advisories
+they address. Remove the `seroval` override when upstream dependencies resolve
+a version compatible with `seroval-plugins`.
