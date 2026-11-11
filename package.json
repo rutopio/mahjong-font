@@ -18,7 +18,7 @@
     "@base-ui/react": "1.9.0",
     "@phosphor-icons/react": "2.1.10",
     "@resvg/resvg-wasm": "2.6.2",
-    "@rutopio/ui": "github:rutopio/ui#v2.0.1",
+    "@rutopio/ui": "github:rutopio/ui#v2.0.2",
     "@tanstack/react-router": "1.170.46",
     "clsx": "2.1.1",
     "cmdk": "1.1.1",
