@@ -1,6 +1,7 @@
 @import "@rutopio/ui/cjk-fonts.css";
 @import "@fontsource-variable/noto-sans-jp";
 @import "@fontsource-variable/noto-sans-tc";
+@import "./generated-noto.css";
 
 @font-face {
   font-family: "Inter Variable";
@@ -20,7 +21,7 @@
 
 @font-face {
   font-family: "Paper Mono";
-  src: url("/fonts/PaperMono[wght].woff2") format("woff2");
+  src: url("/fonts/PaperMono[wght].woff2?v=fb6978c5") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;

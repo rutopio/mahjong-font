@@ -53,7 +53,7 @@ function imgBadgePlugin(): Plugin {
 // Preload core fonts; CJK subsets load on demand.
 const PUBLIC_PRELOAD_FONTS = [
   "/fonts/ui/inter-normal-core.woff2",
-  "/fonts/PaperMono%5Bwght%5D.woff2",
+  "/fonts/PaperMono%5Bwght%5D.woff2?v=fb6978c5",
 ];
 
 function fontPreloadPlugin(): Plugin {

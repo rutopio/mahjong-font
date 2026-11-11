@@ -56,3 +56,7 @@ Desktop.ini
 /.codex/
 /tasks/
 /skills-lock.json
+
+# Downloaded font sources and local visual audit evidence.
+/.font-source-cache/
+/docs/font-audit/
