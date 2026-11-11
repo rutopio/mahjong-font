@@ -30,8 +30,11 @@ export interface TilesData {
 let loadPromise: Promise<TilesData> | undefined;
 
 export function loadTilesData(): Promise<TilesData> {
-  loadPromise ??= import("./tiles-data.json").then(
-    (module) => module.default as unknown as TilesData
-  );
+  loadPromise ??= import("./tiles-data.json")
+    .then((module) => module.default as unknown as TilesData)
+    .catch((error) => {
+      loadPromise = undefined;
+      throw error;
+    });
   return loadPromise;
 }
