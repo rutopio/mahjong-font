@@ -130,9 +130,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
       <Dialog open={downloadOpen} onOpenChange={setDownloadOpen}>
         <DialogContent className="sm:max-w-2xl">
           <DialogHeader>
-            <DialogTitle className="font-heading">
-              {t("ui.saveAsImage")}
-            </DialogTitle>
+            <DialogTitle>{t("ui.saveAsImage")}</DialogTitle>
             <DialogDescription>{t("ui.saveDescription")}</DialogDescription>
           </DialogHeader>
           {preview}
@@ -177,9 +175,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
       <Dialog open={shareOpen} onOpenChange={setShareOpen}>
         <DialogContent className="sm:max-w-2xl">
           <DialogHeader>
-            <DialogTitle className="font-heading">
-              {t("share.shareTitle")}
-            </DialogTitle>
+            <DialogTitle>{t("share.shareTitle")}</DialogTitle>
             <DialogDescription>{t("share.shareDescription")}</DialogDescription>
           </DialogHeader>
           {preview}

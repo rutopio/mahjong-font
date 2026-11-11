@@ -12,49 +12,13 @@ import {
   OutlineList,
   type OutlineListItem,
 } from "@rutopio/base-component/outline-list";
+import { ReadingProgressRing } from "@rutopio/base-component/outline-nav";
 import { PageActionRail } from "@rutopio/base-component/page-action-rail";
 import { navigateToSection } from "@rutopio/base-component/section-navigation";
 import { useMountEffect } from "@rutopio/base-component/use-mount-effect";
-import { motion, useReducedMotion } from "motion/react";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ApiShareButton } from "@/components/api-share-button";
-
-const circumference = 2 * Math.PI * 6.25;
-
-function ReadingProgressRing({ progress }: { progress: number }) {
-  const reducedMotion = useReducedMotion();
-  return (
-    <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4 -rotate-90">
-      <circle
-        cx="8"
-        cy="8"
-        r="6.25"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        className="opacity-20"
-      />
-      <motion.circle
-        cx="8"
-        cy="8"
-        r="6.25"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeDasharray={circumference}
-        initial={false}
-        animate={{ strokeDashoffset: (1 - progress) * circumference }}
-        transition={
-          reducedMotion
-            ? { duration: 0 }
-            : { type: "spring", stiffness: 200, damping: 30, mass: 0.4 }
-        }
-      />
-    </svg>
-  );
-}
 
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -177,9 +141,7 @@ export function ApiPageActions({
               </DrawerTrigger>
               <DrawerContent>
                 <DrawerHeader className="border-border border-b pb-4">
-                  <DrawerTitle className="font-heading">
-                    {pageTitle ?? t("imgApi.title")}
-                  </DrawerTitle>
+                  <DrawerTitle>{pageTitle ?? t("imgApi.title")}</DrawerTitle>
                 </DrawerHeader>
                 <nav
                   ref={drawerScrollRef}

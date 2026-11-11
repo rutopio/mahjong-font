@@ -1,5 +1,7 @@
 import { CircleNotchIcon } from "@phosphor-icons/react";
+import { Article, ArticleSection } from "@rutopio/base-component/article";
 import type { OutlineListItem as OutlineItem } from "@rutopio/base-component/outline-list";
+import { PageIntro } from "@rutopio/base-component/page-intro";
 import type { ReactNode } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { ApiPageActions } from "@/components/api-page-actions";
@@ -116,20 +118,21 @@ export function ApiDocs() {
 
   return (
     <>
-      <article className="flex w-full min-w-0 flex-col gap-16 py-6 text-base text-neutral-800 tabular-nums leading-[1.65] sm:py-12 dark:text-neutral-300">
+      <Article className="py-6 sm:py-12">
         <header className="flex flex-col gap-6">
-          <h1 className="text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50">
-            {t("imgApi.title")}
-          </h1>
+          <PageIntro title={t("imgApi.title")} />
           <p className="text-pretty text-base leading-[1.65]">
             {t("imgApi.intro")}
           </p>
         </header>
 
-        <section className="flex min-w-0 flex-col gap-6">
-          <ArticleHeading id="url-format">
-            {t("imgApi.urlFormatHeading")}
-          </ArticleHeading>
+        <ArticleSection
+          heading={
+            <ArticleHeading id="url-format">
+              {t("imgApi.urlFormatHeading")}
+            </ArticleHeading>
+          }
+        >
           <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
             {`${origin}/img/<${t("imgApi.tilePlaceholder")}>?theme=color&color=AA7942`}
           </code>
@@ -139,12 +142,15 @@ export function ApiDocs() {
           <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
             {`const imageUrl = \`${origin}/img/\${encodeURIComponent(tile)}\`;`}
           </code>
-        </section>
+        </ArticleSection>
 
-        <section className="flex min-w-0 flex-col gap-6">
-          <ArticleHeading id="convert-shared-url">
-            {t("imgApi.convertHeading")}
-          </ArticleHeading>
+        <ArticleSection
+          heading={
+            <ArticleHeading id="convert-shared-url">
+              {t("imgApi.convertHeading")}
+            </ArticleHeading>
+          }
+        >
           <p className="text-pretty text-base leading-[1.65]">
             <Trans
               i18nKey="imgApi.convertIntro"
@@ -167,12 +173,15 @@ export function ApiDocs() {
               7m7m7m2p3p4p8p8p8p4s5s6s8s_8s?theme=color&amp;color=AA7942
             </code>
           </div>
-        </section>
+        </ArticleSection>
 
-        <section className="flex min-w-0 flex-col gap-6">
-          <ArticleHeading id="parameters">
-            {t("imgApi.paramsHeading")}
-          </ArticleHeading>
+        <ArticleSection
+          heading={
+            <ArticleHeading id="parameters">
+              {t("imgApi.paramsHeading")}
+            </ArticleHeading>
+          }
+        >
           <div className="overflow-x-auto rounded-md border">
             <table className="w-full text-base leading-[1.65]">
               <thead className="bg-muted text-left text-muted-foreground">
@@ -240,21 +249,28 @@ export function ApiDocs() {
           <p className="text-pretty text-muted-foreground">
             {t("imgApi.inputRules")}
           </p>
-        </section>
+        </ArticleSection>
 
-        <section className="flex min-w-0 flex-col gap-6">
-          <ArticleHeading id="examples">
-            {t("imgApi.examplesHeading")}
-          </ArticleHeading>
+        <ArticleSection
+          heading={
+            <ArticleHeading id="examples">
+              {t("imgApi.examplesHeading")}
+            </ArticleHeading>
+          }
+        >
           <div className="flex min-w-0 flex-col gap-16">
             {EXAMPLES.map((ex) => {
               const fullUrl = `${origin}${ex.path}`;
               const label = t(ex.labelKey);
               return (
-                <section key={ex.id} className="flex min-w-0 flex-col gap-6">
-                  <ArticleHeading id={ex.id} level={3}>
-                    {label}
-                  </ArticleHeading>
+                <ArticleSection
+                  key={ex.id}
+                  heading={
+                    <ArticleHeading id={ex.id} level={3}>
+                      {label}
+                    </ArticleHeading>
+                  }
+                >
                   <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
                     {fullUrl}
                   </code>
@@ -265,16 +281,19 @@ export function ApiDocs() {
                       className="h-auto max-h-20 w-auto max-w-full"
                     />
                   </div>
-                </section>
+                </ArticleSection>
               );
             })}
           </div>
-        </section>
+        </ArticleSection>
 
-        <section className="flex min-w-0 flex-col gap-6">
-          <ArticleHeading id="embedding">
-            {t("imgApi.embedHeading")}
-          </ArticleHeading>
+        <ArticleSection
+          heading={
+            <ArticleHeading id="embedding">
+              {t("imgApi.embedHeading")}
+            </ArticleHeading>
+          }
+        >
           <p className="text-base text-muted-foreground">Markdown:</p>
           <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
             {`![${embedAlt}](${embedUrl})`}
@@ -283,8 +302,8 @@ export function ApiDocs() {
           <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
             {`<img src="${embedUrl}" alt="${embedAlt}" />`}
           </code>
-        </section>
-      </article>
+        </ArticleSection>
+      </Article>
       <ApiPageActions items={outlineItems} />
     </>
   );

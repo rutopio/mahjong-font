@@ -23,8 +23,8 @@ importers:
         specifier: 2.6.2
         version: 2.6.2
       '@rutopio/base-component':
-        specifier: github:rutopio/base-component#v0.13.0
-        version: https://codeload.github.com/rutopio/base-component/tar.gz/563d3bfaff75e03836031f03bfba9e5344f6ee91(@base-ui/react@1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@phosphor-icons/react@2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(motion@12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(next-themes@0.4.6(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        specifier: github:rutopio/base-component#v0.14.0
+        version: https://codeload.github.com/rutopio/base-component/tar.gz/965f1e1c6bd9d9fc0687b5eb1d0ace3d446bb9f3(@base-ui/react@1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@phosphor-icons/react@2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(cmdk@1.1.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(motion@12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(next-themes@0.4.6(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sonner@2.0.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       class-variance-authority:
         specifier: 0.7.1
         version: 0.7.1
@@ -1009,22 +1009,28 @@ packages:
   '@rolldown/pluginutils@1.1.0':
     resolution: {integrity: sha512-K+NU2HDCEem4sClgHH4ZZXwdJeNFkJo+hRk479DIwdIviAPN2hFJH1KHHwg8CxHQXvi0M5XY4deTXINfIiSG6w==}
 
-  '@rutopio/base-component@https://codeload.github.com/rutopio/base-component/tar.gz/563d3bfaff75e03836031f03bfba9e5344f6ee91':
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/rutopio/base-component/tar.gz/563d3bfaff75e03836031f03bfba9e5344f6ee91}
-    version: 0.13.0
+  '@rutopio/base-component@https://codeload.github.com/rutopio/base-component/tar.gz/965f1e1c6bd9d9fc0687b5eb1d0ace3d446bb9f3':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/rutopio/base-component/tar.gz/965f1e1c6bd9d9fc0687b5eb1d0ace3d446bb9f3}
+    version: 0.14.0
     peerDependencies:
       '@base-ui/react': ^1.6.0
       '@phosphor-icons/react': ^2.1.10
       canvas-confetti: ^1.9.4
+      cmdk: ^1.1.1
       motion: ^12.40.0
       next-themes: ^0.4.6
       react: ^19.2.0
       react-dom: ^19.2.0
       react-medium-image-zoom: ^5.4.8
+      sonner: ^2.0.7
     peerDependenciesMeta:
       canvas-confetti:
         optional: true
+      cmdk:
+        optional: true
       react-medium-image-zoom:
+        optional: true
+      sonner:
         optional: true
 
   '@sindresorhus/is@7.2.0':
@@ -2607,7 +2613,7 @@ snapshots:
 
   '@rolldown/pluginutils@1.1.0': {}
 
-  '@rutopio/base-component@https://codeload.github.com/rutopio/base-component/tar.gz/563d3bfaff75e03836031f03bfba9e5344f6ee91(@base-ui/react@1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@phosphor-icons/react@2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(motion@12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(next-themes@0.4.6(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@rutopio/base-component@https://codeload.github.com/rutopio/base-component/tar.gz/965f1e1c6bd9d9fc0687b5eb1d0ace3d446bb9f3(@base-ui/react@1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@phosphor-icons/react@2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(cmdk@1.1.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(motion@12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(next-themes@0.4.6(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sonner@2.0.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7))':
     dependencies:
       '@base-ui/react': 1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@phosphor-icons/react': 2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -2618,6 +2624,9 @@ snapshots:
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
       tailwind-merge: 3.6.0
+    optionalDependencies:
+      cmdk: 1.1.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      sonner: 2.0.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
 
   '@sindresorhus/is@7.2.0': {}
 

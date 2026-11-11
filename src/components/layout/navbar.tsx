@@ -5,6 +5,7 @@ import {
   ListIcon,
 } from "@phosphor-icons/react";
 import { ActionMenu } from "@rutopio/base-component/action-menu";
+import { Badge } from "@rutopio/base-component/badge";
 import { Button, buttonVariants } from "@rutopio/base-component/button";
 import {
   Drawer,
@@ -18,13 +19,12 @@ import {
   HeaderNavigation,
   SiteHeader,
 } from "@rutopio/base-component/site-header";
+import { useIsMobile } from "@rutopio/base-component/use-mobile";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Badge } from "@/components/ui/badge";
 import { useLang } from "@/hooks/use-lang";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
 import { type Locale, stripLocale, withLocale } from "@/lib/locale";
 
@@ -81,7 +81,6 @@ export function Navbar() {
               ? "主要導覽"
               : "主要导航"
       }
-      compactActions
       brand={
         <Link
           to={withLocale("/", language)}
@@ -126,7 +125,6 @@ export function Navbar() {
           ]}
           label={t("ui.navMenu")}
           title="Mahjong Font"
-          titleClassName="font-heading"
           menuIcon={<ListIcon aria-hidden="true" />}
           selectedIcon={<CheckIcon aria-hidden="true" />}
           renderLink={(item, props) => (
@@ -159,9 +157,7 @@ export function Navbar() {
               />
               <DrawerContent>
                 <DrawerHeader className="border-border border-b pb-4">
-                  <DrawerTitle className="font-heading">
-                    {t("ui.downloadFont")}
-                  </DrawerTitle>
+                  <DrawerTitle>{t("ui.downloadFont")}</DrawerTitle>
                 </DrawerHeader>
                 <div className="flex flex-col gap-1 px-4 pt-4 pb-6">
                   {fontDownloads.map((font) => (
@@ -213,7 +209,6 @@ export function Navbar() {
               htmlLang: lang.value,
             }))}
             isMobile={isMobile}
-            titleClassName="font-heading"
             onChange={(value) => handleLanguageChange(value)}
           />
           <ThemeToggle />

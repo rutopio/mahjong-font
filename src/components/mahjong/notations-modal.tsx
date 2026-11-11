@@ -8,6 +8,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@rutopio/base-component/drawer";
+import { useIsMobile } from "@rutopio/base-component/use-mobile";
 import { useTranslation } from "react-i18next";
 import { Notations } from "@/components/mahjong/notations";
 import {
@@ -17,7 +18,6 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 interface NotationsModalProps {
   open: boolean;
@@ -38,9 +38,7 @@ export function NotationsModal({
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle className="font-heading">
-              {t("ui.howToUse")}
-            </DrawerTitle>
+            <DrawerTitle>{t("ui.howToUse")}</DrawerTitle>
             <DrawerDescription className="sr-only">
               {t("ui.howToUse")}
             </DrawerDescription>

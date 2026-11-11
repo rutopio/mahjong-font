@@ -13,13 +13,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@rutopio/base-component/dialog";
+import { Input } from "@rutopio/base-component/input";
 import {
   openShareWindow,
   usePageShare,
 } from "@rutopio/base-component/page-share";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import { Input } from "@/components/ui/input";
 
 export function ApiShareButton({
   size = "icon",
@@ -47,9 +47,7 @@ export function ApiShareButton({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="font-heading">
-              {t("share.shareTitle")}
-            </DialogTitle>
+            <DialogTitle>{t("share.shareTitle")}</DialogTitle>
             <DialogDescription>{t("share.shareDescription")}</DialogDescription>
           </DialogHeader>
           <Input

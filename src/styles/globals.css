@@ -3,31 +3,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "@rutopio/base-component/styles.css";
+@import "@rutopio/base-component/article.css";
 @import "@rutopio/base-component/neutral-theme.css";
-
-@theme inline {
-  --font-sans:
-    "Inter Variable", var(--font-cjk-primary), var(--font-cjk-secondary),
-    var(--font-cjk-tertiary), sans-serif;
-  --font-heading: var(--font-sans);
-  --font-mono:
-    "Paper Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-}
-
-:root {
-  --font-cjk-primary: "Noto Sans TC Variable";
-  --font-cjk-secondary: "Noto Sans JP Variable";
-  --font-cjk-tertiary: "Noto Sans SC Variable";
-}
-
-html:lang(ja) {
-  --font-cjk-primary: "Noto Sans JP Variable";
-  --font-cjk-secondary: "Noto Sans TC Variable";
-}
-
-html:lang(zh-Hans) {
-  --font-cjk-primary: "Noto Sans SC Variable";
-  --font-cjk-secondary: "Noto Sans TC Variable";
-  --font-cjk-tertiary: "Noto Sans JP Variable";
-}
+@import "@rutopio/base-component/cjk-fonts.css";

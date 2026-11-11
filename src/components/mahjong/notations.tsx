@@ -1,7 +1,4 @@
-import { useTranslation } from "react-i18next";
-
-import { TileSvg } from "@/components/mahjong/tile-svg";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@rutopio/base-component/badge";
 import {
   Table,
   TableBody,
@@ -9,7 +6,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@rutopio/base-component/table";
+import { useTranslation } from "react-i18next";
+import { TileSvg } from "@/components/mahjong/tile-svg";
 import type { NotationItem } from "@/lib/constants";
 import { notationExamples, notationItems } from "@/lib/constants";
 import { transformString } from "@/lib/transform-string";

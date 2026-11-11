@@ -1,7 +1,8 @@
+import { PageTransition } from "@rutopio/base-component/page-transition";
+import { SiteLayout } from "@rutopio/base-component/site-layout";
+import { Toaster } from "@rutopio/base-component/sonner";
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
-import { motion, useReducedMotion } from "motion/react";
 import { lazy, Suspense } from "react";
-import { Toaster } from "sonner";
 
 import "@/styles/globals.css";
 
@@ -50,19 +51,19 @@ function useLangSync() {
 // remount the page, and reduced-motion preferences skip the entrance fade.
 function AnimatedOutlet() {
   const pathname = useLocation({ select: (location) => location.pathname });
-  const reduceMotion = useReducedMotion();
   const isHome = stripLocale(pathname) === "/";
-
   return (
-    <motion.div
-      key={pathname}
-      initial={reduceMotion ? false : { opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      className={`flex min-w-0 flex-auto flex-col ${isHome ? "w-full lg:w-[calc(100vw-3rem)] lg:max-w-5xl lg:flex-none" : "w-full"}`}
-    >
-      <Outlet />
-    </motion.div>
+    <PageTransition key={pathname}>
+      <div
+        className={
+          isHome
+            ? "flex min-w-0 flex-auto flex-col lg:w-[calc(100vw-3rem)] lg:max-w-5xl lg:self-center"
+            : "flex min-w-0 flex-auto flex-col"
+        }
+      >
+        <Outlet />
+      </div>
+    </PageTransition>
   );
 }
 
@@ -70,10 +71,7 @@ function RootComponent() {
   const lang = useLangSync();
   return (
     <I18nProvider>
-      <div
-        key={lang}
-        className="mx-auto flex min-h-full w-full max-w-2xl flex-col px-3 min-[360px]:px-6"
-      >
+      <SiteLayout key={lang}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:outline-2 focus:outline-ring"
@@ -89,7 +87,7 @@ function RootComponent() {
           <AnimatedOutlet />
         </main>
         <Footer />
-      </div>
+      </SiteLayout>
       <Toaster expand={false} closeButton position="top-center" />
       <ScreenSize />
       <Suspense>

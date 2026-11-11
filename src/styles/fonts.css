@@ -1,7 +1,6 @@
 /* Inter for Latin, then locale-aware Noto Sans CJK fallbacks. */
 @import "@fontsource-variable/noto-sans-jp";
 @import "@fontsource-variable/noto-sans-tc";
-@import "@fontsource-variable/noto-sans-sc";
 
 @font-face {
   font-family: "Inter Variable";

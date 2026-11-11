@@ -2,7 +2,7 @@ import * as React from "react";
 import { CheckIcon, MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { Command as CommandPrimitive } from "cmdk";
 
-import { InputGroup, InputGroupAddon } from "@/components/ui/input-group";
+import { InputGroup, InputGroupAddon } from "@rutopio/base-component/input-group";
 import { cn } from "@/lib/utils";
 
 function Command({

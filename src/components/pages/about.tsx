@@ -1,5 +1,7 @@
+import { Article, ArticleSection } from "@rutopio/base-component/article";
 import { GithubMarkIcon } from "@rutopio/base-component/github-mark-icon";
 import type { OutlineListItem as OutlineItem } from "@rutopio/base-component/outline-list";
+import { PageIntro } from "@rutopio/base-component/page-intro";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ApiPageActions } from "@/components/api-page-actions";
@@ -22,11 +24,9 @@ export function About() {
 
   return (
     <>
-      <article className="flex w-full min-w-0 flex-col gap-16 py-6 text-base text-neutral-800 tabular-nums leading-[1.65] sm:py-12 dark:text-neutral-300">
+      <Article className="py-6 sm:py-12">
         <header className="flex flex-col gap-6">
-          <h1 className="text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50">
-            {t("about.title")}
-          </h1>
+          <PageIntro title={t("about.title")} />
           <p className="text-pretty">{t("about.intro")}</p>
           <p className="text-pretty">{t("about.features")}</p>
           <p className="text-pretty">
@@ -38,10 +38,13 @@ export function About() {
           </p>
         </header>
 
-        <section className="flex flex-col gap-6">
-          <ArticleHeading id="source-code">
-            {t("about.sourceHeading")}
-          </ArticleHeading>
+        <ArticleSection
+          heading={
+            <ArticleHeading id="source-code">
+              {t("about.sourceHeading")}
+            </ArticleHeading>
+          }
+        >
           <p className="text-pretty">
             <a
               href={GITHUB_REPO_URL}
@@ -58,12 +61,15 @@ export function About() {
               rutopio/mahjong-font
             </a>
           </p>
-        </section>
+        </ArticleSection>
 
-        <section className="flex flex-col gap-6">
-          <ArticleHeading id="downloads">
-            {t("about.downloadsHeading")}
-          </ArticleHeading>
+        <ArticleSection
+          heading={
+            <ArticleHeading id="downloads">
+              {t("about.downloadsHeading")}
+            </ArticleHeading>
+          }
+        >
           <ul className="ml-6 flex list-disc flex-col gap-1">
             {fontDownloads.map((font) => (
               <li key={font.url}>
@@ -78,12 +84,15 @@ export function About() {
               </li>
             ))}
           </ul>
-        </section>
+        </ArticleSection>
 
-        <section className="flex flex-col gap-6">
-          <ArticleHeading id="license">
-            {t("about.licenseHeading")}
-          </ArticleHeading>
+        <ArticleSection
+          heading={
+            <ArticleHeading id="license">
+              {t("about.licenseHeading")}
+            </ArticleHeading>
+          }
+        >
           <ul className="ml-6 flex list-disc flex-col gap-1">
             <li>
               <a
@@ -106,8 +115,8 @@ export function About() {
               </a>
             </li>
           </ul>
-        </section>
-      </article>
+        </ArticleSection>
+      </Article>
       <ApiPageActions
         items={outlineItems}
         pageTitle={t("about.title")}

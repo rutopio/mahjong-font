@@ -1,9 +1,8 @@
+import { Input } from "@rutopio/base-component/input";
 import { useTranslation } from "react-i18next";
-
 import { NotationsButton } from "@/components/mahjong/notations-button";
 import { ThemeSelector } from "@/components/mahjong/theme-selector";
 import { YakuSelector } from "@/components/mahjong/yaku-selector";
-import { Input } from "@/components/ui/input";
 
 interface InputSectionProps {
   input: string;
