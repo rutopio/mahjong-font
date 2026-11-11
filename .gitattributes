@@ -1,12 +1,41 @@
+# Normalize text files to LF on every platform.
 * text=auto eol=lf
+
+# Keep code and editable vector/diagram sources reviewable.
+*.svg text
+*.drawio text
+*.excalidraw text
+
+# Never normalize or merge binary assets as text.
 *.pdf binary
+*.ai binary
+*.psd binary
 *.png binary
 *.jpg binary
 *.jpeg binary
 *.gif binary
 *.ico binary
+*.webp binary
+*.avif binary
+*.bmp binary
+*.tif binary
+*.tiff binary
+*.heic binary
 *.woff binary
 *.woff2 binary
 *.ttf binary
+*.ttc binary
 *.eot binary
 *.otf binary
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.m4a binary
+*.flac binary
+*.mp4 binary
+*.webm binary
+*.mov binary
+*.zip binary
+*.gz binary
+*.br binary
+*.7z binary
