@@ -32,6 +32,8 @@ import {
 import { yakuGroups } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
+const PARENTHETICAL_SUFFIX_RE = /\s*\(.*\)$/;
+
 function YakuCommandList({
   selectedOption,
   onSelect,
@@ -86,7 +88,7 @@ export function YakuSelector({
 
   const selectedLabel = selectedOption
     ? yakuGroups.flatMap((g) => g.items).includes(selectedOption)
-      ? t(selectedOption).replace(/\s*\(.*\)$/, "")
+      ? t(selectedOption).replace(PARENTHETICAL_SUFFIX_RE, "")
       : undefined
     : undefined;
 

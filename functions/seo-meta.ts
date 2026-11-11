@@ -1,3 +1,4 @@
+const TRAILING_SLASHES_RE = /\/+$/;
 /**
  * Per-route SEO metadata for the title/description/locale/hreflang rewrite in
  * _middleware.ts. The app is a single index.html shell, so the static head only
@@ -144,7 +145,8 @@ export function pathFor(lang: Lang, page: Page): string {
 /** Resolve a URL pathname to its language, page, and canonical path. */
 export function resolveRoute(pathname: string): RouteMeta {
   // Strip trailing slash (except root) for stable matching.
-  const p = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  const p =
+    pathname.length > 1 ? pathname.replace(TRAILING_SLASHES_RE, "") : pathname;
   let lang: Lang = "ja";
   let bare = p;
   for (const l of LANGS) {

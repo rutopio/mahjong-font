@@ -7,9 +7,11 @@ import { Trans, useTranslation } from "react-i18next";
 import { ApiPageActions } from "@/components/api-page-actions";
 import { ArticleHeading } from "@/components/article-heading";
 
+const INLINE_MARKUP_RE = /(`[^`]+`|\*\*[^*]+\*\*)/;
+
 /** Render `code` and **bold** markers inside a param description. */
 function parseDescription(text: string): ReactNode {
-  return text.split(/(`[^`]+`|\*\*[^*]+\*\*)/).map((part, i) => {
+  return text.split(INLINE_MARKUP_RE).map((part, i) => {
     if (part.startsWith("`") && part.endsWith("`")) {
       return (
         <code

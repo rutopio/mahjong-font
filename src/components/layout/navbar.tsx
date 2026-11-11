@@ -25,6 +25,8 @@ import { useLang } from "@/hooks/use-lang";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
 import { type Locale, stripLocale, withLocale } from "@/lib/locale";
 
+const TRAILING_SLASH_RE = /\/$/;
+
 const FONT_VERSION = "v2.1";
 const GITHUB_LABEL: Record<Locale, string> = {
   ja: "GitHub リポジトリ（新しいタブで開く）",
@@ -38,7 +40,8 @@ export function Navbar() {
   const navigate = useNavigate();
   const pathname = useLocation({ select: (l) => l.pathname });
   const language = useLang();
-  const currentPage = stripLocale(pathname).replace(/\/$/, "") || "/";
+  const currentPage =
+    stripLocale(pathname).replace(TRAILING_SLASH_RE, "") || "/";
   const isHome = currentPage === "/";
   const isApi = currentPage === "/api";
   const isAbout = currentPage === "/about";

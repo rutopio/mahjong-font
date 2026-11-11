@@ -8,6 +8,8 @@ import { DEFAULT_TILE_COLOR } from "./constants";
 import { shapeTiles } from "./shape-tiles";
 import type { TilesData } from "./tiles-data";
 
+const HEX_COLOR_RE = /^#[0-9a-f]{6}$/i;
+
 /** CPAL index the user is allowed to recolor (the tile base). */
 const TILE_BASE_INDEX = 3;
 
@@ -61,7 +63,7 @@ export function buildTilesContent({
   const isColorful = theme !== "monochrome";
   // This renderer also feeds inline HTML and a directly served SVG. Never
   // interpolate an unchecked attribute value, even if the caller validated it.
-  const safeTileColor = /^#[0-9a-f]{6}$/i.test(tileColor)
+  const safeTileColor = HEX_COLOR_RE.test(tileColor)
     ? tileColor
     : DEFAULT_TILE_COLOR;
 
