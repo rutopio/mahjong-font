@@ -8,10 +8,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@rutopio/ui/drawer";
-import {
-  OutlineList,
-  type OutlineListItem,
-} from "@rutopio/ui/outline-list";
+import { OutlineList, type OutlineListItem } from "@rutopio/ui/outline-list";
 import { ReadingProgressRing } from "@rutopio/ui/outline-nav";
 import { PageActionRail } from "@rutopio/ui/page-action-rail";
 import { navigateToSection } from "@rutopio/ui/section-navigation";
@@ -125,64 +122,60 @@ export function ApiPageActions({
     <PageActionRail
       label={label}
       mobileOutline={
-        <>
-          {items.length > 0 && (
-            <Drawer open={outlineOpen} onOpenChange={handleOutlineOpenChange}>
-              <DrawerTrigger
-                render={
-                  <Button
-                    variant="outline"
-                    size="icon-lg"
-                    aria-label={`${Math.round(progress * 100)}% · ${t("apiActions.outline")}`}
-                  />
-                }
+        items.length > 0 && (
+          <Drawer open={outlineOpen} onOpenChange={handleOutlineOpenChange}>
+            <DrawerTrigger
+              render={
+                <Button
+                  variant="outline"
+                  size="icon-lg"
+                  aria-label={`${Math.round(progress * 100)}% · ${t("apiActions.outline")}`}
+                />
+              }
+            >
+              <ReadingProgressRing progress={progress} />
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader className="border-border border-b pb-4">
+                <DrawerTitle>{pageTitle ?? t("imgApi.title")}</DrawerTitle>
+              </DrawerHeader>
+              <nav
+                ref={drawerScrollRef}
+                aria-label={t("apiActions.outline")}
+                className="min-h-0 flex-1 overflow-y-auto px-4 pt-4 pb-6"
               >
-                <ReadingProgressRing progress={progress} />
-              </DrawerTrigger>
-              <DrawerContent>
-                <DrawerHeader className="border-border border-b pb-4">
-                  <DrawerTitle>{pageTitle ?? t("imgApi.title")}</DrawerTitle>
-                </DrawerHeader>
-                <nav
-                  ref={drawerScrollRef}
-                  aria-label={t("apiActions.outline")}
-                  className="min-h-0 flex-1 overflow-y-auto px-4 pt-4 pb-6"
-                >
-                  <OutlineList
-                    items={items}
-                    activeId={selectedId}
-                    onNavigate={navigateToHeading}
-                    indicator={<ArrowLeftIcon className="size-4" />}
-                  />
-                </nav>
-              </DrawerContent>
-            </Drawer>
-          )}
-        </>
+                <OutlineList
+                  items={items}
+                  activeId={selectedId}
+                  onNavigate={navigateToHeading}
+                  indicator={<ArrowLeftIcon className="size-4" />}
+                />
+              </nav>
+            </DrawerContent>
+          </Drawer>
+        )
       }
       desktopOutline={
-        <>
-          {items.length > 0 && (
-            <ActionMenu
-              label={t("apiActions.outline")}
-              triggerLabel={`${Math.round(progress * 100)}% · ${t("apiActions.outline")}`}
-              trigger={<ReadingProgressRing progress={progress} />}
-              side="left"
-              indicator={<ArrowLeftIcon className="size-4" />}
-              items={items.map((item) => ({
-                ...item,
-                active: item.id === selectedId,
-                ariaCurrent:
-                  item.id === selectedId ? ("location" as const) : undefined,
-                href: `#${encodeURIComponent(item.id)}`,
-                onSelect: (event) => {
-                  event.preventDefault();
-                  navigateToHeading(item.id);
-                },
-              }))}
-            />
-          )}
-        </>
+        items.length > 0 && (
+          <ActionMenu
+            label={t("apiActions.outline")}
+            triggerLabel={`${Math.round(progress * 100)}% · ${t("apiActions.outline")}`}
+            trigger={<ReadingProgressRing progress={progress} />}
+            side="left"
+            indicator={<ArrowLeftIcon className="size-4" />}
+            items={items.map((item) => ({
+              ...item,
+              active: item.id === selectedId,
+              ariaCurrent:
+                item.id === selectedId ? ("location" as const) : undefined,
+              href: `#${encodeURIComponent(item.id)}`,
+              onSelect: (event) => {
+                event.preventDefault();
+                navigateToHeading(item.id);
+              },
+            }))}
+          />
+        )
       }
       actions={utilities}
     />

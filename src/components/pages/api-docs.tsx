@@ -15,7 +15,7 @@ function parseDescription(text: string): ReactNode {
         <code
           // biome-ignore lint/suspicious/noArrayIndexKey: static split, stable order
           key={i}
-          className="rounded bg-muted px-1 py-0.5 font-mono text-base"
+          className="bg-muted rounded px-1 py-0.5 font-mono text-base"
         >
           {part.slice(1, -1)}
         </code>
@@ -121,7 +121,7 @@ export function ApiDocs() {
       <Article className="py-6 sm:py-12">
         <header className="flex flex-col gap-6">
           <PageIntro title={t("imgApi.title")} />
-          <p className="text-pretty text-base leading-[1.65]">
+          <p className="text-base leading-[1.65] text-pretty">
             {t("imgApi.intro")}
           </p>
         </header>
@@ -133,13 +133,13 @@ export function ApiDocs() {
             </ArticleHeading>
           }
         >
-          <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
+          <code className="bg-muted block overflow-x-auto rounded-md px-4 py-3 font-mono text-base whitespace-nowrap">
             {`${origin}/img/<${t("imgApi.tilePlaceholder")}>?theme=color&color=AA7942`}
           </code>
           <p className="text-pretty">
             {parseDescription(t("imgApi.encodingIntro"))}
           </p>
-          <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
+          <code className="bg-muted block overflow-x-auto rounded-md px-4 py-3 font-mono text-base whitespace-nowrap">
             {`const imageUrl = \`${origin}/img/\${encodeURIComponent(tile)}\`;`}
           </code>
         </ArticleSection>
@@ -151,23 +151,23 @@ export function ApiDocs() {
             </ArticleHeading>
           }
         >
-          <p className="text-pretty text-base leading-[1.65]">
+          <p className="text-base leading-[1.65] text-pretty">
             <Trans
               i18nKey="imgApi.convertIntro"
               components={{
                 from: (
-                  <code className="rounded bg-muted px-1 py-0.5 font-mono" />
+                  <code className="bg-muted rounded px-1 py-0.5 font-mono" />
                 ),
-                to: <code className="rounded bg-muted px-1 py-0.5 font-mono" />,
+                to: <code className="bg-muted rounded px-1 py-0.5 font-mono" />,
               }}
             />
           </p>
           <div className="flex flex-col gap-6">
-            <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
+            <code className="bg-muted block overflow-x-auto rounded-md px-4 py-3 font-mono text-base whitespace-nowrap">
               {origin}/<span className="text-destructive">?tile=</span>
               7m7m7m2p3p4p8p8p8p4s5s6s8s_8s&amp;theme=color&amp;color=AA7942
             </code>
-            <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
+            <code className="bg-muted block overflow-x-auto rounded-md px-4 py-3 font-mono text-base whitespace-nowrap">
               {origin}
               <span className="text-destructive">/img/</span>
               7m7m7m2p3p4p8p8p8p4s5s6s8s_8s?theme=color&amp;color=AA7942
@@ -184,7 +184,7 @@ export function ApiDocs() {
         >
           <div className="overflow-x-auto rounded-md border">
             <table className="w-full text-base leading-[1.65]">
-              <thead className="bg-muted text-left text-muted-foreground">
+              <thead className="bg-muted text-muted-foreground text-left">
                 <tr>
                   <th className="px-4 py-2 font-semibold">
                     {t("imgApi.colName")}
@@ -211,34 +211,36 @@ export function ApiDocs() {
                   >
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <code className="font-mono font-semibold">{p.name}</code>
+                        <code className="font-mono font-semibold">
+                          {p.name}
+                        </code>
                         {p.required && (
-                          <span className="rounded-full bg-secondary px-2 py-0.5 text-base text-secondary-foreground">
+                          <span className="bg-secondary text-secondary-foreground rounded-full px-2 py-0.5 text-base">
                             {t("imgApi.required")}
                           </span>
                         )}
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <code className="font-mono text-base text-muted-foreground">
+                      <code className="text-muted-foreground font-mono text-base">
                         {p.location}
                       </code>
                     </td>
                     <td className="px-4 py-3">
-                      <code className="break-words font-mono text-base text-primary">
+                      <code className="text-primary font-mono text-base break-words">
                         {p.type}
                       </code>
                     </td>
                     <td className="px-4 py-3">
                       {p.default ? (
-                        <code className="font-mono text-base text-muted-foreground">
+                        <code className="text-muted-foreground font-mono text-base">
                           {p.default}
                         </code>
                       ) : (
                         <span className="text-muted-foreground/60">—</span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-muted-foreground">
+                    <td className="text-muted-foreground px-4 py-3">
                       {parseDescription(t(p.descKey))}
                     </td>
                   </tr>
@@ -246,7 +248,7 @@ export function ApiDocs() {
               </tbody>
             </table>
           </div>
-          <p className="text-pretty text-muted-foreground">
+          <p className="text-muted-foreground text-pretty">
             {t("imgApi.inputRules")}
           </p>
         </ArticleSection>
@@ -271,7 +273,7 @@ export function ApiDocs() {
                     </ArticleHeading>
                   }
                 >
-                  <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
+                  <code className="bg-muted block overflow-x-auto rounded-md px-4 py-3 font-mono text-base whitespace-nowrap">
                     {fullUrl}
                   </code>
                   <div className="flex min-h-20 items-center justify-center overflow-x-auto">
@@ -294,12 +296,12 @@ export function ApiDocs() {
             </ArticleHeading>
           }
         >
-          <p className="text-base text-muted-foreground">Markdown:</p>
-          <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
+          <p className="text-muted-foreground text-base">Markdown:</p>
+          <code className="bg-muted block overflow-x-auto rounded-md px-4 py-3 font-mono text-base whitespace-nowrap">
             {`![${embedAlt}](${embedUrl})`}
           </code>
-          <p className="text-base text-muted-foreground">HTML:</p>
-          <code className="block overflow-x-auto whitespace-nowrap rounded-md bg-muted px-4 py-3 font-mono text-base">
+          <p className="text-muted-foreground text-base">HTML:</p>
+          <code className="bg-muted block overflow-x-auto rounded-md px-4 py-3 font-mono text-base whitespace-nowrap">
             {`<img src="${embedUrl}" alt="${embedAlt}" />`}
           </code>
         </ArticleSection>

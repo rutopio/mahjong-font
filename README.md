@@ -185,3 +185,25 @@ The font files are licensed under the [SIL Open Font License, Version 1.1](./LIC
 - [Gutenberg Labo](http://gutenberg.osdn.jp)
 - [Inconsolata - Google Fonts](https://fonts.google.com/specimen/Inconsolata)
 - [Riichi.Wiki](https://riichi.wiki/)
+
+## Development toolchain
+
+Use Node.js 26.13.0 (`nvm use`) and pnpm 12.18.0, as pinned in
+`.nvmrc` and `package.json`. Install with `pnpm install --frozen-lockfile`.
+
+- `pnpm check`: read-only Biome formatting/lint and browser/Functions type checks
+- `pnpm check:fix`: apply safe Biome fixes
+- `pnpm format`: format source files
+- `pnpm build`: create the production output
+- `pnpm audit`: check direct and transitive dependencies
+
+The five personal sites share the same `biome.json`, `.editorconfig`,
+`.gitattributes`, `tsconfig.base.json`, Functions compiler settings and pnpm
+policy. Keep shared package versions aligned when upgrading. Project aliases,
+content pipelines and Cloudflare bindings remain specific to each site.
+CSS formatting stays outside Biome; Tailwind class sorting reads
+`src/styles/globals.css` and its shared design tokens.
+
+Security overrides in `pnpm-workspace.yaml` document the advisories they fix.
+The serializer override aligns `seroval` with `seroval-plugins`; remove it once
+the upstream dependency graph consistently resolves compatible versions.

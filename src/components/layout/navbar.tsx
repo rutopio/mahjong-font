@@ -15,10 +15,7 @@ import {
   DrawerTrigger,
 } from "@rutopio/ui/drawer";
 import { LanguageToggle } from "@rutopio/ui/language-toggle";
-import {
-  HeaderNavigation,
-  SiteHeader,
-} from "@rutopio/ui/site-header";
+import { HeaderNavigation, SiteHeader } from "@rutopio/ui/site-header";
 import { useIsMobile } from "@rutopio/ui/use-mobile";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
@@ -86,12 +83,12 @@ export function Navbar() {
           to={withLocale("/", language)}
           activeOptions={{ exact: true, includeSearch: false }}
           aria-label={t("ui.navHome")}
-          className="flex h-12 shrink-0 items-center rounded-md focus-visible:outline-2 focus-visible:outline-ring"
+          className="focus-visible:outline-ring flex h-12 shrink-0 items-center rounded-md focus-visible:outline-2"
         >
           <span className="flex size-12 items-center justify-center">
             <svg
               aria-hidden="true"
-              className="size-8 text-foreground"
+              className="text-foreground size-8"
               fill="currentColor"
               viewBox="0 0 735 734"
               xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +161,7 @@ export function Navbar() {
                     <button
                       key={font.labelKey}
                       type="button"
-                      className="flex min-h-10 items-center justify-between gap-3 rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+                      className="text-foreground focus-visible:outline-ring flex min-h-10 items-center justify-between gap-3 rounded-lg px-3 text-left text-base focus-visible:outline-2"
                       onClick={() => {
                         setDownloadOpen(false);
                         void downloadFont(font.url);

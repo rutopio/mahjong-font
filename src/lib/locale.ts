@@ -21,7 +21,7 @@ export interface LocaleMeta {
   default?: boolean;
 }
 
-const LOCALES: LocaleMeta[] = [
+const LOCALES: [LocaleMeta, ...LocaleMeta[]] = [
   { code: "ja", prefix: "", htmlLang: "ja", label: "日本語", default: true },
   { code: "en", prefix: "/en", htmlLang: "en", label: "English" },
   { code: "zh-TW", prefix: "/zh_tw", htmlLang: "zh-Hant", label: "繁體中文" },

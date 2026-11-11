@@ -96,7 +96,7 @@ export function YakuSelector({
       role="combobox"
       aria-expanded={open}
       aria-label={t("ui.examples")}
-      className="w-fit min-w-[180px] justify-start border-input bg-background px-3 font-normal hover:bg-muted"
+      className="border-input bg-background hover:bg-muted w-fit min-w-[180px] justify-start px-3 font-normal"
       onClick={() => isMobile && setOpen(true)}
     >
       <BookmarkSimpleIcon aria-hidden="true" />

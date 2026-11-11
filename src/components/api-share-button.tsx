@@ -14,10 +14,7 @@ import {
   DialogTitle,
 } from "@rutopio/ui/dialog";
 import { Input } from "@rutopio/ui/input";
-import {
-  openShareWindow,
-  usePageShare,
-} from "@rutopio/ui/page-share";
+import { openShareWindow, usePageShare } from "@rutopio/ui/page-share";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 

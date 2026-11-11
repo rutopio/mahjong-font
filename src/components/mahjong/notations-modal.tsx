@@ -58,7 +58,7 @@ export function NotationsModal({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full gap-0 sm:min-w-[600px] sm:max-w-[50%]">
+      <SheetContent className="w-full gap-0 sm:max-w-[50%] sm:min-w-[600px]">
         <SheetHeader>
           <SheetTitle>{t("ui.howToUse")}</SheetTitle>
           <SheetDescription className="sr-only">

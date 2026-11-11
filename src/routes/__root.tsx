@@ -9,12 +9,12 @@ import "@/styles/globals.css";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { NotFound } from "@/components/not-found";
 import { useLang } from "@/hooks/use-lang";
 import i18n from "@/lib/i18n";
 import { stripLocale } from "@/lib/locale";
 import { I18nProvider } from "@/provider/i18n-provider";
 import { RootError } from "@/routes/-root-error";
-import { NotFound } from "@/components/not-found";
 
 const TanStackRouterDevtools = import.meta.env.DEV
   ? lazy(() =>
@@ -74,7 +74,7 @@ function RootComponent() {
       <SiteLayout key={lang}>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:outline-2 focus:outline-ring"
+          className="focus:bg-background focus:outline-ring sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:px-3 focus:py-2 focus:outline-2"
         >
           {SKIP_LABEL[lang]}
         </a>
@@ -82,7 +82,7 @@ function RootComponent() {
         <main
           id="main-content"
           tabIndex={-1}
-          className="flex min-w-0 flex-1 justify-center bg-background"
+          className="bg-background flex min-w-0 flex-1 justify-center"
         >
           <AnimatedOutlet />
         </main>

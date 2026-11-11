@@ -24,10 +24,10 @@ export function ThemeSelector({
 
   return (
     <div className="flex items-center gap-2">
-      <div className="inline-flex h-9 rounded-lg bg-muted p-[3px]">
+      <div className="bg-muted inline-flex h-9 rounded-lg p-[3px]">
         <RadioGroup
           aria-label={t("ui.theme")}
-          className="group relative inline-grid grid-cols-2 items-center gap-0 font-semibold text-base after:absolute after:inset-y-0 after:w-1/2 after:rounded-md after:bg-background after:shadow-sm after:transition-[translate] after:duration-200 after:ease-out has-focus-visible:after:ring-[3px] has-focus-visible:after:ring-ring/50 data-[state=colorful]:after:translate-x-full motion-reduce:after:transition-none"
+          className="group after:bg-background has-focus-visible:after:ring-ring/50 relative inline-grid grid-cols-2 items-center gap-0 text-base font-semibold after:absolute after:inset-y-0 after:w-1/2 after:rounded-md after:shadow-sm after:transition-[translate] after:duration-200 after:ease-out has-focus-visible:after:ring-[3px] data-[state=colorful]:after:translate-x-full motion-reduce:after:transition-none"
           data-state={theme}
           onValueChange={(value) => onThemeChange(value as string)}
           value={theme}
@@ -36,7 +36,7 @@ export function ThemeSelector({
             <label
               key={option.value}
               htmlFor={`${id}-${option.value}`}
-              className="relative z-10 inline-flex h-full select-none items-center justify-center whitespace-nowrap px-3 text-muted-foreground transition-colors data-active:text-foreground"
+              className="text-muted-foreground data-active:text-foreground relative z-10 inline-flex h-full items-center justify-center px-3 whitespace-nowrap transition-colors select-none"
               data-active={theme === option.value ? "" : undefined}
             >
               {t(option.labelKey)}

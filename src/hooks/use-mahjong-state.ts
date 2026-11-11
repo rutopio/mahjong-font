@@ -44,9 +44,9 @@ export function useMahjongState() {
     update({ ...state, tileColor: value });
 
   const handleOptionChange = (value: string) => {
-    const transformedValue = transformString(
-      optionValues[value as keyof typeof optionValues]
-    );
+    const option = optionValues[value as keyof typeof optionValues];
+    if (option === undefined) return;
+    const transformedValue = transformString(option);
     setInput(transformedValue);
   };
 

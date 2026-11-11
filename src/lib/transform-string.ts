@@ -7,27 +7,25 @@ export function transformString(text: string) {
   const result: string[] = [];
   let stack: string[] = [];
   let indicator: string;
-  for (let i = 0; i < charArr.length; i++) {
-    if (/([A-Za-z]|\.)/.test(charArr[i])) {
+  for (const char of charArr) {
+    if (/([A-Za-z]|\.)/.test(char)) {
       // Suit indicators (m, p, s, z) and tile modifiers (.)
-      indicator = charArr[i];
+      indicator = char;
 
       for (let j = 0; j < stack.length; j++) {
         result.push(`${stack[j]}${indicator}`);
       }
 
       stack = [];
-    } else if (/\d/.test(charArr[i])) {
+    } else if (/\d/.test(char)) {
       // Tile numbers
-      stack.push(charArr[i]);
+      stack.push(char);
     } else {
       // Symbols (*, -, =, etc.)
       // First flush the stack before adding the symbol (without indicator, as these digits haven't met their indicator yet)
-      for (let j = 0; j < stack.length; j++) {
-        result.push(stack[j]);
-      }
+      result.push(...stack);
       stack = [];
-      result.push(charArr[i]);
+      result.push(char);
     }
   }
   return result.concat(stack).join("");

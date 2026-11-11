@@ -54,7 +54,7 @@ export function About() {
             >
               <span
                 aria-hidden="true"
-                className="mr-1 inline-block h-4 w-4 align-[-0.125em] text-primary [&>svg]:size-full"
+                className="text-primary mr-1 inline-block h-4 w-4 align-[-0.125em] [&>svg]:size-full"
               >
                 <GithubMarkIcon />
               </span>

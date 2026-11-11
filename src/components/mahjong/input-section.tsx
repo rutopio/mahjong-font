@@ -35,7 +35,7 @@ export function InputSection({
         type="text"
         placeholder={t("ui.placeholder")}
         aria-label={t("ui.placeholder")}
-        className="h-12 w-full bg-background text-center text-base lg:text-lg"
+        className="bg-background h-12 w-full text-center text-base lg:text-lg"
         value={input}
         onChange={(e) => onInputChange(e.target.value)}
       />

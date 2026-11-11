@@ -33,7 +33,7 @@ function ColorArea({ className, ...props }: AriaColorAreaProps) {
     <AriaColorArea
       className={composeRenderProps(className, (className) =>
         cn(
-          "size-[192px] shrink-0 rounded-md border border-border shadow-md",
+          "border-border size-[192px] shrink-0 rounded-md border shadow-md",
           className
         )
       )}
@@ -46,7 +46,7 @@ function SliderTrack({ className, ...props }: AriaSliderTrackProps) {
   return (
     <AriaSliderTrack
       className={composeRenderProps(className, (className) =>
-        cn("h-7 w-[192px] rounded-md border border-border", className)
+        cn("border-border h-7 w-[192px] rounded-md border", className)
       )}
       {...props}
     />
@@ -91,10 +91,10 @@ function ColorSwatchPickerItem({
     <AriaColorSwatchPickerItem
       className={composeRenderProps(className, (className) =>
         cn(
-          "size-8 overflow-hidden rounded-md ring-offset-background transition-colors",
+          "ring-offset-background size-8 overflow-hidden rounded-md transition-colors",
           "data-selected:border-white",
           "data-disabled:pointer-events-none data-disabled:opacity-50",
-          "data-focus-visible:outline-none data-focus-visible:ring-2 data-focus-visible:ring-ring",
+          "data-focus-visible:ring-ring data-focus-visible:ring-2 data-focus-visible:outline-none",
           className
         )
       )}

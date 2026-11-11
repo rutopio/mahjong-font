@@ -48,7 +48,11 @@ function syncMetadata(pathname: string) {
       ?.setAttribute("href", value);
   };
 
-  document.title = router.state.statusCode === 404 ? NOT_FOUND_TITLE : title;
+  document.title = router.state.matches.some(
+    (match) => match.status === "notFound" || match._notFound
+  )
+    ? NOT_FOUND_TITLE
+    : title;
   setContent('meta[name="description"]', description);
   setHref('link[rel="canonical"]', canonical);
   for (const lang of LANGS) {

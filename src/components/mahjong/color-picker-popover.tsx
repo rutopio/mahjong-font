@@ -92,7 +92,7 @@ function EyeDropperButton() {
   return (
     <AriaButton
       aria-label={labels.eyedropper}
-      className="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background font-semibold text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-offset-2"
+      className="border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex size-8 items-center justify-center rounded-md border text-sm font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
       onPress={() => {
         // @ts-expect-error - EyeDropper API may not be available
         new EyeDropper()
@@ -217,7 +217,7 @@ export function ColorPickerPopover({
             <ColorField className="flex w-full gap-2">
               <AriaLabel className="sr-only">{labels.hex}</AriaLabel>
               <AriaInput
-                className="h-9 w-full rounded-md border border-input bg-transparent px-2.5 py-1 font-mono text-sm shadow-xs outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-9 w-full rounded-md border bg-transparent px-2.5 py-1 font-mono text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
                 placeholder="Hex"
                 onKeyDown={(e) => {
                   // Blur on Enter to commit the color value
