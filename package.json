@@ -6,6 +6,7 @@
   "private": true,
   "packageManager": "pnpm@12.18.0",
   "scripts": {
+    "test": "node --experimental-vm-modules --test tests/*.test.mjs",
     "dev": "vite --host",
     "build": "pnpm check && vite build",
     "preview": "vite preview",

@@ -60,11 +60,10 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   // <hash>.<project>.pages.dev preview URL) is 301'd to the custom domain, path +
   // query preserved, so the pages.dev origin never gets indexed or linked.
   if (url.hostname.endsWith(".pages.dev")) {
-    const target = new URL(
-      url.pathname + url.search,
-      "https://mahjong.chingru.com"
+    return Response.redirect(
+      `https://mahjong.chingru.com${url.pathname}${url.search}`,
+      301
     );
-    return Response.redirect(target.toString(), 301);
   }
 
   // Don't touch the image function or anything that isn't the HTML shell.
