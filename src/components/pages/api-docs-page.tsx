@@ -4,8 +4,8 @@ import type { OutlineListItem as OutlineItem } from "@rutopio/ui/outline-list";
 import { PageIntro } from "@rutopio/ui/page-intro";
 import type { ReactNode } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { ApiPageActions } from "@/components/api-page-actions";
-import { ArticleHeading } from "@/components/article-heading";
+import { ArticleHeading } from "@/components/article/article-heading";
+import { ApiPageActions } from "@/components/navigation/api-page-actions";
 
 const INLINE_MARKUP_RE = /(`[^`]+`|\*\*[^*]+\*\*)/;
 

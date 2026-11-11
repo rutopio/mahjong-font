@@ -8,10 +8,10 @@
  * shields.io) sized to the tiles, cached aggressively at the edge.
  */
 
+import tilesData from "../../src/data/tiles-data.json";
 import { decodeImageTilePath } from "../../src/lib/image-input";
 import { renderBadgeSvg } from "../../src/lib/render-badge-svg";
 import type { TilesData } from "../../src/lib/tiles-data";
-import tilesData from "../../src/lib/tiles-data.json";
 import { decodeFromQuery } from "../../src/lib/url-state";
 
 const data = tilesData as unknown as TilesData;

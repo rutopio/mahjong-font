@@ -37,7 +37,7 @@ test("OG requests share initialization, retry rejection, and reuse success", asy
           parseBrand: () => "IntD",
           renderOgSvg: () => "<svg/>",
         },
-        "../src/lib/tiles-data.json": { default: {} },
+        "../src/data/tiles-data.json": { default: {} },
         "../src/lib/image-input": { isValidImageTile: () => true },
         "../src/lib/url-state": {
           decodeFromQuery: () => ({

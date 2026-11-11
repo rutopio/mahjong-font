@@ -16,7 +16,7 @@ import { decodeFromQuery } from "./src/lib/url-state";
  */
 function imgBadgePlugin(): Plugin {
   const data = JSON.parse(
-    readFileSync(path.resolve(__dirname, "src/lib/tiles-data.json"), "utf8")
+    readFileSync(path.resolve(__dirname, "src/data/tiles-data.json"), "utf8")
   ) as TilesData;
 
   return {

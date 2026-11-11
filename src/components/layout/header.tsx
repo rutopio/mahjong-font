@@ -20,7 +20,7 @@ import { useIsNarrowViewport } from "@rutopio/ui/use-is-narrow-viewport";
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeToggle } from "@/components/navigation/theme-toggle";
 import { useLang } from "@/hooks/use-lang";
 import { fontDownloads, GITHUB_REPO_URL, languages } from "@/lib/constants";
 import { type Locale, stripLocale, withLocale } from "@/lib/locale";

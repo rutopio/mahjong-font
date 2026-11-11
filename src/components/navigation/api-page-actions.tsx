@@ -15,7 +15,7 @@ import { scrollToSection } from "@rutopio/ui/section-navigation";
 import { useMountEffect } from "@rutopio/ui/use-mount-effect";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ApiShareButton } from "@/components/api-share-button";
+import { ApiShareButton } from "@/components/navigation/api-share-button";
 
 function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;

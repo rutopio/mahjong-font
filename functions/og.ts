@@ -10,10 +10,10 @@
 import { initWasm, Resvg } from "@resvg/resvg-wasm";
 // The .wasm is imported as a module so Wrangler bundles it with the function.
 import resvgWasm from "@resvg/resvg-wasm/index_bg.wasm";
+import tilesData from "../src/data/tiles-data.json";
 import { isValidImageTile } from "../src/lib/image-input";
 import { OG_WIDTH, renderOgSvg } from "../src/lib/render-og-image";
 import type { TilesData } from "../src/lib/tiles-data";
-import tilesData from "../src/lib/tiles-data.json";
 import { decodeFromQuery } from "../src/lib/url-state";
 
 const data = tilesData as unknown as TilesData;

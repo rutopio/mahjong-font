@@ -101,10 +101,10 @@ See [Development toolchain](#development-toolchain) for setup and commands.
 The app renders tiles as inline SVG. This avoids blank image downloads on iOS
 and displays font palette colors consistently across browsers.
 The glyph data is extracted ahead of time from the Riichi-Mahjong woff2 fonts
-into `src/lib/tiles-data.json`, which the web app and the Image API both read.
+into `src/data/tiles-data.json`, which the web app and the Image API both read.
 
 - Tile glyph data: extract ligatures, SVG paths, bounds and the COLR/CPAL
-  palette from `preprocess/fonts/*.woff2` into `src/lib/tiles-data.json`.
+  palette from `preprocess/fonts/*.woff2` into `src/data/tiles-data.json`.
   Requires Python with [fontTools](https://github.com/fonttools/fonttools).
   Re-run after changing the source fonts:
 

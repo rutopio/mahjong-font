@@ -4,7 +4,7 @@ Extract mahjong tile glyph data from the Riichi-Mahjong woff2 fonts into a
 single JSON consumed by the web app. This replaces webfont rendering with
 inline SVG, fixing iOS download blanks and cross-browser COLR/CPAL support.
 
-Output: src/lib/tiles-data.json
+Output: src/data/tiles-data.json
 
 Run from repo root:  python3 preprocess/extract-tiles.py
 """
@@ -22,7 +22,7 @@ ROOT = os.path.dirname(HERE)
 # shipped to the web build; only the generated tiles-data.json is.
 COLORFUL = os.path.join(HERE, "fonts/Riichi-Mahjong-Colorful.woff2")
 MONOCHROME = os.path.join(HERE, "fonts/Riichi-Mahjong-Monochrome.woff2")
-OUT = os.path.join(ROOT, "src/lib/tiles-data.json")
+OUT = os.path.join(ROOT, "src/data/tiles-data.json")
 
 
 def get_ligatures(font):

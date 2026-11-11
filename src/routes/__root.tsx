@@ -8,12 +8,12 @@ import { lazy, Suspense } from "react";
 import "@/styles/globals.css";
 
 import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
-import { NotFound } from "@/components/not-found";
+import { Navbar } from "@/components/layout/header";
+import { NotFound } from "@/components/layout/not-found";
 import { useLang } from "@/hooks/use-lang";
 import i18n from "@/lib/i18n";
 import { stripLocale } from "@/lib/locale";
-import { I18nProvider } from "@/provider/i18n-provider";
+import { I18nProvider } from "@/providers/i18n-provider";
 import { RootError } from "@/routes/-root-error";
 
 const TanStackRouterDevtools = import.meta.env.DEV
