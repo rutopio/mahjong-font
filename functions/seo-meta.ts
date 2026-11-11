@@ -1,14 +1,4 @@
 const TRAILING_SLASHES_RE = /\/+$/;
-/**
- * Per-route SEO metadata for the title/description/locale/hreflang rewrite in
- * _middleware.ts. The app is a single index.html shell, so the static head only
- * describes the ja home page. Crawlers don't run JS, so the middleware injects
- * the right title / description / canonical / locale / hreflang per route from
- * here. Pure data, no app imports, so it stays out of the client bundle.
- *
- * Mirrors src/lib/locale.ts (ja default at bare path; en /en, zh-TW /zh_tw,
- * zh-CN /zh_cn) but lives under functions/ so the edge has no src dependency.
- */
 
 export type Lang = "ja" | "en" | "zh-TW" | "zh-CN";
 export type Page = "home" | "api" | "about";
@@ -25,9 +15,6 @@ interface Copy {
   description: string;
 }
 
-// Title/description per (lang, page). Home keeps the existing index.html values
-// for ja/en; zh variants follow the locale json tone. api descriptions come from
-// imgApi.intro in src/locale/*.json.
 const COPY: Record<Lang, Record<Page, Copy>> = {
   ja: {
     home: {
@@ -97,7 +84,6 @@ const COPY: Record<Lang, Record<Page, Copy>> = {
   },
 };
 
-/** og:locale code per language. */
 export const OG_LOCALE: Record<Lang, string> = {
   ja: "ja_JP",
   en: "en_US",
@@ -105,7 +91,6 @@ export const OG_LOCALE: Record<Lang, string> = {
   "zh-CN": "zh_CN",
 };
 
-/** <html lang> / hreflang code per language. */
 export const HREFLANG: Record<Lang, string> = {
   ja: "ja",
   en: "en",
@@ -124,7 +109,6 @@ export function imageAltFor(lang: Lang, tile: string): string {
   return `${IMAGE_ALT[lang]}${tile}`;
 }
 
-/** URL prefix per language (ja is bare). */
 const PREFIX: Record<Lang, string> = {
   ja: "",
   en: "/en",
@@ -134,7 +118,6 @@ const PREFIX: Record<Lang, string> = {
 
 export const LANGS: Lang[] = ["ja", "en", "zh-TW", "zh-CN"];
 
-/** Canonical path for a page in a given language. ja is bare, others prefixed. */
 export function pathFor(lang: Lang, page: Page): string {
   const base = page === "home" ? "/" : `/${page}`;
   const prefix = PREFIX[lang];
@@ -142,9 +125,7 @@ export function pathFor(lang: Lang, page: Page): string {
   return page === "home" ? prefix : `${prefix}${base}`;
 }
 
-/** Resolve a URL pathname to its language, page, and canonical path. */
 export function resolveRoute(pathname: string): RouteMeta {
-  // Strip trailing slash (except root) for stable matching.
   const p =
     pathname.length > 1 ? pathname.replace(TRAILING_SLASHES_RE, "") : pathname;
   let lang: Lang = "ja";
@@ -162,7 +143,6 @@ export function resolveRoute(pathname: string): RouteMeta {
   return { lang, page, path: pathFor(lang, page) };
 }
 
-/** Title and description for a resolved route. */
 export function metaFor(route: RouteMeta): Copy {
   return COPY[route.lang][route.page];
 }

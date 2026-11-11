@@ -1,15 +1,4 @@
-/**
- * Cloudflare Pages middleware: inject per-route SEO metadata into the served
- * HTML. The app is a single index.html shell whose static head only describes
- * the ja home page, and crawlers don't run JS, so the correct title /
- * description / canonical / locale / OG tags and hreflang alternates for each
- * route (and language) must be written here.
- *
- * On top of that, the OG/Twitter image is swapped for the on-demand /og image
- * of the current share URL (the home page shares the rendered tile).
- *
- * Only the HTML app shell is rewritten; /og and static assets pass through.
- */
+// Crawlers need localized metadata and tile previews before the SPA runs.
 
 import { isValidImageTile } from "../src/lib/image-input";
 import { OG_HEIGHT, OG_WIDTH } from "../src/lib/render-og-image";
@@ -56,9 +45,7 @@ const setContent = (v: string) => new MetaContentRewriter(v);
 export const onRequest: PagesFunction = async ({ request, next }) => {
   const url = new URL(request.url);
 
-  // Canonical-host redirect. Any *.pages.dev host (<project>.pages.dev and every
-  // <hash>.<project>.pages.dev preview URL) is 301'd to the custom domain, path +
-  // query preserved, so the pages.dev origin never gets indexed or linked.
+  // Keep preview hosts out of search indexes.
   if (url.hostname.endsWith(".pages.dev")) {
     return Response.redirect(
       `https://mahjong.chingru.com${url.pathname}${url.search}`,
@@ -66,7 +53,6 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
     );
   }
 
-  // Don't touch the image function or anything that isn't the HTML shell.
   if (url.pathname.startsWith("/og")) return next();
 
   const response = await next();
@@ -77,8 +63,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const { title, description } = metaFor(route);
   const locale = OG_LOCALE[route.lang];
 
-  // Content pages use their own URL and a generic cover. Only the home page
-  // takes its Open Graph image from the tile string in the share URL.
+  // Only generator links use a tile preview; content pages use the generic cover.
   const isContentPage = route.page !== "home";
 
   const state = decodeFromQuery(isContentPage ? "" : url.search);
@@ -90,12 +75,9 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const imageAlt = imageAltFor(route.lang, imageState.input);
   const pageUrl = `${url.origin}${route.path}${isContentPage || !url.search ? "" : `?${query}`}`;
 
-  // Canonical points at the current localized page without the share query, so
-  // each locale URL is self-canonical and agrees with the hreflang alternates
-  // (otherwise every locale would canonicalize to the ja home and cancel them).
+  // Keep each locale self-canonical so canonical URLs agree with hreflang alternates.
   const canonicalUrl = `${url.origin}${route.path}`;
 
-  // hreflang alternates: the same page in each language. x-default points to ja.
   const jaAlt = `${url.origin}${pathFor("ja", route.page)}`;
   const enAlt = `${url.origin}${pathFor("en", route.page)}`;
   const zhTwAlt = `${url.origin}${pathFor("zh-TW", route.page)}`;

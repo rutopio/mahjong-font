@@ -1,14 +1,4 @@
-/**
- * Cloudflare Pages Function: on-demand Open Graph image.
- *
- *   GET /og?tile=...&theme=...&color=...
- *
- * Reuses the app's pure tile renderer to build a 1200x630 SVG, then rasterizes
- * it to PNG with resvg-wasm. Cached at the edge so repeated shares are cheap.
- */
-
 import { initWasm, Resvg } from "@resvg/resvg-wasm";
-// The .wasm is imported as a module so Wrangler bundles it with the function.
 import resvgWasm from "@resvg/resvg-wasm/index_bg.wasm";
 import tilesData from "../src/data/tiles-data.json";
 import { isValidImageTile } from "../src/lib/image-input";
@@ -18,7 +8,7 @@ import { decodeFromQuery } from "../src/lib/url-state";
 
 const data = tilesData as unknown as TilesData;
 
-// initWasm must run once per isolate; guard with a shared promise.
+// Share initialization across concurrent requests; a failed attempt remains retryable.
 let wasmReady: Promise<void> | null = null;
 function ensureWasm(): Promise<void> {
   if (!wasmReady) {

@@ -13,10 +13,6 @@ interface TileSvgProps {
   ariaLabel?: string;
 }
 
-/**
- * Renders a tile sequence as inline SVG. Shared by the main preview and the
- * notation examples so both use the same data-driven renderer (no webfont).
- */
 function TileSvgContent({
   text,
   theme,

@@ -1,9 +1,6 @@
 const TILE_SUFFIX_RE = /([A-Za-z]|\.)/;
 const DIGIT_RE = /\d/;
-/**
- * Transforms mahjong notation string into displayable characters.
- * Example: "123m" -> "1m2m3m", "123." -> "1.2.3."
- */
+/** Expand grouped notation, e.g. "123m" to "1m2m3m". */
 export function expandMahjongNotation(text: string) {
   const charArr = text.trim().split("");
   const result: string[] = [];
@@ -11,7 +8,6 @@ export function expandMahjongNotation(text: string) {
   let indicator: string;
   for (const char of charArr) {
     if (TILE_SUFFIX_RE.test(char)) {
-      // Suit indicators (m, p, s, z) and tile modifiers (.)
       indicator = char;
 
       for (let j = 0; j < stack.length; j++) {
@@ -20,11 +16,9 @@ export function expandMahjongNotation(text: string) {
 
       stack = [];
     } else if (DIGIT_RE.test(char)) {
-      // Tile numbers
       stack.push(char);
     } else {
-      // Symbols (*, -, =, etc.)
-      // First flush the stack before adding the symbol (without indicator, as these digits haven't met their indicator yet)
+      // Preserve unsuffixed digits before emitting a symbol.
       result.push(...stack);
       stack = [];
       result.push(char);

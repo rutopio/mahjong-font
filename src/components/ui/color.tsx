@@ -59,7 +59,6 @@ function ColorThumb({ className, ...props }: AriaColorThumbProps) {
       className={composeRenderProps(className, (className) =>
         cn(
           "z-10 box-border size-5 rounded-[50%] border-2 border-white shadow-md",
-          /* Focus Visible */
           "data-focus-visible:size-6",
           className
         )

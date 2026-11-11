@@ -1,8 +1,4 @@
-/**
- * Exports the mahjong tile SVG as a downloadable SVG or PNG. Rebuilds the SVG
- * from data (same path as the preview) instead of capturing the DOM, so there
- * is no foreignObject/webfont involvement and iOS produces real images.
- */
+// Export paths directly; DOM capture with webfonts can produce blank images on iOS.
 
 import { isTouchDevice } from "./is-touch-device";
 import { renderTilesSvg } from "./render-tile-svg";
@@ -45,7 +41,6 @@ async function buildSvg({
   return renderTilesSvg({ text, theme, tileColor, data });
 }
 
-/** Download the tiles as a vector SVG file. */
 export async function downloadSvg(opts: ExportOptions) {
   const svg = await buildSvg(opts);
   if (!svg) throw new Error("Nothing to export");
@@ -53,11 +48,6 @@ export async function downloadSvg(opts: ExportOptions) {
   triggerDownload(blob, `${opts.filename}.svg`);
 }
 
-/**
- * Rasterize the SVG via an <img> + canvas. No foreignObject and no webfont, so
- * this is reliable on iOS Safari. A background color is filled first (required
- * for JPEG, which has no transparency).
- */
 async function svgToRasterBlob(
   svg: string,
   mime: "image/png" | "image/jpeg",
@@ -98,7 +88,6 @@ async function svgToRasterBlob(
   }
 }
 
-/** Download a raster blob, preferring the native share sheet on mobile. */
 async function deliverRaster(blob: Blob, filename: string, mime: string) {
   const file = new File([blob], filename, { type: mime });
 
@@ -120,7 +109,6 @@ async function deliverRaster(blob: Blob, filename: string, mime: string) {
   triggerDownload(blob, filename);
 }
 
-/** Download (or share on mobile) the tiles as a PNG image. */
 export async function downloadPng(opts: ExportOptions) {
   const svg = await buildSvg(opts);
   if (!svg) throw new Error("Nothing to export");
@@ -128,7 +116,6 @@ export async function downloadPng(opts: ExportOptions) {
   await deliverRaster(blob, `${opts.filename}.png`, "image/png");
 }
 
-/** Download (or share on mobile) the tiles as a JPEG image (white background). */
 export async function downloadJpg(opts: ExportOptions) {
   const svg = await buildSvg(opts);
   if (!svg) throw new Error("Nothing to export");

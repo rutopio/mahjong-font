@@ -13,9 +13,7 @@ const resources = {
   ja: { translation: translationJA },
 };
 
-// The URL is the source of truth for language (see lib/locale.ts and the
-// LangSync effect in __root). i18next initializes to the default (ja); LangSync
-// calls changeLanguage on every navigation to match the path. No localStorage.
+// Route entry controls language; browser detection would disagree with shared URLs.
 i18next.use(initReactI18next).init({
   resources,
   lng: "ja",

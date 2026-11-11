@@ -9,11 +9,7 @@ import { renderBadgeSvg } from "./src/lib/render-badge-svg";
 import type { TilesData } from "./src/lib/tiles-data";
 import { decodeFromQuery } from "./src/lib/url-state";
 
-/**
- * Dev-only: mirror the /img Pages Function so the badge endpoint works under
- * `vite dev` too (Cloudflare Functions only run under wrangler). Shares the
- * same renderer, so dev and prod stay in sync.
- */
+// Vite does not run Pages Functions, so expose the badge renderer during development.
 function imgBadgePlugin(): Plugin {
   const data = JSON.parse(
     readFileSync(path.resolve(__dirname, "src/data/tiles-data.json"), "utf8")
@@ -27,7 +23,6 @@ function imgBadgePlugin(): Plugin {
         if (!url.pathname.startsWith("/img/")) return next();
 
         const rawTile = url.pathname.slice("/img/".length);
-        // /img and /img/ (no tile) fall through to the SPA help page.
         if (!rawTile) return next();
         const tile = decodeImageTilePath(rawTile);
         if (tile === null) {
@@ -55,8 +50,7 @@ function imgBadgePlugin(): Plugin {
   };
 }
 
-// Preload the self-hosted Latin body font and Paper Mono. CJK subsets are
-// requested as needed by the browser's unicode-range rules.
+// Preload core fonts; CJK subsets load on demand.
 const PUBLIC_PRELOAD_FONTS = [
   "/fonts/ui/inter-normal-core.woff2",
   "/fonts/PaperMono%5Bwght%5D.woff2",

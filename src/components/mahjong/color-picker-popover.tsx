@@ -1,9 +1,3 @@
-/**
- * @fileoverview Tile color picker popover for the colorful mahjong theme.
- * Provides a color picker popover using react-aria-components that lets users
- * select a tile color via a color area, hue slider, hex input, and preset colors.
- */
-
 import { CopyIcon, EyedropperIcon } from "@phosphor-icons/react";
 import { Button } from "@rutopio/ui/button";
 import { use, useRef } from "react";
@@ -73,13 +67,6 @@ const LABELS = {
   },
 } as const;
 
-/**
- * EyeDropper button component that uses the browser's EyeDropper API
- * to pick colors from anywhere on the screen.
- * Returns null if the EyeDropper API is not supported by the browser.
- *
- * @returns EyeDropper button component or null if not supported.
- */
 function EyeDropperButton() {
   const state = use(ColorPickerStateContext);
   const labels = LABELS[useLang()];
@@ -108,33 +95,20 @@ function EyeDropperButton() {
 }
 
 interface ColorPickerPopoverProps {
-  /** The current color value (hex string). */
+  /** Hex color. */
   color: string;
-  /** Callback invoked when the color changes. */
   onColorChange: (color: string) => void;
 }
 
-/**
- * Popover-based color picker component.
- * Displays a color swatch button that opens a color picker dialog with
- * color area selector, hue slider, hex input field, and preset colors.
- *
- * @param props - Component props.
- * @returns Color picker popover component.
- */
 export function ColorPickerPopover({
   color,
   onColorChange,
 }: ColorPickerPopoverProps) {
   const labels = LABELS[useLang()];
-  // Parse the hex color string to a Color object in HSB format
   const colorValue = parseColor(color).toFormat("hsb");
-  // Track if user is dragging to prevent popover from closing during drag
   const isDraggingRef = useRef(false);
 
-  // On touch devices (phones and tablets, incl. iPad), use the native OS color
-  // picker via <input type="color"> for the familiar system UI. The swatch
-  // keeps the same look.
+  // Prefer the OS picker on touch devices to avoid popover drag and dismissal conflicts.
   if (isTouchDevice()) {
     return (
       <label
@@ -152,11 +126,6 @@ export function ColorPickerPopover({
     );
   }
 
-  /**
-   * Handles color change from the color picker.
-   *
-   * @param newColor - The new color value from the picker.
-   */
   const handleColorChange = (newColor: Color) => {
     onColorChange(newColor.toString("hex"));
   };
@@ -172,7 +141,7 @@ export function ColorPickerPopover({
       </AriaButton>
       <Popover
         placement="bottom"
-        // Prevent popover from closing during color area/slider drag interactions
+        // A color drag may end outside the popover; keep it open.
         shouldCloseOnInteractOutside={() => !isDraggingRef.current}
       >
         <Dialog
@@ -220,7 +189,6 @@ export function ColorPickerPopover({
                 className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-9 w-full rounded-md border bg-transparent px-2.5 py-1 font-mono text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
                 placeholder="Hex"
                 onKeyDown={(e) => {
-                  // Blur on Enter to commit the color value
                   if (e.key === "Enter") {
                     e.currentTarget.blur();
                   }

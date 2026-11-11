@@ -37,18 +37,14 @@ export const Route = createRootRoute({
   errorComponent: RootError,
 });
 
-// Keep i18next in sync with the URL (the source of truth for language).
-// changeLanguage runs synchronously during render so children read the right
-// strings on first paint; the router updates <html lang> with other metadata.
-// The app subtree is keyed by lang so every consumer re-renders on switch.
+// Apply language before children render to avoid showing the previous locale on first paint.
 function useLangSync() {
   const lang = useLang();
   if (i18n.language !== lang) i18n.changeLanguage(lang);
   return lang;
 }
 
-// Match intd's soft fade on pathname changes. Query and hash updates do not
-// remount the page, and reduced-motion preferences skip the entrance fade.
+// Query and hash updates retain page state and do not restart the entrance animation.
 function AnimatedOutlet() {
   const pathname = useLocation({ select: (location) => location.pathname });
   const isHome = stripLocale(pathname) === "/";

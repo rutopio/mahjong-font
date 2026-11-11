@@ -1,14 +1,6 @@
-/**
- * Builds an Open Graph image SVG (1.91:1) for a mahjong tile sequence: a white
- * canvas with the tile group scaled to fit and centered, surrounded by padding.
- * Platform-agnostic and pure, so it is reused by the Cloudflare Pages function
- * that rasterizes it to PNG on demand.
- */
-
 import { buildTilesContent } from "./render-tile-svg";
 import type { TilesData } from "./tiles-data";
 
-/** Open Graph recommended 1.91:1 canvas. */
 export const OG_WIDTH = 1200;
 export const OG_HEIGHT = 630;
 
@@ -24,10 +16,6 @@ interface OgOptions {
   data: TilesData;
 }
 
-/**
- * Returns an OG image as an SVG string, or null when there are no tiles to
- * render (caller can fall back to a static image).
- */
 export function renderOgSvg({
   text,
   theme,
@@ -39,7 +27,6 @@ export function renderOgSvg({
 
   const { inner, width, height } = content;
 
-  // Fit the tile box into the padded area, preserving aspect ratio.
   const boxW = OG_WIDTH - OG_PADDING * 2;
   const boxH = OG_HEIGHT - OG_PADDING * 2;
   const scale = Math.min(boxW / width, boxH / height);

@@ -1,13 +1,3 @@
-/**
- * Cloudflare Pages Function: on-demand tile badge, shields.io style.
- *
- *   GET /img/<tile>?theme=color&color=AA7942
- *
- * The tile sequence comes from the URL path; theme/color come from the query
- * and fall back to defaults when omitted. Returns an inline SVG (like
- * shields.io) sized to the tiles, cached aggressively at the edge.
- */
-
 import tilesData from "../../src/data/tiles-data.json";
 import { decodeImageTilePath } from "../../src/lib/image-input";
 import { renderBadgeSvg } from "../../src/lib/render-badge-svg";
@@ -20,7 +10,6 @@ export const onRequestGet: PagesFunction = async (context) => {
   const { request, params } = context;
   const url = new URL(request.url);
 
-  // [tile] is a single path segment; /img (no tile) falls through to the SPA.
   const raw = params.tile;
   const tile = decodeImageTilePath((Array.isArray(raw) ? raw[0] : raw) ?? "");
   if (tile === null) {

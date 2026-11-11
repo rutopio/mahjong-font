@@ -1,16 +1,8 @@
-/**
- * Reproduces the font's GSUB ligature shaping in JS: greedy longest-match of
- * the input string against the ligature table, mirroring how the webfont turns
- * "1m2m3m" into individual tile glyphs.
- */
+// Greedy longest-match shaping follows the font's GSUB ligature order.
 
-/** Ligature keys are length 2-4; try longest first. */
+// The extracted table has keys up to four characters, including one-character gaps.
 const MAX_LIG_LEN = 4;
 
-/**
- * Convert a (transformed) notation string into a sequence of tile glyph names.
- * Characters that match no ligature are skipped (e.g. stray punctuation).
- */
 export function shapeTiles(
   text: string,
   ligatures: Record<string, string>
@@ -34,7 +26,6 @@ export function shapeTiles(
     }
 
     if (!matched) {
-      // No ligature covers this character; skip it.
       i += 1;
     }
   }

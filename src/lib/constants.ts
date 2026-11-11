@@ -1,30 +1,15 @@
-// ============================================================================
-// URLs
-// ============================================================================
-
-/** GitHub profile URL for the project author. */
 const GITHUB_PROFILE_URL = "https://github.com/rutopio";
 
-/** GitHub repository URL for this project. */
 export const GITHUB_REPO_URL = `${GITHUB_PROFILE_URL}/mahjong-font`;
 
-/** Base URL for downloading font files from the repository. */
 const FONT_DOWNLOAD_BASE_URL =
   "https://raw.githubusercontent.com/rutopio/mahjong-font/main/fonts/otf";
 
-// ============================================================================
-// Internationalization
-// ============================================================================
-
-/** Language option for the language selector. */
 interface LanguageOption {
-  /** Language code (e.g., "ja", "en"). */
   value: string;
-  /** Display label in native language. */
   label: string;
 }
 
-/** Available languages for the application. */
 export const languages: LanguageOption[] = [
   { value: "ja", label: "日本語" },
   { value: "en", label: "English" },
@@ -32,19 +17,12 @@ export const languages: LanguageOption[] = [
   { value: "zh-CN", label: "简体中文" },
 ];
 
-// ============================================================================
-// Font Downloads
-// ============================================================================
-
-/** Font download option with translation key and URL. */
 interface FontDownload {
   /** i18n key for the font label. */
   labelKey: string;
-  /** Direct download URL for the font file. */
   url: string;
 }
 
-/** Available font files for download. */
 export const fontDownloads: FontDownload[] = [
   {
     labelKey: "ui.monochromeFont",
@@ -56,16 +34,7 @@ export const fontDownloads: FontDownload[] = [
   },
 ];
 
-// ============================================================================
-// Yaku (Winning Hands) Examples
-// ============================================================================
-
-/**
- * Single source of truth for yaku examples, grouped by han value.
- * Each group's `han` drives both the group label key (`groups.<han>`) and
- * each item's i18n key (`yaku.<han>.<name>`). `optionValues` and `yakuGroups`
- * below are derived from this, so a new yaku is added in exactly one place.
- */
+// Han and name form the translation key: yaku.<han>.<name>.
 const yakuSource: {
   han: string;
   items: { name: string; notation: string }[];
@@ -126,61 +95,40 @@ const yakuSource: {
   },
 ];
 
-/**
- * Mapping of yaku i18n keys to their mahjong notation strings.
- * Used to resolve a selected option back to its notation.
- */
 export const optionValues: Record<string, string> = Object.fromEntries(
   yakuSource.flatMap((group) =>
     group.items.map((item) => [`yaku.${group.han}.${item.name}`, item.notation])
   )
 );
 
-/** Yaku group for categorizing hands by han value. */
 interface YakuGroup {
   /** i18n key for the group label (e.g., "groups.one_han"). */
   labelKey: string;
-  /** Array of yaku i18n keys belonging to this group. */
   items: string[];
 }
 
-/** Yaku hands grouped by their han (scoring) value, derived from yakuSource. */
 export const yakuGroups: YakuGroup[] = yakuSource.map((group) => ({
   labelKey: `groups.${group.han}`,
   items: group.items.map((item) => `yaku.${group.han}.${item.name}`),
 }));
 
-// ============================================================================
-// Theme Options
-// ============================================================================
-
-/** Theme option for the font style selector. */
 interface ThemeOption {
-  /** Internal value for the theme. */
   value: string;
   /** i18n key for the theme label. */
   labelKey: string;
 }
 
-/** Available font themes (monochrome or colorful). */
 export const themeOptions: ThemeOption[] = [
   { value: "monochrome", labelKey: "ui.monochrome" },
   { value: "colorful", labelKey: "ui.colorful" },
 ];
 
-// ============================================================================
-// Notation Examples & Documentation
-// ============================================================================
-
-/** Example notation for demonstration purposes. */
 interface NotationExample {
   /** i18n key for the combination description. */
   combination: string;
-  /** Mahjong notation string to display. */
   notation: string;
 }
 
-/** Examples showing various notation combinations. */
 export const notationExamples: NotationExample[] = [
   { combination: "notation.manzu-examples", notation: "1m2m3m" },
   { combination: "notation.pinzu-aka-dora-examples", notation: "4p5p*6p" },
@@ -191,13 +139,6 @@ export const notationExamples: NotationExample[] = [
   { combination: "notation.dice-examples", notation: "1.2.3.4.5.6." },
 ];
 
-/**
- * Union type for different notation item display formats.
- * - "range": Shows a range of tiles (e.g., 1m to 9m)
- * - "badges": Shows badge items with a description
- * - "badges-wrapped": Shows badges wrapped between two descriptions
- * - "description": Shows a title with description text
- */
 export type NotationItem =
   | {
       type: "range";
@@ -221,7 +162,6 @@ export type NotationItem =
     }
   | { type: "description"; titleKey: string; descriptionKey: string };
 
-/** Notation items for the "How to Use" documentation modal. */
 export const notationItems: NotationItem[] = [
   { type: "range", titleKey: "notation.manzu", start: "1m", end: "9m" },
   { type: "range", titleKey: "notation.pinzu", start: "1p", end: "9p" },
@@ -271,14 +211,8 @@ export const notationItems: NotationItem[] = [
   },
 ];
 
-// ============================================================================
-// Color Picker
-// ============================================================================
-
-/** Default tile color for the colorful font theme. */
 export const DEFAULT_TILE_COLOR = "#AA7942";
 
-/** Preset colors for the color swatch picker. */
 export const PRESET_COLORS = [
   "#AA7942",
   "#0a22c0",

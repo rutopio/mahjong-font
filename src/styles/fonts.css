@@ -1,5 +1,4 @@
 @import "@rutopio/ui/cjk-fonts.css";
-/* Inter for Latin, then locale-aware Noto Sans CJK fallbacks. */
 @import "@fontsource-variable/noto-sans-jp";
 @import "@fontsource-variable/noto-sans-tc";
 
@@ -19,7 +18,6 @@
   font-display: swap;
 }
 
-/* Paper Mono — not on @fontsource, self-hosted woff2 */
 @font-face {
   font-family: "Paper Mono";
   src: url("/fonts/PaperMono[wght].woff2") format("woff2");

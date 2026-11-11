@@ -1,8 +1,4 @@
-/**
- * Builds a single inline SVG for a sequence of mahjong tiles, used by both the
- * on-screen preview and the image export (DRY). Resolves COLR layer colors in
- * JS so it does not depend on browser COLR/CPAL support.
- */
+// Resolve COLR layers to SVG paths so rendering does not depend on browser color-font support.
 
 import { DEFAULT_TILE_COLOR } from "./constants";
 import { shapeTiles } from "./shape-tiles";
@@ -16,10 +12,7 @@ const TILE_BASE_INDEX = 3;
 /** Default advance for glyphs missing from the advances table. */
 const DEFAULT_ADVANCE = 854;
 
-/**
- * Margin (font units) added around the content so tile outlines don't touch the
- * viewBox edge and get clipped when the SVG is scaled to fit.
- */
+/** Font-unit padding prevents outlines from clipping at the viewBox edge. */
 const MARGIN = 16;
 
 function resolveColor(
@@ -48,11 +41,6 @@ export interface TilesContent {
   height: number;
 }
 
-/**
- * Lays tiles left-to-right and returns the inner `<g>` plus its box size. Font
- * coordinates are y-up, so the content is flipped into svg y-down space. Shared
- * by the inline preview and the OG image renderer.
- */
 export function buildTilesContent({
   text,
   theme,
@@ -61,8 +49,7 @@ export function buildTilesContent({
 }: RenderOptions): TilesContent | null {
   const { palette, ligatures, advances, bounds, colorful, monochrome } = data;
   const isColorful = theme !== "monochrome";
-  // This renderer also feeds inline HTML and a directly served SVG. Never
-  // interpolate an unchecked attribute value, even if the caller validated it.
+  // This string is also served as SVG, so validate colors before interpolating attributes.
   const safeTileColor = HEX_COLOR_RE.test(tileColor)
     ? tileColor
     : DEFAULT_TILE_COLOR;
@@ -72,8 +59,7 @@ export function buildTilesContent({
 
   let x = 0;
   const groups: string[] = [];
-  // Track the true visible extent. Tiles overlap, so advance understates the
-  // width; the real content box comes from each glyph's bounds at its x offset.
+  // Overlapping tiles can extend beyond their advances; measure visible glyph bounds.
   let minX = Infinity;
   let maxX = -Infinity;
   let minY = Infinity;
@@ -106,8 +92,7 @@ export function buildTilesContent({
   const width = maxX - minX + MARGIN * 2;
   const height = maxY - minY + MARGIN * 2;
 
-  // Place content at (MARGIN, MARGIN): shift left by minX, and flip y-up font
-  // space to y-down svg space anchored at the content's top (maxY).
+  // Flip y-up font coordinates to y-down SVG coordinates, keeping the top-left margin.
   const inner =
     `<g transform="translate(${MARGIN - minX} ${MARGIN + maxY}) scale(1 -1)">` +
     `${groups.join("")}</g>`;
@@ -115,10 +100,6 @@ export function buildTilesContent({
   return { inner, width, height };
 }
 
-/**
- * Returns a standalone SVG string laying tiles left-to-right, sized to its own
- * content box.
- */
 export function renderTilesSvg(options: RenderOptions): string {
   const content = buildTilesContent(options);
   if (!content) return "";

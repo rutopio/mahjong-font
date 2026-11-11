@@ -9,7 +9,6 @@ import { ApiPageActions } from "@/components/navigation/api-page-actions";
 
 const INLINE_MARKUP_RE = /(`[^`]+`|\*\*[^*]+\*\*)/;
 
-/** Render `code` and **bold** markers inside a param description. */
 function parseDescription(text: string): ReactNode {
   return text.split(INLINE_MARKUP_RE).map((part, i) => {
     if (part.startsWith("`") && part.endsWith("`")) {
@@ -31,7 +30,6 @@ function parseDescription(text: string): ReactNode {
   });
 }
 
-/** Example tile strings; labels are i18n keys resolved at render time. */
 const EXAMPLES: { id: string; labelKey: string; path: string }[] = [
   {
     id: "example-default",
@@ -52,7 +50,6 @@ const EXAMPLES: { id: string; labelKey: string; path: string }[] = [
 
 const EMBED_TILE = "7m7m7m2p3p4p8p8p8p4s5s6s8s_8s";
 
-/** Param rows: name/location/type/default are code symbols; only desc is i18n. */
 const PARAMS: {
   name: string;
   location: "path" | "query";

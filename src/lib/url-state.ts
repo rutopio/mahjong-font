@@ -1,9 +1,3 @@
-/**
- * Shared encoding/decoding of the app state carried in the URL query string
- * (?tile=...&theme=...&color=...). Used by the client hook and by the
- * server-side OG image function, so both agree on defaults and parsing.
- */
-
 import { DEFAULT_TILE_COLOR } from "./constants";
 
 const THEME_URL_MAP: Record<string, string> = {
@@ -31,7 +25,6 @@ const DEFAULT_STATE: MahjongUrlState = {
   tileColor: DEFAULT_TILE_COLOR,
 };
 
-/** Serialize state into a query string (without the leading "?"). */
 export function encodeToQuery(state: MahjongUrlState): string {
   const urlTheme = THEME_INTERNAL_MAP[state.theme] || "color";
   const params = new URLSearchParams({ tile: state.input, theme: urlTheme });
@@ -41,13 +34,7 @@ export function encodeToQuery(state: MahjongUrlState): string {
   return params.toString();
 }
 
-/**
- * Parse a query string into state. A missing tile uses the default state;
- * missing or unrecognised optional parameters use their individual defaults.
- *
- * `tileOverride` supplies the tile sequence from outside the query (e.g. the
- * URL path for the /img endpoint).
- */
+/** tileOverride supplies notation from the /img path instead of the query. */
 export function decodeFromQuery(
   search: string,
   tileOverride?: string
@@ -57,7 +44,6 @@ export function decodeFromQuery(
   const urlTheme = params.get("theme");
   const theme = urlTheme ? THEME_URL_MAP[urlTheme] : undefined;
 
-  // A bare URL still shows the default tiles.
   if (input === null) return DEFAULT_STATE;
 
   const resolvedTheme = theme || DEFAULT_THEME;

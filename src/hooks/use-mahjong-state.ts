@@ -15,18 +15,12 @@ const findMatchingOption = (inputValue: string): string => {
 
 const getInitialState = () => decodeFromQuery(window.location.search);
 
-/**
- * Owns the generator's core state (input, theme, tile color) and keeps it in
- * sync with the URL query string. Also derives the matching yaku option for the
- * current input. localStorage is intentionally not used; a URL without params
- * (or a malformed one) always falls back to the default state.
- */
+// Initialize from the shared URL, not a previous visitor session.
 export function useMahjongState() {
   const [state, setState] = useState(getInitialState);
   const { input, theme, tileColor } = state;
   const selectedOption = findMatchingOption(input);
 
-  // User actions update the URL at the same entry point as React state.
   const update = (next: typeof state) => {
     setState(next);
     const encoded = encodeToQuery(next);

@@ -1,8 +1,4 @@
-/**
- * Typed loader for the pre-extracted mahjong tile SVG data.
- * The JSON is large (~1.2MB raw, ~300KB gzipped) so it is lazy-loaded via
- * dynamic import and cached after the first call.
- */
+// Load the large outline dataset only when rendering tiles.
 
 interface ColorLayer {
   /** SVG path data in font coordinate space (y-up, unitsPerEm scale). */

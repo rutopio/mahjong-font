@@ -68,9 +68,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
     }
   };
 
-  // On touch devices, save the PNG straight through the native share sheet so
-  // the user can pick "Save Image" (Photos), Files, or anywhere else. Desktop
-  // opens the format dialog (PNG/SVG) instead.
+  // File sharing lets touch users save directly to Photos; desktop uses the format dialog.
   const handleDownloadClick = () => {
     if (isTouchDevice()) {
       void handleDownload("png");
@@ -91,7 +89,6 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
     </div>
   );
 
-  // Build the /img badge URL: tiles in the path, theme/color in the query.
   const openImgPage = () => {
     const params = new URLSearchParams(
       encodeToQuery({ input: text, theme, tileColor })
@@ -117,8 +114,6 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
     }
   };
 
-  // On touch devices, only use the native share sheet (no dialog fallback);
-  // pointer-based devices (desktop) always open the dialog.
   const handleShareClick = async () => {
     if (isTouchDevice() && navigator.share) {
       try {
@@ -127,7 +122,7 @@ export function ActionButtons({ text, theme, tileColor }: ActionButtonsProps) {
           url: window.location.href,
         });
       } catch {
-        // User cancelled or share failed; do nothing.
+        // Dismissing the native share sheet should not open another dialog.
       }
       return;
     }

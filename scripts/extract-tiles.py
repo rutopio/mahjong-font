@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""
-Extract mahjong tile glyph data from the Riichi-Mahjong woff2 fonts into a
-single JSON consumed by the web app. This replaces webfont rendering with
-inline SVG, fixing iOS download blanks and cross-browser COLR/CPAL support.
-
-Output: src/data/tiles-data.json
-
-Run from repo root:  python3 scripts/extract-tiles.py
-"""
+"""Extract font outlines and shaping data for the shared SVG renderer."""
 
 import json
 import os
@@ -18,8 +10,6 @@ from fontTools.ttLib import TTFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-# Source fonts live under assets/, outside the web build.
-# Only the generated tiles-data.json is shipped to the application.
 COLORFUL = os.path.join(ROOT, "assets/fonts/woff2/Riichi-Mahjong-Colorful.woff2")
 MONOCHROME = os.path.join(ROOT, "assets/fonts/woff2/Riichi-Mahjong-Monochrome.woff2")
 OUT = os.path.join(ROOT, "src/data/tiles-data.json")
@@ -128,10 +118,7 @@ def extract_palette(font):
     return [[c.red, c.green, c.blue] for c in cpal.palettes[0]]
 
 
-# Notation chars that produce horizontal gaps. They map to plain (pathless)
-# cmap glyphs whose advance widths create the spacing, but they are not GSUB
-# ligatures, so the shaper would otherwise skip them. " " is a small gap and
-# "_" a large gap; both must be registered so they advance the layout.
+# Gap glyphs have advances but no GSUB ligatures; register them so shaping preserves spacing.
 GAP_CHARS = [" ", "_"]
 
 

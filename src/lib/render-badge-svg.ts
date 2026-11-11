@@ -1,9 +1,3 @@
-/**
- * Builds a tile badge SVG cropped to the tile group, rendered at a fixed
- * height (width scales proportionally). Served inline by the /img endpoint so
- * it can be embedded like a shields.io badge. Pure and platform-agnostic.
- */
-
 import { buildTilesContent } from "./render-tile-svg";
 import type { TilesData } from "./tiles-data";
 
@@ -20,10 +14,6 @@ interface BadgeOptions {
   data: TilesData;
 }
 
-/**
- * Returns the badge as an SVG string, or null when there are no tiles to
- * render. The viewBox hugs the tile content plus a small padding.
- */
 export function renderBadgeSvg({
   text,
   theme,
@@ -37,8 +27,6 @@ export function renderBadgeSvg({
   const w = width + BADGE_PADDING * 2;
   const h = height + BADGE_PADDING * 2;
 
-  // Keep the intrinsic coordinate system in the viewBox (no distortion) and
-  // scale the rendered size to a fixed height; width follows proportionally.
   const renderH = BADGE_HEIGHT;
   const renderW = Math.round((w * BADGE_HEIGHT) / h);
 
