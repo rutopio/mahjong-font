@@ -20,7 +20,7 @@
     "@resvg/resvg-wasm": "2.6.2",
     "@rutopio/ui": "github:rutopio/ui#v2.0.3",
     "@tanstack/react-router": "1.170.46",
-    "clsx": "2.1.1",
+    "cn": "0.5.2",
     "cmdk": "1.1.1",
     "i18next": "27.1.1",
     "motion": "14.12.0",
@@ -29,8 +29,7 @@
     "react-aria-components": "1.22.1",
     "react-dom": "19.3.1",
     "react-i18next": "18.0.1",
-    "sonner": "2.0.8",
-    "tailwind-merge": "3.7.0"
+    "sonner": "2.0.8"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.6",

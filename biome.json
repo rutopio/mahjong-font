@@ -79,7 +79,7 @@
   ],
   "tailwind": {
     "attributes": ["className", "class"],
-    "mergeFunctions": ["cn", "clsx", "cx"],
+    "mergeFunctions": ["cn", "cx"],
     "variantFunctions": ["cva"],
     "stylesheet": "./src/styles/globals.css"
   }
